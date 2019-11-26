@@ -14,7 +14,7 @@ class Router {
             $url = '';
 
             if(isset($_GET['url'])){
-                // on decompose l'url et on lui applique le filtre FILTER_SANITIZE_URL 
+                // on decompose l'url et on lui applique le filtre FILTER_SANITIZE_URL qui supprime tous les caractères d'URL illégales d'une chaîne 
                 $url = explode('/', filter_var($_GET['url'], FILTER_SANITIZE_URL))
             }
         } catch(){
