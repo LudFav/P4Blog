@@ -13,7 +13,7 @@ class HomeController{
 
     private function billets(){
         $this->_billetManager = new BilletManager();
-        $billets = $this->billetManager->getBillet();
+        $billets = $this->_billetManager->getBillet();
         require_once('HomeView.php'); // à securiser
     }
 }
