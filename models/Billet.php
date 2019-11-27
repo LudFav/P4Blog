@@ -6,8 +6,8 @@ class Billet {
     private $_auteur;
     private $_titre;
     private $_contenu;
-    private $_dateAjoutBillet;
-    private $_dateModifBillet;
+    private $_dateajoutbillet;
+    private $_datemodifbillet;
 
     public function __construct(array $data){
         $this->hydrate($data);
@@ -21,6 +21,7 @@ class Billet {
             }
         }
     }
+
 // setters 
     public function setId($id){
         $id= (int) $id;
@@ -47,12 +48,12 @@ class Billet {
         }
     }
 
-    public function setdateAjoutBillet($dateAjoutBillet){
-        $this->_dateAjoutBillet= $dateAjoutBillet;   
+    public function setDateajoutbillet($dateajoutbillet){
+        $this->_dateajoutbillet= $dateajoutbillet;   
     }
 
-    public function setdateAjoutBillet($dateModifBillet){
-        $this->_dateModifBillet= $dateModifBillet;   
+    public function setDatemodifbillet($datemodifbillet){
+        $this->_datemodifbillet= $datemodifbillet;   
     }
 
 // getters
@@ -73,11 +74,11 @@ class Billet {
         return $this->_contenu;
     }
 
-    public function dateAjoutBillet(){
-        return $this->_dateAjoutBillet;
+    public function dateajoutbillet(){
+        return $this->_dateajoutbillet;
     }
 
     public function dateModifBillet(){
-        return $this->_dateModifBillet;
+        return $this->_datemodifbillet;
     }
 }
