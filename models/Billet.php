@@ -15,9 +15,9 @@ class Billet {
 
     public function hydrate(array $data){
         foreach($data as $key => $value){
-            $method = 'set'.ucfirst($key) // creation des methodes pour set nos attributs, par ex la premiere methode s'appelera setId
-            if ( method_exists($this, $method)){
-                $this->method($value);
+            $method = 'set'.ucfirst($key); // creation des methodes pour set nos attributs, par ex la premiere methode s'appelera setId
+            if( method_exists($this, $method)){
+                $this->$method($value);
             }
         }
     }
