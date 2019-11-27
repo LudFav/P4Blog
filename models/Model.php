@@ -6,7 +6,7 @@ abstract class Model{
     private static function setBdd(){
         self::$_bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
         //utilisation des const de PDO pour gerer les erreurs 
-        self::$_bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING)
+        self::$_bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 
     //methode de connexion par defaut à la base de donnée
@@ -21,7 +21,7 @@ abstract class Model{
     protected function getAll($table, $obj){
         $this->getBdd();
         $arrayTable  = [];
-        $requete = self::$_bdd->prepare('SELECT * FROM' .$table.'ORDER BY id DESC')
+        $requete = self::$_bdd->prepare(' SELECT * FROM ' .$table. ' ORDER BY id desc');
         $requete->execute();
 
         // creation de la variable data contenant les données recuperées de la table cible
