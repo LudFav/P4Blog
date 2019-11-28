@@ -6,8 +6,7 @@ class Comment
     private $_billet;
     private $_auteur;
     private $_contenu;
-    private $_dateajoutcom;
-    private $_datemodifcom;
+    private $_date;
     private $_signale;
  
     public function __construct(array $data){
@@ -39,12 +38,8 @@ class Comment
         }
     }
 
-    public function setDateajoutcom($dateajoutcom){
-        $this->_dateajoutcom= $dateajoutcom;   
-    }
-
-    public function setDatemodifcom($datemodifcom){
-        $this->_datemodifcom= $datemodifcom;   
+    public function setDate($date){
+        $this->_date= $date;   
     }
 
     public function setSignale($signale){
@@ -63,12 +58,8 @@ class Comment
         return $this->_contenu;
     }
     
-    public function dateajoutcom(){
-        return $this->_dateajoutcom;
-    }
-
-    public function datemodifcom(){
-        return $this->_datemodifcom;
+    public function date(){
+        return $this->_date;
     }
 
     public function signale(){
