@@ -27,17 +27,3 @@ class ControllerAccueil
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
- ?>
