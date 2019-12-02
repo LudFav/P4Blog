@@ -24,8 +24,6 @@ class ControllerPost
       $this->_view = new View('SinglePost');
       $this->_view->generate(array('billet' => $billet));
     }
-
   }
 }
 
- ?>
