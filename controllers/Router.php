@@ -1,8 +1,6 @@
 <?php
 require_once 'views/View.php';
-/**
- *
- */
+
 class Router
 {
   private $ctrl;
@@ -26,8 +24,7 @@ class Router
         //on décompose l'url et on lui applique un filtre
         $url = explode('/', filter_var($_GET['url'], FILTER_SANITIZE_URL));
 
-        //on recupere le premier parametre de url
-        //on le met tout en miniscule
+        //on recupere le premier parametre de url on le met tout en miniscule
         //on met sa premiere lettre en majuscule
         $controller = ucfirst(strtolower($url[0]));
 
@@ -36,11 +33,9 @@ class Router
         //on retrouve le chemin du controleur voulu
         $controllerFile = "controllers/".$controllerClass.".php";
 
-        //on check si le fichier du controleur existe
+        //on verifit si le fichier du controleur existe
         if (file_exists($controllerFile)) {
-          //on lance la classe en question
-          //avec tous les parametres url
-          //pour respecter l'encapsulation
+          //on lance la classe en question avec tous les parametres url
           require_once($controllerFile);
           $this->ctrl = new $controllerClass($url);
         }
@@ -60,19 +55,7 @@ class Router
       $this->_view = new View('Error');
       $this->_view->generate(array('errorMsg' => $errorMsg));
     }
-
-
-
-
-
-
-
   }
-
-
-
-
-
 }
 
 
