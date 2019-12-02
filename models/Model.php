@@ -22,7 +22,7 @@ abstract class Model
     }
   }
 
-  //creation d ela methode
+  //creation de la methode
   //de récupération de liste d'elements
   //dans la bdd
 
@@ -33,7 +33,7 @@ abstract class Model
     $req->execute();
 
     //on crée la variable data qui
-    //va cobntenir les données
+    //va contenir les données
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
       // var contiendra les données sous forme d'objets
       $var[] = new $obj($data);
@@ -58,27 +58,5 @@ abstract class Model
     return $var;
     $req->closeCursor();
   }
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
-
-
-
-
-
-
-
-
-
- ?>
