@@ -4,14 +4,13 @@
 class BilletManager extends Model
 {
 
-  //gérer la fonction qui va recuperer
-  //tous les billets dans la bdd
+  //methode qui va recuperer tous les billets dans la bdd
   public function getBillets(){
-    return $this->getAll('billets', 'billet');
+    return $this->getAll('billets', 'Billet');
   }
 
   public function getBillet($id){
-      return $this->getOne('billets', 'billet', $id);
+      return $this->getOne('billets', 'Billet', $id);
   }
 }
 
