@@ -22,9 +22,7 @@ abstract class Model
     }
   }
 
-  //creation de la methode
-  //de récupération de liste d'elements
-  //dans la bdd
+  //creation de la methode de récupération de liste d'elements dans la bdd
 
   protected function getAll($table, $obj){
     $this->getBdd();
