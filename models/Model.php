@@ -58,5 +58,12 @@ abstract class Model
     return $var;
     $req->closeCursor();
   }
+
+
+  protected function add(){}
+
+  protected function modify($table, $obj, $id){}
+
+  protected function delete($table, $obj, $id){}
 }
 
