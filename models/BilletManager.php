@@ -1,5 +1,5 @@
 <?php
-
+// contient les methodes d'operation de nos billets
 
 class BilletManager extends Model
 {
