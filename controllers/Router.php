@@ -1,8 +1,8 @@
 <?php
+// Notre routeur va gerer les requetes de l'URL, selon l'url il chargera tel ou tel controleur
 require_once 'views/View.php';
 
-class Router
-{
+class Router {
   private $ctrl;
   private $view;
 
@@ -15,17 +15,15 @@ class Router
         require_once('models/'.$class.'.php');
       });
 
-      //on crée une variable $url
+      //on crée une variable $url contenant une chaine de caractere vide
       $url = '';
 
-      //on va determiner le controleur en
-      //fonction de la valeur de cette variable
+      //on va determiner le controleur en fonction de la valeur de cette variable
       if (isset($_GET['url'])) {
-        //on décompose l'url et on lui applique un filtre
+        //on décompose l'url et on lui applique un filtre afin de supprimer tout les caracteres illegaux d'url d'une chaine
         $url = explode('/', filter_var($_GET['url'], FILTER_SANITIZE_URL));
 
-        //on recupere le premier parametre de url on le met tout en miniscule
-        //on met sa premiere lettre en majuscule
+        //on recupere le premier parametre de url, on le met tout en minuscule, on met sa premiere lettre en majuscule
         $controller = ucfirst(strtolower($url[0]));
 
         $controllerClass = "Controller".$controller;
@@ -41,10 +39,9 @@ class Router
         }
         else {
           throw new \Exception("Page introuvable", 1);
-
         }
       }
-
+      // si le routeur ne reconnait pas le parametre de la variable $url, il redirigera la page vers la page d'accueil
       else {
         require_once('controllers/ControllerAccueil.php');
         $this->ctrl = new ControllerAccueil($url);
