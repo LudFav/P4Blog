@@ -1,8 +1,6 @@
 <?php
 
-/**
- *
- */
+
 class View
 {
   //fichier vue
