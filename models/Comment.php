@@ -3,6 +3,7 @@
 
 class Comment
 {
+    private $_id;
     private $_billet;
     private $_auteur;
     private $_contenu;
@@ -22,6 +23,9 @@ class Comment
         }
     }
 //setters 
+    public function setId($id){
+    $this->id= (int) $id;
+    }
     public function setBillet($billet){
     $this->billet = (int) $billet;
     }
@@ -46,6 +50,9 @@ class Comment
         $this->signale = (int) $signale;
     }
  //getters
+    public function id(){
+        return $this->_id;
+    }
     public function billet(){
         return $this->_billet;
     }
