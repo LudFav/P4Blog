@@ -9,9 +9,7 @@ class Billet {
   private $_auteur;
   private $_titre;
   private $_contenu;
-  private $_dateajoutbillet;
-  private $_datemodifbillet;
-
+  private $_date;
 
   public function __construct(array $data){
     $this->hydrate($data);
