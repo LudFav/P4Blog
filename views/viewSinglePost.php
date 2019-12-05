@@ -89,6 +89,7 @@
 
 <section class="comment-section">
   <div class="container">
+  
     <h4><b>POST COMMENT</b></h4>
     <div class="row">
 
@@ -117,6 +118,9 @@
             </div><!-- row -->
           </form>
         </div><!-- comment-form -->
+        <?php
+        foreach ($commentaire as $comment):
+        ?>
 
         <h4><b>COMMENTS(12)</b></h4>
 
@@ -131,8 +135,8 @@
               </div>
 
               <div class="middle-area">
-                <a class="name" href="#"><b>Katy Liu</b></a>
-                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
+                <a class="name" href="#"><b><?=$comment[0]->auteur()?></b></a>
+                <h6 class="date"><?=$comment[0]->date()?></h6>
               </div>
 
               <div class="right-area">
@@ -141,70 +145,15 @@
 
             </div><!-- post-info -->
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-              ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-              Ut enim ad minim veniam</p>
+            <p><?=$comment[0]->contenu()?></p>
 
           </div>
 
-          <div class="comment">
-            <h5 class="signal-for">Reply for <a href="#"><b>Katy Lui</b></a></h5>
-
-            <div class="post-info">
-
-              <div class="left-area">
-                
-              </div>
-
-              <div class="middle-area">
-                <a class="name" href="#"><b>Katy Liu</b></a>
-                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-              </div>
-
-              <div class="right-area">
-                <h5 class="signal-btn" ><a href="#"><b>Signaler</b></a></h5>
-              </div>
-
-            </div><!-- post-info -->
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-              ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-              Ut enim ad minim veniam</p>
-
-          </div>
-
-        </div><!-- commnets-area -->
-
-        <div class="commnets-area ">
-
-          <div class="comment">
-
-            <div class="post-info">
-
-              <div class="left-area">
-                
-              </div>
-
-              <div class="middle-area">
-                <a class="name" href="#"><b>Katy Liu</b></a>
-                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-              </div>
-
-              <div class="right-area">
-                <h5 class="signal-btn" ><a href="#"><b>Signaler</b></a></h5>
-              </div>
-
-            </div><!-- post-info -->
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-              ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-              Ut enim ad minim veniam</p>
-
-          </div>
-
-        </div><!-- commnets-area -->
+         
 
         <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a>
+        <?php endforeach ?>
+
 
       </div><!-- col-lg-8 col-md-12 -->
 
