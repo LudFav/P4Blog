@@ -23,7 +23,11 @@ class ControllerPost {
   }
 
   private function comment(){
-    if (isset($_GET[''])){}
+    if (isset($_GET['id'])){
+      $this->_commentManager = new CommentManager;
+      $comment = $this->_billetManager->getComments($_GET['billet-id']);
+      $this->_view->generate(array('comment' => $comment));
+    }
   }
 }
 
