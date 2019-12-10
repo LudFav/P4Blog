@@ -3,6 +3,7 @@ require_once 'views/View.php';
 
 class ControllerPost {
   private $_billetManager;
+  private $_commentManager;
   private $_view;
 
   public function __construct(){
@@ -10,6 +11,7 @@ class ControllerPost {
       throw new \Exception("Page Introuvable");
     } else {
       $this->billet();
+      $this->comment();
     }
   }
 
@@ -25,7 +27,8 @@ class ControllerPost {
   private function comment(){
     if (isset($_GET['id'])){
       $this->_commentManager = new CommentManager;
-      $comment = $this->_billetManager->getComments($_GET['billet-id']);
+      $comment = $this->_commentManager->getComments($_GET['billet']);
+      $this->_view = new View('SinglePost');
       $this->_view->generate(array('comment' => $comment));
     }
   }
