@@ -1,6 +1,5 @@
 <?php
 
-
 class View
 {
   //fichier vue
@@ -14,8 +13,7 @@ class View
     $this->_file = 'views/view'.$action.'.php';
   }
 
-  //crée une fonction qui va
-  //générer et afficher la vue
+  //crée une fonction qui va générer et afficher la vue
   public function generate($data){
     //définir le contenu à envoyer
     $content = $this->generateFile($this->_file, $data);
