@@ -29,18 +29,26 @@ abstract class Model
     $var = [];
     $req = self::$_bdd->prepare('SELECT * FROM '.$table.' ORDER BY id desc');
     $req->execute();
-
     //on crée la variable data qui
     //va contenir les données
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
       // var contiendra les données sous forme d'objets
       $var[] = new $obj($data);
     }
-
     return $var;
     $req->closeCursor();
+  }
 
-
+  protected function getAllComments($table, $obj, $billetId){
+    $this->getBdd();
+    $var = [];
+    $req = self::$_bdd->prepare('SELECT * FROM '.$table.'WHERE billetId = ? ');
+    $req->execute();
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+      $var[] = new $obj($data);
+    }
+    return $var;
+    $req->closeCursor();
   }
 
   protected function getOne($table, $obj, $id)
