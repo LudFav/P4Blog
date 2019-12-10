@@ -4,7 +4,7 @@
 class Comment
 {
     private $_id;
-    private $_billet;
+    private $_billetId;
     private $_auteur;
     private $_contenu;
     private $_date;
@@ -16,7 +16,7 @@ class Comment
 
     public function hydrate(array $data){
         foreach($data as $key => $value){
-            $method = 'set'.ucfirst($key) // creation des methodes pour set nos attributs, par ex la premiere methode s'appelera setId
+            $method = 'set'.ucfirst($key) 
             if ( method_exists($this, $method)){
                 $this->method($value);
             }
@@ -27,8 +27,8 @@ class Comment
     $this->id= (int) $id;
     }
     
-    public function setBillet($billet){
-    $this->billet = (int) $billet;
+    public function setbilletId($billetId){
+    $this->billetId = (int) $billetId;
     }
  
     public function setAuteur($auteur){
@@ -54,8 +54,8 @@ class Comment
     public function id(){
         return $this->_id;
     }
-    public function billet(){
-        return $this->_billet;
+    public function billetId(){
+        return $this->_billetId;
     }
     
     public function auteur(){
