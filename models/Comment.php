@@ -26,6 +26,7 @@ class Comment
     public function setId($id){
     $this->id= (int) $id;
     }
+    
     public function setBillet($billet){
     $this->billet = (int) $billet;
     }
