@@ -27,8 +27,7 @@ class Billet {
 
   //setters
 
-  public function setId($id)
-  {
+  public function setId($id){
     $id = (int) $id;
     if ($id > 0) {
       $this->_id = $id;
