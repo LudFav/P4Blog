@@ -24,11 +24,11 @@ class ControllerPost {
       $billet = $this->_billetManager->getBillet($_GET['id']);
       $this->_view->generate(array('billet' => $billet));
     }
-
+    
       $this->_commentManager = new CommentManager;
       $comments = $this->_commentManager->getComments();
       $this->_view->generate(array('comments' => $comments));
-    
+     
   }
 /* 
   private function billet(){
