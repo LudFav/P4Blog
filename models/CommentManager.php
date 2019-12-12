@@ -6,8 +6,8 @@ class CommentManager extends Model {
   //tous les commentaires dans la bdd
 
 
-  public function getComments($id){
-    return $this->getAllComments('commentaires', 'Comment', $id);
+  public function getComments(){
+    return $this->getAllComments('commentaires', 'Comment', $billetId);
   }
 
   public function getComment($id){
