@@ -39,10 +39,11 @@ abstract class Model
     $req->closeCursor();
   }
 
-  protected function getAllComments($table, $obj, $billetId){
+  protected function getAllComments($table, $obj, $id){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare('SELECT * FROM '.$table.'WHERE billetId = ? ');
+    $req = self::$_bdd->prepare('SELECT * FROM '.$table.'WHERE `billetId` = (SELECT `id` FROM `billets` WHERE `id` =:id)');
+    $req->bindValue(':id', $id);
     $req->execute();
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
       $var[] = new $obj($data);
