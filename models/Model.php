@@ -56,7 +56,7 @@ abstract class Model
   protected function getAllComments($table, $obj, $billetId){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare('SELECT * FROM '.$table.' WHERE billetId =?' );
+    $req = self::$_bdd->prepare('SELECT billets.id FROM billets INNER JOIN ' .$table. ' ON billets.id = ' .$table. '.billetId ' );
     $req->execute(array($billetId));
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
       $var[] = new $obj($data);
