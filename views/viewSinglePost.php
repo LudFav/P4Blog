@@ -119,12 +119,12 @@
           </form>
         </div><!-- comment-form -->
         <?php
-        foreach ($comments as $comment):
+        foreach ($billet as $comment):
         ?>
 
         <h4><b>COMMENTS()</b></h4>
 
-        <div class="commnets-area">
+        <div class="comments-area">
 
           <div class="comment">
 
