@@ -39,19 +39,6 @@ abstract class Model
     $req->closeCursor();
   }
 
-  protected function getAllComments($table, $obj, $id){
-    $this->getBdd();
-    $var = [];
-    $req = self::$_bdd->prepare('SELECT * FROM '.$table.'WHERE `billetId` = (SELECT `id` FROM `billets` WHERE `id` =:id)');
-    $req->bindValue(':id', $id);
-    $req->execute();
-    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-      $var[] = new $obj($data);
-    }
-    return $var;
-    $req->closeCursor();
-  }
-
   protected function getOne($table, $obj, $id)
   {
     $this->getBdd();
@@ -66,6 +53,17 @@ abstract class Model
     $req->closeCursor();
   }
 
+  protected function getAllComments($table, $obj, $billetId){
+    $this->getBdd();
+    $var = [];
+    $req = self::$_bdd->prepare('SELECT * FROM '.$table.' WHERE billetId =?' );
+    $req->execute(array($billetId));
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+      $var[] = new $obj($data);
+    }
+    return $var;
+    $req->closeCursor();
+  }
 
   protected function add(){}
 
