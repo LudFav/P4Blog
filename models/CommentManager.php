@@ -4,13 +4,23 @@ class CommentManager extends Model {
 
   //gérer la fonction qui va recuperer
   //tous les commentaires dans la bdd
+  
 
 
-  public function getComments(){
-    return $this->getAllComments('commentaires', 'Comment', $billetId);
+  public function getComments($billetId){
+    $commentaires = [];
+    $req = self::$_bdd->prepare('SELECT * FROM commentaires WHERE billetId = ?');
+    $req->execute(array($billetId));
+    
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+      $commentaire = new Comment($data);
+      $commentaires[] = $commentaire;
+    }
+    $req->closeCursor();
+    return $commentaires;
   }
 
-  public function getComment($id){
-      return $this->getOne('commentaires', 'Comment', $id);
+  public function getComment($billetId){
+      return $this->getOne('commentaires', 'Comment', $billetId);
   }
 }
