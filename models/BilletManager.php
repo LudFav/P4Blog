@@ -1,7 +1,7 @@
 <?php
 // contient les methodes d'operation de nos billets
 
-class BilletManager extends Model
+class BilletManager extends Model implements crud
 {
 
   //methode qui va recuperer tous les billets dans la bdd
@@ -12,6 +12,13 @@ class BilletManager extends Model
   public function getBillet($id){
       return $this->getOne('billets', 'Billet', $id);
   }
+
+  public function create(){}
+
+  public function update(){}
+
+  public function delete(){}
+  
 }
 
 
