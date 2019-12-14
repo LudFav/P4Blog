@@ -42,8 +42,7 @@ abstract class Model
 
   }
 
-  protected function getOne($table, $obj, $id)
-  {
+  protected function getOne($table, $obj, $id){
     $this->getBdd();
     $var = [];
     $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, DATE_FORMAT(date, '%d/%m/%Y à %Hh%i') AS date FROM " .$table. " WHERE id = ?");
