@@ -29,5 +29,7 @@ class CommentManager extends Model implements crud {
   public function update(){}
 
   public function delete(){}
-  
+
+  public function getSignaledComments(){}
+
 }
