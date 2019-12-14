@@ -123,7 +123,7 @@
          
         ?>
 
-        <h4><b>COMMENTS()</b></h4>
+      
 
         <div class="comments-area">
 
@@ -140,20 +140,20 @@
                 <h6 class="date"><?=$commentaire->date()?></h6>
               </div>
 
-              <div class="right-area">
-                <h5 class="signal-btn" ><a href="#"><b>Signaler</b></a></h5>
-              </div>
+             
 
             </div><!-- post-info -->
 
             <p><?=$commentaire->contenu()?></p>
-
+            <div class="right-area">
+                <h5 class="signal-btn" ><a href="#"><b>Signaler</b></a></h5>
+            </div>
           </div>
 
-         
+          <?php endforeach ?>   
 
-        <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a>
-        <?php endforeach ?>
+        
+      
 
 
       </div><!-- col-lg-8 col-md-12 -->
