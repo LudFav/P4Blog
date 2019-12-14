@@ -1,6 +1,6 @@
 <?php 
 
-class CommentManager extends Model {
+class CommentManager extends Model implements crud {
 
   //gérer la fonction qui va recuperer
   //tous les commentaires dans la bdd
@@ -23,4 +23,11 @@ class CommentManager extends Model {
   public function getComment($billetId){
       return $this->getOne('commentaires', 'Comment', $billetId);
   }
+
+  public function create(){}
+
+  public function update(){}
+
+  public function delete(){}
+  
 }
