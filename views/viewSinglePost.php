@@ -119,10 +119,11 @@
           </form>
         </div><!-- comment-form -->
         <?php
-        foreach ($comments as $comment):
+        foreach ($commentaires as $commentaire):
+         
         ?>
 
-        <h4><b>COMMENTS()</b></h4>
+      
 
         <div class="comments-area">
 
@@ -135,24 +136,24 @@
               </div>
 
               <div class="middle-area">
-                <a class="name" href="#"><b><?=$comment->auteur()?></b></a>
-                <h6 class="date"><?=$comment->date()?></h6>
+                <a class="name" href="#"><b><?=$commentaire->auteur()?></b></a>
+                <h6 class="date"><?=$commentaire->date()?></h6>
               </div>
 
-              <div class="right-area">
-                <h5 class="signal-btn" ><a href="#"><b>Signaler</b></a></h5>
-              </div>
+             
 
             </div><!-- post-info -->
 
-            <p><?=$comment->contenu()?></p>
-
+            <p><?=$commentaire->contenu()?></p>
+            <div class="right-area">
+                <h5 class="signal-btn" ><a href="#"><b>Signaler</b></a></h5>
+            </div>
           </div>
 
-         
+          <?php endforeach ?>   
 
-        <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a>
-        <?php endforeach ?>
+        
+      
 
 
       </div><!-- col-lg-8 col-md-12 -->
