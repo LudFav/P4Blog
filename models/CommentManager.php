@@ -46,12 +46,12 @@ public function update(){}
 
 
 public function delete($id){
-  self::$_bdd->exec('DELETE FROM commentaires WHERE id = '.(int) $id);
+  self::$_bdd->exec('DELETE FROM commentaires WHERE id = ?');
 }
 
 
 public function signale($id){
-  $req = self::$_bdd->prepare("UPDATE commentaires SET signale = 1 WHERE id = ?");
+  $req = self::$_bdd->prepare('UPDATE commentaires SET signale = 1 WHERE id = ?');
 
 }
 
