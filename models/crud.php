@@ -2,14 +2,14 @@
 
 interface crud {
 
-    public function create();
+    public function create($table, $obj);
 
-    public function readAll();
+    public function readAll($table, $obj);
 
-    public function readOne();
+    public function readOne($table, $obj, $id);
 
     public function update();
 
-    public function delete();
+    public function delete($id);
 
 }
