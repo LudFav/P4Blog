@@ -22,32 +22,36 @@ class ControllerPost {
     if (isset($_GET['id'])) {
       $this->_billetManager = new BilletManager;
       $billet = $this->_billetManager->getBillet($_GET['id']);
-      $this->_view->generate(array('billet' => $billet));
-    }
-    
+ 
       $this->_commentManager = new CommentManager;
-      $comments = $this->_commentManager->getComments();
-      $this->_view->generate(array('comments' => $comments));
-     
+      $commentaires = $this->_commentManager->getComments($_GET['id']);
+   
+      $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires));
+    } 
   }
-/* 
+/*
   private function billet(){
     if (isset($_GET['id'])) {
       $this->_billetManager = new BilletManager;
       $billet = $this->_billetManager->getBillet($_GET['id']);
       $this->_view = new View('SinglePost');
-      $this->_view->generate(array('billet' => $billet));
+      $this->_view->generate(array('billet' => $billet), array('commentaires' => $commentaires) );
     }
   }
 
   private function commentaires(){
-    if (isset($_GET['billetId'])){
+    var_dump('commentaires');
+    if (isset($_GET['id'])){
       $this->_commentManager = new CommentManager;
-      $comment = $this->_commentManager->getComments($_GET['billetId']);
+
+      $commentaires = $this->_commentManager->getComments($_GET['id']);
+      echo '<pre>';
+      var_dump($commentaires);
+      echo '</pre>';
       $this->_view->generate(array('commentaires' => $commentaires));
     }
   }
-
 */
+
 }
 
