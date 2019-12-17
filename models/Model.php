@@ -23,7 +23,7 @@ abstract class Model
   }
 
   //creation de la methode de récupération de liste d'elements dans la bdd
-
+/*
   protected function getAll($table, $obj){
     $this->getBdd();
     $var = [];
@@ -54,5 +54,6 @@ abstract class Model
     return $var;
     $req->closeCursor();
   }
+  */
 }
 
