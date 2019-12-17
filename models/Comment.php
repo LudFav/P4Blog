@@ -24,11 +24,11 @@ class Comment
     }
 //setters 
     public function setId($id){
-    $this->id= (int) $id;
+    $this->_id= (int) $id;
     }
     
-    public function setbilletId($billetId){
-    $this->billetId = (int) $billetId;
+    public function setBilletid($billetId){
+    $this->_billetId = (int) $billetId;
     }
  
     public function setAuteur($auteur){
@@ -48,7 +48,7 @@ class Comment
     }
 
     public function setSignale($signale){
-        $this->signale = (int) $signale;
+        $this->_signale = (int) $signale;
     }
  //getters
     public function id(){
