@@ -1,8 +1,7 @@
 <?php
+
 require_once 'views/View.php';
-/**
- *
- */
+
 class ControllerAccueil
 {
   private $_billetManager;
