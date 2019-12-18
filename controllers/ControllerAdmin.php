@@ -1,5 +1,7 @@
 <?php
+
 require_once 'views/View.php';
+
 class ControllerAdmin{
     private $_billetManager;
     private $_commentManager;
