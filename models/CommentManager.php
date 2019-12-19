@@ -55,6 +55,18 @@ public function signale($id){
 
 }
 
+public function getSignaledComments($table, $obj, $signale= null){
+  $commentairesignal = [];
+  $req = self::$_bdd->prepare('SELECT * FROM commentaires WHERE signale = 1');
+  $req->execute(array($signale));
+  
+  while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+    $commentaire = new Comment($data);
+    $commentairesignal[] = $commentaire;
+  }
+  $req->closeCursor();
+  return $commentairesignal;
+}
 
 public function getComments($billetId){
   return $this->readAll('commentaires', 'Comment', $billetId);
@@ -66,18 +78,7 @@ public function getComment($billetId){
 }
 
 
-public function getSignaledComments($table, $obj, $signale= null){
-  $commentaires = [];
-  $req = self::$_bdd->prepare('SELECT * FROM commentaires WHERE signale = 1');
-  $req->execute(array($signale));
-  
-  while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-    $commentaire = new Comment($data);
-    $commentaires[] = $commentaire;
-  }
-  $req->closeCursor();
-  return $commentaires;
-}
+
 
 /*
   public function getComments($billetId){
