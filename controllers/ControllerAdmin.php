@@ -13,6 +13,7 @@ class ControllerAdmin{
 
     private function tableauDeBord(){
         $this->_view = new View('Admin');
+        /*
         if (isset($_GET['id'])) {
           $this->_billetManager = new BilletManager;
           $billets = $this->_billetManager->getBillets();
@@ -21,6 +22,7 @@ class ControllerAdmin{
           $commentaires = $this->_commentManager->getSignaledComments($_GET['id']);
        
           $this->_view->generate(array('billets' => $billets, 'commentaires' => $commentaires));
-        } 
+        }*/
+        echo 'ADMIN'; 
       }
 }
