@@ -8,22 +8,26 @@ class ControllerAdmin{
     private $_view;
     public function __construct(){
       $this->tableauDeBord();
+      
     }
   
 
     private function tableauDeBord(){
        
-        /*
+        
+        $this->_view = new View('Admin');
         if (isset($_GET['id'])) {
           $this->_billetManager = new BilletManager;
           $billets = $this->_billetManager->getBillets();
      
           $this->_commentManager = new CommentManager;
-          $commentaires = $this->_commentManager->getSignaledComments($_GET['id']);
+          $commentaires = $this->_commentManager->getSignaledComments();
        
           $this->_view->generate(array('billets' => $billets, 'commentaires' => $commentaires));
-        }*/
+        }
         echo 'ADMIN'; 
-        $this->_view = new View('Admin');
-      }
+        
+        var_dump($_view);
+        
+    }
 }
