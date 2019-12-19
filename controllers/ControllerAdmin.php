@@ -6,8 +6,10 @@ class ControllerAdmin{
     private $_billetManager;
     private $_commentManager;
     private $_view;
-    
-    $this->tableauDeBord();
+    public function __construct(){
+      $this->tableauDeBord();
+    }
+  
 
     private function tableauDeBord(){
         $this->_view = new View('Admin');
