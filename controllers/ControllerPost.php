@@ -23,7 +23,7 @@ class ControllerPost {
       $this->_commentManager = new CommentManager;
       $commentaires = $this->_commentManager->getComments($_GET['id']);
    
-      $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires));
+    $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires ));
     } 
   }
 }
