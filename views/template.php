@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="fr">
 <head>
 	<title>TITLE</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -116,6 +116,30 @@
 
 
 	<!-- SCIPTS -->
+	<!-- TinyMCE -->
+<script type="text/javascript" src="assets/js/tiny_mce/tiny_mce.min.js"></script>
+<script type="text/javascript">
+  tinyMCE.init({
+    // type de mode
+    mode : "exact", 
+    // id ou class, des textareas appelés
+    elements : "Textarea1", 
+    // en mode avancé, cela permet de choisir les plugins
+    theme : "advanced", 
+    // langue
+    language : "fr", 
+    // liste des plugins
+    theme_advanced_toolbar_location : "top",
+    theme_advanced_buttons1 : "bold,italic,underline,strikethrough,sup,forecolor,separator,"
+    + "justifyleft,justifycenter,justifyright,justifyfull,formatselect,"
+    + "bullist,numlist,outdent,indent,separator,cleanup,|,undo,redo,|,",
+    theme_advanced_buttons2 : "",
+    theme_advanced_buttons3 : "",
+    height:"250px",
+    width:"600px"
+  });
+</script>
+		
 
 	<script src="public/common-js/jquery-3.1.1.min.js"></script>
 
