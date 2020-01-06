@@ -9,18 +9,17 @@ class ControllerAddbillet
 
   public function __construct()
   {
-    if (isset($url) && count($url) > 1) {
-      throw new \Exception("Page introuvable", 1);
-
-    }
-    else {
-      $this->billets();
-    }
+    
+    $this->addBillet();
+    echo "something";
+  
   }
 
-  private function billets(){
-    $this->_billetManager = new BilletManager();
-    $billets = $this->_billetManager->create('billets', 'Billet');
+  private function addBillet(){
     $this->_view = new View('Addbillet');
+    $this->_billetManager = new BilletManager();
+    if($_POST){
+        $billets = $this->_billetManager->create('billets', 'Billet');
+    }  
   }
 }
