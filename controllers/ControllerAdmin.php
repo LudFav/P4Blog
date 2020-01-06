@@ -16,23 +16,13 @@ class ControllerAdmin{
        
         
         $this->_view = new View('Admin');
-        /* if (isset($_GET['id'])) {
-          $this->_billetManager = new BilletManager;
-          $billets = $this->_billetManager->getBillets();
-     
-          $this->_commentManager = new CommentManager;
-          $commentaires = $this->_commentManager->getSignaledComments();
-       
-          $this->_view->generate(array('billets' => $billets, 'commentaires' => $commentaires));
-        }
-        */
         $this->_billetManager = new BilletManager;
         $billets = $this->_billetManager->getBillets();
    
         $this->_commentManager = new CommentManager;
-        //$commentaires = $this->_commentManager->getSignaledComments($signale);
+        $commentaires = $this->_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null);
      
-      $this->_view->generate(array('billets' => $billets, /* 'commentaires' => $commentaires */));
+      $this->_view->generate(array('billets' => $billets, 'commentaires' => $commentaires ));
         
         echo 'ADMIN';   
     }
