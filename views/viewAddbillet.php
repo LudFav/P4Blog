@@ -1,4 +1,4 @@
-<form>
+<form action="" method="post">
   <div class="form-group">
     <label for="auteur">Auteur</label>
     <input type="text" class="form-control" id="Test" placeholder="Stephane Rois">
@@ -13,6 +13,8 @@
     <label for="exampleFormControlTextarea1">Example textarea</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
+
+  <input type="submit" value="valider" />
 </form>
 </body>
 </html>
