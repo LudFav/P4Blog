@@ -76,23 +76,4 @@ public function getComments($billetId){
 public function getComment($billetId){
     return $this->readOne('commentaires', 'Comment', $billetId);
 }
-
-
-
-
-/*
-  public function getComments($billetId){
-    $commentaires = [];
-    $req = self::$_bdd->prepare('SELECT * FROM commentaires WHERE billetId = ?');
-    $req->execute(array($billetId));
-    
-    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-      $commentaire = new Comment($data);
-      $commentaires[] = $commentaire;
-    }
-    $req->closeCursor();
-    return $commentaires;
-  }
-*/
-
 }
