@@ -65,18 +65,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                 <?php /* foreach ($commentaires as $commentaire): ?>
+                 <?php  foreach ($commentaires as $commentaire): ?>
                       <tr>
                         <td><?php echo ($commentaire->id()); ?></td>
                         <td><?php echo ($commentaire->auteur()); ?></td>
                         <td><?php echo ($commentaire->contenu()); ?></td>
-                        <td><?php echo ($$commentaire->date()); ?></td>
+                        <td><?php echo ($commentaire->date()); ?></td>
                         <td>
                           <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                           <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                       </tr>
-                    <?php endforeach; */ ?>
+                    <?php endforeach;  ?>
                 
                   </tbody>   
             </table> 
