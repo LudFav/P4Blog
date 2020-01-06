@@ -11,10 +11,8 @@
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="Textarea1" rows="3"></textarea>
+    <textarea class="form-control" id="textarea1" rows="3"></textarea>
   </div>
 
   <input type="submit" value="valider" />
 </form>
-</body>
-</html>
