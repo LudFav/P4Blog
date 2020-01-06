@@ -14,7 +14,6 @@ class ControllerAdmin{
 
     private function tableauDeBord(){
        
-        
         $this->_view = new View('Admin');
         $this->_billetManager = new BilletManager;
         $billets = $this->_billetManager->getBillets();
@@ -22,8 +21,6 @@ class ControllerAdmin{
         $this->_commentManager = new CommentManager;
         $commentaires = $this->_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null);
      
-      $this->_view->generate(array('billets' => $billets, 'commentaires' => $commentaires ));
-        
-        echo 'ADMIN';   
+      $this->_view->generate(array('billets' => $billets, 'commentaires' => $commentaires ));  
     }
 }
