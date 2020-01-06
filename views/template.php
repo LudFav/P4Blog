@@ -1,11 +1,11 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 	<title>TITLE</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
-
+	
 
 	<!-- Font -->
 
@@ -51,12 +51,6 @@
 
 
   <?= $content ?>
-
-
-
-
-
-
 
 	<footer>
 
@@ -116,29 +110,8 @@
 
 
 	<!-- SCIPTS -->
-	<!-- TinyMCE -->
-<script type="text/javascript" src="assets/js/tiny_mce/tiny_mce.min.js"></script>
-<script type="text/javascript">
-  tinyMCE.init({
-    // type de mode
-    mode : "exact", 
-    // id ou class, des textareas appelés
-    elements : "Textarea1", 
-    // en mode avancé, cela permet de choisir les plugins
-    theme : "advanced", 
-    // langue
-    language : "fr", 
-    // liste des plugins
-    theme_advanced_toolbar_location : "top",
-    theme_advanced_buttons1 : "bold,italic,underline,strikethrough,sup,forecolor,separator,"
-    + "justifyleft,justifycenter,justifyright,justifyfull,formatselect,"
-    + "bullist,numlist,outdent,indent,separator,cleanup,|,undo,redo,|,",
-    theme_advanced_buttons2 : "",
-    theme_advanced_buttons3 : "",
-    height:"250px",
-    width:"600px"
-  });
-</script>
+	
+
 		
 
 	<script src="public/common-js/jquery-3.1.1.min.js"></script>
@@ -148,6 +121,14 @@
 	<script src="public/common-js/bootstrap.js"></script>
 
 	<script src="public/common-js/scripts.js"></script>
+	<script src="https://cdn.tiny.cloud/1/kj6hnyq7ot3n0153ozo5fcikhcy2knn23ufpbnbl50rsuwon/tinymce/5/tinymce.min.js"></script>
 
+	<script>tinymce.init({
+	  selector: '#textarea1',  // change this value according to your HTML
+	  plugin: 'a_tinymce_plugin',
+	  a_plugin_option: true,
+	  a_configuration_option: 400
+	});
+	</script>
 </body>
 </html>
