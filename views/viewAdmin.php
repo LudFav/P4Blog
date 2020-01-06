@@ -42,7 +42,6 @@
                     <?php endforeach; ?>
                   </tbody>   
             </table> 
-<<<<<<< HEAD
             </div>     
             <div class="table-wrapper">
             <div class="table-title">
@@ -81,19 +80,8 @@
                 
                   </tbody>   
             </table> 
-=======
->>>>>>> ce0d34963f11369ab2d470611424abf7aee07f6b
             </div>        
         </div>   
       </div>  
 </body>
 </html>
-<<<<<<< HEAD
-
-
-
-
-
-
-=======
->>>>>>> ce0d34963f11369ab2d470611424abf7aee07f6b
