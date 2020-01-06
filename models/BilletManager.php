@@ -3,13 +3,13 @@
 
 class BilletManager extends Model implements crud
 {
-  public function create($table, $obj){
+  public function create($billets, $billet){
     $this->getBdd();
     $var = [];
     $req = self::$_bdd->prepare('INSERT INTO billets SET auteur = :auteur, titre = :titre, contenu = :contenu, date = NOW()');   
-    $req->bindValue(':titre', $obj->titre());
-    $req->bindValue(':auteur', $obj->auteur());
-    $req->bindValue(':contenu', $obj->contenu());
+    $req->bindValue(':auteur', $billet->auteur());
+    $req->bindValue(':titre', $billet->titre());
+    $req->bindValue(':contenu', $billet->contenu());
     $req->execute();
     $req->closeCursor();
   }
