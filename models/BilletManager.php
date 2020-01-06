@@ -7,9 +7,9 @@ class BilletManager extends Model implements crud
     $this->getBdd();
     $var = [];
     $req = self::$_bdd->prepare('INSERT INTO billets SET auteur = :auteur, titre = :titre, contenu = :contenu, date = NOW()');   
-    $req->bindValue(':titre', $billet->titre());
-    $req->bindValue(':auteur', $billet->auteur());
-    $req->bindValue(':contenu', $billet->contenu());
+    $req->bindValue(':titre', $obj->titre());
+    $req->bindValue(':auteur', $obj->auteur());
+    $req->bindValue(':contenu', $obj->contenu());
     $req->execute();
     $req->closeCursor();
   }
