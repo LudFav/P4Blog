@@ -8,7 +8,6 @@ class ControllerAdmin{
     private $_view;
     public function __construct(){
       $this->tableauDeBord();
-      
     }
   
 
