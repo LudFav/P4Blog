@@ -13,9 +13,8 @@ class ControllerAddbillet
   }
 
   private function addBillet(){
-    echo " something1 ";
+    
     $this->_view = new View('Addbillet');
-    echo " something2 ";
     $this->_billetManager = new BilletManager();
     if($_POST){
        
