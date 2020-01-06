@@ -119,12 +119,8 @@
           </form>
         </div><!-- comment-form -->
         <?php
-        foreach ($commentaires as $commentaire):
-         
+        foreach ($commentaires as $commentaire):  
         ?>
-
-      
-
         <div class="comments-area">
 
           <div class="comment">
