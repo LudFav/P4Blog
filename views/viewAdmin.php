@@ -1,10 +1,10 @@
 <div class="slider">
   <div class="display-table  center-text">
-    <h1 class="title display-table-cell"><b>ADMIN</b></h1>
+    <h1 class="title display-table-cell"><b>ADMINISTRATION</b></h1>
   </div>
 </div><!-- slider -->
 
-<div class="container">
+<div class="container" style="padding-top:20px;">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
