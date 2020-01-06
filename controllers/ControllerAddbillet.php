@@ -9,17 +9,22 @@ class ControllerAddbillet
 
   public function __construct()
   {
-    
     $this->addBillet();
-    echo "something";
-  
   }
 
   private function addBillet(){
+    echo " something1 ";
     $this->_view = new View('Addbillet');
+    echo " something2 ";
     $this->_billetManager = new BilletManager();
     if($_POST){
+       
         $billets = $this->_billetManager->create('billets', 'Billet');
-    }  
+        echo " Le billet a été ajouté " ;
+    } else {
+        echo " Le billet n'a pas été ajouté ";
+    } 
+
+    $this->_view->generate(array());
   }
 }
