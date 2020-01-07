@@ -110,25 +110,19 @@
 
 
 	<!-- SCIPTS -->
-	
-
-		
-
 	<script src="public/common-js/jquery-3.1.1.min.js"></script>
-
 	<script src="public/common-js/tether.min.js"></script>
-
 	<script src="public/common-js/bootstrap.js"></script>
-
 	<script src="public/common-js/scripts.js"></script>
-	<script src="assets/js/tinymce/tinymce.min.js"></script>
 
-	<script>tinymce.init({
+	<script src="assets/js/tinymce/tinymce.min.js"></script>
+	<script> tinymce.init({
 	  selector: '#textarea1',  // change this value according to your HTML
 	  plugin: 'a_tinymce_plugin',
 	  a_plugin_option: true,
 	  a_configuration_option: 400
 	});
 	</script>
+	
 </body>
 </html>
