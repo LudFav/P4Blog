@@ -16,4 +16,3 @@
 
   <input type="submit" value="valider" />
 </form>
-0
