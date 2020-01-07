@@ -477,6 +477,19 @@ min-width: 100px;
 .modal form label {
 font-weight: normal;
 }
+.form-group {
+    margin: 1rem;
+}
+
+#FormAddBillet{
+	display:flex;
+	flex-direction: column;
+}
+
+input.addBillet{
+	width: 150px;
+	margin:15px auto;
+}
 
 /********************** FIN D'AJOUTS****/
 
