@@ -491,5 +491,12 @@ input.addBillet{
 	margin:15px auto;
 }
 
+#form-submit{
+	margin-bottom:15px;
+}
+
+.signal-btn{
+	margin-bottom:15px;
+}
 /********************** FIN D'AJOUTS****/
 
