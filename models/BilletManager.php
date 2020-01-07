@@ -56,13 +56,12 @@ class BilletManager extends Model implements crud
   }
 
   public function getBillet($id){
-      return $this->readOne('billets', 'Billet', $id);
+    return $this->readOne('billets', 'Billet', $id);
   }
 
-  
-
- 
-  
+  public function createBillet(){
+    return $this->create('billets', 'Billet');
+  } 
 }
 
 
