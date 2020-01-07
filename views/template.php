@@ -34,7 +34,7 @@
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 
 			<ul class="main-menu visible-on-click" id="main-menu">
-				<li><a href="#">Accueil</a></li>
+				<li><a href="accueil">Accueil</a></li>
 				<li><a href="#">Categories</a></li>
 				<li><a href="#">Features</a></li>
 			</ul><!-- main-menu -->
@@ -117,12 +117,12 @@
 
 	<script src="assets/js/tinymce/tinymce.min.js"></script>
 	<script> tinymce.init({
-	  selector: '#textarea1',  // change this value according to your HTML
+	  selector: '#textareaB',  // change this value according to your HTML
 	  plugin: 'a_tinymce_plugin',
 	  a_plugin_option: true,
 	  a_configuration_option: 400
 	});
 	</script>
-	
+
 </body>
 </html>
