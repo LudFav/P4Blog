@@ -15,6 +15,7 @@ class ControllerAddbillet
   private function addBillet(){
     
     $this->_view = new View('Addbillet');
+    $this->_view->generate(array());
     $this->_billetManager = new BilletManager();
     if($_POST){
        
@@ -23,7 +24,5 @@ class ControllerAddbillet
     } else {
         echo " Le billet n'a pas été ajouté ";
     } 
-
-    $this->_view->generate(array());
   }
 }
