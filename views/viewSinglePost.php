@@ -47,32 +47,6 @@
         </div><!-- main-post -->
       </div><!-- col-lg-8 col-md-12 -->
 
-      <div class="col-lg-4 col-md-12 no-left-padding">
-
-        <div class="single-post info-area">
-
-          <div class="sidebar-area about-area">
-            <h4 class="title"><b>ABOUT BONA</b></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-              ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-              Ut enim ad minim veniam</p>
-          </div>
-
-          <div class="sidebar-area subscribe-area">
-
-            <h4 class="title"><b>SUBSCRIBE</b></h4>
-            <div class="input-area">
-              <form>
-                <input class="email-input" type="text" placeholder="Enter your email">
-                <button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
-              </form>
-            </div>
-
-          </div><!-- subscribe-area -->
-
-          <div class="tag-area">
-
-            <h4 class="title"><b>TAG CLOUD</b></h4>
         
           </div><!-- subscribe-area -->
 
@@ -90,7 +64,7 @@
 <section class="comment-section">
   <div class="container">
   
-    <h4><b>POST COMMENT</b></h4>
+    <h4><b>Commentaires</b></h4>
     <div class="row">
 
       <div class="col-lg-8 col-md-12">
@@ -100,19 +74,14 @@
 
               <div class="col-sm-6">
                 <input type="text" aria-required="true" name="contact-form-name" class="form-control"
-                  placeholder="Enter your name" aria-invalid="true" required >
+                  placeholder="Nom" aria-invalid="true" required >
               </div><!-- col-sm-6 -->
-              <div class="col-sm-6">
-                <input type="email" aria-required="true" name="contact-form-email" class="form-control"
-                  placeholder="Enter your email" aria-invalid="true" required>
-              </div><!-- col-sm-6 -->
-
               <div class="col-sm-12">
                 <textarea name="contact-form-message" rows="2" class="text-area-messge form-control"
                   placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
               </div><!-- col-sm-12 -->
               <div class="col-sm-12">
-                <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
+                <button class="submit-btn" type="submit" id="form-submit"><b>Envoyer Commentaire</b></button>
               </div><!-- col-sm-12 -->
 
             </div><!-- row -->
