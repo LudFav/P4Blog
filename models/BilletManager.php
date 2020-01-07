@@ -15,16 +15,16 @@ class BilletManager extends Model implements crud
   }
 
 
-  public function readAll($table, $obj){
+  public function readAll($billets, $billet){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
+    $req = self::$_bdd->prepare('SELECT * FROM '.$billets.' ORDER BY id DESC');
     $req->execute();
     //on crée la variable data qui
     //va contenir les données
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
       // var contiendra les données sous forme d'objets
-      $var[] = new $obj($data);
+      $var[] = new $billet($data);
     }
     return $var;
     $req->closeCursor();
@@ -32,13 +32,13 @@ class BilletManager extends Model implements crud
   }
 
 
-  public function readOne($table, $obj, $id){
+  public function readOne($billets, $billet, $id){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, DATE_FORMAT(date, '%d/%m/%Y à %Hh%i') AS date FROM " .$table. " WHERE id = ?");
+    $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, DATE_FORMAT(date, '%d/%m/%Y à %Hh%i') AS date FROM " .$billets. " WHERE id = ?");
     $req->execute(array($id));
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-      $var[] = new $obj($data);
+      $var[] = new $billet($data);
     }
     return $var;
     $req->closeCursor();
