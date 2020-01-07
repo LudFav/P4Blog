@@ -121,7 +121,7 @@
 	<script src="public/common-js/bootstrap.js"></script>
 
 	<script src="public/common-js/scripts.js"></script>
-	<script src="https://cdn.tiny.cloud/1/kj6hnyq7ot3n0153ozo5fcikhcy2knn23ufpbnbl50rsuwon/tinymce/5/tinymce.min.js"></script>
+	<script src="assets/js/tinymce/tinymce.min.js"></script>
 
 	<script>tinymce.init({
 	  selector: '#textarea1',  // change this value according to your HTML
