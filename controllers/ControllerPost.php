@@ -19,9 +19,14 @@ class ControllerPost {
     if (isset($_GET['id'])) {
       $this->_billetManager = new BilletManager;
       $billet = $this->_billetManager->getBillet($_GET['id']);
- 
+
+      $data = array(
+        'auteur' => isset($_POST['auteur']) ? htmlspecialchars($_POST['auteur']) : NULL,
+        'contenu' => isset($_POST['contenu']) ? htmlspecialchars($_POST['contenu']) : NULL
+        );
       $this->_commentManager = new CommentManager;
       $commentaires = $this->_commentManager->getComments($_GET['id']);
+      $addComment = $this->_commentManager->createComment($data);
    
     $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires ));
     } 
