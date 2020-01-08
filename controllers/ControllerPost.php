@@ -25,8 +25,9 @@ class ControllerPost {
         'contenu' => isset($_POST['contenu']) ? htmlspecialchars($_POST['contenu']) : NULL
         );
       $this->_commentManager = new CommentManager;
+      $addComment = $this->_commentManager->createComment($_GET['id'], $data);
       $commentaires = $this->_commentManager->getComments($_GET['id']);
-      $addComment = $this->_commentManager->createComment($data);
+      
    
     $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires ));
     } 
