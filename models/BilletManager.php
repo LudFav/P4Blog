@@ -64,7 +64,8 @@ class BilletManager extends Model implements crud
   }
 
   public function createBillet($data){
-    return $this->create('billets''auteur' => $data['auteur'],
+    return $this->create('billets',array(
+    'auteur' => $data['auteur'],
     'titre'  => $data['titre'],
     'contenu'=> $data['contenu'],
     'date'   => date('d-m-Y H:i:s')
