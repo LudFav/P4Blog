@@ -2,16 +2,20 @@
 
 class CommentManager extends Model implements crud {
 
-public function create($table, $obj){
-  $this->getBdd();
-  $var = [];
-  $req = self::$_bdd->prepare('INSERT INTO commentaires SET billetId = :billetId, auteur = :auteur, contenu = :contenu, date = NOW()');   
-  $req->bindValue(':billetId', $comment->billetId());
-  $req->bindValue(':auteur', $comment->auteur());
-  $req->bindValue(':contenu', $comment->contenu());
-  $req->execute();
-  $req->closeCursor();
-}
+  public function create($table, $data){
+    $this->getBdd();
+    ksort($data);
+    $keyFields = implode('`, `', array_keys($data));
+    $valueFields = ':' . implode(', :', array_keys($data));
+    $req = self::$_bdd->prepare("INSERT INTO $table (`$keyFields`) VALUES ($valueFields )"); 
+
+    foreach ($data as $key => $value){
+      $req->bindValue(":$key", $value);
+    }
+
+    $req->execute();
+    $req->closeCursor();
+  }
 
 
 public function readAll($table, $obj, $billetId= null){
@@ -75,5 +79,13 @@ public function getComments($billetId){
 
 public function getComment($billetId){
     return $this->readOne('commentaires', 'Comment', $billetId);
+}
+
+public function createComment($data){
+  return $this->create('commentaires', array(
+    'auteur' => $data['auteur'],
+    'contenu'=> $data['contenu'],
+    'date'   => date('d-m-Y H:i:s')
+  ));
 }
 }
