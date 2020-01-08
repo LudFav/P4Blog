@@ -14,7 +14,7 @@ class BilletManager extends Model implements crud
       $req->bindValue(":$key", $value);
     }
 
-    $req->execute();
+    $req->execute( array();
     $req->closeCursor();
   }
 
@@ -64,12 +64,11 @@ class BilletManager extends Model implements crud
   }
 
   public function createBillet($data){
-    return $this->create('billets', array(
-      'auteur' => $data['auteur'],
-      'titre'  => $data['titre'],
-      'contenu'=> $data['contenu'],
-      'date'   => date('d-m-Y H:i:s')
-    ));
+    return $this->create('billets''auteur' => $data['auteur'],
+    'titre'  => $data['titre'],
+    'contenu'=> $data['contenu'],
+    'date'   => date('d-m-Y H:i:s')
+  ));
   }
   
 }
