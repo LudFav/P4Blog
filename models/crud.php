@@ -2,7 +2,7 @@
 
 interface crud {
 
-    public function create($table, $obj);
+    public function create($table, $data);
 
     public function readAll($table, $obj);
 
