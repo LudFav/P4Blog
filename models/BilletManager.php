@@ -59,9 +59,7 @@ class BilletManager extends Model implements crud
     return $this->readOne('billets', 'Billet', $id);
   }
 
-  public function createBillet(){
-    return $this->create('billets', 'Billet');
-  } 
+  
 }
 
 
