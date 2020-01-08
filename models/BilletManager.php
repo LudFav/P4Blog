@@ -3,31 +3,32 @@
 
 class BilletManager extends Model implements crud
 {
-  public function create($billets, $billet){
+  public function create($table, $data){
     $this->getBdd();
-    $var = [];
-    $req = self::$_bdd->prepare('INSERT INTO billets SET auteur = :auteur, titre = :titre, contenu = :contenu, date = NOW()'); 
-    $data [
-      
-    ];  
-    $req->bindValue(':auteur', $billet->auteur());
-    $req->bindValue(':titre', $billet->titre());
-    $req->bindValue(':contenu', $billet->contenu());
+    ksort($data);
+    $keyFields = implode('`, `', array_keys($data));
+    $valueFields = ':' . implode(', :', array_keys($data));
+    $req = self::$_bdd->prepare("INSERT INTO $table (`$keyFields`) VALUES ($valueFields )"); 
+
+    foreach ($data as $key => $value){
+      $req->bindValue(":$key", $value);
+    }
+
     $req->execute();
     $req->closeCursor();
   }
 
 
-  public function readAll($billets, $billet){
+  public function readAll($table, $obj){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare('SELECT * FROM '.$billets.' ORDER BY id DESC');
+    $req = self::$_bdd->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
     $req->execute();
     //on crée la variable data qui
     //va contenir les données
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
       // var contiendra les données sous forme d'objets
-      $var[] = new $billet($data);
+      $var[] = new $obj($data);
     }
     return $var;
     $req->closeCursor();
@@ -35,13 +36,13 @@ class BilletManager extends Model implements crud
   }
 
 
-  public function readOne($billets, $billet, $id){
+  public function readOne($table, $obj, $id){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, DATE_FORMAT(date, '%d/%m/%Y à %Hh%i') AS date FROM " .$billets. " WHERE id = ?");
+    $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, DATE_FORMAT(date, '%d/%m/%Y à %Hh%i') AS date FROM " .$table. " WHERE id = ?");
     $req->execute(array($id));
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-      $var[] = new $billet($data);
+      $var[] = new $obj($data);
     }
     return $var;
     $req->closeCursor();
@@ -62,6 +63,14 @@ class BilletManager extends Model implements crud
     return $this->readOne('billets', 'Billet', $id);
   }
 
+  public function createBillet($data){
+    return $this->create('billets', array(
+      'auteur' => $data['auteur'],
+      'titre'  => $data['titre'],
+      'contenu'=> $data['contenu'],
+      'date'   => date('d-m-Y H:i:s')
+    ));
+  }
   
 }
 
