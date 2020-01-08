@@ -7,12 +7,11 @@ class CommentManager extends Model implements crud {
     ksort($data);
     $keyFields = implode('`, `', array_keys($data));
     $valueFields = ':' . implode(', :', array_keys($data));
-    $req = self::$_bdd->prepare("INSERT INTO $table (`$keyFields`) VALUES ($valueFields )"); 
-
+    $req = self::$_bdd->prepare("INSERT INTO $table (`$keyFields`) VALUES ($valueFields)"); 
+    
     foreach ($data as $key => $value){
       $req->bindValue(":$key", $value);
     }
-
     $req->execute();
     $req->closeCursor();
   }
@@ -81,7 +80,7 @@ public function getComment($billetId){
     return $this->readOne('commentaires', 'Comment', $billetId);
 }
 
-public function createComment($data){
+public function createComment($billetId, $data){
   return $this->create('commentaires', array(
     'auteur' => $data['auteur'],
     'contenu'=> $data['contenu'],
