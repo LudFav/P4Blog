@@ -17,14 +17,10 @@ class ControllerAddbillet
     $this->_view = new View('Addbillet');
     $this->_view->generate(array());
 
-    $auteur = $_POST['auteur'];
-    $titre = $_POST['titre'];
-    $contenu = $_POST['contenu'];
-    if (!is_null($auteur) AND !is_null($titre) AND !is_null($contenu)){
+    $auteur = isset($_POST['auteur']) ? htmlspecialchars($_POST['auteur']) : NULL;
+    $titre = isset($_POST['titre']) ? htmlspecialchars($_POST['titre']) : NULL;
+    $auteur = isset($_POST['contenu']) ? htmlspecialchars($_POST['contenu']) : NULL;
     $this->_billetManager = new BilletManager();
     $billet = $this->_billetManager->create('billets', 'BILLET');
-    }
-
-  
   }
 }
