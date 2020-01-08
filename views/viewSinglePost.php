@@ -73,11 +73,11 @@
             <div class="row">
 
               <div class="col-sm-6">
-                <input type="text" aria-required="true" name="contact-form-name" class="form-control"
+                <input type="text" aria-required="true" name="auteur" class="form-control"
                   placeholder="Nom" aria-invalid="true" required >
               </div><!-- col-sm-6 -->
               <div class="col-sm-12">
-                <textarea name="contact-form-message" rows="2" class="text-area-messge form-control"
+                <textarea name="contenu" rows="2" class="text-area-messge form-control"
                   placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
               </div><!-- col-sm-12 -->
               <div class="col-sm-12">
