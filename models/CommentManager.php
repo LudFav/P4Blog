@@ -2,7 +2,7 @@
 
 class CommentManager extends Model implements crud {
 
-  public function create($table, $data){
+  public function create($table, $data, $billetId= null){
     $this->getBdd();
     ksort($data);
     $keyFields = implode('`, `', array_keys($data));
@@ -84,6 +84,7 @@ public function createComment($billetId, $data){
   return $this->create('commentaires', array(
     'auteur' => $data['auteur'],
     'contenu'=> $data['contenu'],
+    'billetId' => $data['billetId'],
     'date'   => date('d-m-Y H:i:s')
   ));
 }
