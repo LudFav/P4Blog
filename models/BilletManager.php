@@ -14,7 +14,7 @@ class BilletManager extends Model implements crud
       $req->bindValue(":$key", $value);
     }
 
-    $req->execute( array();
+    $req->execute();
     $req->closeCursor();
   }
 
