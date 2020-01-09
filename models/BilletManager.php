@@ -48,10 +48,10 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
 
-  public function update(){}
+  public function update($table, $data){}
 
-  public function delete($id){
-    self::$_bdd->exec('DELETE FROM billets WHERE id = '.(int) $id);
+  public function delete($table, $id){
+    self::$_bdd->exec("DELETE FROM $table WHERE id = .(int) $id");
   }
   
   //methode qui va recuperer tous les billets dans la bdd
