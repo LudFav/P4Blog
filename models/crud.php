@@ -8,8 +8,8 @@ interface crud {
 
     public function readOne($table, $obj, $id);
 
-    public function update();
+    public function update($table, $data);
 
-    public function delete($id);
+    public function delete($table, $id);
 
 }
