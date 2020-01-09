@@ -69,7 +69,7 @@
 
       <div class="col-lg-8 col-md-12">
         <div class="comment-form">
-          <form action="post&id=?" method="post">
+          <form action="" method="post">
             <div class="row">
 
               <div class="col-sm-6">
