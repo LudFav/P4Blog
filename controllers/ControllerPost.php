@@ -23,10 +23,11 @@ class ControllerPost {
       
       $this->_commentManager = new CommentManager;
       $data = array(
-        'auteur' => isset($_POST['auteur']) ? htmlspecialchars($_POST['auteur']) : NULL,
-        'contenu' => isset($_POST['contenu']) ? htmlspecialchars($_POST['contenu']) : NULL
+        'billetId' => isset($_GET['id']) ? $_GET['id'] : NULL,
+        'auteur' => isset($_POST['auteur']) ? htmlspecialchars($_POST['auteur']) : " ",
+        'contenu' => isset($_POST['contenu']) ? htmlspecialchars($_POST['contenu']) : " "
         );
-      $addComment = $this->_commentManager->createComment($_GET['id'], $data);
+      $addComment = $this->_commentManager->createComment($data, $_GET['id']);
       $commentaires = $this->_commentManager->getComments($_GET['id']);
       
    
