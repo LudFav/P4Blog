@@ -68,7 +68,7 @@ class BilletManager extends Model implements crud
     'auteur' => $data['auteur'],
     'titre'  => $data['titre'],
     'contenu'=> $data['contenu'],
-    'date'   => date('d-m-Y H:i:s')
+    'date'   => date('d-m-Y H:i')
   ));
   }
   
