@@ -35,8 +35,8 @@
                         <td><?php echo ($billet->titre()); ?></td>
                         <td><?php echo ($billet->date()); ?></td>
                         <td>
-                          <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                          <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                          <a href="#edit" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                          <a href="#delete" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                       </tr>
                     <?php endforeach; ?>
@@ -50,7 +50,7 @@
 						          <h2>Commentaires Signalés</h2>
                     </div>
 					          <div class="col-sm-6">
-						          <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Effacer</span></a>						
+						          <a href="#delete" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Effacer</span></a>						
 					          </div>
                 </div>
             </div>
@@ -72,8 +72,8 @@
                         <td><?php echo ($commentaire->contenu()); ?></td>
                         <td><?php echo ($commentaire->date()); ?></td>
                         <td>
-                          <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                          <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                          <a href="#editComment" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                          <a href="#deleteComment" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                       </tr>
                     <?php endforeach;  ?>
