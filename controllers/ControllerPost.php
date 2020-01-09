@@ -19,20 +19,21 @@ class ControllerPost {
     if (isset($_GET['id'])) {
       $this->_billetManager = new BilletManager;
       $billet = $this->_billetManager->getBillet($_GET['id']);
-
-      
       $this->_commentManager = new CommentManager;
-      $data = array(
+  /*  $data = array(
         'billetId' => isset($_GET['id']) ? $_GET['id'] : NULL,
-        'auteur' => isset($_POST['auteur']) ? htmlspecialchars($_POST['auteur']) : " ",
-        'contenu' => isset($_POST['contenu']) ? htmlspecialchars($_POST['contenu']) : " "
+        'auteur' => !empty($_POST['auteur']) ? htmlspecialchars($_POST['auteur']) : " ",
+        'contenu' => !empty($_POST['contenu']) ? htmlspecialchars($_POST['contenu']) : " "
         );
       $addComment = $this->_commentManager->createComment($data, $_GET['id']);
+  */
       $commentaires = $this->_commentManager->getComments($_GET['id']);
-      
    
     $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires ));
     } 
   }
+
+
+
 }
 
