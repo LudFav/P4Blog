@@ -2,16 +2,18 @@
 
 class CommentManager extends Model implements crud {
 
-  public function create($table, $data, $billetId= null){
+  public function create($table, $data){
     $this->getBdd();
     ksort($data);
     $keyFields = implode('`, `', array_keys($data));
     $valueFields = ':' . implode(', :', array_keys($data));
-    $req = self::$_bdd->prepare("INSERT INTO $table (`$keyFields`) VALUES ($valueFields)"); 
+    
+    $req = self::$_bdd->prepare("INSERT INTO $table (`$keyFields`) VALUES ($valueFields)");
     
     foreach ($data as $key => $value){
       $req->bindValue(":$key", $value);
     }
+
     $req->execute();
     $req->closeCursor();
   }
@@ -19,7 +21,7 @@ class CommentManager extends Model implements crud {
 
 public function readAll($table, $obj, $billetId= null){
   $commentaires = [];
-  $req = self::$_bdd->prepare('SELECT * FROM commentaires WHERE billetId = ?');
+  $req = self::$_bdd->prepare("SELECT * FROM $table WHERE billetId = ?");
   $req->execute(array($billetId));
   
   while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -34,7 +36,7 @@ public function readAll($table, $obj, $billetId= null){
 public function readOne($table, $obj, $id){
   $this->getBdd();
   $commentaire = [];
-  $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, DATE_FORMAT(date, '%d/%m/%Y à %Hh%i') AS date FROM " .$table. " WHERE id = ?");
+  $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, DATE_FORMAT(date, '%d/%m/%Y à %Hh%i') AS date FROM $table WHERE id = ?");
   $req->execute(array($id));
   while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
     $commentaire[] = new Comment($data);
@@ -45,11 +47,11 @@ public function readOne($table, $obj, $id){
 }
 
 
-public function update(){}
+public function update($table, $data){}
 
 
-public function delete($id){
-  self::$_bdd->exec('DELETE FROM commentaires WHERE id = ?');
+public function delete($table, $id){
+  self::$_bdd->exec("DELETE FROM $table WHERE id = ?");
 }
 
 
@@ -80,11 +82,12 @@ public function getComment($billetId){
     return $this->readOne('commentaires', 'Comment', $billetId);
 }
 
-public function createComment($billetId, $data){
+public function createComment($data, $billetId){
+  var_dump($data);
   return $this->create('commentaires', array(
+    'billetId'=>$data['billetId'],
     'auteur' => $data['auteur'],
-    'contenu'=> $data['contenu'],
-    'billetId' => $data['billetId'],
+    'contenu'=> $data['contenu'],    
     'date'   => date('d-m-Y H:i:s')
   ));
 }
