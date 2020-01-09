@@ -14,7 +14,10 @@ class BilletManager extends Model implements crud
       $req->bindValue(":$key", $value);
     }
 
-    $req->execute();
+    $requete = $req->execute();
+    if ($requete) {
+      header("Location:admin");
+    }
     $req->closeCursor();
   }
 
@@ -71,7 +74,6 @@ class BilletManager extends Model implements crud
     'date'   => date('d-m-Y H:i')
   ));
   }
-  
 }
 
 
