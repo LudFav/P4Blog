@@ -48,9 +48,9 @@ class UserManager extends Model implements crud
     $req->closeCursor();
   }
 
-  public function update($table, $data){}
+  public function update($table, $data, $where){}
 
-  public function delete($table, $id){
+  public function delete($table, $where){
     self::$_bdd->exec("DELETE FROM $table WHERE id = .(int) $id");
   }
   
