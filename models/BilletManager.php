@@ -48,23 +48,34 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
 
-  public function update($table, $data){
+
+  public function update($table, $data, $where){
     $this->getBdd();
     ksort($data);
-    $req = self::$_bdd->prepare("UPDATE $table SET titre=:titre,contenu=:contenu WHERE id=?"); 
-    $req->execute(array($id));
+    $fields = NULL;
+		foreach($data as $key=> $value) {
+			$fields .= "`$key`=:$key,";
+		}
+		$fields = rtrim($fields, ',');
+    $req = self::$_bdd->prepare("UPDATE $table SET $fields WHERE $where"); 
+    
     foreach ($data as $key => $value){
       $req->bindValue(":$key", $value);
     }
-
     $req->execute();
     $req->closeCursor();
   }
 
-  public function delete($table, $id){
-    self::$_bdd->exec("DELETE FROM $table WHERE id=:id");
+
+
+  public function delete($table, $where){
+    $this->getBdd();
+    $req = self::$_bdd->prepare("DELETE FROM $table WHERE $where");
+    $req->execute();
+    $req->closeCursor();
   }
   
+
   //methode qui va recuperer tous les billets dans la bdd
   public function getBillets(){
     return $this->readAll('billets', 'Billet');
@@ -87,7 +98,11 @@ class BilletManager extends Model implements crud
     return $this->update('billets',array(
       'titre'  => $data['titre'],
       'contenu'=> $data['contenu']
-    ));
+    ), "`id` = '{$_GET['id']}'");
+  }
+
+  public function deleteBillet($id){
+    return $this->delete('billets', "`id` = '{$_GET['id']}'");
   }
 }
 
