@@ -12,8 +12,7 @@
 						          <h2>Billets</h2>
                     </div>
 					          <div class="col-sm-6">
-						          <a href="addbillet" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Ajouter 1 billet</span></a>
-						          <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Effacer</span></a>						
+						          <a href="addbillet" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i><span><strong>Nouveau Billet</strong></span></a>
 					          </div>
                 </div>
             </div>
@@ -35,8 +34,8 @@
                         <td><?php echo ($billet->titre()); ?></td>
                         <td><?php echo ($billet->date()); ?></td>
                         <td>
-                          <a href="update" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                          <a href="#delete" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                          <a href="update&id=<?= $billet->id() ?>" class="edit" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                          <form action="delete&id=<?= $billet->id() ?>" onSubmit="return confirm('Etes vous sur de vouloir supprimer ce billet?')" class="delete"><button name="delete" type="submit" id="deleteButton"><i class="fa fa-trash" aria-hidden="true"></i></button</form>
                         </td>
                       </tr>
                     <?php endforeach; ?>
@@ -49,9 +48,6 @@
                     <div class="col-sm-6">
 						          <h2>Commentaires Signalés</h2>
                     </div>
-					          <div class="col-sm-6">
-						          <a href="#delete" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Effacer</span></a>						
-					          </div>
                 </div>
             </div>
             <table class="table table-striped table-hover">
