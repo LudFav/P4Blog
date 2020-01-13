@@ -10,6 +10,7 @@
 	<!-- Font -->
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+	<link href="assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
 	<!-- Stylesheets -->
@@ -110,6 +111,7 @@
 
 
 	<!-- SCIPTS -->
+	<script src="assets/js/delete.js"></script>
 	<script src="public/common-js/jquery-3.1.1.min.js"></script>
 	<script src="public/common-js/tether.min.js"></script>
 	<script src="public/common-js/bootstrap.js"></script>
@@ -117,7 +119,7 @@
 
 	<script src="assets/js/tinymce/tinymce.min.js"></script>
 	<script> tinymce.init({
-	  selector: '#textareaB',  // change this value according to your HTML
+	  selector: '#textareaB, #textareaC',  // change this value according to your HTML
 	  plugin: 'a_tinymce_plugin',
 	  a_plugin_option: true,
 	  a_configuration_option: 400
