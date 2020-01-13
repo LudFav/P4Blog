@@ -15,5 +15,5 @@
     <textarea class="form-control" name="contenu" id="textareaB" rows="3"></textarea>
   </div>
 
-  <input name="date" type="submit" value="valider" class="addBillet"/>
+  <input name="add" type="submit" value="valider" class="addBillet"/>
 </form>
