@@ -47,10 +47,10 @@ public function readOne($table, $obj, $id){
 }
 
 
-public function update($table, $data){}
+public function update($table, $data, $where){}
 
 
-public function delete($table, $id){
+public function delete($table, $where){
   self::$_bdd->exec("DELETE FROM $table WHERE id = ?");
 }
 
