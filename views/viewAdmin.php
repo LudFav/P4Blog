@@ -68,8 +68,8 @@
                         <td><?php echo ($commentaire->contenu()); ?></td>
                         <td><?php echo ($commentaire->date()); ?></td>
                         <td>
-                          <a href="#editComment" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                          <a href="#deleteComment" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                          <a href="#editComment" class="edit" data-toggle="modal"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                          <a href="#deleteComment" class="delete" data-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                       </tr>
                     <?php endforeach;  ?>
