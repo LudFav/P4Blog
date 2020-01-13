@@ -16,13 +16,14 @@ class ControllerAddcomment
     
     $this->_view = new View('Addcomment');
     $this->_view->generate(array());
-    $data = array(
-        'billetId' => isset($_GET['id']) ? $_GET['id'] : NULL,
-        'auteur' => !empty($_POST['auteur']) ? htmlspecialchars($_POST['auteur']) : " ",
-        'contenu' => !empty($_POST['contenu']) ? htmlspecialchars($_POST['contenu']) : " "
+    if(isset($_POST['add'])){
+        $data = array(
+            'billetId' => $_GET['id'];
+            'auteur' => htmlspecialchars($_POST['auteur']),
+            'contenu' => htmlspecialchars($_POST['contenu']),
         );
-    $this->_commentManager = new CommentManager();
-    $comment = $this->_commentManager->createComment($data);
+    $addComment = $this->_commentManager->createComment($data);
+    }
   }
 }
 
