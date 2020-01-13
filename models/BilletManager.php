@@ -14,10 +14,7 @@ class BilletManager extends Model implements crud
       $req->bindValue(":$key", $value);
     }
 
-    $requete = $req->execute();
-    if ($requete) {
-      header("Location:admin");
-    }
+    $req->execute();
     $req->closeCursor();
   }
 
@@ -25,7 +22,7 @@ class BilletManager extends Model implements crud
   public function readAll($table, $obj){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
+    $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC");
     $req->execute();
     //on crée la variable data qui
     //va contenir les données
@@ -42,7 +39,7 @@ class BilletManager extends Model implements crud
   public function readOne($table, $obj, $id){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, DATE_FORMAT(date, '%d/%m/%Y à %Hh%i') AS date FROM " .$table. " WHERE id = ?");
+    $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, date FROM $table WHERE id = ?");
     $req->execute(array($id));
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
       $var[] = new $obj($data);
@@ -51,10 +48,21 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
 
-  public function update($table, $data){}
+  public function update($table, $data){
+    $this->getBdd();
+    ksort($data);
+    $req = self::$_bdd->prepare("UPDATE $table SET titre=:titre,contenu=:contenu WHERE id=?"); 
+    $req->execute(array($id));
+    foreach ($data as $key => $value){
+      $req->bindValue(":$key", $value);
+    }
+
+    $req->execute();
+    $req->closeCursor();
+  }
 
   public function delete($table, $id){
-    self::$_bdd->exec("DELETE FROM $table WHERE id = .(int) $id");
+    self::$_bdd->exec("DELETE FROM $table WHERE id=:id");
   }
   
   //methode qui va recuperer tous les billets dans la bdd
@@ -73,6 +81,13 @@ class BilletManager extends Model implements crud
     'contenu'=> $data['contenu'],
     'date'   => date('d-m-Y H:i')
   ));
+  }
+
+  public function updateBillet($data, $id){
+    return $this->update('billets',array(
+      'titre'  => $data['titre'],
+      'contenu'=> $data['contenu']
+    ));
   }
 }
 
