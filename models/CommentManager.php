@@ -79,11 +79,10 @@ public function getComments($billetId){
 
 
 public function getComment($billetId){
-    return $this->readOne('commentaires', 'Comment', $billetId);
+  return $this->readOne('commentaires', 'Comment', $billetId);
 }
 
 public function createComment($data, $billetId){
-  var_dump($data);
   return $this->create('commentaires', array(
     'billetId'=>$data['billetId'],
     'auteur' => $data['auteur'],
