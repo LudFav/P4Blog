@@ -14,8 +14,7 @@ class ControllerAddbillet
 
   private function addBillet(){
     
-    $this->_view = new View('Addbillet');
-    $this->_view->generate(array());
+    
     if(isset($_POST['add'])){
       $data = array(
       'auteur' => htmlspecialchars($_POST['auteur']),
@@ -24,6 +23,9 @@ class ControllerAddbillet
       );
       $this->_billetManager = new BilletManager();
       $billets = $this->_billetManager->createBillet($data);
+      header('Location:admin');
     }
+    $this->_view = new View('Addbillet');
+    $this->_view->generate(array());
   }
 }
