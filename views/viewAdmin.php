@@ -35,8 +35,8 @@
                         <td><?php echo ($billet->titre()); ?></td>
                         <td><?php echo ($billet->date()); ?></td>
                         <td>
-                          <a href="#edit" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                          <a href="#delete" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                          <a href="update" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                          <a href="#delete" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                       </tr>
                     <?php endforeach; ?>
