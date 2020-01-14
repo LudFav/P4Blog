@@ -125,6 +125,7 @@
 	  a_configuration_option: 400
 	});
 	</script>
+	<script src="assets/js/ajax.js"></script>
 
 </body>
 </html>
