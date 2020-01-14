@@ -113,7 +113,7 @@
 
             <p><?=$commentaire->contenu()?></p>
             <div class="right-area">
-                <h5 class="signal-btn" ><a href="#"><b>Signaler</b></a></h5>
+                <button class="signal-btn" onclick="handleButton(this)" ><b>Signaler</b></button>
             </div>
           </div>
 
