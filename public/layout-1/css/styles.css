@@ -499,10 +499,14 @@ input.addBillet{
 	margin-bottom:15px;
 }
 
-button#deleteButton {
-    border: none;
+td.actionTd {
+    display: flex;
+}
+
+button.deletebtn {
     background-color: transparent;
-    color: #d9534f;
+	border: none;
+	color: #d9534f;
     cursor: pointer;
 }
 /********************** FIN D'AJOUTS****/
