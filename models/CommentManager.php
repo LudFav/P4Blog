@@ -51,14 +51,22 @@ public function update($table, $data, $where){}
 
 
 public function delete($table, $where){
-  self::$_bdd->exec("DELETE FROM $table WHERE id = ?");
+  $this->getBdd();
+  $req = self::$_bdd->prepare("DELETE FROM $table WHERE $where");
+  $req->execute();
+  $req->closeCursor();
 }
 
 
 public function signale($id){
   $req = self::$_bdd->prepare('UPDATE commentaires SET signale = 1 WHERE id = ?');
-
 }
+
+public function unsignale($id){
+  $req = self::$_bdd->prepare('UPDATE commentaires SET signale = 0 WHERE id = ?');
+}
+
+
 
 public function getSignaledComments($table, $obj, $signale= null){
   $commentairesignal = [];
@@ -89,5 +97,9 @@ public function createComment($data, $billetId){
     'contenu'=> $data['contenu'],    
     'date'   => date('d-m-Y H:i:s')
   ));
+}
+
+public function deleteComment($id){
+  return $this->delete('commentaires', "`id` = '{$_GET['id']}'");
 }
 }
