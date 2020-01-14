@@ -28,14 +28,16 @@
                 </thead>
                 <tbody>
                     <?php foreach ($billets as $billet): ?>
+
                       <tr>
-                        <td><?php echo ($billet->id()); ?></td>
+                        <a href="post&id=<?= $billet->id()?>"><td><?php echo ($billet->id()); ?></td></a>
                         <td><?php echo ($billet->auteur()); ?></td>
                         <td><?php echo ($billet->titre()); ?></td>
                         <td><?php echo ($billet->date()); ?></td>
-                        <td>
-                          <a href="update&id=<?= $billet->id() ?>" class="edit" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                          <form action="delete&id=<?= $billet->id() ?>" onSubmit="return confirm('Etes vous sur de vouloir supprimer ce billet?')" class="delete"><button name="delete" type="submit" id="deleteButton"><i class="fa fa-trash" aria-hidden="true"></i></button</form>
+                        <td class="actionTd">
+                          <a href="post&id=<?= $billet->id()?>" class="visualize"><i class="fa fa-eye"></i></a>
+                          <a href="update&id=<?= $billet->id()?>" class="edit" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                          <form action="deletebillet&id=<?= $billet->id()?>" id="formDelete<?= $billet->id()?>" onSubmit="return confirm('Etes vous sur de vouloir supprimer ce billet?')" class="deleteForm"><button name="deleteBilletbtn" type="submit" id="deleteButton<?= $billet->id()?>" class="deletebtn"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
                         </td>
                       </tr>
                     <?php endforeach; ?>
@@ -67,9 +69,9 @@
                         <td><?php echo ($commentaire->auteur()); ?></td>
                         <td><?php echo ($commentaire->contenu()); ?></td>
                         <td><?php echo ($commentaire->date()); ?></td>
-                        <td>
-                          <a href="#editComment" class="edit" data-toggle="modal"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                          <a href="#deleteComment" class="delete" data-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <td class="actionTd">
+                          <a href="update&id=<?= $commentaire->id()?>" class="edit" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                          <form action="deletecomment&id=<?= $commentaire->id()?>" id="commentDelete<?= $commentaire->id()?>" onSubmit="return confirm('Etes vous sur de vouloir supprimer ce commentaire?')" class="deleteForm"><button name="deleteCommentbtn" type="submit" id="deleteButton<?= $commentaire->id()?>" class="deletebtn"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
                         </td>
                       </tr>
                     <?php endforeach;  ?>
