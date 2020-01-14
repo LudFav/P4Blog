@@ -29,7 +29,9 @@ class ControllerPost {
         $addComment = $this->_commentManager->createComment($data, $data['billetId']);
       }
       $commentaires = $this->_commentManager->getComments($_GET['id']);
-   
+      if(isset($_POST['signal'])){
+        $signaleCom = $this->_commentManager->signaleComment($_GET['id']);
+      }
     $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires ));
     } 
   }
