@@ -15,10 +15,20 @@ class ControllerPost {
   }
 
   private function post(){
+   
+    
     $this->_view = new View('SinglePost');
+    
     if (isset($_GET['id'])) {
+      /**
+     * Billets a montrer
+     */
       $this->_billetManager = new BilletManager;
       $billet = $this->_billetManager->getBillet($_GET['id']);
+
+      /**
+     * Inserer commentaires 
+     */
       $this->_commentManager = new CommentManager;
       if(isset($_POST['addComment'])){
         $data = array(
@@ -27,16 +37,32 @@ class ControllerPost {
             'contenu' => htmlspecialchars($_POST['contenu']),
         );
         $addComment = $this->_commentManager->createComment($data, $data['billetId']);
+
       }
+        /**
+     * Commentaires a montrer
+     */
       $commentaires = $this->_commentManager->getComments($_GET['id']);
-      if(isset($_POST['signal'])){
-        $signaleCom = $this->_commentManager->signaleComment($_GET['id']);
+
+        /**
+     * Commentaires a montrer
+      */
+      /*  if(isset($_POST['idSignal'])){
+        $signaleCom = $this->_commentManager->signaleComment($_POST['idSignal']); 
+        echo "ok";  
+      } else {
+      echo "nope";
       }
-    $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires ));
-    } 
+      */ 
+
+        /**
+     * Generation de la vue 
+     */
+      $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires ));
+
+  
+    
+    }
   }
-
-
-
 }
 
