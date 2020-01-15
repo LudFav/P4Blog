@@ -1,5 +1,6 @@
 function signalement(){
-    $('#signal<?= echo $commentaire->id()?>').on('click', function(e) {       
+    $('.signalebtn').on('click', function(e) { 
+        var id = $(this).attr("id");       
         $.post({
              url: 'ControllerPost.php',
              data: {
