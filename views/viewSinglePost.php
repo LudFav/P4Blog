@@ -113,7 +113,7 @@
 
             <p><?=$commentaire->contenu()?></p>
             <div class="right-area">
-                <button id="signal<?=$commentaire->id()?>" class="signal-btn" onclick="signalement()" ><b>Signaler</b></button>
+                <button id="<?="signal" . $commentaire->id()?>" class="signal-btn" onclick="signalement()" class="signalbtn"><b>Signaler</b></button>
             </div>
           </div>
 
