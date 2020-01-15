@@ -47,7 +47,22 @@ class CommentManager extends Model implements crud {
     }
     
     
-    public function update($table, $data, $where){}
+    public function update($table, $data, $where){
+      $this->getBdd();
+      ksort($data);
+      $fields = NULL;
+      foreach($data as $key=> $value) {
+        $fields .= "`$key`=:$key,";
+      }
+      $fields = rtrim($fields, ',');
+      $req = self::$_bdd->prepare("UPDATE $table SET $fields WHERE $where"); 
+      
+      foreach ($data as $key => $value){
+        $req->bindValue(":$key", $value);
+      }
+      $req->execute();
+      $req->closeCursor();
+    }
     
     
     public function delete($table, $where){
@@ -103,6 +118,12 @@ class CommentManager extends Model implements crud {
       ));
     }
     
+    public function updateComment($data, $id){
+      return $this->update('commentaires',array(
+        'contenu'=> $data['contenu']
+      ), "`id` = '{$_GET['id']}'");
+    }
+
     public function deleteComment($id){
       return $this->delete('commentaires', "`id` = '{$_GET['id']}'");
     }
