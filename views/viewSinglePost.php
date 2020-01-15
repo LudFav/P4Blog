@@ -89,6 +89,7 @@
             </div>
           </form>
         </div>
+        
         <?php
         foreach ($commentaires as $commentaire):  
         ?>
@@ -113,13 +114,15 @@
 
             <p><?=$commentaire->contenu()?></p>
             <div class="right-area">
-                <button id="<?="signal" . $commentaire->id()?>" class="signal-btn" onclick="signalement()" class="signalbtn"><b>Signaler</b></button>
+                <button id='signal<?=$commentaire->id()?>' class='signalbtn' value='<?=$commentaire->id()?>' ><b>Signaler</b></button>
             </div>
           </div>
 
           <?php endforeach ?>   
 
-        
+          <script type="text/javascript">
+         
+      </script>
       
 
 
