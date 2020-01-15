@@ -111,7 +111,7 @@
 
 
 	<!-- SCIPTS -->
-	<script src="assets/js/delete.js"></script>
+	<script src="assets/js/ajax.js"></script>
 	<script src="public/common-js/jquery-3.1.1.min.js"></script>
 	<script src="public/common-js/tether.min.js"></script>
 	<script src="public/common-js/bootstrap.js"></script>
@@ -125,7 +125,7 @@
 	  a_configuration_option: 400
 	});
 	</script>
-	<script src="assets/js/ajax.js"></script>
+	
 
 </body>
 </html>
