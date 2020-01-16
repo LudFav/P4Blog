@@ -93,37 +93,34 @@
         <?php
         foreach ($commentaires as $commentaire):  
         ?>
-        <div class="comments-area">
+        <div class="comments-area" style="margin-top:15px">
 
           <div class="comment">
 
             <div class="post-info">
 
-              <div class="left-area">
-          
-              </div>
               <?php if($commentaire->modere()==1){
-                echo  '<div class="middle-area">
-                          <a class="name" href="#"><b>La modération</b></a>
-                       </div>
-                       </div>
-                       </div><!-- post-info -->
-                            <p><i>' .$commentaire->contenu(). '</i></p>
-                        </div>';
+                echo '<div class="middle-area">
+                              <a class="name" href="#"><b>La modération</b></a>
+                              </div>
+                              </div>
+                              </div><!-- post-info -->
+                                   <p><i>' .$commentaire->contenu(). '</i></p>
+                      </div>';
                         
                     } else {
                           echo '<div class="middle-area">
-                             <a class="name" href="#"><b>' .$commentaire->auteur(). '</b></a>
-                             <h6 class="date">' .$commentaire->date() .'</h6>
-                           </div>
-                           </div><!-- post-info -->
-                           <p>' .$commentaire->contenu(). '</p>
-                           <div class="right-area">
-                               <button id=signal' .$commentaire->id(). 'class="signalbtn" value=' .$commentaire->id(). ' ><b>Signaler</b></button>
-                           </div>
-                           </div>';
+                                       <a class="name" href="#"><b>' .$commentaire->auteur(). '</b></a>
+                                       <h6 class="date">' .$commentaire->date() .'</h6>
+                                     </div>
+                                     </div><!-- post-info -->
+                                         <p>' .$commentaire->contenu(). '</p>
+                                     <div class="right-area">
+                                         <button id=signal' .$commentaire->id(). 'class="signalbtn" value=' .$commentaire->id(). ' ><b>Signaler</b></button>
+                                     </div>
+                                </div>';
                           }?>
-          <?php endforeach ?>   
+              <?php endforeach ?>   
 
           <script type="text/javascript">
          
