@@ -9,6 +9,7 @@ class Comment
     private $_contenu;
     private $_date;
     private $_signale;
+    private $_modere;
  
     public function __construct(array $data){
         $this->hydrate($data);
@@ -50,6 +51,10 @@ class Comment
     public function setSignale($signale){
         $this->_signale = (int) $signale;
     }
+
+    public function setModere($modere){
+        $this->_modere = (int) $modere;
+    }
  //getters
     public function id(){
         return $this->_id;
@@ -72,5 +77,9 @@ class Comment
 
     public function signale(){
         return $this->_signale;
+    }
+
+    public function modere(){
+        return $this->_modere;
     }
 }
