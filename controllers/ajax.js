@@ -18,6 +18,21 @@
 
 
 // ADMIN
+    //BILLET
+    $('.deleteBilBtn').on('click',function(){
+        var idBilToDelete=$(this).attr('value');
+        console.log(idBilToDelete);
+        $.post({
+             url: 'admin',
+             data: {'deleteBillet' : idBilToDelete},
+             /*success: function(data){
+                console.log(data);
+            }*/
+        });
+    });
+
+
+    //COMMENTAIRES
         $('.unsignalComBtn').on('click',function(){
             var idComToUnsignal=$(this).attr('value');
             console.log(idComToUnsignal);
@@ -47,7 +62,7 @@
             console.log(idComToDelete);
             $.post({
                  url: 'admin',
-                 data: {'delete' : idComToDelete},
+                 data: {'deleteCom' : idComToDelete},
                  /*success: function(data){
                     console.log(data);
                 }*/
