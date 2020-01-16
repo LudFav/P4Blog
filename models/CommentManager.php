@@ -71,7 +71,12 @@ class CommentManager extends Model implements crud {
       $req->execute();
       $req->closeCursor();
     }
-    
+
+    public function moderation($table, $where){
+      $req = self::$_bdd->prepare("UPDATE $table SET contenu = 'Ce commentaire a été modéré', modere = 1 WHERE $where");
+      $req->execute();
+      $req->closeCursor();
+    }
     
     public function signale($table, $where){
       $req = self::$_bdd->prepare("UPDATE $table SET signale = 1 WHERE $where");
@@ -117,22 +122,20 @@ class CommentManager extends Model implements crud {
         'date'   => date('d-m-Y H:i:s')
       ));
     }
-    
-    public function updateComment($data, $id){
-      return $this->update('commentaires',array(
-        'contenu'=> $data['contenu']
-      ), "`id` = '{$_GET['id']}'");
-    }
 
-    public function deleteComment($id){
-      return $this->delete('commentaires', "`id` = '{$_GET['id']}'");
-    }
-    
     public function signaleComment($id){
       return $this->signale('commentaires', "`id` = '{$_POST['idSignal']}'");
     }
     
+    public function modereComment($id){
+      return $this->moderation('commentaires', "`id` = '{$_POST['modere']}'");
+    }
+
+    public function deleteComment($id){
+      return $this->delete('commentaires', "`id` = '{$_POST['delete']}'");
+    }
+    
     public function unsignaleComment($id){
-      return $this->unsignale('commentaires', "`id` = '{$_GET['id']}'");
+      return $this->unsignale('commentaires', "`id` = '{$_POST['unSignal']}'");
     }
 }
