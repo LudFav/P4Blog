@@ -18,7 +18,6 @@ class ControllerAdmin{
         $billets = $this->_billetManager->getBillets();
         if (isset($_POST['deleteBillet'])){
           $deleteBillet = $this->_billetManager->deleteBillet($_POST['deleteBillet']);
-          header('Location:admin');
         }
 
 
@@ -26,18 +25,16 @@ class ControllerAdmin{
         $this->_commentManager = new CommentManager;
         $commentaires = $this->_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null);
         if(isset($_POST['unSignal'])){
-          $unSignalComment = $this->_commentManager->unsignaleComment($_POST['unSignal']);
-          header('Location:admin');
+          $unSignalComment = $this->_commentManager->unsignaleComment($_POST['unSignal']);  
         }
 
         if(isset($_POST['modere'])){
-          $modereComment = $this->_commentManager->modereComment($_POST['modere']);
-          header('Location:admin');
+          $modereComment = $this->_commentManager->modereComment($_POST['modere']);  
         }
 
         if (isset($_POST['deleteCom'])) {
           $deleteComment = $this->_commentManager->deleteComment($_POST['deleteCom']);
-          header('Location:admin');
+          
         }
       //VUE
       $this->_view = new View('Admin');
