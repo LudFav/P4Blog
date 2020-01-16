@@ -116,7 +116,7 @@
                                      </div><!-- post-info -->
                                          <p>' .$commentaire->contenu(). '</p>
                                      <div class="right-area">
-                                         <button id=signal' .$commentaire->id(). 'class="signalbtn" value=' .$commentaire->id(). ' ><b>Signaler</b></button>
+                                         <button id=signal' .$commentaire->id(). ' class="signalbtn" value=' .$commentaire->id(). ' ><b>Signaler</b></button>
                                      </div>
                                 </div>';
                           }?>
