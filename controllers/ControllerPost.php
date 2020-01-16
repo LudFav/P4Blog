@@ -47,13 +47,13 @@ class ControllerPost {
         /**
      * Commentaires a montrer
       */
-      /*  if(isset($_POST['idSignal'])){
+        if(isset($_POST['idSignal'])){
         $signaleCom = $this->_commentManager->signaleComment($_POST['idSignal']); 
         echo "ok";  
       } else {
       echo "nope";
       }
-      */ 
+      
 
         /**
      * Generation de la vue 
