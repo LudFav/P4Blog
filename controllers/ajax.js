@@ -1,6 +1,18 @@
 
-        
-        $('.signalbtn').on('click', function() {
+//  AJAX FRONT
+
+        //FORMULAIRE D'ENVOI DE COMMENTAIRE
+        /*$('.formCommentaire').on('submit', ()=>{
+            event.preventDefault();
+            var idBillet = $('.post-info').attr('value');
+            $.post({
+                url:'post&id='+idBillet,
+                data: $('.formCommentaire').serialize(),
+            })
+        })*/
+
+        //BOUTON SIGNALER
+        $('.signalbtn').on('click', ()=> {
             
             var id=$(this).attr('value');
             var billetId=$('.post-info').attr('value');
@@ -18,22 +30,22 @@
 
 
 // ADMIN
-    //BILLET
-    $('.deleteBilBtn').on('click',function(){
+    //BILLETS
+    $('.deleteBilBtn').on('click',()=>{
         var idBilToDelete=$(this).attr('value');
         console.log(idBilToDelete);
         $.post({
              url: 'admin',
              data: {'deleteBillet' : idBilToDelete},
-             /*success: function(data){
+             success: (data)=>{
                 console.log(data);
-            }*/
+            }
         });
     });
 
 
     //COMMENTAIRES
-        $('.unsignalComBtn').on('click',function(){
+        $('.unsignalComBtn').on('click',()=>{
             var idComToUnsignal=$(this).attr('value');
             console.log(idComToUnsignal);
             $.post({
@@ -45,7 +57,7 @@
             });
         });
 
-        $('.modereComBtn').on('click',function(){
+        $('.modereComBtn').on('click',()=>{
             var idComToModere=$(this).attr('value');
             console.log(idComToModere);
             $.post({
@@ -57,7 +69,7 @@
             });
         });
 
-        $('.deleteComBtn').on('click',function(){
+        $('.deleteComBtn').on('click',()=>{
             var idComToDelete=$(this).attr('value');
             console.log(idComToDelete);
             $.post({
