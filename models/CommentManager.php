@@ -129,7 +129,7 @@ class CommentManager extends Model implements crud {
     }
     
     public function signaleComment($id){
-      return $this->signale('commentaires', "`id` = '{$_GET['id']}'");
+      return $this->signale('commentaires', "`id` = '{$_POST['idSignal']}'");
     }
     
     public function unsignaleComment($id){
