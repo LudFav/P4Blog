@@ -15,7 +15,7 @@
 
           <div class="blog-post-inner">
 
-            <div class="post-info">
+            <div class="post-info" value="<?=$billet[0]->id()?>">
 
               <div class="left-area">
     
