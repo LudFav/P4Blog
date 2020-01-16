@@ -503,11 +503,25 @@ td.actionTd {
     display: flex;
 }
 
-button.deletebtn {
+.deleteComBtn {
     background-color: transparent;
 	border: none;
 	color: #d9534f;
     cursor: pointer;
+}
+
+.modereComBtn {
+	background-color: transparent;
+	border: none;
+	color: #d9534f;
+    cursor: pointer;
+}
+
+.unsignalComBtn {
+	background-color: transparent;
+	border: none;
+	color:	#28a745;
+	cursor: pointer;
 }
 /********************** FIN D'AJOUTS****/
 
