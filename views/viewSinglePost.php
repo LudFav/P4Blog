@@ -71,7 +71,7 @@
 
       <div class="col-lg-8 col-md-12">
         <div class="comment-form">
-          <form action="" method="post">
+          <form action="" method="post" class="formCommentaire">
             <div class="row">
 
               <div class="col-sm-6">
@@ -80,7 +80,7 @@
               </div>
               <div class="col-sm-12">
                 <textarea name="contenu" rows="2" class="text-area-messge form-control"
-                  placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
+                  placeholder="Enter your comment" aria-invalid="true" required></textarea >
               </div>
               <div class="col-sm-12">
                 <button class="submit-btn" type="submit" id="form-submit" name="addComment"><b>Envoyer Commentaire</b></button>
@@ -93,7 +93,7 @@
         <?php
         foreach ($commentaires as $commentaire):  
         ?>
-        <div class="comments-area" style="margin-top:15px">
+        <div class="comments-area" style="margin-top:5px; margin-bottom:20px">
 
           <div class="comment">
 
