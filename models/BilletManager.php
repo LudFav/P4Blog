@@ -102,7 +102,7 @@ class BilletManager extends Model implements crud
   }
 
   public function deleteBillet($id){
-    return $this->delete('billets', "`id` = '{$_GET['id']}'");
+    return $this->delete('billets', "`id` = '{$_POST['deleteBillet']}'");
   }
 }
 
