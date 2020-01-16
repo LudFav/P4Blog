@@ -13,15 +13,16 @@ class ControllerAdmin{
 
     private function tableauDeBord(){
        
-        
+        //BILLET
         $this->_billetManager = new BilletManager;
         $billets = $this->_billetManager->getBillets();
-        if (isset($_GET['id'])) {
-          $this->_billetManager = new BilletManager;
-          $deleteBillet = $this->_billetManager->deleteBillet($_GET['id']);
+        if (isset($_POST['deleteBillet'])){
+          $deleteBillet = $this->_billetManager->deleteBillet($_POST['deleteBillet']);
           header('Location:admin');
         }
 
+
+        //COMMENT
         $this->_commentManager = new CommentManager;
         $commentaires = $this->_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null);
         if(isset($_POST['unSignal'])){
@@ -34,11 +35,11 @@ class ControllerAdmin{
           header('Location:admin');
         }
 
-        if (isset($_POST['delete'])) {
-          $deleteComment = $this->_commentManager->deleteComment($_POST['delete']);
+        if (isset($_POST['deleteCom'])) {
+          $deleteComment = $this->_commentManager->deleteComment($_POST['deleteCom']);
           header('Location:admin');
         }
-
+      //VUE
       $this->_view = new View('Admin');
       $this->_view->generate(array('billets' => $billets, 'commentaires' => $commentaires ));  
     }
