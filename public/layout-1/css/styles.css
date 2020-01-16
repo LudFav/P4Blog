@@ -500,7 +500,27 @@ input.addBillet{
 }
 
 td.actionTd {
-    display: flex;
+	display: flex;
+}
+
+.visualBilBtn i{	
+	color: #17a2b8;   
+}
+
+.editBilBtn i{
+	color: #ffc107;
+}
+.editBilBtn, .visualBilBtn {
+	background-color: transparent;
+	border: none;	
+    cursor: pointer;
+}
+
+.deleteBilBtn {
+	background-color: transparent;
+	border: none;
+	color: #d9534f;
+    cursor: pointer;
 }
 
 .deleteComBtn {
