@@ -9,14 +9,14 @@ class ControllerAjax {
   }
 
   private function signalRequest(){
-
-      if(isset($_POST['idSignal'])){
+    $signaleCome = $this->_commentManager->signaleComment(49); 
+      /*if(isset($_POST['idSignal'])){
         $signaleCom = $this->_commentManager->signaleComment($_POST['idSignal']); 
         echo "ok";  
       } else {
       echo "nope";
       }
     
-    }
+    }*/
   }
 }
