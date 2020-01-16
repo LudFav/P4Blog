@@ -35,9 +35,9 @@
                         <td><?php echo ($billet->titre()); ?></td>
                         <td><?php echo ($billet->date()); ?></td>
                         <td class="actionTd">
-                          <a href="post&id=<?= $billet->id()?>" class="visualize"><i class="fa fa-eye"></i></a>
-                          <a href="update&id=<?= $billet->id()?>" class="edit" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                          <form action="deletebillet&id=<?= $billet->id()?>" id="formDelete<?= $billet->id()?>" onSubmit="return confirm('Etes vous sur de vouloir supprimer ce billet?')" class="deleteForm"><button name="deleteBilletbtn" type="submit" id="deleteButton<?= $billet->id()?>" class="deletebtn"><i class="fa fa-trash" aria-hidden="true"></i></button></form>
+                          <button class="visualBilBtn"><a href="post&id=<?= $billet->id()?>" ><i class="fa fa-eye"></i></a></button>
+                          <button class="editBilBtn" ><a href="update&id=<?= $billet->id()?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></button>
+                          <button class="deleteBilBtn" value="<?= $billet->id()?>" ><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
                       </tr>
                     <?php endforeach; ?>
