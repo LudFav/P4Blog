@@ -24,6 +24,8 @@ class ControllerAdmin{
         //COMMENT
         $this->_commentManager = new CommentManager;
         $commentaires = $this->_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null);
+        
+
         if(isset($_POST['unSignal'])){
           $unSignalComment = $this->_commentManager->unsignaleComment($_POST['unSignal']);  
         }
