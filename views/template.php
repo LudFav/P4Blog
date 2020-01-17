@@ -117,15 +117,16 @@
 	<script src="public/common-js/bootstrap.js"></script>
 	<script src="public/common-js/scripts.js"></script>
 
-	<!--<script src="assets/js/tinymce/tinymce.min.js"></script>
+	<script src="assets/js/tinymce/tinymce.min.js"></script>
 	<script> tinymce.init({
 	  selector: '#textareaB, #textareaC',  // change this value according to your HTML
 	  plugin: 'a_tinymce_plugin',
 	  a_plugin_option: true,
 	  a_configuration_option: 400
 	});
-	</script>-->
+	</script>
 	<script src="controllers/ajax.js"></script>
+	<script src="controllers/script.js"></script>
 	
 
 </body>
