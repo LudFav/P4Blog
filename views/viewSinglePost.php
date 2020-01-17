@@ -97,29 +97,22 @@
 
           <div class="comment">
 
-            <div class="post-info">
+            <div class="comment-info" value='<?= $commentaire->id() ?>'>
 
-              <?php if($commentaire->modere()==1){
-                echo '<div class="middle-area">
-                              <a class="name" href="#"><b>La modération</b></a>
-                              </div>
-                              </div>
-                              </div><!-- post-info -->
-                                   <p><i>' .$commentaire->contenu(). '</i></p>
-                      </div>';
-                        
-                    } else {
-                          echo '<div class="middle-area">
-                                       <a class="name" href="#"><b>' .$commentaire->auteur(). '</b></a>
-                                       <h6 class="date">' .$commentaire->date() .'</h6>
-                                     </div>
-                                     </div><!-- post-info -->
-                                         <p>' .$commentaire->contenu(). '</p>
+              
+              
+                        <div class="middle-area" value="<?= $commentaire->modere() ?>">
+                                       <a class="commentName" href="#"><b><?=$commentaire->auteur()?></b></a>
+                                       <h6 class="commentDate"><?=$commentaire->date()?></h6>
+                        </div>
+            </div><!-- post-info -->
+                                         <p><?=$commentaire->contenu()?></p>
                                      <div class="right-area">
-                                         <button id=signal' .$commentaire->id(). ' class="signalbtn" value=' .$commentaire->id(). ' ><b>Signaler</b></button>
+                                         <button id='signal<?=$commentaire->id()?>' class="signalbtn" value='<?=$commentaire->id()?>' ><b>Signaler</b></button>
                                      </div>
-                                </div>';
-                          }?>
+                        </div>
+                       
+                         
               <?php endforeach ?>   
 
           <script type="text/javascript">
