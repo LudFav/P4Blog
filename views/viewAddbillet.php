@@ -2,12 +2,12 @@
 <form action="addbillet" method="post" id="FormAddBillet">
   <div class="form-group">
     <label for="auteur" class="labelBillet"><b>Auteur</b></label>
-    <input type="text" name="auteur" class="form-control" id="auteurB" placeholder="Stephane Rois" size="35">
+    <input type="text" name="auteur" class="form-control" id="auteurB" placeholder="Stephane Rois" size="35" required>
   </div>
 
   <div class="form-group">
     <label for="titre" class="labelBillet"><b>Titre</b></label>
-    <input type="text" name="titre" class="form-control" id="titreB" placeholder="titre">
+    <input type="text" name="titre" class="form-control" id="titreB" placeholder="titre" required>
   </div>
 
   <div class="form-group">
