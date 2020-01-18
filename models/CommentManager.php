@@ -21,6 +21,7 @@ class CommentManager extends Model implements crud {
   
     public function readAll($table, $obj, $billetId= null){
       $commentaires = [];
+      var_dump(self::$_bdd);
       $req = self::$_bdd->prepare("SELECT * FROM $table WHERE billetId = ?");
       $req->execute(array($billetId));
       
@@ -94,7 +95,8 @@ class CommentManager extends Model implements crud {
     
     public function getSignaledComments($table, $obj, $signale= null){
       $commentairesignal = [];
-      $req = self::$_bdd->prepare('SELECT * FROM commentaires WHERE signale = 1');
+      $bdd = $this->getBdd();
+      $req = $bdd->prepare('SELECT * FROM commentaires WHERE signale = 1');
       $req->execute(array($signale));
       
       while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
