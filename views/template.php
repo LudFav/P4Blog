@@ -126,7 +126,7 @@
 	});
 	</script>
 	<script src="controllers/ajax.js"></script>
-	<script src="controllers/jscript.js"></script>
+	
 	
 
 </body>
