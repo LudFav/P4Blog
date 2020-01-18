@@ -2,14 +2,18 @@
 //  AJAX FRONT
 
         //FORMULAIRE D'ENVOI DE COMMENTAIRE
-        /*$('.formCommentaire').on('submit', ()=>{
+        $('.formCommentaire').on('submit', function(){
             event.preventDefault();
             var idBillet = $('.post-info').attr('value');
+
             $.post({
-                url:'post&id='+idBillet,
-                data: $('.formCommentaire').serialize(),
+                url:'ajaxAddComment',
+                data: {commentaires: $('.formCommentaire').serialize(), billetId: idBillet},
+                success:function(data){
+                    console.log(data);
+                }
             })
-        })*/
+        })
 
         //BOUTON SIGNALER
         $('.signalbtn').on('click', function() {
