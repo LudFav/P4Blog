@@ -83,7 +83,7 @@
                   placeholder="Enter your comment" aria-invalid="true" required></textarea >
               </div>
               <div class="col-sm-12">
-                <button class="submit-btn" type="submit" id="form-submit" name="addComment"><b>Envoyer Commentaire</b></button>
+                <button class="submit-btn" type="submit" id="form-submit" name="addCommentaire"><b>Envoyer Commentaire</b></button>
               </div>
 
             </div>
