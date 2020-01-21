@@ -1,18 +1,39 @@
 
 //  AJAX FRONT
 
-        //FORMULAIRE D'ENVOI DE COMMENTAIRE
-        $('.formCommentaire').on('submit', function(){
-            event.preventDefault();
+        function showComment(){
             var idBillet = $('.post-info').attr('value');
-
             $.post({
-                url:'ajaxAddComment',
-                data: {commentaires: $('.formCommentaire').serialize(), billetId: idBillet},
-                success:function(data){
-                    console.log(data);
+                url: 'ajax',
+                data:{'billetId': idBillet, 'action': 'showComment'},
+                success: function(data){
+                    $('#showComments').html(data);
                 }
             })
+        }
+       
+        showComment();
+
+        //FORMULAIRE D'ENVOI DE COMMENTAIRE
+        $('.submit-btn').on('click', function(e){
+            e.preventDefault();
+            if($('#formCommentaire')[0].checkValidity()){
+                var idBillet = $('.post-info').attr('value');
+                var auteur = $('#auteur').val();
+                var contenu = $('#contenu').val();
+                $.post({
+                    url:'ajax',
+                    data:{'action': 'insertCom',
+                          'auteur': auteur,
+                          'contenu': contenu,
+                          'billetId': idBillet},
+                    success:function(data){
+                        $('#formCommentaire')[0].reset(); 
+                        showComment();
+                    }
+                })
+                
+            }
         })
 
         //BOUTON SIGNALER
