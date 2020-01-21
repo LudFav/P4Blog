@@ -15,18 +15,18 @@ class ControllerAdmin{
        
         //BILLET
         $this->_billetManager = new BilletManager;
-        $billets = $this->_billetManager->getBillets();
-        if (isset($_POST['deleteBillet'])){
+        $billets = ' ';//$this->_billetManager->getBillets();
+        /*if (isset($_POST['deleteBillet'])){
           $deleteBillet = $this->_billetManager->deleteBillet($_POST['deleteBillet']);
-        }
+        }*/
 
 
         //COMMENT
-        $this->_commentManager = new CommentManager;
+       /*  $this->_commentManager = new CommentManager;
         $commentaires = $this->_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null);
         
 
-        if(isset($_POST['unSignal'])){
+       if(isset($_POST['unSignal'])){
           $unSignalComment = $this->_commentManager->unsignaleComment($_POST['unSignal']);  
         }
 
@@ -37,9 +37,9 @@ class ControllerAdmin{
         if (isset($_POST['deleteCom'])) {
           $deleteComment = $this->_commentManager->deleteComment($_POST['deleteCom']);
           
-        }
+        }*/
       //VUE
-      $this->_view = new View('Admin');
-      $this->_view->generate(array('billets' => $billets, 'commentaires' => $commentaires ));  
+      $this->_view = new View('Admin'); 
+      $this->_view->generateAdmin(array(/*'billets' => $billets, 'commentaires' => $commentaires */));  
     }
 }
