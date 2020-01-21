@@ -80,12 +80,14 @@ class CommentManager extends Model implements crud {
     }
     
     public function signale($table, $where){
+      $this->getBdd();
       $req = self::$_bdd->prepare("UPDATE $table SET signale = 1 WHERE $where");
       $req->execute();
       $req->closeCursor();
     }
     
     public function unsignale($table, $where){
+      $this->getBdd();
       $req = self::$_bdd->prepare("UPDATE $table SET signale = 0 WHERE $where");
       $req->execute();
       $req->closeCursor();
