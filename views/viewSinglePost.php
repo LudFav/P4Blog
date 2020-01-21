@@ -71,16 +71,16 @@
 
       <div class="col-lg-8 col-md-12">
         <div class="comment-form">
-          <form action="" method="post" class="formCommentaire">
+          <form action="" method="post" id="formCommentaire">
             <div class="row">
 
               <div class="col-sm-6">
                 <input type="text" aria-required="true" name="auteur" class="form-control"
-                  placeholder="Nom" aria-invalid="true" required >
+                  placeholder="Nom" aria-invalid="true" id="auteur" required >
               </div>
               <div class="col-sm-12">
                 <textarea name="contenu" rows="2" class="text-area-messge form-control"
-                  placeholder="Enter your comment" aria-invalid="true" required></textarea >
+                  placeholder="votre commentaire" id="contenu" aria-invalid="true" required></textarea >
               </div>
               <div class="col-sm-12">
                 <button class="submit-btn" type="submit" id="form-submit" name="addCommentaire"><b>Envoyer Commentaire</b></button>
@@ -89,14 +89,14 @@
             </div>
           </form>
         </div>
-        
-        <?php
+        <div id="showComments"></div>
+        <?php /*
         foreach ($commentaires as $commentaire):  
         ?>
         <div class="comments-area" style="margin-top:5px; margin-bottom:20px">
 
           <div class="comment">
-      <?php  if($commentaire->modere()==1){
+      <?php if($commentaire->modere()==1){
                   echo  '<div class="comment-info" value=' .$commentaire->id(). '>
                   <div class="middle-area" value=' .$commentaire->modere(). '>
                       <h6 class="commentName"><b>La modération</b></h6>
@@ -118,10 +118,13 @@
           </div><!-- comment -->
         </div>';}?><!-- comment-area -->
         <?php endforeach 
-        ?>   
+        
+        ?>
+        
       </div><!-- col-lg-8 col-md-12 -->
 
     </div><!-- row -->
 
   </div><!-- container -->
+  <?php */ ?>
 </section>
