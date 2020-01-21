@@ -21,10 +21,20 @@ class View
     //template
     $view = $this->generateFile('views/template.php', array('t' => $this->_t, 'content' => $content));
     echo $view;
+    
+  }
+
+  public function generateAdmin($data){
+    //définir le contenu à envoyer
+    $content = $this->generateFile($this->_file, $data);
+
+    //template
+    $view = $this->generateFile('views/templateAdmin.php', array('t' => $this->_t, 'content' => $content));
+    echo $view;  
   }
 
 
-  private function generateFile($file, $data){
+  public function generateFile($file, $data){
     if (file_exists($file)) {
       extract($data);
 
