@@ -26,6 +26,6 @@ class ControllerAddbillet
       header('Location:admin');
     }
     $this->_view = new View('Addbillet');
-    $this->_view->generate(array());
+    $this->_view->generateAdmin(array());
   }
 }
