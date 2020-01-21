@@ -3,7 +3,6 @@
 
 class ControllerAjax{
     private $_commentManager;
-    private $_view;
     public function __construct(){
 
         $this->_commentManager = new CommentManager;
@@ -58,7 +57,10 @@ class ControllerAjax{
             exit;
         }
         
-      
+        if(isset($_POST['action']) && $_POST['action']=='signalCom'){
+            var_dump($_POST['action']);
+            $signaleCom = $this->_commentManager->signaleComment($_POST['idSignal']);   
+          }
     }
 
     
