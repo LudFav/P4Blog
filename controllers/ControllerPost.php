@@ -26,16 +26,17 @@ class ControllerPost {
       
 
   //COMMENTAIRES  
-      $this->_commentManager = new CommentManager;
-    
+   
+   /*      $this->_commentManager = new CommentManager;
+ 
         /**
      * Commentaires a montrer
-     */
+  /
       $commentaires = $this->_commentManager->getComments($_GET['id']);
 
         /**
      * Inserer commentaires 
-     */
+  /
       if(isset($_POST['addComment'])){
         $data = array(
             'billetId' => $_GET['id'],
@@ -48,17 +49,18 @@ class ControllerPost {
       }
         /**
      * Commentaires a montrer
-      */
+  /
         if(isset($_POST['idSignal'])){
         $signaleCom = $this->_commentManager->signaleComment($_POST['idSignal']);   
       }
+*/
 
     //VUE
         /**
      * Generation de la vue 
      */
     $this->_view = new View('SinglePost');
-    $this->_view->generate(array('billet' => $billet, 'commentaires' => $commentaires )); 
+$this->_view->generate(array('billet' => $billet/*, 'commentaires' => $commentaires*/)); 
     }
   }
 }
