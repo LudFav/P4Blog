@@ -19,10 +19,10 @@ class CommentManager extends Model implements crud {
     }
   
   
-    public function readAll($table, $obj, $billetId= null){
+    public function readAll($table, $obj, $billetId=null){
+      $this->getBdd();
       $commentaires = [];
-      var_dump(self::$_bdd);
-      $req = self::$_bdd->prepare("SELECT * FROM $table WHERE billetId = ?");
+      $req = self::$_bdd->prepare("SELECT * FROM $table WHERE  billetId = ?");
       $req->execute(array($billetId));
       
       while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -91,12 +91,20 @@ class CommentManager extends Model implements crud {
       $req->closeCursor();
     }
     
-    
+    public function createComment($data, $billetId){
+      return $this->create('commentaires', array(
+        'billetId'=> $_POST['billetId'],
+        'auteur' => htmlspecialchars($_POST['auteur']),
+        'contenu'=> htmlspecialchars($_POST['contenu']),    
+        'date'   => date('d-m-Y H:i:s')
+      ));
+    }
     
     public function getSignaledComments($table, $obj, $signale= null){
       $commentairesignal = [];
       $bdd = $this->getBdd();
-      $req = $bdd->prepare('SELECT * FROM commentaires WHERE signale = 1');
+      //$req = $bdd->prepare('SELECT * FROM commentaires WHERE signale = 1');
+      $req = self::$_bdd->prepare('SELECT * FROM commentaires WHERE signale = 1');
       $req->execute(array($signale));
       
       while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -114,15 +122,6 @@ class CommentManager extends Model implements crud {
     
     public function getComment($billetId){
       return $this->readOne('commentaires', 'Comment', $billetId);
-    }
-    
-    public function createComment($data, $billetId){
-      return $this->create('commentaires', array(
-        'billetId'=>$data['billetId'],
-        'auteur' => $data['auteur'],
-        'contenu'=> $data['contenu'],    
-        'date'   => date('d-m-Y H:i:s')
-      ));
     }
 
     public function signaleComment($id){
