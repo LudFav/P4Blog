@@ -31,80 +31,27 @@
                         $('#formCommentaire')[0].reset(); 
                         showComment();
                     }
-                })
-                
+                })   
             }
         })
 
+       
         //BOUTON SIGNALER
-        $('.signalbtn').on('click', function() {
-            
+    
+    
+    $(document).ready(function(){
+        $('.signalbtn').on('click', function(){
+            console.log('test signale');
             var comId=$(this).attr('value');
-            var billetId=$('.post-info').attr('value');
                 console.log(comId);
                 $.post({
-                     url: 'post&id='+billetId,
-                     data: {'idSignal' : comId },
-                     /*success: function(data){
+                     url: 'ajax',
+                     data: {'action': 'signalCom', 'idSignal' : comId },
+                     success: function(data){
                         console.log(data);
-                    }*/
-                
+                    }
                 });
         });
-
-
-// ADMIN
-    //BILLETS
-    $('.deleteBilBtn').on('click', function() {
-        var idBilToDelete=$(this).attr('value');
-        console.log(idBilToDelete);
-        $.post({
-             url: 'admin',
-             data: {'deleteBillet' : idBilToDelete},
-             success: (data)=>{
-                console.log(data);
-            }
-        });
-    });
-
-
-    //COMMENTAIRES
-        $('.unsignalComBtn').on('click', function(){
-            var idComToUnsignal=$(this).attr('value');
-            console.log(idComToUnsignal);
-            $.post({
-                 url: 'admin',
-                 data: {'unSignal' : idComToUnsignal},
-                 /*success: function(data){
-                    console.log(data);
-                }*/
-            });
-        });
-
-        $('.modereComBtn').on('click', function(){
-            var idComToModere=$(this).attr('value');
-            console.log(idComToModere);
-            $.post({
-                 url: 'admin',
-                 data: {'modere' : idComToModere},
-                 /*success: function(data){
-                    console.log(data);
-                }*/
-            });
-        });
-
-        $('.deleteComBtn').on('click', function(){
-            var idComToDelete=$(this).attr('value');
-            console.log(idComToDelete);
-            $.post({
-                 url: 'admin',
-                 data: {'deleteCom' : idComToDelete},
-                 /*success: function(data){
-                    console.log(data);
-                }*/
-            });
-        });
-   
-            
+    })
 
     
