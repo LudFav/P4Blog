@@ -52,6 +52,27 @@
                     }
                 });
         });
+
+
+        $('#loginSubmit').on('click', function(){
+            var username = $('#username').val();
+            var password = $('#password').val();
+            console.log('test');
+            $.post({
+                url: 'login',
+                data: {'action': 'login', 'username': username, 'password': password},
+                success: function(data){
+                    console.log(data);
+                }
+                
+            });  
+        });
     })
+
+
+
+
+
+    
 
     
