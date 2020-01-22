@@ -1,14 +1,16 @@
 <div class="login">
-	<h1>Authentification</h1>
-	<form action="" method="post">
+	<form action="" method="post" id="loginForm">
+		<h3>Authentification</h3>
 		<label for="username">
-			<i class="fas fa-user"></i>
+		<i class="fa fa-user" aria-hidden="true"></i>
+		<input type="text" name="username" placeholder="pseudonyme" id="username" required>
 		</label>
-		<input type="text" name="username" placeholder="Username" id="username" required>
+		<br>
 		<label for="password">
-			<i class="fas fa-lock"></i>
+		<i class="fa fa-unlock-alt" aria-hidden="true"></i>
+		<input type="password" name="password" placeholder="mot de passe" id="password" required>
 		</label>
-		<input type="password" name="password" placeholder="Password" id="password" required>
-		<input type="submit" value="Login">
+		<br>
+		<input type="submit" value="Login" id="submitLogin">
 	</form>
 </div>
