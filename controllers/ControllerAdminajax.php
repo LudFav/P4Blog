@@ -74,33 +74,5 @@ class ControllerAdminajax{
         if(isset($_POST['action']) && $_POST['action']=='deleteComment'){
             $deleteComment = $this->_commentManager->deleteComment($_POST['deleteCom']);
         }
-/*
-
-
-
-
-
-
-        $this->_commentManager = new CommentManager;
-
-       
-        
-        
-        if(isset($_POST['action']) && $_POST['action']=='insertCom'){
-           var_dump($_POST['auteur']);
-            $data = array(
-                'billetId' =>  $_POST['billetId'],
-                'auteur' => htmlspecialchars($_POST['auteur']),
-                'contenu' => htmlspecialchars($_POST['contenu'])
-            );
-            var_dump($data);
-            $createCommentaires = $this->_commentManager->createComment($data, $_POST['billetId']);
-            exit;
-        }
-        
-        if(isset($_POST['action']) && $_POST['action']=='signalCom'){
-            var_dump($_POST['action']);
-            $signaleCom = $this->_commentManager->signaleComment($_POST['idSignal']);   
-        }*/
     }
 }
