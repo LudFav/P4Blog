@@ -74,6 +74,7 @@ class CommentManager extends Model implements crud {
     }
 
     public function moderation($table, $where){
+      $this->getBdd();
       $req = self::$_bdd->prepare("UPDATE $table SET contenu = 'Ce commentaire a été modéré', signale = 0, modere = 1  WHERE $where");
       $req->execute();
       $req->closeCursor();
@@ -135,10 +136,10 @@ class CommentManager extends Model implements crud {
     }
 
     public function deleteComment($id){
-      return $this->delete('commentaires', "`id` = '{$_POST['delete']}'");
+      return $this->delete('commentaires', "`id` = '{$_POST['deleteCom']}'");
     }
     
     public function unsignaleComment($id){
-      return $this->unsignale('commentaires', "`id` = '{$_POST['unSignal']}'");
+      return $this->unsignale('commentaires', "`id` = '{$_POST['comToUnsignal']}'");
     }
 }
