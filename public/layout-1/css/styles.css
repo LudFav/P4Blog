@@ -499,7 +499,7 @@ input.addBillet{
 	margin-bottom:15px;
 }
 
-td.actionTd {
+td.actionTd, td.commentActionTd {
 	display: flex;
 }
 
