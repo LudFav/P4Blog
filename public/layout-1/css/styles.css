@@ -543,5 +543,28 @@ td.actionTd, td.commentActionTd {
 	color:	#28a745;
 	cursor: pointer;
 }
+
+.login {
+	width:auto;
+	height:auto;
+	
+}
+
+#loginForm{
+	display:flex;
+	flex-direction: column;
+}
+
+#loginForm h3 {
+	margin:25px auto;
+}
+
+#loginForm label{
+	margin:5px auto;
+}
+
+#submitLogin{
+	margin:0 auto 25px;
+}
 /********************** FIN D'AJOUTS****/
 
