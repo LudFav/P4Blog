@@ -37,7 +37,7 @@
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li><a href="accueil">Accueil</a></li>
 				<li><a href="#">Categories</a></li>
-				<li><a href="login">Connexion</a></li>
+				<li><a  data-toggle="modal" data-target="#exampleModalCenter">Connexion</a></li>
 			</ul><!-- main-menu -->
 
 			<div class="src-area">
@@ -47,9 +47,37 @@
 				</form>
 			</div>
 
-		</div><!-- conatiner -->
+		</div><!-- container -->
 	</header>
-
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  			<div class="modal-dialog modal-dialog-centered" role="document">
+  			  <div class="modal-content">
+  			    <div class="modal-header text-center">
+  			      <h5 class="modal-title w-100 font-weight-bold" id="exampleModalLongTitle">Authentification</h5>
+  			      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  			        <span aria-hidden="true">&times;</span>
+  			      </button>
+  			    </div>
+  			    <div class="modal-body mx-3">
+					  <div class="md-form mb-1">	
+							<i class="fa fa-user" aria-hidden="true"></i>
+							<input type="text" name="username" placeholder="pseudonyme" id="username" class="form-control validate" required>
+							<label for="username"></label>
+					  </div>
+					  <div class="md-form mb-1">
+						<label for="password">
+						<i class="fa fa-unlock-alt" aria-hidden="true"></i>
+						<input type="password" name="password" placeholder="mot de passe" id="password" class="form-control validate" required>
+						</label>
+					  </div>		
+  			    </div>
+				  	  <div class="modal-footer d-flex justify-content-center">
+        			    <button  type="button" value="Login" class="btn btn-primary" id="loginSubmit">Se Connecter</button>
+					  </div>    
+  			    </div>
+  			  </div>
+  			</div>
+		</div><!-- modal -->
 
   <?= $content ?>
 
