@@ -64,11 +64,10 @@
 							<input type="text" name="username" placeholder="pseudonyme" id="username" class="form-control validate" required>
 							<label for="username"></label>
 					  </div>
-					  <div class="md-form mb-1">
-						<label for="password">
+					  <div class="md-form mb-1">	
 						<i class="fa fa-unlock-alt" aria-hidden="true"></i>
 						<input type="password" name="password" placeholder="mot de passe" id="password" class="form-control validate" required>
-						</label>
+						<label for="password"></label>
 					  </div>		
   			    </div>
 				  	  <div class="modal-footer d-flex justify-content-center">
