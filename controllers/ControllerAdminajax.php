@@ -55,7 +55,7 @@ class ControllerAdminajax{
                 $commentOutput.='<td class="commentActionTd">';       
                 $commentOutput.='<button class="unsignalComBtn" value="' .$commentaire->id(). '"><i class="fa fa-comment-o" aria-hidden="true"></i></button>';
                 $commentOutput.='<button class="modereComBtn" value="' .$commentaire->id(). '" ><i class="fa fa-commenting" aria-hidden="true"></i></button>';
-                $commentOutput.='<button class="deleteComBtn" value="' .$commentaire->id(). '" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                $commentOutput.='<button class="deleteComBtn" data-toggle="modal" data-target="#exampleModal" value="' .$commentaire->id(). '" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
                 $commentOutput.='</td>';
                 $commentOutput.='</tr>';
             }
