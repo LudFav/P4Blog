@@ -566,5 +566,13 @@ td.actionTd, td.commentActionTd {
 #submitLogin{
 	margin:0 auto 25px;
 }
+
+.md-form {
+    display: flex;
+}
+
+.md-form i {
+    margin: auto 10px;
+}
 /********************** FIN D'AJOUTS****/
 
