@@ -39,7 +39,7 @@
         //BOUTON SIGNALER
     
     
-    $(document).ready(function(){
+    $(window).bind('load', function(){
         $('.signalbtn').on('click', function(){
             console.log('test signale');
             var comId=$(this).attr('value');
@@ -48,7 +48,7 @@
                      url: 'ajax',
                      data: {'action': 'signalCom', 'idSignal' : comId },
                      success: function(data){
-                        console.log(data);
+                        showComment();
                     }
                 });
         });
