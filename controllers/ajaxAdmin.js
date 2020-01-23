@@ -1,34 +1,41 @@
 // ADMIN
 
-    //TABLE BILLETS
-    function billetTable(){
-        var idBillet = $('.post-info').attr('value');
-        $.post({
-            url: 'adminajax',
-            data:{'billetId': idBillet, 'action': 'showbillet'},
-            success: function(data){
-                console.log('test01'); 
-                $('#tbodyBillet').html(data);
-            }
-        })
-    }    
-    
+ //TABLE BILLETS
+function billetTable(){
+    var idBillet = $('.post-info').attr('value');
+    $.post({
+        url: 'adminajax',
+        data:{'billetId': idBillet, 'action': 'showbillet'},
+        success: function(data){
+            console.log('test01'); 
+            $('#tbodyBillet').html(data);
+        }
+    })
+}    
+//TABLE COMMENTAIRES SIGNALÉS
+function commentTable(){
+    $.post({
+        url: 'adminajax',
+        data:{'action': 'showCommentSignaled'},
+        success: function(data){
+            if(!$.trim(data)){
+                console.log('blank message')
+                //var messageComVide = $('<h3>Aucun commentaire signalé</h3>');
+                //messageComVide.appendTo($('#tbodyComment'));
+            } else{
+            console.log('test02');                
+            $('#tbodyComment').html(data);
+            } 
+        }
+    });
+}
+billetTable();
 
-    //TABLE COMMENTAIRES SIGNALÉS
-    function commentTable(){
-        $.post({
-            url: 'adminajax',
-            data:{'action': 'showCommentSignaled'},
-            success: function(data){ 
-                console.log('test02');                
-                $('#tbodyComment').html(data); 
-                           
-            }
-        })
-    }
+commentTable();
+
+
      
-    billetTable();
-    commentTable();
+ 
     console.log('test03'); 
     
 //ACTIONS D'ADMINISTRATION
@@ -39,12 +46,14 @@
         $('.deleteBilBtn').on('click', function() {
             var idBilToDelete=$(this).attr('value');
             console.log('test07');
-            $.post({
-                url: 'adminajax',
-                data: {'action': 'deleteBillet','deleteBillet' : idBilToDelete},
-                success: function(data){
-                   billetTable();
-                }
+            $(document).on('click', '.deleteconfirm', function(){
+                $.post({
+                    url: 'adminajax',
+                    data: {'action': 'deleteBillet','deleteBillet' : idBilToDelete},
+                    success: function(data){
+                       billetTable();
+                    }
+                });
             });
         }); 
 
@@ -76,23 +85,25 @@
             });
         });
 
+        var delButton = $('<button type="button" class="deleteconfirm btn btn-primary" data-dismiss="modal">oui</button>');
+        delButton.appendTo($('.modal-footer'));
+        delButton.hide();
         $('.deleteComBtn').on('click', function(){
             var idComToDelete=$(this).attr('value');
-            console.log('test 08');
-            console.log(idComToDelete);
-            $.post({
-                url: 'adminajax',
-                data: {'action': 'deleteComment','deleteCom' : idComToDelete},
-                success: function(data){
-                   console.log(data);
-                   commentTable();
-                } 
+            delButton.show();    
+            $('.modal-footer').on('click', '.deleteconfirm', function(){    
+                $.post({
+                    url: 'adminajax',
+                    data: {'action': 'deleteComment','deleteCom' : idComToDelete},
+                    success: function(data){
+                       console.log('data envoyé');
+                       commentTable();
+                    } 
+                });
+                $('#exampleModal').hide();
             });            
         });
         console.log('test05');
-        
-       
-
     })
     
 
