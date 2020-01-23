@@ -96,7 +96,7 @@ commentTable();
                     url: 'adminajax',
                     data: {'action': 'deleteComment','deleteCom' : idComToDelete},
                     success: function(data){
-                       console.log('data envoyé');
+                       console.log(data);
                        commentTable();
                     } 
                 });
