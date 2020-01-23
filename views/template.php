@@ -144,6 +144,6 @@
 	<script src="public/common-js/bootstrap.js"></script>
 	<script src="public/common-js/scripts.js"></script>
 	</script>
-	<script src="controllers/ajax.js"></script>
+	<script src="assets/js/ajax.js"></script>
 </body>
 </html>
