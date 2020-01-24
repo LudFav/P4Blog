@@ -19,19 +19,40 @@ function commentTable(){
         data:{'action': 'showCommentSignaled'},
         success: function(data){
             if(!$.trim(data)){
-                console.log('blank message')
+                console.log('blank message');
+                $('#tbodyComment').html('<p> 0 Commentaires signalés</p>');
                 //var messageComVide = $('<h3>Aucun commentaire signalé</h3>');
                 //messageComVide.appendTo($('#tbodyComment'));
             } else{
-            console.log('test02');                
-            $('#tbodyComment').html(data);
+            
+            let newCommentTable = $(data);
+            console.log(newCommentTable); 
+            newButtons = newCommentTable.find('.unsignalComBtn');
+            console.log(newButtons);
+            newButtons.on('click', function() {
+                unsignalCom(newButtons);
+            })
+            $('#tbodyComment').html(newCommentTable);
+            
             } 
         }
     });
 }
-billetTable();
 
-commentTable();
+function unsignalCom(button){
+           
+    console.log('test 08');
+    var idComToUnsignal= button.attr('value');
+    $.post({
+        url: 'adminajax',
+        data: {'action': 'unsignal', 'comToUnsignal' : idComToUnsignal},
+        success: function(data){
+           console.log(data);
+           commentTable();
+        }
+    });
+}
+
 
 
      
@@ -56,20 +77,17 @@ commentTable();
                 });
             });
         }); 
+       
+       
 
+           
         //BOUTONS COMMENTAIRES SIGNALÉS
         $('.unsignalComBtn').on('click', function() {
-            console.log('test 08');
-            var idComToUnsignal=$(this).attr('value');
-            $.post({
-                url: 'adminajax',
-                data: {'action': 'unsignal', 'comToUnsignal' : idComToUnsignal},
-                success: function(data){
-                   console.log(data);
-                   commentTable();
-                }
-            });
-        });
+            unsignalCom( $('.unsignalComBtn'))
+            })
+            
+            
+            
 
         $('.modereComBtn').on('click', function(){
             var idComToModere=$(this).attr('value');
@@ -104,6 +122,10 @@ commentTable();
             });            
         });
         console.log('test05');
+
+        billetTable();
+            
+        commentTable();
     })
     
 
