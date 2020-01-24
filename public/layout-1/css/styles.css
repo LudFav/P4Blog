@@ -574,5 +574,45 @@ td.actionTd, td.commentActionTd {
 .md-form i {
     margin: auto 10px;
 }
+
+button#login {
+    float: right;
+}
+.confirmation, .connexion{
+		position: absolute;
+		background-color: lightgrey;
+		color:black;
+		left: 30%;
+		top: 175px;
+		width: 350px;
+		height: 300px;
+		border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		z-index:5;
+}
+
+.validbtn, .clearbtn, .confirmation-btn, .annul-btn, .connexion-btn{
+    background-color:#e11f26;
+    border-radius:5px;
+    color: white;
+    border:none;
+}
+
+.connexion-title, .confirmation-title{
+    text-align: center;
+  }
+
+#username, #password{
+	max-width:300px;
+}
+
+.modalClose{
+	height: 1.3rem;
+	width: 1.5rem;
+	fill:black; 
+}
+
+
 /********************** FIN D'AJOUTS****/
 
