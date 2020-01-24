@@ -47,7 +47,7 @@
 				</form>
 			</div>
 
-		</div><!-- conatiner -->
+		</div><!-- container -->
 	</header>
 
 
@@ -101,5 +101,6 @@
 	});
 	</script>
 	<script src="assets/js/ajaxAdmin.js"></script>
+	<script src="assets/js/modal.js"></script>
 </body>
 </html>
