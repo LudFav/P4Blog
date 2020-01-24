@@ -45,7 +45,6 @@ class ControllerAdminajax{
         if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){
             $commentOutput='';
             $commentaires = $this->_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null);
-            var_dump($commentaires);
             foreach ($commentaires as $commentaire){
                 $commentOutput.='<tr class="signaledCommentRow">';
                 $commentOutput.='<td>' .$commentaire->id(). '</td>';
