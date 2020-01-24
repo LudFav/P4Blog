@@ -29,7 +29,7 @@
 
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
-
+		<button  type="button" id="login">Connexion</button>
 			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
 
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
@@ -37,7 +37,6 @@
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li><a href="accueil">Accueil</a></li>
 				<li><a href="#">Categories</a></li>
-				<li><a  data-toggle="modal" data-target="#exampleModalCenter">Connexion</a></li>
 			</ul><!-- main-menu -->
 
 			<div class="src-area">
@@ -47,8 +46,8 @@
 				</form>
 			</div>
 
-		</div><!-- container -->
-	</header>
+		</div>
+	</header><!-- header -->
 		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   			<div class="modal-dialog modal-dialog-centered" role="document">
   			  <div class="modal-content">
@@ -145,5 +144,6 @@
 	<script src="public/common-js/scripts.js"></script>
 	</script>
 	<script src="assets/js/ajax.js"></script>
+	<script src="assets/js/modal.js"></script>
 </body>
 </html>
