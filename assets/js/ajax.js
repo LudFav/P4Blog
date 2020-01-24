@@ -53,20 +53,33 @@
                 });
         });
 
+        
+         let login = new Modal(document.querySelector('body'), {
+            class: 'connexion',
+            titre: 'Connexion',
+            type: 'connexion',
+            pseudonyme: '',
+            motDePasse: '',
+            modalOverlay: 'true'
+         });
+         $('#login').on('click', function(){
+             $('.connexion').show();
+          });
 
-        $('#loginSubmit').on('click', function(){
-            var username = $('#username').val();
-            var password = $('#password').val();
-            console.log('test');
-            $.post({
-                url: 'login',
-                data: {'action': 'login', 'username': username, 'password': password},
-                success: function(data){
-                    console.log(data);
-                }
-                
-            });  
-        });
+          
+            $('#loginSubmit').on('click', function(){
+                var username = $('#username').val();
+                var password = $('#password').val();
+                console.log('test');
+                $.post({
+                    url: 'login',
+                    data: {'action': 'login', 'username': username, 'password': password},
+                    success: function(data){
+                        console.log(data);
+                    }
+
+                });  
+            });
     })
 
 
