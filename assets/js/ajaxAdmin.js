@@ -1,132 +1,155 @@
 // ADMIN
-
+billetTable();
  //TABLE BILLETS
 function billetTable(){
     var idBillet = $('.post-info').attr('value');
+    
     $.post({
         url: 'adminajax',
         data:{'billetId': idBillet, 'action': 'showbillet'},
         success: function(data){
-            console.log('test01'); 
-            $('#tbodyBillet').html(data);
+            if(!$.trim(data)){
+                $('#billetTableTitre h2').text('0 billet posté');
+                $('#tableBillets').hide();
+            } else{     
+                let newBilletTable = $(data);
+                newButtonDeleteB = $('#deleteBillet').find('.deleteBilletconfirmBtn');
+                console.log(newButtonDeleteB );
+                newButtonDeleteB.on('click', function(){
+                    deleteComBtn(newButtonDeleteB);
+                })
+
+                $('#tbodyBillet').html(newBilletTable);
+            }
         }
     })
 }    
+
+
 //TABLE COMMENTAIRES SIGNALÉS
+
+
 function commentTable(){
     $.post({
         url: 'adminajax',
         data:{'action': 'showCommentSignaled'},
         success: function(data){
             if(!$.trim(data)){
-                console.log('blank message');
-                $('#tbodyComment').html('<p> 0 Commentaires signalés</p>');
-                //var messageComVide = $('<h3>Aucun commentaire signalé</h3>');
-                //messageComVide.appendTo($('#tbodyComment'));
-            } else{
-            
+                $('#commentTableTitre h2').text('0 commentaire signalé');
+                $('#tableComments').hide();
+            } else{     
             let newCommentTable = $(data);
-            console.log(newCommentTable); 
-            newButtons = newCommentTable.find('.unsignalComBtn');
-            console.log(newButtons);
-            newButtons.on('click', function() {
-                unsignalCom(newButtons);
+
+            newButtonUnsignal = newCommentTable.find('.unsignalComBtn');
+            newButtonUnsignal.on('click', function() {
+                unsignalCom(newButtonUnsignal);
             })
+
+            newButtonModere = newCommentTable.find('.modereComBtn');
+            newButtonModere.on('click', function(){
+                modereComBtn(newButtonModere);
+            })
+
+            newButtonDelete = newCommentTable.find('.deleteComBtn');
+            newButtonDelete.on('click', function(){
+                modereComBtn(newButtonDelete);
+            })
+
             $('#tbodyComment').html(newCommentTable);
             
             } 
         }
     });
 }
+$(window).bind('load', function(){
 
-function unsignalCom(button){
-           
-    console.log('test 08');
-    var idComToUnsignal= button.attr('value');
+function deleteBilBtn(button){
+    var idBilToDelete = button.attr('value');
     $.post({
         url: 'adminajax',
-        data: {'action': 'unsignal', 'comToUnsignal' : idComToUnsignal},
+        data: {'action': 'deleteBillet','deleteBillet' : idBilToDelete},
         success: function(data){
-           console.log(data);
-           commentTable();
+           billetTable();
         }
     });
 }
 
 
+function unsignalCom(button){
+    var idComToUnsignal = button.attr('value');
+    $.post({
+        url: 'adminajax',
+        data: {'action': 'unsignal', 'comToUnsignal' : idComToUnsignal},
+        success: function(data){
+           commentTable();
+        }
+    });
+}
 
-     
- 
-    console.log('test03'); 
+function modereComBtn(button){
+    var idComToModere = button.attr('value');
+    $.post({
+        url: 'adminajax',
+        data: {'action': 'moderer', 'modere' : idComToModere},
+        success: function(data){
+           commentTable();
+        }
+    });
+}
+
+function deleteComBtn(button){
+    var idComToDelete = button.attr('value');
+    $.post({
+        url: 'adminajax',
+        data: {'action': 'deleteComment','deleteCom' : idComToDelete},
+        success: function(data){
+           commentTable();
+        }
+    });
+}
+
+let deleteBilModal = new Modal(document.querySelector('body'), {
+    id: 'deleteBillet',
+    titre: 'Suppression',
+    type: 'confirmation',
+    confirmation: 'Êtes-vous sur de vouloir supprimer ce billet?'
+ });
+
+
+//BOUTONS CONFIRMATION MODAL
+
+$('.deleteBilBtn').on('click', function(){
+    var idBilToDelete=$(this).attr('value');
+    $('.deleteBilBtn').attr({'data-toggle':"modal", 'data-target':"#deleteBillet"});
+    deleteBilModal;
+    $('.deleteBilletconfirmBtn').attr('value', idBilToDelete);
+})
+
+$('.deleteBilletconfirmBtn').on('click', function(){
+    deleteBilBtn($('.deleteBilletconfirmBtn'));
+})
+
+//BOUTONS COMMENTAIRES SIGNALÉS
+$('.unsignalComBtn').on('click', function() {
+    unsignalCom( $('.unsignalComBtn'));
+})
     
-//ACTIONS D'ADMINISTRATION
+$('.modereComBtn').on('click', function() {
+    modereComBtn( $('.modereComBtn'));
+})
 
-    $(window).bind('load', function(){
-        console.log('test04'); 
-        //BOUTON BILLETS
-        $('.deleteBilBtn').on('click', function() {
-            var idBilToDelete=$(this).attr('value');
-            console.log('test07');
-            $(document).on('click', '.deleteconfirm', function(){
-                $.post({
-                    url: 'adminajax',
-                    data: {'action': 'deleteBillet','deleteBillet' : idBilToDelete},
-                    success: function(data){
-                       billetTable();
-                    }
-                });
-            });
-        }); 
-       
-       
+$('.deleteComBtn').on('click', function() {
+    deleteComBtn( $('.deleteComBtn'));
+})
 
-           
-        //BOUTONS COMMENTAIRES SIGNALÉS
-        $('.unsignalComBtn').on('click', function() {
-            unsignalCom( $('.unsignalComBtn'))
-            })
+        
+
+})
+
+billetTable();
             
-            
-            
-
-        $('.modereComBtn').on('click', function(){
-            var idComToModere=$(this).attr('value');
-            console.log('test 08');
-            console.log(idComToModere);
-            $.post({
-                url: 'adminajax',
-                data: {'action': 'moderer', 'modere' : idComToModere},
-                success: function(data){
-                   console.log(data);
-                   commentTable();
-                }
-            });
-        });
-
-        var delButton = $('<button type="button" class="deleteconfirm btn btn-primary" data-dismiss="modal">oui</button>');
-        delButton.appendTo($('.modal-footer'));
-        delButton.hide();
-        $('.deleteComBtn').on('click', function(){
-            var idComToDelete=$(this).attr('value');
-            delButton.show();    
-            $('.modal-footer').on('click', '.deleteconfirm', function(){    
-                $.post({
-                    url: 'adminajax',
-                    data: {'action': 'deleteComment','deleteCom' : idComToDelete},
-                    success: function(data){
-                       console.log(data);
-                       commentTable();
-                    } 
-                });
-                $('#exampleModal').hide();
-            });            
-        });
-        console.log('test05');
-
-        billetTable();
-            
-        commentTable();
-    })
+commentTable();       
+        
     
 
 
