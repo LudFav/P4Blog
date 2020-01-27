@@ -29,7 +29,7 @@
 
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
-		<button  type="button" id="login">Connexion</button>
+		<button  type="button" id="login" data-toggle="modal" data-target="#connexion">Connexion</button>
 			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
 
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
@@ -48,7 +48,7 @@
 
 		</div>
 	</header><!-- header -->
-		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<!--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   			<div class="modal-dialog modal-dialog-centered" role="document">
   			  <div class="modal-content">
   			    <div class="modal-header text-center">
@@ -75,7 +75,7 @@
   			    </div>
   			  </div>
   			</div>
-		</div><!-- modal -->
+		</div> modal -->
 
   <?= $content ?>
 
