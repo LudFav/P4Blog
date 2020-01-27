@@ -8,7 +8,7 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6" id="billetTableTitre">
 						          <h2>Billets</h2>
                     </div>
 					          <div class="col-sm-6">
@@ -32,7 +32,7 @@
             </table>
             </div>     
 <!--MODAL--> 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -45,16 +45,17 @@
         ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closebtn">Close</button>       
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="validation">Save changes</button>
       </div>
     </div>
   </div>
 </div>
-<!--COMMENTAIRE SIGNALÉ-->
+COMMENTAIRE SIGNALÉ-->
             <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6" id="commentTableTitre">
 						          <h2>Commentaires Signalés</h2>
                     </div>
                 </div>
