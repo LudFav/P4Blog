@@ -55,19 +55,20 @@
 
         
          let login = new Modal(document.querySelector('body'), {
-            class: 'connexion',
+            id: 'connexion',
             titre: 'Connexion',
             type: 'connexion',
             pseudonyme: '',
             motDePasse: '',
-            modalOverlay: 'true'
+            confirmation: 'Veuillez rentrer vos identifiants'
          });
          $('#login').on('click', function(){
-             $('.connexion').show();
+             console.log('test connexion')
+             login;
           });
 
           
-            $('#loginSubmit').on('click', function(){
+            $('#connexion-validBtn').on('click', function(){
                 var username = $('#username').val();
                 var password = $('#password').val();
                 console.log('test');
@@ -79,8 +80,8 @@
                     }
 
                 });  
-            });
-    })
+            })
+    }) 
 
 
 
