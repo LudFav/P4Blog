@@ -75,7 +75,7 @@ class CommentManager extends Model implements crud {
 
     public function moderation($table, $where){
       $this->getBdd();
-      $req = self::$_bdd->prepare("UPDATE $table SET contenu = 'Ce commentaire a été modéré', signale = 0, modere = 1  WHERE $where");
+      $req = self::$_bdd->prepare("UPDATE $table SET signale = 0, modere = 1  WHERE $where");
       $req->execute();
       $req->closeCursor();
     }
