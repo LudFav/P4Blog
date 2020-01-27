@@ -1,7 +1,8 @@
- class Modal {
+class Modal {
     /**
      * @param {HTMLElement} element
      * @param {Object} options
+     *  @param {string} id
      *  @param {string} titre
      *  @param {string} type
      *  @param {string} pseudonyme
@@ -11,58 +12,55 @@
     constructor(element, options) {
         this.element = element;
         this.options = {
-            class: options.class,
+            id: options.id,
             titre: options.titre,
             type: options.type,
             pseudonyme: options.pseudonyme,
             motDePasse: options.motDePasse,
             confirmation: options.confirmation,
-            modalOverlay: options.modalOverlay
         }
         this.createModal();
     }
         createModal() {
-            this.modal = $('<div/>').appendTo(this.element);
-            let modalClass = this.options.class;
-            this.modal.addClass(modalClass);
-            this.modal.hide();
-            let modalClose = $('<img class="modalClose" src = "assets/images/close.svg"/>').appendTo(this.modal);
-
-            //TITRE
-            let titreModal = $('<h3 />').appendTo(this.modal);
-            $(titreModal).addClass(modalClass + '-title');
-            $(titreModal).text(this.options.titre);
+            this.modal = $('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'+this.options.titre+'" aria-hidden="true"></div>').appendTo(this.element);
+            let modalId = this.options.id;
+            this.modal.attr('id', modalId);
+            this.modalDial = $('<div class="modal-dialog" role="document"></div>').appendTo(this.modal);
+            this.modalContent = $('<div class="modal-content"></div>').appendTo(this.modalDial);
+            this.modalHeader = $('<div class="modal-header"></div>').appendTo(this.modalContent);
+            this.modalTitle = $('<h5 class="modal-title" id="'+this.options.titre+'">'+this.options.titre+'</h5>').appendTo(this.modalHeader);
+            this.closeModal = $('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>').appendTo(this.modalHeader);
+            this.modalBody = $('<div class="modal-body"><h4 style="text-align:center; margin-bottom:15px;">'+this.options.confirmation+'</h4></div>').appendTo(this.modalContent);
+           // this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
 
             if(this.options.type == 'connexion'){
+                    this.modalFormName = $('<div class="md-form mb-5"></div>').appendTo(this.modalBody);
                     //PSEUDONYME
-                    let iconePseudonyme = $('<i class="fa fa-user" aria-hidden="true"></i>').appendTo(this.modal);
-                    let inputPseudo = $('<input type="text" name="username" placeholder="pseudonyme" id="username" class="form-control validate" required>').appendTo(this.modal);
+                    let iconePseudonyme = $('<i class="fa fa-user" aria-hidden="true"></i>').appendTo(this.modalFormName);
+                    let inputPseudo = $('<input type="text" name="username" placeholder="pseudonyme" id="username" class="form-control validate" required>').appendTo(this.modalFormName);
                     this.options.pseudonyme = inputPseudo;
-                    let labelPseudo = $('<label for="username"></label>').appendTo(this.modal);
-                    $(labelPseudo).addClass(modalClass + '-lblpseudo');
+                    let labelPseudo = $('<label for="username" data-error="wrong" data-success="right"></label>').appendTo(this.modalFormName);
+                    $(labelPseudo).addClass(modalId + '-lblpseudo');
             
                     //MOT DE PASSE
-                    let iconeMdp = $('<i class="fa fa-unlock-alt" aria-hidden="true"></i>').appendTo(this.modal);
-                    let inputMotDePasse = $('<input type="password" name="password" placeholder="mot de passe" id="password" class="form-control validate" required>').appendTo(this.modal);
+                    this.modalFormPass = $('<div class="md-form mb-4"></div>').appendTo(this.modalBody);
+                    let iconeMdp = $('<i class="fa fa-unlock-alt" aria-hidden="true"></i>').appendTo(this.modalFormPass);
+                    let inputMotDePasse = $('<input type="password" name="password" placeholder="mot de passe" id="password" class="form-control validate" required>').appendTo(this.modalFormPass);
                     this.options.motDePasse = inputMotDePasse;
-                    let labelMotDePasse = $('<label for="username"></label>').appendTo(this.modal);
-                    $(labelMotDePasse).addClass(modalClass + '-lblMdp');
+                    let labelMotDePasse = $('<label for="password" data-error="wrong" data-success="right"></label>').appendTo(this.modalFormPass);
+                    $(labelMotDePasse).addClass(modalId + '-lblMdp');
 
+                    
                     //CREATION DIV et Button de modal, si local et session storage sont supporté on sauvegarde nom et prenom en local
-                    let modalBtn = $('<div/>').appendTo(this.modal);
-                    $(modalBtn).addClass(modalClass+'Buttons')
-                    let validBtn = $('<button type="button">Valider</button>').appendTo($(modalBtn));
-                    $(validBtn).addClass(modalClass + '-btn');
+                    this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
+                    let validBtn = $('<button type="button" class="btn btn-primary" id="'+modalId + '-validBtn'+'">Valider</button>').appendTo($(this.modalFooter));
                     $(validBtn).on('click', function () {
                         console.log(inputPseudo.val());
                         console.log(inputMotDePasse.val());
                         localStorage.setItem("name5", inputPseudo.val()); //savgrd le pseudo
                         localStorage.setItem("mdp5", inputMotDePasse.val()); //savgrd le mdp
                     })
-                    let annulBtn = $('<button type="button" class="annul-btn">Annuler</button>').appendTo($(modalBtn));
-                    $(annulBtn).on('click', function () {
-                        $('.'+modalClass).hide();
-                    })
+                    let annulBtn = $('<button type="button" class="btn btn-secondary" data-dismiss="modal" id="'+modalId+'cancelBtn">Annuler</button>').appendTo($(this.modalFooter));
                 
                     // au chargement de la page si local et session storage sont supporté on recupere nom et prenom
                     $(window).on('load', function() {
@@ -73,21 +71,11 @@
                     })
             }
 
-
-            if(this.options.type == 'confirmation') {
-                let confirmMessage = $('<div class="confirmMessage" >'+this.options.confirmation+'</div>').appendTo(this.modal);
+            if(this.options.type == 'confirmation'){
+                this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
+                this.confirmBtn = $('<button type="button" class="btn btn-primary '+modalId+'confirmBtn" data-dismiss="modal">OK</button>').appendTo(this.modalFooter);
+                this.cancelBtn = $('<button type="button" class="btn btn-secondary '+modalId+'cancelBtn" data-dismiss="modal">Annuler</button>').appendTo(this.modalFooter);
             }
 
-
-            
-            // Si option overlay choisie creation de l'element Overlay
-            if(this.options.modalOverlay === true) {
-                let mapOverlay = $('<div class="mapOverlay"/>').appendTo(this.element);
-            }
         } 
 }
-
-
-
-
-
