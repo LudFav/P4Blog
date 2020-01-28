@@ -1,32 +1,32 @@
- //TABLE BILLETS
- function billetTable(){
-    var idBillet = $('.post-info').attr('value');
-    
-    $.post({
-        url: 'adminajax',
-        data:{'billetId': idBillet, 'action': 'showbillet'},
-        success: function(data){
-            if(!$.trim(data)){
-                $('#billetTableTitre h2').text('0 billet posté');
-                $('#tableBillets').hide();
-            } else{     
-                let newBilletTable = $(data);
-                newButtonDeleteB = $('#deleteBillet').find('.deleteBilletconfirmBtn');
-                console.log(newButtonDeleteB );
-                newButtonDeleteB.on('click', function(){
-                    deleteComBtn(newButtonDeleteB);
-                })
+//TABLE BILLETS**********************************************************
 
-                $('#tbodyBillet').html(newBilletTable);
-            }
-        }
-    })
+function billetTable(){
+   var idBillet = $('.post-info').attr('value');
+   
+   $.post({
+       url: 'adminajax',
+       data:{'billetId': idBillet, 'action': 'showbillet'},
+       success: function(data){
+           if(!$.trim(data)){
+               $('#billetTableTitre h2').text('0 billet posté');
+               $('#tableBillet').hide();
+           } else{     
+               let newBilletTable = $(data);
+               newButtonDeleteB = newBilletTable.find('.deleteComBtn');
+               console.log(newButtonDeleteB);
+               newButtonDeleteBValid = $('.deleteBillet-confirmBtn');
+               newButtonDeleteB.on('click', function(){
+                   modalDeleteBillet;
+                   idBilToDelete = newButtonDeleteB.attr('value');
+                   newButtonDeleteBValid.attr('value', idBilToDelete);
+               });
+               $('#tbodyBillet').html(newBilletTable);
+           }
+       }
+   })
 }    
 
-
-//TABLE COMMENTAIRES SIGNALÉS
-
-
+//TABLE COMMENTAIRES SIGNALÉS********************************************
 function commentTable(){
     $.post({
         url: 'adminajax',
@@ -37,20 +37,25 @@ function commentTable(){
                 $('#tableComments').hide();
             } else{     
             let newCommentTable = $(data);
-
             newButtonUnsignal = newCommentTable.find('.unsignalComBtn');
+            newButtonUnsignalValid = $('.unsignalComModal-confirmBtn');
             newButtonUnsignal.on('click', function() {
-                unsignalCom(newButtonUnsignal);
+                modalUnsignalCom;
+                idComToUnsignal = newButtonUnsignal.attr('value');
             })
 
             newButtonModere = newCommentTable.find('.modereComBtn');
+            newButtonModereValid = $('.modereComModal-confirmBtn');
             newButtonModere.on('click', function(){
-                modereComBtn(newButtonModere);
+                modalModereCom;
+                idComToModere = newButtonModere.attr('value');
             })
 
-            newButtonDelete = newCommentTable.find('.deleteComBtn');
-            newButtonDelete.on('click', function(){
-                modereComBtn(newButtonDelete);
+            newButtonDeleteC = newCommentTable.find('.deleteComBtn');
+            newButtonDeleteValid = $('.deleteComModal-confirmBtn');
+            newButtonDeleteC.on('click', function(){
+                modalDeleteCom;
+                idComToDelete = newButtonDeleteC.attr('value');
             })
 
             $('#tbodyComment').html(newCommentTable);
@@ -59,7 +64,8 @@ function commentTable(){
         }
     });
 }
-$(window).bind('load', function(){
+
+//FONCTIONS REQUETES AJAX ACTIONS*****************************************
 
 function deleteBilBtn(button){
     var idBilToDelete = button.attr('value');
@@ -71,7 +77,6 @@ function deleteBilBtn(button){
         }
     });
 }
-
 
 function unsignalCom(button){
     var idComToUnsignal = button.attr('value');
@@ -97,64 +102,101 @@ function modereComBtn(button){
 
 function deleteComBtn(button){
     var idComToDelete = button.attr('value');
-    $.post({
-        url: 'adminajax',
-        data: {'action': 'deleteComment','deleteCom' : idComToDelete},
-        success: function(data){
-           commentTable();
-        }
-    });
+    tr = button.closest('tr');
+    console.log(tr);
+        $.post({
+            url: 'adminajax',
+            data: {'action': 'deleteComment','deleteCom' : idComToDelete},
+            success: function(data){
+            tr.fadeOut(3000);
+               commentTable();
+            }
+        });
 }
 
-let deleteBilModal = new Modal(document.querySelector('body'), {
+
+
+// MODALS *******************************************************************
+
+//BILLETS
+modalDeleteBillet = new Modal(document.querySelector('body'), {
     id: 'deleteBillet',
     titre: 'Suppression',
     type: 'confirmation',
     confirmation: 'Êtes-vous sur de vouloir supprimer ce billet?'
- });
+});
+
+//COMMENTAIRES
+modalUnsignalCom = new Modal(document.querySelector('body'), {
+    id: 'unsignalComModal',
+    titre: 'Restauration',
+    type: 'confirmation',
+    confirmation: 'Êtes-vous sur de vouloir restaurer ce commentaire?'
+});
+modalModereCom = new Modal(document.querySelector('body'), {
+    id: 'modereComModal',
+    titre: 'Modération',
+    type: 'confirmation',
+    confirmation: 'Êtes-vous sur de vouloir modérer ce commentaire?'
+});
+modalDeleteCom = new Modal(document.querySelector('body'), {
+    id: 'deleteComModal',
+    titre: 'Supression',
+    type: 'confirmation',
+    confirmation: 'Êtes-vous sur de vouloir supprimer ce commentaire?'
+});
+/*$('#deleteComModal').on('shown.bs.modal', function (){ 
+  $('#tbodyComment').focus()
+})*/
+
+//BOUTONS CONFIRMATION MODAL*************************************************
+$( window ).bind("load", function(){
+    //BOUTONS EFFACER BILLET
+    $('.deleteBilBtn').on('click', function(){
+        modalDeleteBillet;    
+        var idBilToDelete=$(this).attr('value');
+        $('.deleteBillet-confirmBtn').attr('value', idBilToDelete);
+    });
+        $('.deleteBillet-confirmBtn').on('click', function(){
+            deleteBilBtn($('.deleteBilBtn'));
+        });
+
+    //BOUTONS COMMENTAIRES SIGNALÉS
+
+    $('.unsignalComBtn').on('click', function() {
+        modalUnsignalCom;
+        var idComToUnsignal=$(this).attr('value');
+        $('.unsignalComModal-confirmBtn').attr('value', idComToUnsignal);
+    });
+        $('.unsignalComModal-confirmBtn').on('click', function(){
+            unsignalCom($('.unsignalComBtn'));
+        });
 
 
-//BOUTONS CONFIRMATION MODAL
+    $('.modereComBtn').on('click', function() {
+        modalModereCom;
+        var idComToModere=$(this).attr('value');
+        $('.modereComModal-confirmBtn').attr('value', idComToModere);
+    });
+        $('.modereComModal-confirmBtn').on('click', function(){
+            modereComBtn( $('.modereComBtn'));
+        })
 
-$('.deleteBilBtn').on('click', function(){
-    var idBilToDelete=$(this).attr('value');
-    $('.deleteBilBtn').attr({'data-toggle':"modal", 'data-target':"#deleteBillet"});
-    deleteBilModal;
-    $('.deleteBilletconfirmBtn').attr('value', idBilToDelete);
-})
 
-$('.deleteBilletconfirmBtn').on('click', function(){
-    deleteBilBtn($('.deleteBilletconfirmBtn'));
-})
+    $('.deleteComBtn').on('click', function() {
+        modalDeleteCom;
+        var idComToDelete=$(this).attr('value');
+        $('.deleteComModal-confirmBtn').attr('value', idComToDelete);
+    });
+        $('.deleteComModal-confirmBtn').on('click', function(){
+            deleteComBtn( $('.deleteComBtn'));
+        })
+});
 
-//BOUTONS COMMENTAIRES SIGNALÉS
-$('.unsignalComBtn').on('click', function() {
-    unsignalCom( $('.unsignalComBtn'));
-})
+billetTable();      
+commentTable();   
+
+
     
-$('.modereComBtn').on('click', function() {
-    modereComBtn( $('.modereComBtn'));
-})
 
-$('.deleteComBtn').on('click', function() {
-    deleteComBtn( $('.deleteComBtn'));
-})
-
-        
-
-})
-
-billetTable();
-            
-commentTable();       
-        
-    
-
-
-    
-
-  
-
-    
-
-      
+     
