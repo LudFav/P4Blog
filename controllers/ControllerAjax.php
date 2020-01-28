@@ -36,7 +36,7 @@ class ControllerAjax{
                     $commentairesOutput.= '</div><!-- comment-info -->';
                     $commentairesOutput.= '<p>' .$commentaire->contenu(). '</p>';
                     $commentairesOutput.= '<div class="right-area">';
-                    $commentairesOutput.= '<button id="signal' .$commentaire->id(). '" class="signalbtn" value=' .$commentaire->id().' ><b>Signaler</b></button>';
+                    $commentairesOutput.= '<button  class="signalbtn" value=' .$commentaire->id().' ><b>Signaler</b></button>';
                     $commentairesOutput.= '</div>';
                     $commentairesOutput.= '</div><!-- comment -->';
                     $commentairesOutput.= '</div>';
