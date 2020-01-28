@@ -69,10 +69,12 @@ function commentTable(){
 
 function deleteBilBtn(button){
     var idBilToDelete = button.attr('value');
+    tr = button.closest('tr');
     $.post({
         url: 'adminajax',
         data: {'action': 'deleteBillet','deleteBillet' : idBilToDelete},
         success: function(data){
+           tr.fadeOut('slow');
            billetTable();
         }
     });
@@ -108,7 +110,7 @@ function deleteComBtn(button){
             url: 'adminajax',
             data: {'action': 'deleteComment','deleteCom' : idComToDelete},
             success: function(data){
-            tr.fadeOut(3000);
+            tr.fadeOut('slow');
                commentTable();
             }
         });
