@@ -1,8 +1,4 @@
-<div class="slider">
-  <div class="display-table  center-text">
-    <h1 class="title display-table-cell"><b>ADMINISTRATION</b></h1>
-  </div>
-</div><!-- slider -->
+
 <!--BILLET--> 
 <div class="container" style="padding-top:20px;">
         <div class="table-wrapper">
