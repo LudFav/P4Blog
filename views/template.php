@@ -143,7 +143,7 @@
 	<script src="public/common-js/bootstrap.js"></script>
 	<script src="public/common-js/scripts.js"></script>
 	</script>
-	<script src="assets/js/ajax.js"></script>
 	<script src="assets/js/modal.js"></script>
+	<script src="assets/js/ajax.js"></script>
 </body>
 </html>
