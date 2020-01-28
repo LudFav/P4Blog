@@ -23,7 +23,7 @@ class ControllerAdminajax{
                  $billetsOutput.= '<td class="actionTd">';
                  $billetsOutput.= '<button class="visualBilBtn"><a href="post&id=' .$billet->id(). '" ><i class="fa fa-eye"></i></a></button>';
                  $billetsOutput.= '<button class="editBilBtn" ><a href="update&id=' .$billet->id(). '"><i class="fa fa-pencil" aria-hidden="true"></i></a></button>';
-                 $billetsOutput.= '<button class="deleteBilBtn" value="' .$billet->id(). '" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                 $billetsOutput.= '<button class="deleteBilBtn" value="' .$billet->id(). '" data-toggle="modal" data-target ="#deleteBillet" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
                  $billetsOutput.= '</td>';
                  $billetsOutput.= '</tr>';
             }
@@ -31,7 +31,7 @@ class ControllerAdminajax{
             exit($data['billetsOutput']);
         }   
               
-
+        
 
         if(isset($_POST['action']) && $_POST['action']=='deleteBillet'){
             $deleteBillet = $this->_billetManager->deleteBillet($_POST['deleteBillet']); 
@@ -52,9 +52,9 @@ class ControllerAdminajax{
                 $commentOutput.='<td>' .$commentaire->contenu(). '</td>';
                 $commentOutput.='<td>' .$commentaire->date(). '</td>';
                 $commentOutput.='<td class="commentActionTd">';       
-                $commentOutput.='<button class="unsignalComBtn" value="' .$commentaire->id(). '"><i class="fa fa-comment-o" aria-hidden="true"></i></button>';
-                $commentOutput.='<button class="modereComBtn" value="' .$commentaire->id(). '" ><i class="fa fa-commenting" aria-hidden="true"></i></button>';
-                $commentOutput.='<button class="deleteComBtn" value="' .$commentaire->id(). '" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                $commentOutput.='<button class="unsignalComBtn" value="' .$commentaire->id(). '" data-toggle="modal" data-target ="#unsignalComModal"><i class="fa fa-comment-o" aria-hidden="true"></i></button>';
+                $commentOutput.='<button class="modereComBtn" value="' .$commentaire->id(). '" data-toggle="modal" data-target ="#modereComModal" ><i class="fa fa-commenting" aria-hidden="true"></i></button>';
+                $commentOutput.='<button class="deleteComBtn" value="' .$commentaire->id(). '" data-toggle="modal" data-target ="#deleteComModal" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
                 $commentOutput.='</td>';
                 $commentOutput.='</tr>';
             }
@@ -73,5 +73,10 @@ class ControllerAdminajax{
         if(isset($_POST['action']) && $_POST['action']=='deleteComment'){
             $deleteComment = $this->_commentManager->deleteComment($_POST['deleteCom']);
         }
+
+        if(isset($_POST['action']) && $_POST['action']=='showCommentModere'){
+            $modereCommentOutput='';
+        }
+
     }
 }
