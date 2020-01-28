@@ -60,7 +60,7 @@ class Modal {
                         localStorage.setItem("name5", inputPseudo.val()); //savgrd le pseudo
                         localStorage.setItem("mdp5", inputMotDePasse.val()); //savgrd le mdp
                     })
-                    let annulBtn = $('<button type="button" class="btn btn-secondary" data-dismiss="modal" id="'+modalId+'cancelBtn">Annuler</button>').appendTo($(this.modalFooter));
+                    let annulBtn = $('<button type="button" class="btn btn-secondary" data-dismiss="modal" id="'+modalId+'-cancelBtn">Annuler</button>').appendTo($(this.modalFooter));
                 
                     // au chargement de la page si local et session storage sont supporté on recupere nom et prenom
                     $(window).on('load', function() {
@@ -73,8 +73,8 @@ class Modal {
 
             if(this.options.type == 'confirmation'){
                 this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
-                this.confirmBtn = $('<button type="button" class="btn btn-primary '+modalId+'confirmBtn" data-dismiss="modal">OK</button>').appendTo(this.modalFooter);
-                this.cancelBtn = $('<button type="button" class="btn btn-secondary '+modalId+'cancelBtn" data-dismiss="modal">Annuler</button>').appendTo(this.modalFooter);
+                this.confirmBtn = $('<button type="button" class="btn btn-primary '+modalId+'-confirmBtn" data-dismiss="modal">OK</button>').appendTo(this.modalFooter);
+                this.cancelBtn = $('<button type="button" class="btn btn-secondary '+modalId+'-cancelBtn" data-dismiss="modal">Annuler</button>').appendTo(this.modalFooter);
             }
 
         } 
