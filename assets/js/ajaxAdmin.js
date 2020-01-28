@@ -1,7 +1,5 @@
-// ADMIN
-billetTable();
  //TABLE BILLETS
-function billetTable(){
+ function billetTable(){
     var idBillet = $('.post-info').attr('value');
     
     $.post({
