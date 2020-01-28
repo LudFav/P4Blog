@@ -7,12 +7,22 @@
                 url: 'ajax',
                 data:{'billetId': idBillet, 'action': 'showComment'},
                 success: function(data){
-                    $('#showComments').html(data);
+                    if(!$.trim(data)){
+                        $('#showComments').text('Soyez la première personne à écrire un commentaire sur ce billet.'); 
+                        $('#showComments').attr('style','font-style:italic; margin-bottom:15px;');       
+                    } else{
+                        let newCommentDisplay= $(data);
+                        newButtonSignal = newCommentDisplay.find('.signalbtn');
+                        newButtonSignal.on('click', function(){
+                            id= $(this).attr('value');
+                            signalement(id);
+                        });
+
+                        $('#showComments').html(newCommentDisplay);
+                    }
                 }
             })
         }
-       
-        showComment();
 
         //FORMULAIRE D'ENVOI DE COMMENTAIRE
         $('.submit-btn').on('click', function(e){
@@ -35,25 +45,24 @@
             }
         })
 
-       
+        function signalement(id){
+            $.post({
+                 url: 'ajax',
+                 data: {'action': 'signalCom', 'idSignal' : id },
+                 success: function(data){
+                    showComment();
+                }
+            });
+        }  
         //BOUTON SIGNALER
-    
+        
     
     $(window).bind('load', function(){
+
         $('.signalbtn').on('click', function(){
-            console.log('test signale');
-            var comId=$(this).attr('value');
-                console.log(comId);
-                $.post({
-                     url: 'ajax',
-                     data: {'action': 'signalCom', 'idSignal' : comId },
-                     success: function(data){
-                        showComment();
-                    }
-                });
+            signalement($(this).attr('value'));
         });
 
-        
          let login = new Modal(document.querySelector('body'), {
             id: 'connexion',
             titre: 'Connexion',
@@ -82,6 +91,8 @@
                 });  
             })
     }) 
+
+    showComment();
 
 
 
