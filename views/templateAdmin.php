@@ -100,7 +100,8 @@
 	  a_configuration_option: 400
 	});
 	</script>
-	<script src="assets/js/ajaxAdmin.js"></script>
 	<script src="assets/js/modal.js"></script>
+	<script src="assets/js/ajaxAdmin.js"></script>
+	
 </body>
 </html>
