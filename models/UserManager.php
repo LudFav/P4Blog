@@ -24,10 +24,7 @@ class UserManager extends Model implements crud
     $var = [];
     $req = self::$_bdd->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
     $req->execute();
-    //on crée la variable data qui
-    //va contenir les données
-    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-      // var contiendra les données sous forme d'objets
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
       $var[] = new $obj($data);
     }
     return $var;
@@ -48,10 +45,28 @@ class UserManager extends Model implements crud
     $req->closeCursor();
   }
 
-  public function update($table, $data, $where){}
+  public function update($table, $data, $where){
+    $this->getBdd();
+    ksort($data);
+    $fields = NULL;
+    foreach($data as $key=> $value) {
+      $fields .= "`$key`=:$key,";
+    }
+    $fields = rtrim($fields, ',');
+    $req = self::$_bdd->prepare("UPDATE $table SET $fields WHERE $where"); 
+    
+    foreach ($data as $key => $value){
+      $req->bindValue(":$key", $value);
+    }
+    $req->execute();
+    $req->closeCursor();
+  }
 
   public function delete($table, $where){
-    self::$_bdd->exec("DELETE FROM $table WHERE id = .(int) $id");
+    $this->getBdd();
+    $req = self::$_bdd->prepare("DELETE FROM $table WHERE $where");
+    $req->execute();
+    $req->closeCursor();
   }
   
   public function getUsers(){
