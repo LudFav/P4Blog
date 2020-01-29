@@ -15,7 +15,7 @@ class ControllerAdminajax{
             $billetsOutput = '';
             $billets = $this->_billetManager->getBillets();
             foreach ($billets as $billet){ 
-                 $billetsOutput.= '<tr>';
+                 $billetsOutput.= '<tr class="billetRow' .$billet->id(). '">';
                  $billetsOutput.= '<a href="post&id' .$billet->id(). '"><td>' .$billet->id(). '</td></a>';
                  $billetsOutput.= '<td>' .$billet->auteur(). '</td>';
                  $billetsOutput.= '<td>' .$billet->titre(). '</td>';
@@ -46,7 +46,7 @@ class ControllerAdminajax{
             $commentOutput='';
             $commentaires = $this->_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null);
             foreach ($commentaires as $commentaire){
-                $commentOutput.='<tr class="signaledCommentRow">';
+                $commentOutput.='<tr class="signaledCommentRow' .$commentaire->id(). '">';
                 $commentOutput.='<td>' .$commentaire->id(). '</td>';
                 $commentOutput.='<td>' .$commentaire->auteur(). '</td>';
                 $commentOutput.='<td>' .$commentaire->contenu(). '</td>';
