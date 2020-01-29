@@ -73,12 +73,14 @@ class CommentManager extends Model implements crud {
       $req->closeCursor();
     }
 
-    public function moderation($table, $where){
+    public function moderation($table, $modere, $where){
       $this->getBdd();
-      $req = self::$_bdd->prepare("UPDATE $table SET signale = 0, modere = 1  WHERE $where");
+      $req = self::$_bdd->prepare("UPDATE $table SET signale = 0, $modere  WHERE $where");
       $req->execute();
       $req->closeCursor();
     }
+
+    
     
     public function signale($table, $where){
       $this->getBdd();
@@ -143,7 +145,11 @@ class CommentManager extends Model implements crud {
     }
     
     public function modereComment($id){
-      return $this->moderation('commentaires', "`id` = '{$_POST['modere']}'");
+      return $this->moderation('commentaires', "`modere`= 1", "`id` = '{$_POST['modere']}'");
+    }
+
+    public function unmodereComment($id){
+      return $this->moderation('commentaires', "`modere`= 0", "`id` = '{$_POST['unmodere']}'");
     }
 
     public function deleteComment($id){
