@@ -24,7 +24,7 @@ class ControllerAjax{
                   $commentairesOutput.= '<h6 class="commentDate">' .$commentaire->date(). '</h6>';
                   $commentairesOutput.= '</div>';
                   $commentairesOutput.= '</div><!-- comment-info -->';
-                  $commentairesOutput.= '<p><i>Contenu censuré par la modération</i></p>';
+                  $commentairesOutput.= '<p><i>Commentaire censuré par la modération</i></p>';
                   $commentairesOutput.= '</div><!-- comment -->';
                   $commentairesOutput.= '</div>';
                 } else {    
