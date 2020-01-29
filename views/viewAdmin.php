@@ -1,7 +1,32 @@
 
-<!--BILLET--> 
-<div class="container" style="padding-top:20px;">
-        <div class="table-wrapper">
+<!--BILLET-->
+<div class="container-fluid" style="padding-top:20px;">
+<div class="row">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item" id="billetLink">
+            <a class="nav-link" href="#">
+              Billets
+            </a>
+          </li>
+          <li class="nav-item" id="signalComLink">
+            <a class="nav-link" href="#">
+             Commentaires Signalés
+            </a>
+          </li>
+          <li class="nav-item" id="modComLink">
+            <a class="nav-link" href="#">
+              Commentaires Modérés
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+</nav>
+<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+        <div class="table-wrapper" id="billet-wrapper">
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6" id="billetTableTitre">
@@ -27,28 +52,8 @@
                 </tbody>  
             </table>
             </div>     
-<!--MODAL--> 
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="validation">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-COMMENTAIRE SIGNALÉ-->
-            <div class="table-wrapper">
+<!--COMMENTAIRE SIGNALÉ-->
+        <div class="table-wrapper" id="signalCom-wrapper">
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6" id="commentTableTitre">
@@ -66,13 +71,38 @@ COMMENTAIRE SIGNALÉ-->
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id='tbodyComment'>
-       
-                
+                <tbody id='tbodyComment'>        
                 </tbody>   
             </table> 
-            </div>        
-        </div>   
+        </div>
+<!--COMMENTAIRE MODERÉ-->
+        <div class="table-wrapper" id="modCom-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6" id="moderedCommentTableTitre">
+						          <h2>Commentaires Modérés</h2>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover" id='moderedCommentsTable'>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Auteur</th>
+						<th>Contenu</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id='tbodyCommentModere'>        
+                </tbody>   
+            </table> 
+        </div>  
+
+
+        </div> 
+      </div>  
+      </div>
       </div>  
 </body>
 </html>
