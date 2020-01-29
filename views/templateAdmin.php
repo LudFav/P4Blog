@@ -53,36 +53,7 @@
 
   <?= $content ?>
 
-	<footer>
 
-		<div class="container">
-			<div class="row">
-
-				<div class="col-lg-4 col-md-6">
-					<div class="footer-section">
-
-						<a class="logo" href="#"><img src="public/images/logo.png" alt="Logo Image"></a>
-						<p class="copyright">Bona @ 2017. All rights reserved.</p>
-						
-
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
-
-				
-						<h4 class="title"><b>SUBSCRIBE</b></h4>
-						<div class="input-area">
-							<form>
-								<input class="email-input" type="text" placeholder="Enter your email">
-								<button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
-							</form>
-						</div>
-
-					</div><!-- footer-section -->
-				</div><!-- col-lg-4 col-md-6 -->
-
-			</div><!-- row -->
-		</div><!-- container -->
-	</footer>
 
 
 	<!-- SCIPTS -->
