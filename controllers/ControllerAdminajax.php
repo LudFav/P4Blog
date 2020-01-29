@@ -71,7 +71,8 @@ class ControllerAdminajax{
         }
 
         if(isset($_POST['action']) && $_POST['action']=='deleteComment'){
-            $deleteComment = $this->_commentManager->deleteComment($_POST['deleteCom']);
+            $idToDel = $_POST['deleteCom'];
+            $deleteComment = $this->_commentManager->deleteComment($idToDel);
         }
 
         if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
@@ -84,15 +85,20 @@ class ControllerAdminajax{
                 $moderedCommentOutput.='<td>' .$commentaireModere->contenu(). '</td>';
                 $moderedCommentOutput.='<td>' .$commentaireModere->date(). '</td>';
                 $moderedCommentOutput.='<td class="commentActionTd">';       
-                $moderedCommentOutput.='<button class="unmodereComBtn" value="' .$commentaireModere->id(). '" data-toggle="modal" data-target ="#unModereComModal" ><i class="fa fa-commenting unmod" aria-hidden="true"></i></button>';
-                $moderedCommentOutput.='<button class="deleteModComBtn" value="' .$commentaireModere->id(). '" data-toggle="modal" data-target ="#deleteComModal" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                $moderedCommentOutput.='<button class="unmodereComBtn" value="' .$commentaireModere->id(). '" data-toggle="modal" data-target ="#unmodereComModal" ><i class="fa fa-commenting unmod" aria-hidden="true"></i></button>';
+                $moderedCommentOutput.='<button class="deleteModComBtn" value="' .$commentaireModere->id(). '" data-toggle="modal" data-target ="#deleteModComModal" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
                 $moderedCommentOutput.='</td>';
                 $moderedCommentOutput.='</tr>';
             }
             $data['$moderedCommentOutput'] = $moderedCommentOutput;
             exit($data['$moderedCommentOutput']);
         }
-        
+        if(isset($_POST['action']) && $_POST['action']=='unmodere'){
+            $unModereComment = $this->_commentManager->unmodereComment($_POST['unmodere']); 
+        }
+        if(isset($_POST['action']) && $_POST['action']=='deleteModCom'){
+            $deleteComment = $this->_commentManager->deleteComment($_POST['deleteCom']);
+        }
 
     }
 }
