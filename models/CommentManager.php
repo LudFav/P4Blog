@@ -106,10 +106,8 @@ class CommentManager extends Model implements crud {
     public function getSignaledComments($table, $obj, $signale= null){
       $commentairesignal = [];
       $bdd = $this->getBdd();
-      //$req = $bdd->prepare('SELECT * FROM commentaires WHERE signale = 1');
       $req = self::$_bdd->prepare('SELECT * FROM commentaires WHERE signale = 1');
       $req->execute(array($signale));
-      
       while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
         $commentaire = new Comment($data);
         $commentairesignal[] = $commentaire;
@@ -117,7 +115,20 @@ class CommentManager extends Model implements crud {
       $req->closeCursor();
       return $commentairesignal;
     }
-    
+
+    public function getModeredComments($table, $obj, $modere= null){
+      $commentairemodere = [];
+      $bdd = $this->getBdd();
+      $req = self::$_bdd->prepare('SELECT * FROM commentaires WHERE modere = 1');
+      $req->execute(array($modere));  
+      while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+        $commentaire = new Comment($data);
+        $commentairemodere[] = $commentaire;
+      }
+      $req->closeCursor();
+      return $commentairemodere;
+    }
+
     public function getComments($billetId){
       return $this->readAll('commentaires', 'Comment', $billetId);
     }
