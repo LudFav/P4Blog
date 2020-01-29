@@ -523,7 +523,7 @@ td.actionTd, td.commentActionTd {
     cursor: pointer;
 }
 
-.deleteComBtn {
+.deleteComBtn, .deleteModComBtn {
     background-color: transparent;
 	border: none;
 	color: #d9534f;
@@ -537,7 +537,7 @@ td.actionTd, td.commentActionTd {
     cursor: pointer;
 }
 
-.unsignalComBtn {
+.unsignalComBtn, .unmodereComBtn {
 	background-color: transparent;
 	border: none;
 	color:	#28a745;
@@ -613,6 +613,28 @@ button#login {
 	fill:black; 
 }
 
+.nav-item{
+	padding-bottom: 15px;
+	background: #435d7d;
+	color: #fff;
+	padding: 16px 30px;
+	margin: -20px -25px 10px;
+	border-radius: 3px 3px 0 0;
+	cursor: pointer;
+}
+
+nav.sidebar {
+    margin-top: 50px;
+}
+
+.nav-item:hover{
+	background: #fff;
+	color: #435d7d;
+}
+
+.nav-link{
+	font-size: 16px;
+}
 
 /********************** FIN D'AJOUTS****/
 
