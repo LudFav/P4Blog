@@ -55,19 +55,13 @@ class Modal {
                     this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
                     let validBtn = $('<button type="button" class="btn btn-primary" id="'+modalId + '-validBtn'+'">Valider</button>').appendTo($(this.modalFooter));
                     $(validBtn).on('click', function () {
-                        console.log(inputPseudo.val());
-                        console.log(inputMotDePasse.val());
                         localStorage.setItem("name5", inputPseudo.val()); //savgrd le pseudo
-                        localStorage.setItem("mdp5", inputMotDePasse.val()); //savgrd le mdp
                     })
                     let annulBtn = $('<button type="button" class="btn btn-secondary" data-dismiss="modal" id="'+modalId+'-cancelBtn">Annuler</button>').appendTo($(this.modalFooter));
-                
-                    // au chargement de la page si local et session storage sont supporté on recupere nom et prenom
+            
                     $(window).on('load', function() {
-                    let userName = localStorage.getItem("name5"); //récup nom
-                    let userPass = localStorage.getItem("mdp5"); //récup prenom
+                    let userName = localStorage.getItem("name5"); 
                     $(inputPseudo).val(userName);
-                    $(inputMotDePasse).val(userPass);
                     })
             }
 
