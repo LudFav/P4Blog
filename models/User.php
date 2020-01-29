@@ -6,6 +6,7 @@ class Username
     private $_id;
     private $_username;
     private $_pass;
+    private $_role;
    
     public function __construct(array $data){
         $this->hydrate($data);
@@ -36,6 +37,12 @@ class Username
         }
     }
 
+    public function role($role){
+        if(is_string($role)){
+            $this->_role= $role;
+        }
+    }
+
  //getters
     public function id(){
         return $this->_id;
@@ -46,5 +53,9 @@ class Username
     
     public function pass(){
         return $this->_pass;
+    }
+
+    public function role(){
+        return $this->_role;
     }
 }
