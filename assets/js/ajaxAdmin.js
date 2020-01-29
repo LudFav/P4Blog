@@ -14,7 +14,6 @@ function billetTable(){
               newButtonDeleteBillet.on('click', function(){
                    modalDeleteBillet;
                    idBilletToDelete = $(this).attr('value');
-                   console.log(idBilletToDelete);
                });
                $('#tbodyBillet').html(newBilletTable);
            }
@@ -61,8 +60,6 @@ function commentTable(){
 //FONCTIONS REQUETES AJAX ACTIONS*****************************************
 
 function deleteBilBtn(idBilletToDelete){
-    console.log('test methode deleteBilletBtn');
-    console.log(idBilletToDelete);
     $.post({
         url: 'adminajax',
         data: {'action': 'deleteBillet','deleteBillet' : idBilletToDelete},
@@ -142,11 +139,12 @@ $( window ).bind("load", function(){
     $('.deleteBilBtn').on('click', function(){
         modalDeleteBillet;    
         idBilletToDelete=$(this).attr('value');
-        console.log(idBilletToDelete);
         $('.deleteBillet-confirmBtn').attr('value', idBilletToDelete);
     });
         $('.deleteBillet-confirmBtn').on('click', function(){
-            deleteBilBtn(idBilletToDelete);
+            $('.billetRow'+idBilletToDelete).fadeOut('slow', function(){
+                deleteBilBtn(idBilletToDelete);
+            })   
         });
 
     //BOUTONS COMMENTAIRES SIGNALÉS
@@ -156,7 +154,9 @@ $( window ).bind("load", function(){
         $('.unsignalComModal-confirmBtn').attr('value', idComToUnsignal);
     });
         $('.unsignalComModal-confirmBtn').on('click', function(){
-            unsignalCom(idComToUnsignal);
+            $('.signaledCommentRow'+idComToUnsignal).fadeOut('slow', function(){
+                unsignalCom(idComToUnsignal);
+            });
         });
 
 
@@ -166,7 +166,9 @@ $( window ).bind("load", function(){
         $('.modereComModal-confirmBtn').attr('value', idComToModere);
     });
         $('.modereComModal-confirmBtn').on('click', function(){
-            modereComBtn(idComToModere);
+            $('.signaledCommentRow'+idComToModere).fadeOut('slow', function(){
+                modereComBtn(idComToModere);
+            });
         })
 
 
@@ -176,7 +178,9 @@ $( window ).bind("load", function(){
         $('.deleteComModal-confirmBtn').attr('value', idComToDelete);
     });
         $('.deleteComModal-confirmBtn').on('click', function(){
-            deleteComBtn(idComToDelete);
+            $('.signaledCommentRow'+idComToDelete).fadeOut('slow', function(){
+                deleteComBtn(idComToDelete);
+            });
         })
 });
 
