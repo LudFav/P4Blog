@@ -7,7 +7,7 @@
         <ul class="nav flex-column">
           <li class="nav-item" id="billetLink">
             <a class="nav-link" href="#">
-              Billets
+              <span class="glyphicon glyphicon-book"></span> Billet 
             </a>
           </li>
           <li class="nav-item" id="signalComLink">
@@ -44,7 +44,7 @@
                         <th>Auteur</th>
 						            <th>Titre</th>
                         <th>Date</th>
-                        <th>Actions</th>
+                        <th style="text-align:center;">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="tbodyBillet">
@@ -68,7 +68,7 @@
                         <th>Auteur</th>
 						<th>Contenu</th>
                         <th>Date</th>
-                        <th>Actions</th>
+                        <th style="text-align:center;">Actions</th>
                     </tr>
                 </thead>
                 <tbody id='tbodyComment'>        
@@ -91,7 +91,7 @@
                         <th>Auteur</th>
 						<th>Contenu</th>
                         <th>Date</th>
-                        <th>Actions</th>
+                        <th style="text-align:center;">Actions</th>
                     </tr>
                 </thead>
                 <tbody id='tbodyCommentModere'>        
