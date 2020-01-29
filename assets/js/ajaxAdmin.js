@@ -57,6 +57,36 @@ function commentTable(){
     });
 }
 
+function moderedCommentTable(){
+    $.post({
+        url: 'adminajax',
+        data:{'action': 'showCommentModered'},
+        success: function(data){
+            if(!$.trim(data)){
+                $('#moderedCommentTableTitre h2').text('0 commentaire modéré');
+                $('#moderedCommentsTable').hide();
+            } else{     
+            let newModeredCommentTable = $(data);
+
+            newButtonUnmodere = newModeredCommentTable.find('.modereComBtn');
+            newButtonUnmodere.on('click', function(){
+                modalUnmodereCom;
+                idComToUnmodere = $(this).attr('value');
+            })
+
+            newButtonDeleteCom = newModeredCommentTable.find('.deleteComBtn');
+            newButtonDeleteCom.on('click', function(){
+                modalDeleteCom;
+                idComToDelete = $(this).attr('value');
+            })
+
+            $('#tbodyCommentModere').html(newModeredCommentTable);
+            
+            }
+        }
+    });
+}
+
 //FONCTIONS REQUETES AJAX ACTIONS*****************************************
 
 function deleteBilBtn(idBilletToDelete){
@@ -134,7 +164,9 @@ modalDeleteCom = new Modal(document.querySelector('body'), {
 
 //BOUTONS CONFIRMATION MODAL*************************************************
 $( window ).bind("load", function(){
-
+    $('#signalCom-wrapper').hide();
+    $('#modCom-wrapper').hide();
+    $('#billet-wrapper').show();
     //BOUTONS EFFACER BILLET
     $('.deleteBilBtn').on('click', function(){
         modalDeleteBillet;    
@@ -184,10 +216,28 @@ $( window ).bind("load", function(){
         })
 });
 
-billetTable();      
-commentTable();   
+billetTable();
+commentTable();
+moderedCommentTable(); 
+
+$('#billetLink').on('click', function(){
+
+    $('#signalCom-wrapper').hide();
+    $('#modCom-wrapper').hide();
+    $('#billet-wrapper').fadeIn(1000);
+})
+$('#signalComLink').on('click', function(){
+    $('#billet-wrapper').hide();
+    $('#modCom-wrapper').hide();
+    $('#signalCom-wrapper').fadeIn(1000);
+    
+})     
+$('#modComLink').on('click', function(){
+    $('#billet-wrapper').hide();
+    $('#signalCom-wrapper').hide();
+    $('#modCom-wrapper').fadeIn(1000);   
+})
 
 
     
 
-     
