@@ -68,16 +68,16 @@ function moderedCommentTable(){
             } else{     
             let newModeredCommentTable = $(data);
 
-            newButtonUnmodere = newModeredCommentTable.find('.modereComBtn');
+            newButtonUnmodere = newModeredCommentTable.find('.unmodereComBtn');
             newButtonUnmodere.on('click', function(){
                 modalUnmodereCom;
-                idComToUnmodere = $(this).attr('value');
+                idModComToUnmodere = $(this).attr('value');
             })
 
-            newButtonDeleteCom = newModeredCommentTable.find('.deleteComBtn');
+            newButtonDeleteCom = newModeredCommentTable.find('.deleteModComBtn');
             newButtonDeleteCom.on('click', function(){
-                modalDeleteCom;
-                idComToDelete = $(this).attr('value');
+                modalDeleteModCom;
+                idModComToDelete = $(this).attr('value');
             })
 
             $('#tbodyCommentModere').html(newModeredCommentTable);
@@ -129,6 +129,25 @@ function deleteComBtn(idComToDelete){
         });
 }
 
+function unmodereComBtn(idModComToUnmodere){
+    $.post({
+        url: 'adminajax',
+        data: {'action': 'unmodere', 'unmodere' : idModComToUnmodere},
+        success: function(data){
+            moderedCommentTable();
+        }
+    });
+}
+
+function deleteModComBtn(idModComToDelete){
+    $.post({
+        url: 'adminajax',
+        data: {'action': 'deleteModCom','deleteCom' : idModComToDelete},
+        success: function(data){
+            moderedCommentTable();
+        }
+    });
+}
 
 
 // MODALS *******************************************************************
@@ -141,7 +160,7 @@ modalDeleteBillet = new Modal(document.querySelector('body'), {
     confirmation: 'Êtes-vous sur de vouloir supprimer ce billet?'
 });
 
-//COMMENTAIRES
+//COMMENTAIRES SIGNALÉ
 modalUnsignalCom = new Modal(document.querySelector('body'), {
     id: 'unsignalComModal',
     titre: 'Restauration',
@@ -159,6 +178,19 @@ modalDeleteCom = new Modal(document.querySelector('body'), {
     titre: 'Supression',
     type: 'confirmation',
     confirmation: 'Êtes-vous sur de vouloir supprimer ce commentaire?'
+});
+//COMMENTAIRES MODÉRÉ
+modalUnmodereCom = new Modal(document.querySelector('body'), {
+    id: 'unmodereComModal',
+    titre: 'Modération',
+    type: 'confirmation',
+    confirmation: 'Êtes-vous sur de vouloir rétablir ce commentaire censuré?'
+});
+modalDeleteModCom = new Modal(document.querySelector('body'), {
+    id: 'deleteModComModal',
+    titre: 'Supression',
+    type: 'confirmation',
+    confirmation: 'Êtes-vous sur de vouloir supprimer ce commentaire censuré?'
 });
 
 
@@ -200,8 +232,9 @@ $( window ).bind("load", function(){
         $('.modereComModal-confirmBtn').on('click', function(){
             $('.signaledCommentRow'+idComToModere).fadeOut('slow', function(){
                 modereComBtn(idComToModere);
+                moderedCommentTable();
             });
-        })
+        });
 
 
     $('.deleteComBtn').on('click', function() {
@@ -213,7 +246,32 @@ $( window ).bind("load", function(){
             $('.signaledCommentRow'+idComToDelete).fadeOut('slow', function(){
                 deleteComBtn(idComToDelete);
             });
-        })
+        });
+    //BOUTONS COMMENTAIRES MODÉRÉ
+    $('.unmodereComBtn').on('click', function() {
+        modalUnmodereCom;
+        idModComToUnmodere=$(this).attr('value');
+        $('.unmodereComModal-confirmBtn').attr('value', idModComToUnmodere);
+    });
+        $('.unmodereComModal-confirmBtn').on('click', function(){
+            $('.moderedCommentRow'+idModComToUnmodere).fadeOut('slow', function(){
+                unmodereComBtn(idModComToUnmodere);
+            });
+        });
+
+    $('.deleteModComBtn').on('click', function() {
+        modalDeleteModCom;
+        idModComToDelete=$(this).attr('value');
+        $('.deleteModComModal-confirmBtn').attr('value', idModComToDelete);
+    });
+        $('.deleteModComModal-confirmBtn').on('click', function(){
+            $('.moderedCommentRow'+idModComToDelete).fadeOut('slow', function(){
+                deleteModComBtn(idModComToDelete);
+            });
+        });
+
+
+    
 });
 
 billetTable();
@@ -235,6 +293,7 @@ $('#signalComLink').on('click', function(){
 $('#modComLink').on('click', function(){
     $('#billet-wrapper').hide();
     $('#signalCom-wrapper').hide();
+    moderedCommentTable();
     $('#modCom-wrapper').fadeIn(1000);   
 })
 
