@@ -16,6 +16,8 @@
 1. PRIMARY STYLES
 --------------------------------- */
 
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
 html{ font-size: 100%; height: 100%;  overflow-x: hidden; touch-action: manipulation; }
 
 body{ font-size: 15px; font-family: 'Roboto', sans-serif; width: 100%; height: 100%; margin: 0; font-weight: 300;
