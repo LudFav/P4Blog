@@ -629,13 +629,18 @@ nav.sidebar {
     margin-top: 50px;
 }
 
-.nav-item:hover{
-	background: #fff;
-	color: #435d7d;
-}
-
 .nav-link{
 	font-size: 16px;
+	
+}
+
+.nav-item:hover{
+	color: #df7a72;
+	background: #fff;
+}
+
+.nav-link:hover, .nav-link:focus{
+	color: #df7a72;
 }
 
 /********************** FIN D'AJOUTS****/
