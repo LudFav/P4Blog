@@ -32,7 +32,6 @@ class BilletManager extends Model implements crud
     }
     return $var;
     $req->closeCursor();
-
   }
 
 
