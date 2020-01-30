@@ -65,7 +65,9 @@ function moderedCommentTable(){
             if(!$.trim(data)){
                 $('#moderedCommentTableTitre h2').text('0 commentaire modéré');
                 $('#moderedCommentsTable').hide();
-            } else{     
+            } else{
+                $('#moderedCommentTableTitre h2').text('Commentaires Modérés');  
+                $('#moderedCommentsTable').show();  
             let newModeredCommentTable = $(data);
 
             newButtonUnmodere = newModeredCommentTable.find('.unmodereComBtn');
@@ -279,7 +281,6 @@ commentTable();
 moderedCommentTable(); 
 
 $('#billetLink').on('click', function(){
-
     $('#signalCom-wrapper').hide();
     $('#modCom-wrapper').hide();
     $('#billet-wrapper').fadeIn(1000);
@@ -291,9 +292,9 @@ $('#signalComLink').on('click', function(){
     
 })     
 $('#modComLink').on('click', function(){
+    moderedCommentTable();
     $('#billet-wrapper').hide();
     $('#signalCom-wrapper').hide();
-    moderedCommentTable();
     $('#modCom-wrapper').fadeIn(1000);   
 })
 
