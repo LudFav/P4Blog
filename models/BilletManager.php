@@ -18,22 +18,41 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
 
-
   public function readAll($table, $obj){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC");
+    $req = self::$_bdd->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
     $req->execute();
-    //on crée la variable data qui
-    //va contenir les données
-    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-      // var contiendra les données sous forme d'objets
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
+      $var[] = new $obj($data);
+    }
+    return $var;
+    $req->closeCursor();
+
+  }
+
+  public function pagination($table, $obj){
+    $this->getBdd();
+    $var = [];
+    $req = self::$_bdd->prepare("SELECT id FROM $table");
+    $req->execute(); 
+    $nbreEntites = $req->rowCount();
+    $nbreEntitesParPage = 5;
+    $pages = ceil($nbreEntites / $nbreEntitesParPage);
+    if(isset($_GET['page'])){
+      $page = $_GET['page'];
+    } else{ 
+        $page = 1;
+    }
+    $limit = 'LIMIT '.($page - 1) * $nbreEntitesParPage. ', '. $nbreEntitesParPage;
+    $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC $limit");
+    $req->execute();  
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
       $var[] = new $obj($data);
     }
     return $var;
     $req->closeCursor();
   }
-
 
   public function readOne($table, $obj, $id){
     $this->getBdd();
@@ -77,7 +96,7 @@ class BilletManager extends Model implements crud
 
   //methode qui va recuperer tous les billets dans la bdd
   public function getBillets(){
-    return $this->readAll('billets', 'Billet');
+    return $this->pagination('billets', 'Billet');
   }
 
   public function getBillet($id){
