@@ -1,11 +1,11 @@
 <?php
 
 
-class Username
+class User
 {
     private $_id;
     private $_username;
-    private $_pass;
+    private $_password;
     private $_role;
    
     public function __construct(array $data){
@@ -31,13 +31,13 @@ class Username
         }
     }
  
-    public function setPass($pass){
-        if(is_string($pass)){
-            $this->_pass= $pass;
+    public function setPassword($password){
+        if(is_string($password)){
+            $this->_password= $password;
         }
     }
 
-    public function role($role){
+    public function setRole($role){
         if(is_string($role)){
             $this->_role= $role;
         }
@@ -51,8 +51,8 @@ class Username
         return $this->_username;
     }
     
-    public function pass(){
-        return $this->_pass;
+    public function password(){
+        return $this->_password;
     }
 
     public function role(){
