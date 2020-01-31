@@ -32,12 +32,24 @@ class UserManager extends Model implements crud
 
   }
 
-
   public function readOne($table, $obj, $id){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare("SELECT id, user FROM " .$table. " WHERE id = ?");
+    $req = self::$_bdd->prepare("SELECT id, username, password, role FROM $table WHERE id = ?");
     $req->execute(array($id));
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+      $var[] = new $obj($data);
+    }
+    return $var;
+    $req->closeCursor();
+  }
+
+
+  public function readAdmin($table, $obj){
+    $this->getBdd();
+    $var = [];
+    $req = self::$_bdd->prepare("SELECT username, password FROM $table WHERE id = 1");
+    $req->execute(array());
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
       $var[] = new $obj($data);
     }
@@ -73,14 +85,15 @@ class UserManager extends Model implements crud
     return $this->readAll('users', 'User');
   }
 
-  public function getUser($id){
-    return $this->readOne('users', 'User', $id);
+  public function getUser(){
+    return $this->readAdmin('users', 'User');
   }
 
   public function createUser($data){
     return $this->create('users',array(
     'username' => $data['username'],
-    'pass'  => $data['pass']
+    'password'  => $data['password'],
+    'role'  => $data['role']
   ));
   }
 }
