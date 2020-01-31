@@ -30,7 +30,7 @@ class ControllerUpdate {
         header('Location:admin');
       }
       $this->_view = new View('Update');
-      $this->_view->generate(array('billet' => $billetToUpdate));  
+      $this->_view->generateAdmin(array('billet' => $billetToUpdate));  
     }
   }
 }
