@@ -1,9 +1,18 @@
 //TABLE BILLETS**********************************************************
+console.log('test live');
 
 function billetTable(){ 
+    console.log('test 01');
+    let url_string = window.location.href;
+    let url = new URL(url_string);
+    let page = url.searchParams.get("page");
+    if( page == null){
+        page = 1;
+    }
+    console.log(page);
    $.post({
        url: 'adminajax',
-       data:{'action': 'showbillet'},
+       data:{'action': 'showbillet', 'page': page },
        success: function(data){
            if(!$.trim(data)){
                $('#billetTableTitre h2').text('0 billet posté');
@@ -18,7 +27,8 @@ function billetTable(){
                $('#tbodyBillet').html(newBilletTable);
            }
        }
-   });
+    
+   }); 
 }    
 
 //TABLE COMMENTAIRES SIGNALÉS********************************************
