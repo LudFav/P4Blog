@@ -31,7 +31,7 @@ class BilletManager extends Model implements crud
 
   }
 
-  public function pagination($table, $obj){
+  public function pagination($table, $obj, $page){
     $this->getBdd();
     $var = [];
     $req = self::$_bdd->prepare("SELECT id FROM $table");
@@ -39,12 +39,7 @@ class BilletManager extends Model implements crud
     $nbreEntites = $req->rowCount();
     $nbreEntitesParPage = 5;
     $pages = ceil($nbreEntites / $nbreEntitesParPage);
-    if(isset($_GET['page'])){
-      $page = $_GET['page'];
-    } else{ 
-        $page = 1;
-    }
-    $limit = 'LIMIT '.($page - 1) * $nbreEntitesParPage. ', '. $nbreEntitesParPage;
+    $limit = 'LIMIT '.(htmlspecialchars($page) - 1) * $nbreEntitesParPage. ', '. $nbreEntitesParPage;
     $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC $limit");
     $req->execute();  
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
@@ -96,11 +91,15 @@ class BilletManager extends Model implements crud
 
   //methode qui va recuperer tous les billets dans la bdd
   public function getBillets(){
-    return $this->pagination('billets', 'Billet');
+    return $this->readAll('billets', 'Billet');
   }
 
   public function getBillet($id){
     return $this->readOne('billets', 'Billet', $id);
+  }
+
+  public function getBilletsWithPagination($page=null){
+    return $this->pagination('billets', 'Billet', $page);
   }
 
   public function createBillet($data){
