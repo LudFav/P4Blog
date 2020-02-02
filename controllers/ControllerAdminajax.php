@@ -13,7 +13,12 @@ class ControllerAdminajax{
 
         if(isset($_POST['action']) && $_POST['action']=='showbillet'){
             $billetsOutput = '';
-            $billets = $this->_billetManager->getBillets();
+            $page = 1;
+            if(isset($_POST['page'])){
+               $page = $_POST['page'];
+            }
+            $billets = $this->_billetManager->getBilletsWithPagination($page);
+          
             foreach ($billets as $billet){ 
                  $billetsOutput.= '<tr class="billetRow' .$billet->id(). '">';
                  $billetsOutput.= '<a href="post&id' .$billet->id(). '"><td>' .$billet->id(). '</td></a>';
