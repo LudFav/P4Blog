@@ -20,7 +20,7 @@ class ControllerAjax{
                   if($commentaire->modere()==1){
                   $commentairesOutput.= '<div class="comment-info" value=' .$commentaire->id(). '>';
                   $commentairesOutput.= '<div class="middle-area" value=' .$commentaire->modere(). '>';
-                  $commentairesOutput.= '<h6 class="commentName"><b>' .$commentaire->auteur(). '</b></h6>';
+                  $commentairesOutput.= '<h6 class="commentName"><b><strong>La modération</strong></b></h6>';
                   $commentairesOutput.= '<h6 class="commentDate">' .$commentaire->date(). '</h6>';
                   $commentairesOutput.= '</div>';
                   $commentairesOutput.= '</div><!-- comment-info -->';
