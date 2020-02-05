@@ -6,18 +6,31 @@ class ControllerAdminajax{
     private $_commentManager;
  
     public function __construct(){
-       
-        //BILLET
-        $this->_billetManager = new BilletManager;
-        
-
         if(isset($_POST['action']) && $_POST['action']=='showbillet'){
             $billetsOutput = '';
             $page = 1;
-            if(isset($_POST['page'])){
-               $page = $_POST['page'];
-            }
-            $billets = $this->_billetManager->getBilletsWithPagination($page);
+            $nbreEntitesParPage = 5;
+            $limit = (htmlspecialchars($page) - 1) * $nbreEntitesParPage;
+            $offset = $nbreEntitesParPage;
+            $nbreEntites = '';
+            //$lastPage = $pages;
+            //var_dump($lastPage);
+        if(isset($_POST['page'])){
+           $page = $_POST['page'];
+        }
+        /*if($page > $pages){
+            $page = $lastPage;
+        }*/
+        //var_dump(count($billets));
+        //BILLET
+        $this->_billetManager = new BilletManager;
+        $nbreEntites = count($this->_billetManager->getBillets());
+        var_dump($nbreEntites);
+        $billets = $this->_billetManager->getBilletsWithPagination($page, $limit, $offset, $nbreEntites, $nbreEntitesParPage);
+        
+           
+
+            
           
             foreach ($billets as $billet){ 
                  $billetsOutput.= '<tr class="billetRow' .$billet->id(). '">';
@@ -30,7 +43,7 @@ class ControllerAdminajax{
                  $billetsOutput.= '<button class="editBilBtn" ><a href="update&id=' .$billet->id(). '"><i class="fa fa-pencil" aria-hidden="true"></i></a></button>';
                  $billetsOutput.= '<button class="deleteBilBtn" value="' .$billet->id(). '" data-toggle="modal" data-target ="#deleteBillet" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
                  $billetsOutput.= '</td>';
-                 $billetsOutput.= '</tr>';
+                 $billetsOutput.= '</tr>'; 
             }
             $data['billetsOutput'] = $billetsOutput;
             exit($data['billetsOutput']);
