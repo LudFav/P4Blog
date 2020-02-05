@@ -28,23 +28,23 @@ class BilletManager extends Model implements crud
     }
     return $var;
     $req->closeCursor();
-
   }
 
-  public function pagination($table, $obj, $page){
+  public function pagination($table, $obj, $page, $limit, $offset, $nbreEntites, $nbreEntitesParPage){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare("SELECT id FROM $table");
-    $req->execute(); 
-    $nbreEntites = $req->rowCount();
-    $nbreEntitesParPage = 5;
-    $pages = ceil($nbreEntites / $nbreEntitesParPage);
-    $limit = 'LIMIT '.(htmlspecialchars($page) - 1) * $nbreEntitesParPage. ', '. $nbreEntitesParPage;
-    $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC $limit");
+    //$req = self::$_bdd->prepare("SELECT id FROM $table");
+    //$req->execute(); 
+    //$nbreEntites = $req->rowCount();
+    //$nbreEntitesParPage = 5;
+    //$pages = ceil($nbreEntites / $nbreEntitesParPage);
+    //$limit = (htmlspecialchars($page) - 1) * $nbreEntitesParPage. ', '. $nbreEntitesParPage;
+    $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC LIMIT $limit, $offset");
     $req->execute();  
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
       $var[] = new $obj($data);
     }
+    
     return $var;
     $req->closeCursor();
   }
@@ -98,8 +98,8 @@ class BilletManager extends Model implements crud
     return $this->readOne('billets', 'Billet', $id);
   }
 
-  public function getBilletsWithPagination($page=null){
-    return $this->pagination('billets', 'Billet', $page);
+  public function getBilletsWithPagination($page=null, $limit=null, $offset=null, $nbreEntites=null, $nbreEntitesParPage=null ){
+    return $this->pagination('billets', 'Billet', $page, $limit, $offset, $nbreEntites, $nbreEntitesParPage);
   }
 
   public function createBillet($data){
