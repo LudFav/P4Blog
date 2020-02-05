@@ -1,15 +1,36 @@
 //TABLE BILLETS**********************************************************
 console.log('test live');
 
+
 function billetTable(){ 
     console.log('test 01');
     let url_string = window.location.href;
     let url = new URL(url_string);
     let page = url.searchParams.get("page");
-    if( page == null){
+    let pagePrev = parseInt(page) - 1;
+    let pageNext = parseInt(page) + 1;
+    let pageLink = 'admin?page=';
+    let currentPage = 'admin?page='+page;
+    if( page == null || page <= 0){
         page = 1;
     }
-    console.log(page);
+    if(page==1){
+        $('.page-link.prev').hide();
+    }
+        $('.page-link.prev').on('click', function(){    
+            $('#signalCom-wrapper').hide();
+            $('#modCom-wrapper').hide();
+            $('.page-link.prev').attr("href", pageLink+pagePrev);
+            $('#billet-wrapper').fadeIn(1000);
+        })
+        
+        $('.page-link.next').on('click', function(){    
+            $('#signalCom-wrapper').hide();
+            $('#modCom-wrapper').hide();
+            $('.page-link.next').attr("href", pageLink+pageNext);  
+            $('#billet-wrapper').fadeIn(1000); 
+        })
+     
    $.post({
        url: 'adminajax',
        data:{'action': 'showbillet', 'page': page },
@@ -19,8 +40,8 @@ function billetTable(){
                $('#tableBillet').hide();
            } else{     
                let newBilletTable = $(data);
-              newButtonDeleteBillet = newBilletTable.find('.deleteBilBtn');
-              newButtonDeleteBillet.on('click', function(){
+                newButtonDeleteBillet = newBilletTable.find('.deleteBilBtn');
+                newButtonDeleteBillet.on('click', function(){
                    modalDeleteBillet;
                    idBilletToDelete = $(this).attr('value');
                });
@@ -286,6 +307,8 @@ $( window ).bind("load", function(){
     
 });
 
+
+
 billetTable();
 commentTable();
 moderedCommentTable(); 
@@ -307,6 +330,7 @@ $('#modComLink').on('click', function(){
     $('#signalCom-wrapper').hide();
     $('#modCom-wrapper').fadeIn(1000);   
 })
+
 
 
     
