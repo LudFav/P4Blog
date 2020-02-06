@@ -18,23 +18,21 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
 
-  function pagemax($table){
+  function pagemax($table, $nbreEntitesParPage){
     $this->getBdd();
     $req = self::$_bdd->prepare("SELECT COUNT(*) from $table");
     $req->execute();
     $nbrEntites = $req->fetchColumn();  
-    $nbreEntitesParPage = 5;
     $max = ceil($nbrEntites/$nbreEntitesParPage);
     return $max;
     $req->closeCursor(); 
   }
 
 
-  public function readAll($table, $obj, $page=null){
+  public function readAll($table, $obj, $page=null, $entiteParPage=null){
     $this->getBdd();
     $var = [];
-    $offset = 5;
-    $limit = (htmlspecialchars($page) - 1) * $offset. ', ' .$offset;
+    $limit = (htmlspecialchars($page) - 1) * $entiteParPage. ', ' .$entiteParPage;
     $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC LIMIT $limit");
     $req->execute();
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
@@ -87,20 +85,16 @@ class BilletManager extends Model implements crud
   
 
   //methode qui va recuperer tous les billets dans la bdd
-  public function getBillets(){
-    return $this->readAll('billets', 'Billet');
+  public function getBillets($page, $entiteParPage){
+    return $this->readAll('billets', 'Billet', $page, $entiteParPage);
   }
 
   public function getBillet($id){
     return $this->readOne('billets', 'Billet', $id);
   }
 
-  public function getBilletsWithPagination($page){
-    return $this->readAll('billets', 'Billet', $page);
-  }
-
-  public function getPageMax(){
-    return $this->pagemax('billets');
+  public function getPageMax($nbreEntitesParPage){
+    return $this->pagemax('billets', $nbreEntitesParPage);
   }
 
   public function createBillet($data){
