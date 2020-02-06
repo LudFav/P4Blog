@@ -18,10 +18,24 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
 
-  public function readAll($table, $obj){
+  function pagemax($table){
+    $this->getBdd();
+    $req = self::$_bdd->prepare("SELECT COUNT(*) from $table");
+    $req->execute();
+    $nbrEntites = $req->fetchColumn();  
+    $nbreEntitesParPage = 5;
+    $max = ceil($nbrEntites/$nbreEntitesParPage);
+    return $max;
+    $req->closeCursor(); 
+  }
+
+
+  public function readAll($table, $obj, $page=null){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
+    $offset = 5;
+    $limit = (htmlspecialchars($page) - 1) * $offset. ', ' .$offset;
+    $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC LIMIT $limit");
     $req->execute();
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
       $var[] = new $obj($data);
@@ -30,24 +44,7 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
 
-  public function pagination($table, $obj, $page, $limit, $offset, $nbreEntites, $nbreEntitesParPage){
-    $this->getBdd();
-    $var = [];
-    //$req = self::$_bdd->prepare("SELECT id FROM $table");
-    //$req->execute(); 
-    //$nbreEntites = $req->rowCount();
-    //$nbreEntitesParPage = 5;
-    //$pages = ceil($nbreEntites / $nbreEntitesParPage);
-    //$limit = (htmlspecialchars($page) - 1) * $nbreEntitesParPage. ', '. $nbreEntitesParPage;
-    $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC LIMIT $limit, $offset");
-    $req->execute();  
-    while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
-      $var[] = new $obj($data);
-    }
-    
-    return $var;
-    $req->closeCursor();
-  }
+ 
 
   public function readOne($table, $obj, $id){
     $this->getBdd();
@@ -98,8 +95,12 @@ class BilletManager extends Model implements crud
     return $this->readOne('billets', 'Billet', $id);
   }
 
-  public function getBilletsWithPagination($page=null, $limit=null, $offset=null, $nbreEntites=null, $nbreEntitesParPage=null ){
-    return $this->pagination('billets', 'Billet', $page, $limit, $offset, $nbreEntites, $nbreEntitesParPage);
+  public function getBilletsWithPagination($page){
+    return $this->readAll('billets', 'Billet', $page);
+  }
+
+  public function getPageMax(){
+    return $this->pagemax('billets');
   }
 
   public function createBillet($data){
