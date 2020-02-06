@@ -6,9 +6,9 @@ function billetTable(){
     console.log('test 01');
     let url_string = window.location.href;
     let url = new URL(url_string);
-    let page = url.searchParams.get("page");
-    let pagePrev = parseInt(page) - 1;
-    let pageNext = parseInt(page) + 1;
+    page = url.searchParams.get("page");
+    //let pagePrev = parseInt(page) - 1;
+    //let pageNext = parseInt(page) + 1;
     let pageLink = 'admin?page=';
     let currentPage = 'admin?page='+page;
     if( page == null || page <= 0){
@@ -16,24 +16,10 @@ function billetTable(){
     }
     if(page==1){
         $('.page-link.prev').hide();
-    }
-        $('.page-link.prev').on('click', function(){    
-            $('#signalCom-wrapper').hide();
-            $('#modCom-wrapper').hide();
-            $('.page-link.prev').attr("href", pageLink+pagePrev);
-            $('#billet-wrapper').fadeIn(1000);
-        })
-        
-        $('.page-link.next').on('click', function(){    
-            $('#signalCom-wrapper').hide();
-            $('#modCom-wrapper').hide();
-            $('.page-link.next').attr("href", pageLink+pageNext);  
-            $('#billet-wrapper').fadeIn(1000); 
-        })
-     
+    } 
    $.post({
        url: 'adminajax',
-       data:{'action': 'showbillet', 'page': page },
+       data:{'action': 'showbillet', 'page': page},
        success: function(data){
            if(!$.trim(data)){
                $('#billetTableTitre h2').text('0 billet posté');
@@ -51,7 +37,16 @@ function billetTable(){
     
    }); 
 }    
-
+function pagination(){
+    $.post({
+        url: 'adminajax',
+        data:{'action': 'pagination', 'page': page},
+        success: function(data){
+           let pagination = $(data);
+           $('#pagination').html(pagination);
+        }
+    })
+}
 //TABLE COMMENTAIRES SIGNALÉS********************************************
 function commentTable(){
     $.post({
@@ -310,6 +305,7 @@ $( window ).bind("load", function(){
 
 
 billetTable();
+pagination()
 commentTable();
 moderedCommentTable(); 
 
