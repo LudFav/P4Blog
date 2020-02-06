@@ -9,8 +9,9 @@ class ControllerAdminajax{
        
             //BILLET
             $this->_billetManager = new BilletManager;  
-            isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1; 
-            $billets = $this->_billetManager->getBilletsWithPagination($page);
+            isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1;
+            $entiteParPage = 4; 
+            $billets = $this->_billetManager->getBillets($page, $entiteParPage);
             if(isset($_POST['action']) && $_POST['action']=='showbillet'){
                 $billetsOutput = '';
                 foreach ($billets as $billet){ 
@@ -27,9 +28,7 @@ class ControllerAdminajax{
                      $billetsOutput.= '</tr>'; 
                 }
                 $data['billetsOutput'] = $billetsOutput;
-                exit($data['billetsOutput']);
-
-                
+                exit($data['billetsOutput']);  
             }  
 
             if(isset($_POST['action']) && $_POST['action']=='deleteBillet'){
@@ -38,24 +37,23 @@ class ControllerAdminajax{
 
             if(isset($_POST['action']) && $_POST['action']=='pagination'){
                 isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1; 
-                $pages = $this->_billetManager->getPageMax();
+                $nbreEntitesParPage = $entiteParPage;
+                $pages = $this->_billetManager->getPageMax($nbreEntitesParPage);
                 $pageNav = 2;
                 $prev = $page - 1;
                 $next = $page + 1;
-
-
                 $billetsPaginationOutput = '';  
                 $billetsPaginationOutput.='<nav aria-label="Page navigation example">';
                 $billetsPaginationOutput.='<ul class="pagination">';
                 if($page > 1){ 
                 $billetsPaginationOutput.='<li class="page-item"><a class="page-link prev" href="admin?page=' .$prev. '">Previous</a></li>';  
                 }
-                for($i = $page - $pageNav; $i> $page;$i++){
+                for($i = $page - $pageNav; $i < $page; $i++){
                     if($i> 0){
                         $billetsPaginationOutput.='<li class="page-item"><a class="page-link" href="admin?page=' .$i. '">' .$i. '</a></li>';
                     }
                 }
-                $billetsPaginationOutput.='<li class="page-item"><p class="page-link current">' .$page. '</p></li>';
+                $billetsPaginationOutput.='<li class="page-item"><p class="page-link active">' .$page. '</p></li>';
                 for($i = $page+1; $i <= $pages; $i++){
                     $billetsPaginationOutput.='<li class="page-item"><a class="page-link" href="admin?page=' .$i. '">' .$i. '</a></li>';
                     if($i >= $page + $pageNav){
