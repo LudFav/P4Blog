@@ -49,15 +49,16 @@
                 </thead>
                 <tbody id="tbodyBillet">
                 </tbody>    
-                <nav aria-label="Page navigation example">
+               <!-- <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item"><a class="page-link prev" href="#">Previous</a></li>
                   <li class="page-item"><a class="page-link" href="#">1</a></li>
                   <li class="page-item"><a class="page-link next" href="#">Next</a></li>
                 </ul>
-                </nav>  
+                </nav> -->  
             </table>
-            
+        <div id='pagination'>
+        </div>    
         </div>
              
 <!--COMMENTAIRE SIGNALÉ-->
