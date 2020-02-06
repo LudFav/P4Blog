@@ -1,22 +1,10 @@
 //TABLE BILLETS**********************************************************
-console.log('test live');
 
 
 function billetTable(){ 
-    console.log('test 01');
     let url_string = window.location.href;
     let url = new URL(url_string);
     page = url.searchParams.get("page");
-    //let pagePrev = parseInt(page) - 1;
-    //let pageNext = parseInt(page) + 1;
-    let pageLink = 'admin?page=';
-    let currentPage = 'admin?page='+page;
-    if( page == null || page <= 0){
-        page = 1;
-    }
-    if(page==1){
-        $('.page-link.prev').hide();
-    } 
    $.post({
        url: 'adminajax',
        data:{'action': 'showbillet', 'page': page},
