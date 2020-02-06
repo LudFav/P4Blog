@@ -35,6 +35,8 @@ class ControllerAdminajax{
                 $deleteBillet = $this->_billetManager->deleteBillet($_POST['deleteBillet']); 
             }
 
+
+            //PAGINATION BILLET
             if(isset($_POST['action']) && $_POST['action']=='pagination'){
                 isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1; 
                 $nbreEntitesParPage = $entiteParPage;
@@ -109,6 +111,8 @@ class ControllerAdminajax{
                 $deleteComment = $this->_commentManager->deleteComment($idToDel);
             }
 
+            
+            //COMMENTAIRE MODERE
             if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
                 $moderedCommentOutput='';
                 $commentaireModeres = $this->_commentManager->getModeredComments('commentaires', 'Comment', $modere=null);
