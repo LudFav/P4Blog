@@ -293,9 +293,9 @@ $( window ).bind("load", function(){
 
 
 billetTable();
-pagination()
-commentTable();
-moderedCommentTable(); 
+pagination();
+$('#signalCom-wrapper').hide();
+$('#modCom-wrapper').hide();
 
 $('#billetLink').on('click', function(){
     $('#signalCom-wrapper').hide();
@@ -303,6 +303,7 @@ $('#billetLink').on('click', function(){
     $('#billet-wrapper').fadeIn(1000);
 })
 $('#signalComLink').on('click', function(){
+    commentTable();
     $('#billet-wrapper').hide();
     $('#modCom-wrapper').hide();
     $('#signalCom-wrapper').fadeIn(1000);
