@@ -91,19 +91,18 @@ $(window).bind('load', function(){
         confirmation: 'Veuillez rentrer vos identifiants'
      });
      $('#login').on('click', function(){
-         console.log('test connexion')
          login;
       });
       
         $('#connexion-validBtn').on('click', function(){
+            console.log('test login');
             var username = $('#username').val();
             var password = $('#password').val();
-            console.log('test');
             $.post({
                 url: 'login',
                 data: {'action': 'login', 'username': username, 'password': password},
                 success: function(data){
-                    console.log(data);
+                    console.log('test login success');
                 }
             });  
         })
