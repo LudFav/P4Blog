@@ -15,19 +15,19 @@ class ControllerLogin {
     $userInfo = $this->_userManager->getUser();
     //$passToHash = password_hash('admin', PASSWORD_DEFAULT, ['cost' => 12]);
     if(isset($_POST['action']) && $_POST['action']=='login'){
-      if($_POST['username'] == $userInfo[0]->username()){
-        echo "Votre pseudo est OK";
+      var_dump($userInfo);
+      $username = htmlspecialchars($_POST['username']);
+      var_dump($username);
+      $passwordSubmitted = htmlspecialchars($_POST['password']);
+      $passwordHashed = $userInfo[0]->password();
+      $password= password_verify($passwordSubmitted, $passwordHashed);
+      var_dump($password);
+      if($_POST['username'] == $userInfo[0]->username() && $password == true){
+        $_SESSION['admin'] = $username;
+        var_dump($_SESSION['admin']);
+        echo " Bienvenue $username";
       } else {
-        echo "Erreur : Mauvais pseudonyme </br>";
-      }
-    $passwordSubmitted = $_POST['password'];
-    $passwordHashed = $userInfo[0]->password();
-    $password= password_verify($passwordSubmitted, $passwordHashed);
-    
-      if($password == true){
-        echo "Votre mot de passe est OK";
-      } else {
-        echo "Erreur : Mauvais mot de passe";
+        echo "Erreur : Erreur de login </br>";
       }
     }
   }
