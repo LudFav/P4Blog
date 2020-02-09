@@ -90,7 +90,7 @@ $(window).bind('load', function(){
         motDePasse: '',
         confirmation: 'Veuillez rentrer vos identifiants'
      });
-     /*$('#login').on('click', function(){
+        $('#login').on('click', function(){
          login;
       });
       
@@ -102,11 +102,14 @@ $(window).bind('load', function(){
                 url: 'login',
                 data: {'action': 'login', 'username': username, 'password': password},
                 success: function(data){
-                    console.log('test login success');
+                   if(data=='Active'){
+                       let statut = '<p>Connecté</p>';
+                       $('#login').replaceWith($(statut));
+                    }
                 }
             });  
         })
-        */
+        
 }) 
 
 billetAccueil()
