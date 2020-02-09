@@ -10,6 +10,6 @@
 			</div><!-- row -->
 
 			<div id='paginationAccueil'></div>
-
+		
 		</div><!-- container -->
 	</section><!-- section -->
