@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 class View
 {
   //fichier vue
@@ -20,8 +20,7 @@ class View
     echo $view;
   }
   public function generateAdmin($data){
-
-    $content= $this->generateFile($this->_file, $data);
+    $content = $this->generateFile($this->_file, $data);
     $view = $this->generateFile('views/templateAdmin.php', array('t' => $this->_t, 'contentAdmin' => $content ));
     echo $view; 
   }
