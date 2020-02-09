@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -38,7 +38,7 @@
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li><a href="accueil">Accueil</a></li>
 				<li><a href="#">Categories</a></li>
-				<li><a href="#">Deconnexion</a></li>
+				<li><a href="#"  class="logout">Deconnexion</a></li>
 			</ul><!-- main-menu -->
 
 			<div class="src-area">
