@@ -22,7 +22,11 @@ class Modal {
         this.createModal();
     }
         createModal() {
-            this.modal = $('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'+this.options.titre+'" aria-hidden="true"></div>').appendTo(this.element);
+           
+           // this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
+
+            if(this.options.type == 'connexion'){
+            this.modal = $('<form method="post" action="login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'+this.options.titre+'" aria-hidden="true"></form>').appendTo(this.element);
             let modalId = this.options.id;
             this.modal.attr('id', modalId);
             this.modalDial = $('<div class="modal-dialog" role="document"></div>').appendTo(this.modal);
@@ -31,10 +35,7 @@ class Modal {
             this.modalTitle = $('<h5 class="modal-title" id="'+this.options.titre+'">'+this.options.titre+'</h5>').appendTo(this.modalHeader);
             this.closeModal = $('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>').appendTo(this.modalHeader);
             this.modalBody = $('<div class="modal-body"><h4 style="text-align:center; margin-bottom:15px;">'+this.options.confirmation+'</h4></div>').appendTo(this.modalContent);
-           // this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
-
-            if(this.options.type == 'connexion'){
-                    this.modalFormName = $('<div class="md-form mb-5"></div>').appendTo(this.modalBody);
+            this.modalFormName = $('<div class="md-form mb-5"></div>').appendTo(this.modalBody);
                     //PSEUDONYME
                     let iconePseudonyme = $('<i class="fa fa-user" aria-hidden="true"></i>').appendTo(this.modalFormName);
                     let inputPseudo = $('<input type="text" name="username" placeholder="pseudonyme" id="username" class="form-control validate" required>').appendTo(this.modalFormName);
@@ -53,7 +54,7 @@ class Modal {
                     
                     //CREATION DIV et Button de modal, si local et session storage sont supporté on sauvegarde nom et prenom en local
                     this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
-                    let validBtn = $('<button type="button" class="btn btn-primary" id="'+modalId + '-validBtn'+'" data-dismiss="modal">Valider</button>').appendTo($(this.modalFooter));
+                    let validBtn = $('<button type="submit" value="Connexion" class="btn btn-primary" id="'+modalId + '-validBtn'+'" data-dismiss="modal">Valider</button>').appendTo($(this.modalFooter));
                     $(validBtn).on('click', function () {
                         localStorage.setItem("name5", inputPseudo.val()); //savgrd le pseudo
                     })
@@ -66,6 +67,15 @@ class Modal {
             }
 
             if(this.options.type == 'confirmation'){
+                this.modal = $('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'+this.options.titre+'" aria-hidden="true"></div>').appendTo(this.element);
+                let modalId = this.options.id;
+                this.modal.attr('id', modalId);
+                this.modalDial = $('<div class="modal-dialog" role="document"></div>').appendTo(this.modal);
+                this.modalContent = $('<div class="modal-content"></div>').appendTo(this.modalDial);
+                this.modalHeader = $('<div class="modal-header"></div>').appendTo(this.modalContent);
+                this.modalTitle = $('<h5 class="modal-title" id="'+this.options.titre+'">'+this.options.titre+'</h5>').appendTo(this.modalHeader);
+                this.closeModal = $('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>').appendTo(this.modalHeader);
+                this.modalBody = $('<div class="modal-body"><h4 style="text-align:center; margin-bottom:15px;">'+this.options.confirmation+'</h4></div>').appendTo(this.modalContent);
                 this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
                 this.confirmBtn = $('<button type="button" class="btn btn-primary '+modalId+'-confirmBtn" data-dismiss="modal">OK</button>').appendTo(this.modalFooter);
                 this.cancelBtn = $('<button type="button" class="btn btn-secondary '+modalId+'-cancelBtn" data-dismiss="modal">Annuler</button>').appendTo(this.modalFooter);
