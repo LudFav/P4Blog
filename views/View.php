@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class View
 {
   //fichier vue
@@ -16,17 +16,15 @@ class View
   public function generate($data){
     //définir le contenu à envoyer
     $content = $this->generateFile($this->_file, $data);
-    if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
-        //template admin
-        $view = $this->generateFile('views/templateAdmin.php', array('t' => $this->_t, 'content' => $content));
-        echo $view;  
-    } else {
-        //template
-        $view = $this->generateFile('views/template.php', array('t' => $this->_t, 'content' => $content));
-        echo $view;
-    }
+    $view = $this->generateFile('views/template.php', array('t' => $this->_t, 'content' => $content));
+    echo $view;
   }
+  public function generateAdmin($data){
 
+    $content= $this->generateFile($this->_file, $data);
+    $view = $this->generateFile('views/templateAdmin.php', array('t' => $this->_t, 'contentAdmin' => $content ));
+    echo $view; 
+  }
   public function generateFile($file, $data){
     if (file_exists($file)) {
       extract($data);
