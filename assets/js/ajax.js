@@ -90,7 +90,7 @@ $(window).bind('load', function(){
         motDePasse: '',
         confirmation: 'Veuillez rentrer vos identifiants'
      });
-     $('#login').on('click', function(){
+     /*$('#login').on('click', function(){
          login;
       });
       
@@ -106,6 +106,7 @@ $(window).bind('load', function(){
                 }
             });  
         })
+        */
 }) 
 
 billetAccueil()
