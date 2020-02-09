@@ -1,5 +1,14 @@
 //TABLE BILLETS**********************************************************
 
+function logout(){
+    $.post({
+        url: 'login',
+        data:{'action':'logout'},
+        success: function(data){
+            console.log(data);
+        }
+    })
+}
 
 function billetTable(){ 
     let url_string = window.location.href;
@@ -215,6 +224,12 @@ $( window ).bind("load", function(){
     $('#signalCom-wrapper').hide();
     $('#modCom-wrapper').hide();
     $('#billet-wrapper').show();
+
+
+    $('.logout').on('click', function(){
+        logout();
+    });
+    
     //BOUTONS EFFACER BILLET
     $('.deleteBilBtn').on('click', function(){
         modalDeleteBillet;    
