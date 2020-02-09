@@ -12,16 +12,18 @@ class ControllerLogin {
   }
     
   public function login() {
+    
     $userInfo = $this->_userManager->getUser();
+    session_start();
     //$passToHash = password_hash('admin', PASSWORD_DEFAULT, ['cost' => 12]);
-    if(isset($_POST['action']) && $_POST['action']=='login'){
-      var_dump($userInfo);
+    if(isset($_POST['username']) && isset$_POST['password']){
+      echo ' test PHP';
       $username = htmlspecialchars($_POST['username']);
-      var_dump($username);
+     
       $passwordSubmitted = htmlspecialchars($_POST['password']);
       $passwordHashed = $userInfo[0]->password();
       $password= password_verify($passwordSubmitted, $passwordHashed);
-      var_dump($password);
+     
       if($_POST['username'] == $userInfo[0]->username() && $password == true){
         $_SESSION['admin'] = $username;
         var_dump($_SESSION['admin']);
