@@ -28,7 +28,6 @@ class BilletManager extends Model implements crud
     $req->closeCursor(); 
   }
 
-
   public function readAll($table, $obj, $page=null, $entiteParPage=null){
     $this->getBdd();
     $var = [];
@@ -43,7 +42,6 @@ class BilletManager extends Model implements crud
   }
 
  
-
   public function readOne($table, $obj, $id){
     $this->getBdd();
     $var = [];
