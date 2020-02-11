@@ -138,5 +138,11 @@ class ControllerAdminajax{
                 $deleteComment = $this->_commentManager->deleteComment($_POST['deleteCom']);
             }
 
+            //CHANGEMENT DE MOT DE PASSE
+            if(isset($_POST['action']) && $_POST['action'] == 'changePassword'){
+                $formOutput ='';
+                $formOutput .= '<form class="changepass">';
+            }
+
     }
 }
