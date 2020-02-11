@@ -89,6 +89,12 @@ class UserManager extends Model implements crud
     return $this->readAdmin('users', 'User');
   }
 
+  public function updateUser($data){
+    return $this->update('users',array(
+      'password'  => $data['password'],
+    ), "`id` = 1");
+  }
+
   public function createUser($data){
     return $this->create('users',array(
     'username' => $data['username'],
