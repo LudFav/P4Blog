@@ -9,7 +9,11 @@ class ControllerAccueil{
       throw new \Exception("Page introuvable", 1);
     } else {
       $this->_view = new View('Accueil');
-      $this->_view->generate(array()); 
+      if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
+      $this->_view->generateAdmin(array());
+      } else {
+        $this->_view->generate(array());
+      }
     } 
   }
 }
