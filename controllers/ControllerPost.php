@@ -22,15 +22,17 @@ class ControllerPost {
      */
       $this->_billetManager = new BilletManager;
       $billet = $this->_billetManager->getBillet($_GET['id']);
-      
-
-
     //VUE
         /**
      * Generation de la vue 
      */
     $this->_view = new View('SinglePost');
-    $this->_view->generate(array('billet' => $billet)); 
+    if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
+    $this->_view->generateAdmin(array('billet' => $billet));
+    } else {
+      $this->_view->generate(array('billet' => $billet));
+    }
+  
     }
   }
 }
