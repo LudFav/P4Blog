@@ -56,14 +56,9 @@ class Modal {
                     this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
                     let validBtn = $('<button type="submit" value="Connexion" class="btn btn-primary" id="'+modalId + '-validBtn'+'" data-dismiss="modal">Valider</button>').appendTo($(this.modalFooter));
                     $(validBtn).on('click', function () {
-                        localStorage.setItem("name5", inputPseudo.val()); //savgrd le pseudo
+                        localStorage.setItem("name", inputPseudo.val()); //savgrd le pseudo
                     })
                     let annulBtn = $('<button type="button" class="btn btn-secondary" data-dismiss="modal" id="'+modalId+'-cancelBtn">Annuler</button>').appendTo($(this.modalFooter));
-            
-                    $(window).on('load', function() {
-                    let userName = localStorage.getItem("name5"); 
-                    $(inputPseudo).val(userName);
-                    })
             }
 
             if(this.options.type == 'confirmation'){
