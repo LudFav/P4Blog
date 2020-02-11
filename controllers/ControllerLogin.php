@@ -10,7 +10,7 @@ class ControllerLogin {
     $this->_userManager = new UserManager; 
     $this->login();
     $this->isLoggedIn();
-   // $this->logout();
+    $this->logout();
     
   }
   public function login(){
@@ -26,6 +26,8 @@ class ControllerLogin {
       
         if($_POST['username'] == $userInfo[0]->username() && $password == true){
           $_SESSION['admin'] = $username;
+          $link = "admin";
+          echo $link;
         } else {
           echo "Erreur : Erreur de login </br>";
         }
@@ -34,18 +36,25 @@ class ControllerLogin {
   }
 public function isLoggedIn(){
   if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
-    //$loginOutput='';
-    //$loginOutput .= '<li><a href="admin">Administration</a></li>';
-    //$data['loginOutput'] = $loginOutput;
-    print 'Active';
-    //exit($data['loginOutput']);
+    if(isset($_POST['action']) && $_POST['action'] == 'isLogged'){
+    //$adminButtonOutput='';
+    //$adminButtonOutput .= '<li><a href="admin">Administration</a></li>';
+    //$data1['adminButtonOutput'] = $adminButtonOutput;
+    //$statutOutput='';
+    //$statutOutput .= '<p class=success> Connecté </p>';
+    //$data2['statutOutput'] = $statutOutput;
+    //$data = array('adminButtonOutput' =>$data1, 'statutOutput'=>$data2);
+    $logged = true;
+    echo $logged;
+    }
   }
 }
   public function logout(){
   if(isset($_POST['action']) && $_POST['action'] == 'logout'){
-    unset($_SESSION['admin']);   
+    session_unset();   
     session_destroy();
-    echo "window.location.href='accueil'";
+    $link = "accueil";
+    echo $link;
     exit;
   }
 }
