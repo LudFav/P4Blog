@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -30,15 +30,14 @@
 
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
-
+		<div id="statut"></div>
 			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
 
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 
 			<ul class="main-menu visible-on-click" id="main-menu">
-				<li><a href="accueil">Accueil</a></li>
-				<li><a href="#">Categories</a></li>
-				<li><a href="#"  class="logout">Deconnexion</a></li>
+				<li class="li-accueil"><a href="accueil">Accueil</a></li>
+				<li class="li-logout"><a href="#"  class="logout">Deconnexion</a></li>
 			</ul><!-- main-menu -->
 
 			<div class="src-area">
@@ -52,7 +51,7 @@
 	</header>
 
 
-  <?= $contentAdmin ?>
+  <?= $content ?>
 
 
 
@@ -73,6 +72,7 @@
 	});
 	</script>
 	<script src="assets/js/modal.js"></script>
+	<script src="assets/js/ajax.js"></script>
 	<script src="assets/js/ajaxAdmin.js"></script>
 	
 </body>
