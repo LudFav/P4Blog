@@ -5,7 +5,23 @@ function logout(){
         url: 'login',
         data:{'action':'logout'},
         success: function(data){
+            window.location.href = data;
+        }
+    })
+}
+
+function isLoggedin(){
+    $.post({
+        url:'login',
+        data:{'action': 'isLogged'},    
+        success: function(data){
             console.log(data);
+            if(data=='1'){
+                let adminButton = '<li><a href="admin">Administration</a></li>';
+                $(adminButton).insertBefore($('.li-logout')); 
+                let statut =  '<p class="text-success" style="float:right"> Connecté </p>';
+                $(statut).appendTo($('#statut')); 
+            }
         }
     })
 }
@@ -306,7 +322,7 @@ $( window ).bind("load", function(){
 });
 
 
-
+isLoggedin();
 billetTable();
 pagination();
 $('#signalCom-wrapper').hide();
