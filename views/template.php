@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -32,7 +32,7 @@
 		<div class="container-fluid position-relative no-side-padding">
 		<button  type="button" id="login" data-toggle="modal" data-target="#connexion">Connexion</button>
 
-		<?php /* var_dump($admin); */ ?>
+		
 			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
 			
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
