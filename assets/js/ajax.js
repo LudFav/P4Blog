@@ -8,11 +8,12 @@ function billetAccueil(){
        url: 'ajax',
        data:{'action': 'showAccueilBillet', 'page': page},
        success: function(data){
-           let billetsAccueil = $(data);
+           billetsAccueil = $(data);
            $('#billetAccueil').html(billetsAccueil);
            }
        }) 
 } 
+
 function pagination(){
     $.post({
         url: 'ajax',
@@ -78,7 +79,8 @@ function signalement(id){
     //BOUTON SIGNALER
     
 
-$(window).bind('load', function(){
+$(window).bind('load', function(){   
+
     $('.signalbtn').on('click', function(){
         signalement($(this).attr('value'));
     });
@@ -93,19 +95,17 @@ $(window).bind('load', function(){
         $('#login').on('click', function(){
          login;
       });
+      let user = localStorage.getItem("name"); 
+      $('#username').val(user);
       
         $('#connexion-validBtn').on('click', function(){
-            console.log('test login');
             var username = $('#username').val();
             var password = $('#password').val();
             $.post({
                 url: 'login',
                 data: {'action': 'login', 'username': username, 'password': password},
                 success: function(data){
-                   if(data=='Active'){
-                       let statut = '<p>Connecté</p>';
-                       $('#login').replaceWith($(statut));
-                    }
+                window.location.href = data;
                 }
             });  
         })
