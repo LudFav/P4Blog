@@ -1,6 +1,6 @@
 <?php
 
-
+/*
 class ControllerAjax{
   private $_billetManager;
   private $_commentManager;
@@ -128,5 +128,6 @@ class ControllerAjax{
         if(isset($_POST['action']) && $_POST['action']=='signalCom'){
             $signaleCom = $this->_commentManager->signaleComment($_POST['idSignal']);   
           }
-    }
+    } 
 }
+*/
