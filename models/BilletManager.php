@@ -28,10 +28,10 @@ class BilletManager extends Model implements crud
     $req->closeCursor(); 
   }
 
-  public function readAll($table, $obj, $page=null, $entiteParPage=null){
+  public function readAll($table, $obj, $pageB=null, $entiteParPage=null){
     $this->getBdd();
     $var = [];
-    $limit = (htmlspecialchars($page) - 1) * $entiteParPage. ', ' .$entiteParPage;
+    $limit = (htmlspecialchars($pageB) - 1) * $entiteParPage. ', ' .$entiteParPage;
     $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC LIMIT $limit");
     $req->execute();
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
@@ -41,7 +41,6 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
 
- 
   public function readOne($table, $obj, $id){
     $this->getBdd();
     $var = [];
@@ -72,8 +71,6 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
 
-
-
   public function delete($table, $where){
     $this->getBdd();
     $req = self::$_bdd->prepare("DELETE FROM $table WHERE $where");
@@ -81,10 +78,8 @@ class BilletManager extends Model implements crud
     $req->closeCursor();
   }
   
-
-  //methode qui va recuperer tous les billets dans la bdd
-  public function getBillets($page, $entiteParPage){
-    return $this->readAll('billets', 'Billet', $page, $entiteParPage);
+  public function getBillets($pageB, $entiteParPage){
+    return $this->readAll('billets', 'Billet', $pageB, $entiteParPage);
   }
 
   public function getBillet($id){
