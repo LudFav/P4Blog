@@ -24,8 +24,8 @@
         </ul>
       </div>
 </nav>
-<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
+<div class="billetAdmin col-md-9 ml-sm-auto col-lg-10 px-4">
+       
         <div class="table-wrapper" id="billet-wrapper">
             <div class="table-title">
                 <div class="row">
@@ -50,9 +50,9 @@
                 <tbody id="tbodyBillet">
                 </tbody>    
             </table>
-        <div id='paginationBillet'>
+            <div id='paginationAdminBillet'>
+            </div>  
         </div>    
-        </div>
              
 <!--COMMENTAIRE SIGNALÉ-->
         <div class="table-wrapper" id="signalCom-wrapper">
