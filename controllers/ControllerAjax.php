@@ -70,6 +70,12 @@ class ControllerAjax{
         $this->_commentManager = new CommentManager;
 
         if(isset($_POST['action'])&& $_POST['action']=='showComment'){
+            isset($_POST['pageCom']) && is_numeric($_POST['pageCom'])? $pageComSign = $_POST['page'] : $pageComSign = 1; 
+            $nbreEntitesParPage = $entiteParPage;
+            $pages = $this->_commentManager->getPageMax($nbreEntitesParPage);
+            $pageNav = 2;
+            $prev = $page - 1;
+            $next = $page + 1;
           $commentairesOutput = '';
          
           $commentaires = $this->_commentManager->getComments($_POST['billetId']);
