@@ -1,5 +1,5 @@
 <?php
-
+/*
 
 class ControllerAdminajax{
     private $_billetManager;
@@ -8,7 +8,8 @@ class ControllerAdminajax{
     public function __construct(){
        
             //BILLET
-            $this->_billetManager = new BilletManager;  
+            //require_once('ajaxAdminPhp/ajaxAdminBillet.php');
+            /*$this->_billetManager = new BilletManager;  
             isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1;
             $entiteParPage = 4; 
             $billets = $this->_billetManager->getBillets($page, $entiteParPage);
@@ -33,10 +34,10 @@ class ControllerAdminajax{
 
             if(isset($_POST['action']) && $_POST['action']=='deleteBillet'){
                 $deleteBillet = $this->_billetManager->deleteBillet($_POST['deleteBillet']); 
-            }
+            }*/
 
             //COMMENTAIRES SIGNALÉS
-
+/*
             $this->_commentManager = new CommentManager;
             if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){   
                 isset($_POST['pageComSign']) && is_numeric($_POST['pageComSign'])? $pageComSign = $_POST['pageComSign'] : $pageComSign = 1; 
@@ -71,50 +72,49 @@ class ControllerAdminajax{
             if(isset($_POST['action']) && $_POST['action']=='deleteComment'){
                 $idToDel = $_POST['deleteCom'];
                 $deleteComment = $this->_commentManager->deleteComment($idToDel);
-            }
-            //PAGINATION COMMENTAIRE SIGNALÉS
-            if(isset($_POST['action']) && $_POST['action']=='paginationComSign'){
-                isset($_POST['pageComSign']) && is_numeric($_POST['pageComSign'])? $pageComSign = $_POST['pageComSign'] : $pageComSign = 1;
-                $ComSignParPage = 5; 
-                $nbreEntitesParPage = $ComSignParPage;
-                $pages = $this->_commentManager->getComSignPageMax($nbreEntitesParPage);
-                $pageNav = 2;
-                $prev = $pageComSign - 1;
-                $next = $pageComSign + 1;
-                
-                if(isset($_POST['page']) && is_numeric($_POST['page'])){
-                    $urlBillet = $_POST['page'];
-                } else {
-                    $urlBillet = 1;
-                }
-                $url= 'page=' .$urlBillet; 
-                $ComSignPaginationOutput = '';  
-                $ComSignPaginationOutput.='<nav aria-label="Page navigation example">';
-                $ComSignPaginationOutput.='<ul class="pagination">';
-                if($pageComSign > 1){ 
-                $ComSignPaginationOutput.='<li class="page-item"><a class="page-link prev signcom" href="admin?page=' .$urlBillet.'&pageComSign=' .$prev. '">Previous</a></li>';  
-                }
-                for($j = $pageComSign - $pageNav; $j < $pageComSign; $j++){
-                    if($j> 0){
-                        $ComSignPaginationOutput.='<li class="page-item"><a class="page-link" href="admin?page=' .$urlBillet.'&pageComSign=' .$j. '">' .$j. '</a></li>';
                     }
-                }
-                $ComSignPaginationOutput.='<li class="page-item"><p class="page-link active">' .$pageComSign. '</p></li>';
-                for($j = $pageComSign+1; $j <= $pages; $j++){
-                    $ComSignPaginationOutput.='<li class="page-item"><a class="page-link" href="admin?page=' .$urlBillet.'&pageComSign=' .$j. '">' .$j. '</a></li>';
-                    if($j >= $pageComSign + $pageNav){
-                    break;
-                    }
-                }
-                if($pageComSign < $pages){
-                $ComSignPaginationOutput.='<li class="page-item"><a class="page-link next signcom" href="admin?page=' .$urlBillet.'&pageComSign=' .$next. '">Next</a></li>';
-                }
-                $ComSignPaginationOutput.='</ul>';
-                $ComSignPaginationOutput.='</nav>';
-                $data['$ComSignPaginationOutput'] = $ComSignPaginationOutput;
-                exit($data['$ComSignPaginationOutput']);
-            }
-
+            /*
+//PAGINATION COMMENTAIRE SIGNALÉS
+if(isset($_POST['action']) && $_POST['action']=='paginationComSign'){
+    isset($_POST['pageComSign']) && is_numeric($_POST['pageComSign'])? $pageComSign = $_POST['pageComSign'] : $pageComSign = 1;
+    $ComSignParPage = 5; 
+    $nbreEntitesParPage = $ComSignParPage;
+    $pages = $this->_commentManager->getComSignPageMax($nbreEntitesParPage);
+    $pageNav = 2;
+    $prev = $pageComSign - 1;
+    $next = $pageComSign + 1;
+    
+    if(isset($_POST['page']) && is_numeric($_POST['page'])){
+        $urlBillet = $_POST['page'];
+    } else {
+        $urlBillet = 1;
+    }
+    $url= 'page=' .$urlBillet; 
+    $ComSignPaginationOutput = '';  
+    $ComSignPaginationOutput.='<nav aria-label="Page navigation example">';
+    $ComSignPaginationOutput.='<ul class="pagination">';
+    if($pageComSign > 1){ 
+    $ComSignPaginationOutput.='<li class="page-item"><a class="page-link prev signcom" href="admin?page=' .$urlBillet.'&pageComSign=' .$prev. '">Previous</a></li>';  
+    }
+    for($j = $pageComSign - $pageNav; $j < $pageComSign; $j++){
+        if($j> 0){
+            $ComSignPaginationOutput.='<li class="page-item"><a class="page-link" href="admin?page=' .$urlBillet.'&pageComSign=' .$j. '">' .$j. '</a></li>';
+        }
+    }
+    $ComSignPaginationOutput.='<li class="page-item"><p class="page-link active">' .$pageComSign. '</p></li>';
+    for($j = $pageComSign+1; $j <= $pages; $j++){
+        $ComSignPaginationOutput.='<li class="page-item"><a class="page-link" href="admin?page=' .$urlBillet.'&pageComSign=' .$j. '">' .$j. '</a></li>';
+        if($j >= $pageComSign + $pageNav){
+        break;
+        }
+    }
+    if($pageComSign < $pages){
+    $ComSignPaginationOutput.='<li class="page-item"><a class="page-link next signcom" href="admin?page=' .$urlBillet.'&pageComSign=' .$next. '">Next</a></li>';
+    }
+    $ComSignPaginationOutput.='</ul>';
+    $ComSignPaginationOutput.='</nav>';
+    $data['$ComSignPaginationOutput'] = $ComSignPaginationOutput;
+    exit($data['$ComSignPaginationOutput']);
 
             
             //COMMENTAIRE MODERE
@@ -145,39 +145,7 @@ class ControllerAdminajax{
 
 
             //PAGINATION BILLET
-            if(isset($_POST['action']) && $_POST['action']=='pagination'){
-                isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1; 
-                $nbreEntitesParPage = $entiteParPage;
-                $pages = $this->_billetManager->getPageMax($nbreEntitesParPage);
-                $pageNav = 2;
-                $prev = $page - 1;
-                $next = $page + 1;
-                $billetsPaginationOutput = '';  
-                $billetsPaginationOutput.='<nav aria-label="Page navigation example">';
-                $billetsPaginationOutput.='<ul class="pagination">';
-                if($page > 1){ 
-                $billetsPaginationOutput.='<li class="page-item"><a class="page-link prev" href="admin?page=' .$prev. '">Previous</a></li>';  
-                }
-                for($i = $page - $pageNav; $i < $page; $i++){
-                    if($i> 0){
-                        $billetsPaginationOutput.='<li class="page-item"><a class="page-link" href="admin?page=' .$i. '">' .$i. '</a></li>';
-                    }
-                }
-                $billetsPaginationOutput.='<li class="page-item"><p class="page-link active">' .$page. '</p></li>';
-                for($i = $page+1; $i <= $pages; $i++){
-                    $billetsPaginationOutput.='<li class="page-item"><a class="page-link" href="admin?page=' .$i. '">' .$i. '</a></li>';
-                    if($i >= $page + $pageNav){
-                    break;
-                    }
-                }
-                if($page < $pages){
-                $billetsPaginationOutput.='<li class="page-item"><a class="page-link next" href="admin?page=' .$next. '">Next</a></li>';
-                }
-                $billetsPaginationOutput.='</ul>';
-                $billetsPaginationOutput.='</nav>';
-                $data['$billetsPaginationOutput'] = $billetsPaginationOutput;
-                exit($data['$billetsPaginationOutput']);
-            }
+            
 
             
 
@@ -189,3 +157,4 @@ class ControllerAdminajax{
 
     }
 }
+*/
