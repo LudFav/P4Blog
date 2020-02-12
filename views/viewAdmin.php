@@ -49,15 +49,8 @@
                 </thead>
                 <tbody id="tbodyBillet">
                 </tbody>    
-               <!-- <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item"><a class="page-link prev" href="#">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link next" href="#">Next</a></li>
-                </ul>
-                </nav> -->  
             </table>
-        <div id='pagination'>
+        <div id='paginationBillet'>
         </div>    
         </div>
              
@@ -82,7 +75,9 @@
                 </thead>
                 <tbody id='tbodyComment'>        
                 </tbody>   
-            </table> 
+            </table>
+            <div id='paginationComSign'>
+        </div>   
         </div>
 <!--COMMENTAIRE MODERÉ-->
         <div class="table-wrapper" id="modCom-wrapper">
