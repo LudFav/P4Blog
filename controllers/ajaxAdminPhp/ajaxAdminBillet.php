@@ -1,5 +1,5 @@
 <?php
-
+require_once 'models/BilletManager.php';
 $_billetManager;
 
 $this->_billetManager = new BilletManager;  
