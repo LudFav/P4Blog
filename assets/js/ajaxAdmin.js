@@ -52,16 +52,16 @@ function billetTable(){
 
 function paginationBillet(){
     $.post({
-        url: 'ajaxAdminPhp/ajaxAdminBillet.php',
+        url: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
         data:{'action': 'pagination', 'page': page},
         success: function(data){
-/*
-            //pagination = JSON.parse(data);
-            //console.log(pagination);
+            console.log(data);
+            /*pagination = JSON.parse(data);
+            console.log(pagination);
             billetAdminPage = pagination.page;
             billetAdminMaxPages = pagination.maxPages;
             GetBilletPagination(billetAdminPage, billetAdminMaxPages);
-*/
+            */
         }
     })
 }
