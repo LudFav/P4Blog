@@ -15,7 +15,6 @@ function isLoggedin(){
         url:'login',
         data:{'action': 'isLogged'},    
         success: function(data){
-            console.log(data);
             if(data=='1'){
                 let adminButton = '<li><a href="admin">Administration</a></li>';
                 $(adminButton).insertBefore($('.li-logout')); 
@@ -50,21 +49,26 @@ function billetTable(){
     
    }); 
 }    
-function pagination(){
+function paginationBillet(){
     $.post({
         url: 'adminajax',
         data:{'action': 'pagination', 'page': page},
         success: function(data){
            let pagination = $(data);
-           $('#pagination').html(pagination);
+           $('#paginationBillet').html(pagination);
         }
     })
 }
+
+
 //TABLE COMMENTAIRES SIGNALÉS********************************************
+let url_string = window.location.href;
+let url = new URL(url_string);
+pageGet= url.searchParams.get("pageComSign");
 function commentTable(){
     $.post({
         url: 'adminajax',
-        data:{'action': 'showCommentSignaled'},
+        data:{'action': 'showCommentSignaled', 'pageComSign': pageGet},
         success: function(data){
             if(!$.trim(data)){
                 $('#commentTableTitre h2').text('0 commentaire signalé');
@@ -95,6 +99,18 @@ function commentTable(){
         }
     });
 }
+function paginationCommentSign(){
+    $.post({
+        url: 'adminajax',
+        data:{'action': 'paginationComSign', 'pageComSign': pageGet},
+        success: function(data){
+           let pagination = $(data);
+           $('#paginationComSign').html(pagination);
+        }
+    })
+   
+}
+
 
 function moderedCommentTable(){
     $.post({
@@ -324,7 +340,8 @@ $( window ).bind("load", function(){
 
 isLoggedin();
 billetTable();
-pagination();
+paginationBillet();
+paginationCommentSign();
 $('#signalCom-wrapper').hide();
 $('#modCom-wrapper').hide();
 
