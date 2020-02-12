@@ -17,7 +17,7 @@ class Modal {
             type: options.type,
             pseudonyme: options.pseudonyme,
             motDePasse: options.motDePasse,
-            confirmation: options.confirmation,
+            confirmation: options.confirmation
         }
         this.createModal();
     }
