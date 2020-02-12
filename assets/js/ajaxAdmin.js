@@ -26,11 +26,11 @@ function isLoggedin(){
 }
 
 function billetTable(){ 
-    let url_string = window.location.href;
+    /*let url_string = window.location.href;
     let url = new URL(url_string);
-    page = url.searchParams.get("page");
+    page = url.searchParams.get("page");*/
    $.post({
-       url: 'adminajax',
+       url: 'admin',
        data:{'action': 'showbillet', 'page': page},
        success: function(data){
            if(!$.trim(data)){
@@ -49,25 +49,29 @@ function billetTable(){
     
    }); 
 }    
+
 function paginationBillet(){
     $.post({
-        url: 'adminajax',
+        url: 'ajaxAdminPhp/ajaxAdminBillet.php',
         data:{'action': 'pagination', 'page': page},
         success: function(data){
-           let pagination = $(data);
-           $('#paginationBillet').html(pagination);
+/*
+            //pagination = JSON.parse(data);
+            //console.log(pagination);
+            billetAdminPage = pagination.page;
+            billetAdminMaxPages = pagination.maxPages;
+            GetBilletPagination(billetAdminPage, billetAdminMaxPages);
+*/
         }
     })
 }
-
-
 //TABLE COMMENTAIRES SIGNALÉS********************************************
 let url_string = window.location.href;
 let url = new URL(url_string);
 pageGet= url.searchParams.get("pageComSign");
 function commentTable(){
     $.post({
-        url: 'adminajax',
+        url: 'admin',
         data:{'action': 'showCommentSignaled', 'pageComSign': pageGet},
         success: function(data){
             if(!$.trim(data)){
@@ -101,11 +105,13 @@ function commentTable(){
 }
 function paginationCommentSign(){
     $.post({
-        url: 'adminajax',
+        url: 'controllers/ajaxAdminPhp/ajaxAdminComSign.php',
         data:{'action': 'paginationComSign', 'pageComSign': pageGet},
         success: function(data){
+            
            let pagination = $(data);
            $('#paginationComSign').html(pagination);
+           
         }
     })
    
@@ -114,7 +120,7 @@ function paginationCommentSign(){
 
 function moderedCommentTable(){
     $.post({
-        url: 'adminajax',
+        url: 'admin',
         data:{'action': 'showCommentModered'},
         success: function(data){
             if(!$.trim(data)){
@@ -148,7 +154,7 @@ function moderedCommentTable(){
 
 function deleteBilBtn(idBilletToDelete){
     $.post({
-        url: 'adminajax',
+        url: 'admin',
         data: {'action': 'deleteBillet','deleteBillet' : idBilletToDelete},
         success: function(data){
            billetTable();
@@ -158,7 +164,7 @@ function deleteBilBtn(idBilletToDelete){
 
 function unsignalCom(idComToUnsignal){
     $.post({
-        url: 'adminajax',
+        url: 'admin',
         data: {'action': 'unsignal', 'comToUnsignal' : idComToUnsignal},
         success: function(data){
            commentTable();
@@ -168,7 +174,7 @@ function unsignalCom(idComToUnsignal){
 
 function modereComBtn(idComToModere){
     $.post({
-        url: 'adminajax',
+        url: 'admin',
         data: {'action': 'moderer', 'modere' : idComToModere},
         success: function(data){
            commentTable();
@@ -178,7 +184,7 @@ function modereComBtn(idComToModere){
 
 function deleteComBtn(idComToDelete){
         $.post({
-            url: 'adminajax',
+            url: 'admin',
             data: {'action': 'deleteComment','deleteCom' : idComToDelete},
             success: function(data){
                commentTable();
@@ -188,7 +194,7 @@ function deleteComBtn(idComToDelete){
 
 function unmodereComBtn(idModComToUnmodere){
     $.post({
-        url: 'adminajax',
+        url: 'admin',
         data: {'action': 'unmodere', 'unmodere' : idModComToUnmodere},
         success: function(data){
             moderedCommentTable();
@@ -198,7 +204,7 @@ function unmodereComBtn(idModComToUnmodere){
 
 function deleteModComBtn(idModComToDelete){
     $.post({
-        url: 'adminajax',
+        url: 'admin',
         data: {'action': 'deleteModCom','deleteCom' : idModComToDelete},
         success: function(data){
             moderedCommentTable();
@@ -249,6 +255,27 @@ modalDeleteModCom = new Modal(document.querySelector('body'), {
     type: 'confirmation',
     confirmation: 'Êtes-vous sur de vouloir supprimer ce commentaire censuré?'
 });
+
+// PAGINATION 
+
+
+
+
+function GetBilletPagination(billetAdminPage, billetAdminMaxPages){
+   let billetPage = parseInt(billetAdminPage);
+   let billetMaxPages = billetAdminMaxPages
+   paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
+    id: 'pageAdminBillet',
+    page:billetPage,
+    maxPages:billetMaxPages,
+    pageNav:2
+   });
+}
+
+
+
+
+
 
 
 //BOUTONS CONFIRMATION MODAL*************************************************
@@ -333,7 +360,7 @@ $( window ).bind("load", function(){
             });
         });
 
-
+        
     
 });
 
