@@ -71,7 +71,8 @@
 	  a_configuration_option: 400
 	});
 	</script>
-	<script src="assets/js/modal.js"></script>
+	<script src="assets/js/Modal.js"></script>
+	<script src="assets/js/Pagination.js"></script>
 	<script src="assets/js/ajax.js"></script>
 	<script src="assets/js/ajaxAdmin.js"></script>
 	
