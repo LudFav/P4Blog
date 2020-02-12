@@ -9,6 +9,8 @@ class ControllerAdmin{
       if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
         $this->_view = new View('Admin'); 
         $this->_view->generateAdmin(array());  
+    } else {
+      header('Location:accueil');
     }
   }
 }
