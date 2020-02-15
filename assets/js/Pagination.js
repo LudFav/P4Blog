@@ -53,12 +53,12 @@ class Pagination {
                 this.paginationNext = $('<li class="page-item"><a class=" '+paginationId+' page-link next" value='+next+'>Next</a></li>').appendTo(this.paginationUl);
             }
 
-           /* $('.'+paginationId+'.page-link').on('click', function(){
+           $('.'+paginationId+'.page-link').on('click', function(){
                 let num = $(this).attr('value');
                 console.log('admin?page='+num);
                 $('#tbodyBillet').load('admin?page='+num, function(){
                     $(this).hide()
                 }); 
-            }); */
+            }); 
         } 
 }
