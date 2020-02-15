@@ -5,7 +5,7 @@ function billetAccueil(){
     let url = new URL(url_string);
     page = url.searchParams.get("page");
    $.post({
-       url: 'ajax',
+       url: 'accueil',
        data:{'action': 'showAccueilBillet', 'page': page},
        success: function(data){
            billetsAccueil = $(data);
@@ -16,7 +16,7 @@ function billetAccueil(){
 
 function pagination(){
     $.post({
-        url: 'ajax',
+        url: 'accueil',
         data:{'action': 'paginationAccueil', 'page': page},
         success: function(data){
            let pagination = $(data);
@@ -28,7 +28,7 @@ function pagination(){
 function showComment(){
         var idBillet = $('.post-info').attr('value');
         $.post({
-            url: 'ajax',
+            url: 'post',
             data:{'billetId': idBillet, 'action': 'showComment'},
             success: function(data){
                 if(!$.trim(data)){
@@ -54,7 +54,7 @@ function showComment(){
             var auteur = $('#auteur').val();
             var contenu = $('#contenu').val();
             $.post({
-                url:'ajax',
+                url:'post',
                 data:{'action': 'insertCom',
                       'auteur': auteur,
                       'contenu': contenu,
@@ -69,7 +69,7 @@ function showComment(){
 
 function signalement(id){
     $.post({
-         url: 'ajax',
+         url: 'post',
          data: {'action': 'signalCom', 'idSignal' : id },
          success: function(data){
             showComment();
