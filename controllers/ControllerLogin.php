@@ -17,6 +17,8 @@ class ControllerLogin {
     if(isset($_POST['action']) && $_POST['action'] == 'login'){  
       $userInfo = $this->_userManager->getUser();
       //$passToHash = password_hash('admin', PASSWORD_DEFAULT, ['cost' => 12]);
+      //var_dump($passToHash);
+      //$2y$12$d6saXiDFegaG6kPyYQYWROryvOPaMK45wyVPHqR0cj2y7iDsIgj/2
       if(isset($_POST['username']) && isset($_POST['password'])){
         $username = htmlspecialchars($_POST['username']);
       
