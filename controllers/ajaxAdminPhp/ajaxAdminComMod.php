@@ -1,10 +1,16 @@
 <?php
-require_once 'controllers/ajaxAdminPhp/ajaxAdminComSign.php';
+spl_autoload_register(function($class){
+    require_once($_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/models/'.$class.'.php');
+});
 
+$_commentManager;
+$_commentManager = new CommentManager;
 
 if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
-    $moderedCommentOutput='';
-    $commentaireModeres = $this->_commentManager->getModeredComments('commentaires', 'Comment', $modere=null);
+    isset($_POST['pageComMod']) && is_numeric($_POST['pageComMod'])? $pageComMod = $_POST['pageComMod'] : $pageComMod = 1; 
+    $moderedCommentOutput=''; 
+    $modComParPage= 5;
+    $commentaireModeres = $_commentManager->getModeredComments('commentaires', 'Comment', $modere=null, $pageComMod, $modComParPage);
     foreach ($commentaireModeres as $commentaireModere){
         $moderedCommentOutput.='<tr class="moderedCommentRow' .$commentaireModere->id(). '">';
         $moderedCommentOutput.='<td>' .$commentaireModere->id(). '</td>';
@@ -21,10 +27,10 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
     exit($data['$moderedCommentOutput']);
 }
 if(isset($_POST['action']) && $_POST['action']=='unmodere'){
-    $unModereComment = $this->_commentManager->unmodereComment($_POST['unmodere']); 
+    $unModereComment = $_commentManager->unmodereComment($_POST['unmodere']); 
 }
 if(isset($_POST['action']) && $_POST['action']=='deleteModCom'){
-    $deleteComment = $this->_commentManager->deleteComment($_POST['deleteCom']);
+    $deleteComment = $_commentManager->deleteComment($_POST['deleteCom']);
 }
 
 
