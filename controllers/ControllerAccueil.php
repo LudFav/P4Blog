@@ -1,6 +1,8 @@
 <?php
 
 require_once 'views/View.php';
+require_once 'controllers/ajaxClientPhp/ajaxBillet.php';
+require_once 'controllers/ajaxClientPhp/ajaxCom.php';
 
 class ControllerAccueil{
   private $_view;
