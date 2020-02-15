@@ -1,11 +1,17 @@
 <?php
-require_once 'models/BilletManager.php';
+
+spl_autoload_register(function($class){
+    require_once($_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/models/'.$class.'.php');
+});
+
 $_billetManager;
 
-$this->_billetManager = new BilletManager;  
+
+
+$_billetManager = new BilletManager;  
 isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1;
 $entiteParPage = 4; 
-$billets = $this->_billetManager->getBillets($page, $entiteParPage);
+$billets = $_billetManager->getBillets($page, $entiteParPage);
 if(isset($_POST['action']) && $_POST['action']=='showbillet'){
     $billetsOutput = '';
     foreach ($billets as $billet){ 
@@ -27,14 +33,14 @@ if(isset($_POST['action']) && $_POST['action']=='showbillet'){
 
 //EFFACER BILLET
 if(isset($_POST['action']) && $_POST['action']=='deleteBillet'){
-    $deleteBillet = $this->_billetManager->deleteBillet($_POST['deleteBillet']); 
+    $deleteBillet = $_billetManager->deleteBillet($_POST['deleteBillet']); 
 }
 
 //PAGINATION
 if(isset($_POST['action']) && $_POST['action']=='pagination'){
     isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1; 
     $nbreEntitesParPage = $entiteParPage;
-    $pages = $this->_billetManager->getPageMax($nbreEntitesParPage);
+    $pages = $_billetManager->getPageMax($nbreEntitesParPage);
     $data = ['page'=>$page, 'maxPages'=>$pages];
     echo json_encode($data);
 }
