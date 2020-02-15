@@ -56,12 +56,11 @@ function paginationBillet(){
         data:{'action': 'pagination', 'page': page},
         success: function(data){
             console.log(data);
-            /*pagination = JSON.parse(data);
+            pagination = JSON.parse(data);
             console.log(pagination);
             billetAdminPage = pagination.page;
             billetAdminMaxPages = pagination.maxPages;
             GetBilletPagination(billetAdminPage, billetAdminMaxPages);
-            */
         }
     })
 }
@@ -264,6 +263,7 @@ modalDeleteModCom = new Modal(document.querySelector('body'), {
 function GetBilletPagination(billetAdminPage, billetAdminMaxPages){
    let billetPage = parseInt(billetAdminPage);
    let billetMaxPages = billetAdminMaxPages
+   //console.log(document.querySelector('#paginationAdminBillet'));
    paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
     id: 'pageAdminBillet',
     page:billetPage,
