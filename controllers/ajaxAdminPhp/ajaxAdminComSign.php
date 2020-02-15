@@ -1,12 +1,15 @@
 <?php
+spl_autoload_register(function($class){
+    require_once($_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/models/'.$class.'.php');
+});
 
 
 $_commentManager;
-$this->_commentManager = new CommentManager;
+$_commentManager = new CommentManager;
 if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){   
     isset($_POST['pageComSign']) && is_numeric($_POST['pageComSign'])? $pageComSign = $_POST['pageComSign'] : $pageComSign = 1; 
-    $ComSignParPage = 5; 
-    $commentaires = $this->_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null, $pageComSign, $ComSignParPage);
+    $comSignParPage = 5; 
+    $commentaires = $_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null, $pageComSign, $comSignParPage);
     $commentOutput='';
     foreach ($commentaires as $commentaire){
         $commentOutput.='<tr class="signaledCommentRow' .$commentaire->id(). '">';
@@ -26,13 +29,13 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){
 }
 
 if(isset($_POST['action']) && $_POST['action']=='unsignal'){
-    $unSignalComment = $this->_commentManager->unsignaleComment($_POST['comToUnsignal']); 
+    $unSignalComment = $_commentManager->unsignaleComment($_POST['comToUnsignal']); 
 }
 if(isset($_POST['action']) && $_POST['action']=='moderer'){
-    $modereComment = $this->_commentManager->modereComment($_POST['modere']); 
+    $modereComment = $_commentManager->modereComment($_POST['modere']); 
 }
 if(isset($_POST['action']) && $_POST['action']=='deleteComment'){
     $idToDel = $_POST['deleteCom'];
-    $deleteComment = $this->_commentManager->deleteComment($idToDel);
+    $deleteComment = $_commentManager->deleteComment($idToDel);
 }
 ?>
