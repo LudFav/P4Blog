@@ -1,5 +1,6 @@
 <?php
 require_once 'views/View.php';
+require_once 'controllers/ajaxClientPhp/ajaxCom.php';
 
 class ControllerPost {
   private $_billetManager;
