@@ -1,4 +1,9 @@
 //TABLE BILLETS**********************************************************
+let page = 1;
+let numPage = page;
+billetTable();
+paginationBillet()
+$('.pageAdminBillet.page-link.prev').hide();
 
 function logout(){
     $.post({
@@ -25,10 +30,9 @@ function isLoggedin(){
     })
 }
 
+
 function billetTable(){ 
-    /*let url_string = window.location.href;
-    let url = new URL(url_string);
-    page = url.searchParams.get("page");*/
+    console.log('page dans billetTable :'+page)
    $.post({
        url: 'admin',
        data:{'action': 'showbillet', 'page': page},
@@ -44,26 +48,79 @@ function billetTable(){
                    idBilletToDelete = $(this).attr('value');
                });
                $('#tbodyBillet').html(newBilletTable);
+               //PAGINATION
+               
+               numPage = page;
+               pageNav = $('.paginationUl').attr('value');
+               pagesMax = $('.actionTd').attr('value');
+               $('.pageAdminBillet.page-link.active').attr('value', numPage);
+               $('.pageAdminBillet.page-link.active').text(numPage);
+               
+               if(numPage <= 1){
+                $('.pageAdminBillet.page-link.prev').hide();
+               } else {
+                $('.pageAdminBillet.page-link.prev').show();
+               }
+               
+               if(numPage >= pagesMax ){
+               $('.pageAdminBillet.page-link.next').hide();
+               } else {
+                $('.pageAdminBillet.page-link.next').show();
+               }
+
            }
        }
-    
-   }); 
+   });
+  
 }    
 
 function paginationBillet(){
+   
     $.post({
         url: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
-        data:{'action': 'pagination', 'page': page},
+        data:{'action': 'pagination', 'page': numPage},
         success: function(data){
-            console.log(data);
             pagination = JSON.parse(data);
-            console.log(pagination);
-            billetAdminPage = pagination.page;
-            billetAdminMaxPages = pagination.maxPages;
+           let billetAdminPage = pagination.page;
+           let billetAdminMaxPages = pagination.maxPages;
             GetBilletPagination(billetAdminPage, billetAdminMaxPages);
+            showPagination();  
+            console.log('page = '+page);
+            console.log('billetMaxPages ='+billetMaxPages);
         }
     })
 }
+
+
+function GetBilletPagination(billetAdminPage, billetAdminMaxPages){
+    billetPage = parseInt(billetAdminPage);
+    billetMaxPages = billetAdminMaxPages
+    paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
+     id: 'pageAdminBillet',
+     page: billetPage,
+     maxPages:billetMaxPages,
+     pageNav:2, 
+    });
+}
+function showPagination(){
+  
+        $('.pageAdminBillet.page-link.next').on('click', function() {
+            
+            page++
+            billetTable(); 
+        }) 
+
+        
+        $('.page-link.prev').on('click', function() {  
+            
+            page--;
+            billetTable();
+         })
+}
+
+
+$('.pageAdminBillet.page-link.active').text(numPage);
+
 //TABLE COMMENTAIRES SIGNALÉS********************************************
 let url_string = window.location.href;
 let url = new URL(url_string);
@@ -260,17 +317,7 @@ modalDeleteModCom = new Modal(document.querySelector('body'), {
 
 
 
-function GetBilletPagination(billetAdminPage, billetAdminMaxPages){
-   let billetPage = parseInt(billetAdminPage);
-   let billetMaxPages = billetAdminMaxPages
-   //console.log(document.querySelector('#paginationAdminBillet'));
-   paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
-    id: 'pageAdminBillet',
-    page:billetPage,
-    maxPages:billetMaxPages,
-    pageNav:2
-   });
-}
+
 
 
 
@@ -366,9 +413,10 @@ $( window ).bind("load", function(){
 
 
 isLoggedin();
-billetTable();
-paginationBillet();
+
+
 paginationCommentSign();
+
 $('#signalCom-wrapper').hide();
 $('#modCom-wrapper').hide();
 
