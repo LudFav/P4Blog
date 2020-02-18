@@ -1,9 +1,11 @@
 //TABLE BILLETS**********************************************************
-let page = 1;
-let numPage = page;
+//let page = 1;
+//let numPage = page;
+GetBilletPagination();
 billetTable();
-paginationBillet()
-$('.pageAdminBillet.page-link.prev').hide();
+
+//verifPagination()
+
 
 function logout(){
     $.post({
@@ -30,12 +32,10 @@ function isLoggedin(){
     })
 }
 
-
 function billetTable(){ 
-    console.log('page dans billetTable :'+page)
    $.post({
        url: 'admin',
-       data:{'action': 'showbillet', 'page': page},
+       data:{'action': 'showbillet'},
        success: function(data){
            if(!$.trim(data)){
                $('#billetTableTitre h2').text('0 billet posté');
@@ -48,37 +48,19 @@ function billetTable(){
                    idBilletToDelete = $(this).attr('value');
                });
                $('#tbodyBillet').html(newBilletTable);
-               //PAGINATION
-               
-               numPage = page;
-               pageNav = $('.paginationUl').attr('value');
-               pagesMax = $('.actionTd').attr('value');
-               $('.pageAdminBillet.page-link.active').attr('value', numPage);
-               $('.pageAdminBillet.page-link.active').text(numPage);
-               
-               if(numPage <= 1){
-                $('.pageAdminBillet.page-link.prev').hide();
-               } else {
-                $('.pageAdminBillet.page-link.prev').show();
-               }
-               
-               if(numPage >= pagesMax ){
-               $('.pageAdminBillet.page-link.next').hide();
-               } else {
-                $('.pageAdminBillet.page-link.next').show();
-               }
-
+               //PAGINATION 
+               //console.log(numPage)
+              // verifPagination()
            }
        }
-   });
-  
+   }); 
 }    
-
+/*
 function paginationBillet(){
    
     $.post({
         url: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
-        data:{'action': 'pagination', 'page': numPage},
+        data:{'action': 'pagination', 'page': page},
         success: function(data){
             pagination = JSON.parse(data);
            let billetAdminPage = pagination.page;
@@ -90,18 +72,16 @@ function paginationBillet(){
         }
     })
 }
+*/
 
-
-function GetBilletPagination(billetAdminPage, billetAdminMaxPages){
-    billetPage = parseInt(billetAdminPage);
-    billetMaxPages = billetAdminMaxPages
+function GetBilletPagination(){
     paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
      id: 'pageAdminBillet',
-     page: billetPage,
-     maxPages:billetMaxPages,
+     urlAjax: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
      pageNav:2, 
     });
 }
+/*
 function showPagination(){
   
         $('.pageAdminBillet.page-link.next').on('click', function() {
@@ -117,9 +97,31 @@ function showPagination(){
             billetTable();
          })
 }
+*/
+/*function verifPagination(){
+    numPage = page;
+    pageNav = $('.paginationUl').attr('value');
+    pagesMax = $('.actionTd').attr('value');
+    $('.pageAdminBillet.page-link.active').attr('value', numPage);
+    $('.pageAdminBillet.page-link.active').text(numPage);
+    console.log('verifpage :'+numPage)
+    if(numPage <= 1 || numPage == null){
+        console.log('verifpageIf :'+numPage)
+     $('.pageAdminBillet.page-link.prev').hide();
+    } else {
+        console.log('verifpageElse :'+numPage)
+     $('.pageAdminBillet.page-link.prev').show();
+    }
+    
+    if(numPage >= pagesMax){
+    $('.pageAdminBillet.page-link.next').hide();
+    } else {
+    $('.pageAdminBillet.page-link.next').show();
+    }
+}
+*/
 
-
-$('.pageAdminBillet.page-link.active').text(numPage);
+//$('.pageAdminBillet.page-link.active').text(numPage);
 
 //TABLE COMMENTAIRES SIGNALÉS********************************************
 let url_string = window.location.href;
@@ -327,6 +329,8 @@ modalDeleteModCom = new Modal(document.querySelector('body'), {
 
 //BOUTONS CONFIRMATION MODAL*************************************************
 $( window ).bind("load", function(){
+    
+
     $('#signalCom-wrapper').hide();
     $('#modCom-wrapper').hide();
     $('#billet-wrapper').show();
