@@ -80,6 +80,7 @@ function GetBilletPagination(){
      urlAjax: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
      pageNav:2, 
     });
+    billetTable()
 }
 /*
 function showPagination(){
