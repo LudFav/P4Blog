@@ -15,12 +15,16 @@ class Pagination {
         };
         
         this.paginationAjax();
+        
     }
+
+        
+    
 
         paginationAjax(){
             $.post({
                 url: this.options.urlAjax,
-                data:{'action': 'pagination', 'page': 2},
+                data:{'action': 'pagination'},
                 success: (data) =>{
                     pagination = JSON.parse(data);
                     let adminPage = parseInt(pagination.page);
@@ -32,6 +36,7 @@ class Pagination {
             })
         }
 
+
         paginate(adminPage, adminMaxPages) {
            
             let paginationId = this.options.id;
@@ -39,62 +44,68 @@ class Pagination {
             this.pagination = $('<nav aria-label="Page navigation '+paginationId+'"></nav>').appendTo(this.element);  
             this.pagination.attr('id', paginationId);
             this.paginationUl = $('<ul class="paginationUl"></ul>').appendTo(this.pagination);
+            let page = adminPage;
+            let next = page + 1;
+            let prev = page - 1;
             this.paginationPrev = $('<li class="page-item"><button class="'+paginationId+' page-link prev">Previous</button></li>').appendTo(this.paginationUl); 
-            
-            /*for(let i = adminPage - adminPageNav; i < adminPage; i++){
+            this.paginationPrev.on('click', ()=>{
+                page = prev;
+                this.pageAjax(page);
+            })
+            for(let i = page - this.options.pageNav; i < page; i++){
                 if(i> 0){
                 
                  this.leftPageNav= $('<li class="page-item"><a class="'+paginationId+' page-link" value='+i+'>' +i+ '</a></li>').appendTo(this.paginationUl);
-                }
-               
-            }*/
-            console.log(adminPage + 1);
-            this.currentPage= $('<li class="page-item"><p class=" '+paginationId+' page-link active" value="'+adminPage+'">'+adminPage+'</p></li>').appendTo(this.paginationUl);
-            /*for(let j = adminPage +1; j <= adminMaxPages; j++){
+                }   
+            }
+
+            this.currentPage= $('<li class="page-item"><p class=" '+paginationId+' page-link active" value="'+page+'">'+page+'</p></li>').appendTo(this.paginationUl);
+
+            for(let j = page +1; j <= adminMaxPages; j++){
                 this.rightPageNav= $('<li class="page-item"><a class=" '+paginationId+' page-link" value='+j+'>'+j+'</a></li>').appendTo(this.paginationUl);
                 
-                if(j >= adminPage + adminPageNav){
+                if(j >= page + this.options.pageNav){
                 break;
                 }
-            } */
-       
+            } 
+
+            /*let currentPageValue = $('.page-link.active').attr('value');
+            let pageValueInt = parseInt(currentPageValue);
+            console.log(pageValueInt + 1)*/
+
             this.paginationNext = $('<li class="page-item"><button class=" '+paginationId+' page-link next">Next</button></li>').appendTo(this.paginationUl);
-            this.paginationNext.on('click', function() {
-                console.log('test Next')
-                currentPageValue++;
-            }); 
+            this.paginationNext.on('click', ()=>{
+                page = next;
+                console.log(next)
+                this.pageAjax(page);
+            })
             
-            $('.page-link.prev').on('click', function() {
-                console.log('test Prev')   
-                currentPageValue--;
-            });  
 
-            let currentPageValue = $('.page-link.active').attr('value');
-
-            $(currentPageValue).on('change', function(){
-                $('.page-link.active').text(currentPageValue);
-                if($(currentPageValue) <= 1 ){
-                    this.paginationPrev.hide();
-                }else {
-                    this.paginationPrev.show();
-                }
-                if($(currentPageValue)>= adminMaxPages){
-                    this.paginationNext.hide();
-                } else {
-                    this.paginationNext.show();
-                }
+            $('.page-link.active').on('change', function(){
+             console.log('change'+page)
+             $('.page-link.active').text(pageValueInt);
+             if($(pageValueInt) <= 1 ){
+                 this.paginationPrev.hide();
+             }else {
+                 this.paginationPrev.show();
+             }
+             if($(pageValueInt)>= adminMaxPages){
+                 this.paginationNext.hide();
+             } else {
+                 this.paginationNext.show();
+             }
             })  
+        }
 
-          /* $('.'+paginationId+'.page-link').on('click', function(){
-                let num = $(this).attr('value');
-                console.log('admin?page='+num);
-                $('#tbodyBillet').load('admin?page='+num, function(){
-                    $(this).hide()
-                }); 
-            }); 
-         */
-        } 
+        pageAjax(page){
+            console.log('pageAjax :'+page)
+            $.post({
+            url: this.options.urlAjax,
+            data:{'action': 'pageAjax', 'page': page}
+            })
+        }
      
-
-       
+          
+            
+      
 }
