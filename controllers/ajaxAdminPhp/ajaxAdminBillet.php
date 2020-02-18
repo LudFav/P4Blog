@@ -6,12 +6,22 @@ spl_autoload_register(function($class){
 
 $_billetManager;
 $_billetManager = new BilletManager; 
-var_dump($_POST['page']);
-$page = ((isset($_POST['action'])) && ($_POST['action']=='pageAjax') && (isset($_POST['page'])) )? $_POST['page'] : 2;
+
+//$page=((isset($_POST['action'])) && ($_POST['action']=='pageAjax') && (isset($_POST['page'])) )? $_POST['page'] : 2;
+if(isset($_POST['action']) && $_POST['action']=='pageAjax'){
+    $page = $_POST['page'];
+    return $page;
+}
+
 $entiteParPage=4;
 $nbreEntitesParPage = $entiteParPage;
 $pageDebillets = $_billetManager->getBillets($page, $entiteParPage);
 $pages = $_billetManager->getPageMax($nbreEntitesParPage);
+
+if(isset($_POST['action']) && $_POST['action']=='pageAjax'){
+    $page = $_POST['page'];
+    return $page;
+}
 
 //PAGINATION
 if(isset($_POST['action']) && $_POST['action']=='pagination'){
