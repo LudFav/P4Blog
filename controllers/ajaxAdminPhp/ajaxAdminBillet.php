@@ -7,8 +7,7 @@ spl_autoload_register(function($class){
 $_billetManager;
 $_billetManager = new BilletManager; 
 
-((isset($_POST['action'])) && ($_POST['action']=='pagination'))? $page = $_POST['page'] : $page = 1;
-var_dump($_POST['page']);
+$page = ((isset($_POST['action'])) && ($_POST['action']=='pageAjax') && (isset($_POST['page'])) )? $_POST['page'] : 1;
 $entiteParPage=4;
 $nbreEntitesParPage = $entiteParPage;
 $pageDebillets = $_billetManager->getBillets($page, $entiteParPage);
