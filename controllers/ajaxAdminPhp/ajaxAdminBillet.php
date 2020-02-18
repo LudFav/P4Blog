@@ -5,15 +5,24 @@ spl_autoload_register(function($class){
 });
 
 $_billetManager;
-$_billetManager = new BilletManager;  
-isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1;
-$entiteParPage = 4; 
-$billets = $_billetManager->getBillets($page, $entiteParPage);
- $nbreEntitesParPage = $entiteParPage;
-    $pages = $_billetManager->getPageMax($nbreEntitesParPage);
+$_billetManager = new BilletManager; 
+
+((isset($_POST['action'])) && ($_POST['action']=='pagination'))? $page = $_POST['page'] : $page = 1;
+var_dump($_POST['page']);
+$entiteParPage=4;
+$nbreEntitesParPage = $entiteParPage;
+$pageDebillets = $_billetManager->getBillets($page, $entiteParPage);
+$pages = $_billetManager->getPageMax($nbreEntitesParPage);
+
+//PAGINATION
+if(isset($_POST['action']) && $_POST['action']=='pagination'){
+    $data = ['page'=>$page, 'maxPages'=>$pages];
+    echo json_encode($data);
+}
+//TABLEAU BILLET
 if(isset($_POST['action']) && $_POST['action']=='showbillet'){
     $billetsOutput = '';
-    foreach ($billets as $billet){ 
+    foreach ($pageDebillets as $billet){ 
          $billetsOutput.= '<tr class="billetRow' .$billet->id(). '">';
          $billetsOutput.= '<a href="post&id' .$billet->id(). '"><td>' .$billet->id(). '</td></a>';
          $billetsOutput.= '<td>' .$billet->auteur(). '</td>';
@@ -33,14 +42,5 @@ if(isset($_POST['action']) && $_POST['action']=='showbillet'){
 //EFFACER BILLET
 if(isset($_POST['action']) && $_POST['action']=='deleteBillet'){
     $deleteBillet = $_billetManager->deleteBillet($_POST['deleteBillet']); 
-}
-
-//PAGINATION
-if(isset($_POST['action']) && $_POST['action']=='pagination'){
-    isset($_POST['page']) && is_numeric($_POST['page'])? $page = $_POST['page'] : $page = 1; 
-    $nbreEntitesParPage = $entiteParPage;
-    $pages = $_billetManager->getPageMax($nbreEntitesParPage);
-    $data = ['page'=>$page, 'maxPages'=>$pages];
-    echo json_encode($data);
 }
 ?>
