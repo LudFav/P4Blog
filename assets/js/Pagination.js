@@ -45,12 +45,11 @@ class Pagination {
             this.pagination.attr('id', paginationId);
             this.paginationUl = $('<ul class="paginationUl"></ul>').appendTo(this.pagination);
             let page = adminPage;
-            let next = page + 1;
-            let prev = page - 1;
             this.paginationPrev = $('<li class="page-item"><button class="'+paginationId+' page-link prev">Previous</button></li>').appendTo(this.paginationUl); 
             this.paginationPrev.on('click', ()=>{
-                page = prev;
+                page--;
                 this.pageAjax(page);
+                console.log('prev'+page)
             })
             for(let i = page - this.options.pageNav; i < page; i++){
                 if(i> 0){
@@ -74,27 +73,38 @@ class Pagination {
             console.log(pageValueInt + 1)*/
 
             this.paginationNext = $('<li class="page-item"><button class=" '+paginationId+' page-link next">Next</button></li>').appendTo(this.paginationUl);
-            this.paginationNext.on('click', ()=>{
-                page = next;
-                console.log(next)
+            $('.'+paginationId+'.page-link.next').on('click', ()=>{
+                page++;
+                console.log('next'+page)
                 this.pageAjax(page);
             })
             
+            $('.page-link.active').text(page);
+            if(page <= 1 ){
+                this.paginationPrev.hide();
+            }else {
+                this.paginationPrev.show();
+            }
+            if(page >= adminMaxPages){
+                this.paginationNext.hide();
+            } else {
+                this.paginationNext.show();
+            }
 
-            $('.page-link.active').on('change', function(){
+            /*$('.page-link.active').on('change', function(){
              console.log('change'+page)
-             $('.page-link.active').text(pageValueInt);
-             if($(pageValueInt) <= 1 ){
+             $('.page-link.active').text(page);
+             if(page <= 1 ){
                  this.paginationPrev.hide();
              }else {
                  this.paginationPrev.show();
              }
-             if($(pageValueInt)>= adminMaxPages){
+             if(page >= adminMaxPages){
                  this.paginationNext.hide();
              } else {
                  this.paginationNext.show();
              }
-            })  
+            })*/  
         }
 
         pageAjax(page){
