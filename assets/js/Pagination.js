@@ -4,6 +4,7 @@ class Pagination {
      * @param {Object} options
      *  @param {string} id
      *  @param {string} urlAjax
+     * @param {int} page
      * @param {int} pageNav
     **/
     constructor(element, options) {
@@ -11,15 +12,13 @@ class Pagination {
         this.options = {
             id: options.id,
             urlAjax: options.urlAjax,
+            page: options.page,
             pageNav: options.pageNav
         };
         
         this.paginationAjax();
         
     }
-
-        
-    
 
         paginationAjax(){
             $.post({
@@ -44,13 +43,12 @@ class Pagination {
             this.pagination = $('<nav aria-label="Page navigation '+paginationId+'"></nav>').appendTo(this.element);  
             this.pagination.attr('id', paginationId);
             this.paginationUl = $('<ul class="paginationUl"></ul>').appendTo(this.pagination);
-            let page = adminPage;
+            let page = this.options.page;
             this.paginationPrev = $('<li class="page-item"><button class="'+paginationId+' page-link prev">Previous</button></li>').appendTo(this.paginationUl); 
-            this.paginationPrev.on('click', ()=>{
+            /*this.paginationPrev.on('click', ()=>{
                 page--;
-                this.pageAjax(page);
-                console.log('prev'+page)
-            })
+                console.log('prev : '+page)
+            })*/
             for(let i = page - this.options.pageNav; i < page; i++){
                 if(i> 0){
                 
@@ -71,13 +69,13 @@ class Pagination {
             /*let currentPageValue = $('.page-link.active').attr('value');
             let pageValueInt = parseInt(currentPageValue);
             console.log(pageValueInt + 1)*/
-
+          
             this.paginationNext = $('<li class="page-item"><button class=" '+paginationId+' page-link next">Next</button></li>').appendTo(this.paginationUl);
+            /*
             $('.'+paginationId+'.page-link.next').on('click', ()=>{
                 page++;
-                console.log('next'+page)
-                this.pageAjax(page);
-            })
+                console.log('next'+page)    
+            })*/
             
             $('.page-link.active').text(page);
             if(page <= 1 ){
@@ -106,16 +104,6 @@ class Pagination {
              }
             })*/  
         }
-
-        pageAjax(page){
-            console.log('pageAjax :'+page)
-            $.post({
-            url: this.options.urlAjax,
-            data:{'action': 'pageAjax', 'page': page}
-            })
-        }
-     
-          
-            
+           
       
 }
