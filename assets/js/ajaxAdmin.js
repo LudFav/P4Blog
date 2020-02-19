@@ -1,10 +1,10 @@
 //TABLE BILLETS**********************************************************
-//let page = 1;
-//let numPage = page;
-GetBilletPagination();
-billetTable();
+let page = 1;
 
-//verifPagination()
+
+billetPagination(page)
+console.log('test objet2')
+billetTable();
 
 
 function logout(){
@@ -32,73 +32,59 @@ function isLoggedin(){
     })
 }
 
-function billetTable(){ 
+function billetPagination(page){
+    //billetPageLogic(page);
+    paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
+     id: 'pageAdminBillet',
+     urlAjax: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
+     page: page,
+     pageNav:2, 
+    });
+}
+/*
+function billetPageLogic(page){
+    $('.pageAdminBillet.page-link.next').on('click', function() {  
+        console.log('NEXT')   
+        page++   
+    }) 
+
+    
+    $('.page-link.prev').on('click', function() { 
+        console.log('PREV') 
+        page--;
+     })
+    console.log(page);
+    $('.pageAdminBillet.page-link.active').text(page);
+}
+*/
+function billetTable(){
    $.post({
        url: 'admin',
-       data:{'action': 'showbillet'},
+       data:{'action': 'showbillet', 'page':page},
        success: function(data){
-           if(!$.trim(data)){
+           tabTest = JSON.parse(data);
+           if(!$.trim(tabTest)){
                $('#billetTableTitre h2').text('0 billet posté');
                $('#tableBillet').hide();
-           } else{     
-               let newBilletTable = $(data);
+           } else{ 
+               let tab2Text= tabTest.billetsOutput;
+               let newBilletTable = $(tab2Text);
                 newButtonDeleteBillet = newBilletTable.find('.deleteBilBtn');
                 newButtonDeleteBillet.on('click', function(){
                    modalDeleteBillet;
-                   idBilletToDelete = $(this).attr('value');
+                   idBilletToDelete = $(this).attr('value'); 
                });
                $('#tbodyBillet').html(newBilletTable);
-               //PAGINATION 
                //console.log(numPage)
               // verifPagination()
            }
        }
    }); 
 }    
-/*
-function paginationBillet(){
-   
-    $.post({
-        url: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
-        data:{'action': 'pagination', 'page': page},
-        success: function(data){
-            pagination = JSON.parse(data);
-           let billetAdminPage = pagination.page;
-           let billetAdminMaxPages = pagination.maxPages;
-            GetBilletPagination(billetAdminPage, billetAdminMaxPages);
-            showPagination();  
-            console.log('page = '+page);
-            console.log('billetMaxPages ='+billetMaxPages);
-        }
-    })
-}
-*/
 
-function GetBilletPagination(){
-    paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
-     id: 'pageAdminBillet',
-     urlAjax: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
-     pageNav:2, 
-    });
-    billetTable()
-}
-/*
-function showPagination(){
-  
-        $('.pageAdminBillet.page-link.next').on('click', function() {
-            
-            page++
-            billetTable(); 
-        }) 
 
-        
-        $('.page-link.prev').on('click', function() {  
-            
-            page--;
-            billetTable();
-         })
-}
-*/
+
+
 /*function verifPagination(){
     numPage = page;
     pageNav = $('.paginationUl').attr('value');
@@ -331,6 +317,18 @@ modalDeleteModCom = new Modal(document.querySelector('body'), {
 //BOUTONS CONFIRMATION MODAL*************************************************
 $( window ).bind("load", function(){
     
+    $('.pageAdminBillet.page-link.next').on('click', function() {  
+        console.log('NEXT')   
+        page++ 
+        console.log(page) 
+        return page 
+    }) 
+    
+    
+    $('.page-link.prev').on('click', function() { 
+        console.log('PREV') 
+        return page--;
+    })
 
     $('#signalCom-wrapper').hide();
     $('#modCom-wrapper').hide();
