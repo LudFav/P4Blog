@@ -2,7 +2,7 @@
 session_start();
 class View
 {
-  //fichier vue
+  //fichier a envoyer a la vue
   private $_file;
 
   //titre de la page
@@ -24,8 +24,10 @@ class View
     $view = $this->generateFile('views/templateAdmin.php', array('t' => $this->_t, 'content' => $content ));
     echo $view; 
   }
-  public function generateFile($file, $data){
+
+  private function generateFile($file, $data){
     if (file_exists($file)) {
+     
       extract($data);
 
       //commencer la temporisation
