@@ -7,28 +7,13 @@ spl_autoload_register(function($class){
 $_billetManager;
 $_billetManager = new BilletManager; 
 
-//$page=((isset($_POST['action'])) && ($_POST['action']=='pageAjax') && (isset($_POST['page'])) )? $_POST['page'] : 2;
-if(isset($_POST['action']) && $_POST['action']=='pageAjax'){
-    $page = $_POST['page'];
-    return $page;
-}
-
 $entiteParPage=4;
 $nbreEntitesParPage = $entiteParPage;
-$pageDebillets = $_billetManager->getBillets($page, $entiteParPage);
+$page = isset($_POST['page'])? $_POST['page'] :1;
+$pageDebillets = $_billetManager->getBillets( $page, $entiteParPage);
 $pages = $_billetManager->getPageMax($nbreEntitesParPage);
 
-if(isset($_POST['action']) && $_POST['action']=='pageAjax'){
-    $page = $_POST['page'];
-    return $page;
-}
-
-//PAGINATION
-if(isset($_POST['action']) && $_POST['action']=='pagination'){
-    $data = ['page'=>$page, 'maxPages'=>$pages];
-    echo json_encode($data);
-}
-//TABLEAU BILLET
+//TABLEAU BILLET ET PAGE
 if(isset($_POST['action']) && $_POST['action']=='showbillet'){
     $billetsOutput = '';
     foreach ($pageDebillets as $billet){ 
@@ -45,11 +30,22 @@ if(isset($_POST['action']) && $_POST['action']=='showbillet'){
          $billetsOutput.= '</tr>'; 
     }
     $data['billetsOutput'] = $billetsOutput;
-    exit($data['billetsOutput']);  
+    $data['page'] = $page;
+    $data['maxPages'] = $pages;
+    $response = json_encode($data);
+    exit($response);
 }
 
 //EFFACER BILLET
 if(isset($_POST['action']) && $_POST['action']=='deleteBillet'){
     $deleteBillet = $_billetManager->deleteBillet($_POST['deleteBillet']); 
+}
+
+//PAGINATION
+
+if(isset($_POST['action']) && $_POST['action']=='pagination'){
+    $vartest = '<p> test </p>';
+    $data2 = ['page'=>$page, 'maxPages'=>$pages, 'test'=>$vartest];
+    echo json_encode($data2);
 }
 ?>
