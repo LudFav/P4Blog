@@ -49,22 +49,24 @@ class Pagination {
                 page--;
                 console.log('prev : '+page)
             })*/
-            for(let i = page - this.options.pageNav; i < page; i++){
+            /*for(let i = page - this.options.pageNav; i < page; i++){
                 if(i> 0){
                 
-                 this.leftPageNav= $('<li class="page-item"><a class="'+paginationId+' page-link" value='+i+'>' +i+ '</a></li>').appendTo(this.paginationUl);
+                 this.leftPageNav= $('<li class="page-item"><a class="'+paginationId+' page-link but" value='+i+'>' +i+ '</a></li>').appendTo(this.paginationUl);
                 }   
             }
 
             this.currentPage= $('<li class="page-item"><p class=" '+paginationId+' page-link active" value="'+page+'">'+page+'</p></li>').appendTo(this.paginationUl);
-
+            
+            /*
             for(let j = page +1; j <= adminMaxPages; j++){
-                this.rightPageNav= $('<li class="page-item"><a class=" '+paginationId+' page-link" value='+j+'>'+j+'</a></li>').appendTo(this.paginationUl);
+                this.rightPageNav= $('<li class="page-item"><a class=" '+paginationId+' page-link but" value='+j+'>'+j+'</a></li>').appendTo(this.paginationUl);
                 
                 if(j >= page + this.options.pageNav){
                 break;
                 }
-            } 
+            }
+            */
 
             /*let currentPageValue = $('.page-link.active').attr('value');
             let pageValueInt = parseInt(currentPageValue);
@@ -76,7 +78,7 @@ class Pagination {
                 page++;
                 console.log('next'+page)    
             })*/
-            
+            /*
             $('.page-link.active').text(page);
             if(page <= 1 ){
                 this.paginationPrev.hide();
