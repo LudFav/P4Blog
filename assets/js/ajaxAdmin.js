@@ -1,20 +1,8 @@
 //TABLE BILLETS**********************************************************
-let page = 1;
-function next(){
-    page + 1
-    return page
-}
-console.log('page :'+page)
-function prev(){
-    page - 1
-    return page
-}
+page = 3;
 
-billetPagination(page)
-console.log('test objet2')
 billetTable();
-
-
+billetPagination(page)
 function logout(){
     $.post({
         url: 'login',
@@ -40,35 +28,8 @@ function isLoggedin(){
     })
 }
 
-function billetPagination(page){
-    //billetPageLogic(page);
-    paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
-     id: 'pageAdminBillet',
-     urlAjax: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
-     page: page,
-     pageNav:2, 
-    });
-}
 
-function billetPageLogic(page){
-    $('.pageAdminBillet.page-link.next').on('click', function() {  
-        console.log('NEXT')   
-        next()
-        console.log('NEXT page :'+page)  
-        billetTable();
-    }) 
-
-    
-    $('.pageAdminBillet.page-link.prev').on('click', function() { 
-        console.log('PREV') 
-        prev()
-        billetTable();
-     })
-    console.log(page);
-    $('.pageAdminBillet.page-link.active').text(page);
-}
-
-function billetTable(){
+function billetTable(){  
    $.post({
        url: 'admin',
        data:{'action': 'showbillet', 'page':page},
@@ -78,36 +39,78 @@ function billetTable(){
                $('#billetTableTitre h2').text('0 billet posté');
                $('#tableBillet').hide();
            } else{ 
-               let tab2Text= tabTest.billetsOutput;
-               let newBilletTable = $(tab2Text);
+                let tab2Text= tabTest.billetsOutput;
+                let newBilletTable = $(tab2Text);
                 newButtonDeleteBillet = newBilletTable.find('.deleteBilBtn');
                 newButtonDeleteBillet.on('click', function(){
-                   modalDeleteBillet;
-                   idBilletToDelete = $(this).attr('value'); 
+                modalDeleteBillet;
+                idBilletToDelete = $(this).attr('value'); 
                });
                $('#tbodyBillet').html(newBilletTable);
-               //console.log(numPage)
-              // verifPagination()
+               pagesMax = tabTest.maxPages;
+               affichagePagination(page, pagesMax);
            }
        }
    }); 
 }    
 
 
+function billetPagination(page){
+    
+    paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
+     id: 'pageAdminBillet',
+     urlAjax: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
+     page: page,
+     pageNav:1, 
+    });
+    
+}
 
+function buttonPagination(){
+  
+    $('.pageAdminBillet.page-link.next').on('click', function() {
+        
+        page++
+        billetTable(); 
+    }) 
 
-/*function verifPagination(){
+    
+    $('.page-link.prev').on('click', function() {  
+        
+        page--;
+        billetTable();
+     })
+}
+
+function affichagePagination(page, pagesMax){
     numPage = page;
-    pageNav = $('.paginationUl').attr('value');
-    pagesMax = $('.actionTd').attr('value');
+    pageNav = 1;
+    //let paginationPrev = $('<li class="page-item"><button class="pageAdminBillet page-link prev">Previous</button></li>').appendTo($('.paginationUl'));
+    for(let i = numPage - pageNav; i < numPage; i++){
+        if(i> 0){
+       
+        let leftPage = $('<li class="page-item"><a class="pageAdminBillet page-link but" value='+i+'>' +i+ '</a></li>');
+        $(leftPage).appendTo($('.paginationUl'));
+        break;
+        }    
+    }
+    let currentPage = $('<li class="page-item"><p class="pageAdminBillet page-link active" value="'+numPage+'">'+numPage+'</p></li>').appendTo($('.paginationUl'));
+
+    for(let j = numPage +1; j <= pagesMax; j++){
+        let rightPage = $('<li class="page-item"><a class="pageAdminBillet page-link but" value='+j+'>'+j+'</a></li>');
+        $(rightPage).appendTo($('.paginationUl'));
+        if(j >= numPage + pageNav){
+        break;
+        }
+    }
+    //let paginationNext = $('<li class="page-item"><button class="pageAdminBillet page-link next">Next</button></li>').appendTo($('.paginationUl'));
     $('.pageAdminBillet.page-link.active').attr('value', numPage);
     $('.pageAdminBillet.page-link.active').text(numPage);
-    console.log('verifpage :'+numPage)
+    
     if(numPage <= 1 || numPage == null){
-        console.log('verifpageIf :'+numPage)
      $('.pageAdminBillet.page-link.prev').hide();
     } else {
-        console.log('verifpageElse :'+numPage)
+
      $('.pageAdminBillet.page-link.prev').show();
     }
     
@@ -117,7 +120,7 @@ function billetTable(){
     $('.pageAdminBillet.page-link.next').show();
     }
 }
-*/
+
 
 //$('.pageAdminBillet.page-link.active').text(numPage);
 
@@ -312,34 +315,11 @@ modalDeleteModCom = new Modal(document.querySelector('body'), {
     confirmation: 'Êtes-vous sur de vouloir supprimer ce commentaire censuré?'
 });
 
-// PAGINATION 
-
-
-
-
-
-
-
-
-
-
-
 
 //BOUTONS CONFIRMATION MODAL*************************************************
 $( window ).bind("load", function(){
-    
-    $('.pageAdminBillet.page-link.next').on('click', function() {  
-        console.log('NEXT')   
-        page++ 
-        console.log(page) 
-        return page 
-    }) 
-    
-    
-    $('.page-link.prev').on('click', function() { 
-        console.log('PREV') 
-        return page--;
-    })
+
+    buttonPagination();
 
     $('#signalCom-wrapper').hide();
     $('#modCom-wrapper').hide();
