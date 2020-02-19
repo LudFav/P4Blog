@@ -44,8 +44,7 @@ if(isset($_POST['action']) && $_POST['action']=='deleteBillet'){
 //PAGINATION
 
 if(isset($_POST['action']) && $_POST['action']=='pagination'){
-    $vartest = '<p> test </p>';
-    $data2 = ['page'=>$page, 'maxPages'=>$pages, 'test'=>$vartest];
+    $data2 = ['page2'=>$page, 'maxPages'=>$pages];
     echo json_encode($data2);
 }
 ?>
