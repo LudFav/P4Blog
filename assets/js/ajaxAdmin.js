@@ -1,6 +1,14 @@
 //TABLE BILLETS**********************************************************
 let page = 1;
-
+function next(){
+    page + 1
+    return page
+}
+console.log('page :'+page)
+function prev(){
+    page - 1
+    return page
+}
 
 billetPagination(page)
 console.log('test objet2')
@@ -41,22 +49,25 @@ function billetPagination(page){
      pageNav:2, 
     });
 }
-/*
+
 function billetPageLogic(page){
     $('.pageAdminBillet.page-link.next').on('click', function() {  
         console.log('NEXT')   
-        page++   
+        next()
+        console.log('NEXT page :'+page)  
+        billetTable();
     }) 
 
     
-    $('.page-link.prev').on('click', function() { 
+    $('.pageAdminBillet.page-link.prev').on('click', function() { 
         console.log('PREV') 
-        page--;
+        prev()
+        billetTable();
      })
     console.log(page);
     $('.pageAdminBillet.page-link.active').text(page);
 }
-*/
+
 function billetTable(){
    $.post({
        url: 'admin',
