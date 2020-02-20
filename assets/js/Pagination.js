@@ -1,4 +1,4 @@
-class Pagination {
+/*class Pagination {
     /**
      * @param {HTMLElement} element
      * @param {Object} options
@@ -6,7 +6,7 @@ class Pagination {
      *  @param {string} urlAjax
      * @param {int} page
      * @param {int} pageNav
-    **/
+
     constructor(element, options) {
         this.element = element;
         this.options = {
@@ -39,7 +39,7 @@ class Pagination {
         paginate(adminPage, adminMaxPages) {
            
             let paginationId = this.options.id;
-            
+            /*
             this.pagination = $('<nav aria-label="Page navigation '+paginationId+'"></nav>').appendTo(this.element);  
             this.pagination.attr('id', paginationId);
             this.paginationUl = $('<ul class="paginationUl"></ul>').appendTo(this.pagination);
@@ -54,9 +54,9 @@ class Pagination {
                 
                  this.leftPageNav= $('<li class="page-item"><a class="'+paginationId+' page-link but" value='+i+'>' +i+ '</a></li>').appendTo(this.paginationUl);
                 }   
-            }
+            }*/
 
-            this.currentPage= $('<li class="page-item"><p class=" '+paginationId+' page-link active" value="'+page+'">'+page+'</p></li>').appendTo(this.paginationUl);
+//            this.currentPage= $('<li class="page-item current"><p class=" '+paginationId+' page-link active" value="'+page+'">'+page+'</p></li>').appendTo(this.paginationUl);
             
             /*
             for(let j = page +1; j <= adminMaxPages; j++){
@@ -65,14 +65,14 @@ class Pagination {
                 if(j >= page + this.options.pageNav){
                 break;
                 }
-            }
-            */
+            }*/
+            
 
             /*let currentPageValue = $('.page-link.active').attr('value');
             let pageValueInt = parseInt(currentPageValue);
             console.log(pageValueInt + 1)*/
           
-            this.paginationNext = $('<li class="page-item"><button class=" '+paginationId+' page-link next">Next</button></li>').appendTo(this.paginationUl);
+            //this.paginationNext = $('<li class="page-item"><button class=" '+paginationId+' page-link next">Next</button></li>').appendTo(this.paginationUl);
             /*
             $('.'+paginationId+'.page-link.next').on('click', ()=>{
                 page++;
@@ -104,8 +104,9 @@ class Pagination {
              } else {
                  this.paginationNext.show();
              }
-            })*/  
+            })
         }
            
       
 }
+*/
