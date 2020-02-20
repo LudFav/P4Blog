@@ -9,7 +9,7 @@ $entiteParPage=3;
 $nbreEntitesParPage=$entiteParPage;
 $pageComSign= isset($_POST['pageComSign'])? $_POST['pageComSign'] : 1; 
 $commentaires = $_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null, $pageComSign, $entiteParPage);
-$comSignpages = $_commentManager->getPageMax($nbreEntitesParPage);
+$comSignpages = $_commentManager->getComSignPageMax($nbreEntitesParPage);
 
 if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){       
     $commentOutput='';
