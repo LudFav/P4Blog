@@ -2,14 +2,16 @@
 spl_autoload_register(function($class){
     require_once($_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/models/'.$class.'.php');
 });
-
-
 $_commentManager;
 $_commentManager = new CommentManager;
-if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){   
-    isset($_POST['pageComSign']) && is_numeric($_POST['pageComSign'])? $pageComSign = $_POST['pageComSign'] : $pageComSign = 1; 
-    $comSignParPage = 5; 
-    $commentaires = $_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null, $pageComSign, $comSignParPage);
+
+$entiteParPage=3;
+$nbreEntitesParPage=$entiteParPage;
+$pageComSign= isset($_POST['pageComSign'])? $_POST['pageComSign'] : 1; 
+$commentaires = $_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null, $pageComSign, $entiteParPage);
+$comSignpages = $_commentManager->getPageMax($nbreEntitesParPage);
+
+if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){       
     $commentOutput='';
     foreach ($commentaires as $commentaire){
         $commentOutput.='<tr class="signaledCommentRow' .$commentaire->id(). '">';
@@ -25,7 +27,10 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){
         $commentOutput.='</tr>';
     }
     $data['commentOutput'] = $commentOutput;
-    exit($data['commentOutput']);
+    $data['pageComSign'] = $pageComSign;
+    $data['maxComSignPages'] = $comSignpages;
+    $responseComSign = json_encode($data);
+    exit($responseComSign);
 }
 
 if(isset($_POST['action']) && $_POST['action']=='unsignal'){
