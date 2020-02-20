@@ -74,6 +74,10 @@ function billetButtonPagination(pagesMax){
         billetTable();
         }
      })
+    $('.pageAdminBillet.page-link.but').on('click', function(){
+        page= $(this).attr('value');
+        billetTable();
+    })
 }
 
 function HtmlPagination(element, paginationId, currentValue, maxValue, pageName){
@@ -93,7 +97,7 @@ function HtmlPagination(element, paginationId, currentValue, maxValue, pageName)
 
     for(let i = numPage - pageNav; i < numPage; i++){
         if(i> 0){
-        let leftPage = $('<li class="page-item"><a class="'+paginationId+' page-link left" value='+i+'>' +i+ '</a></li>');
+        let leftPage = $('<li class="page-item"><a class="'+paginationId+' page-link but left" value='+i+'>' +i+ '</a></li>');
         $(leftPage).appendTo($(paginationUl))
         }    
     }
@@ -101,7 +105,7 @@ function HtmlPagination(element, paginationId, currentValue, maxValue, pageName)
     let currentPage= $('<li class="page-item current"><p class="'+paginationId+'  page-link active" value="'+numPage+'">'+numPage+'</p></li>').appendTo($(paginationUl));
   
     for(let j = numPage +1; j <= pagesMax; j++){
-        let rightPage = $('<li class="page-item"><a class="'+paginationId+' page-link right" value='+j+'>'+j+'</a></li>');
+        let rightPage = $('<li class="page-item"><a class="'+paginationId+' page-link but right" value='+j+'>'+j+'</a></li>');
         $(rightPage).appendTo($(paginationUl));
         if(j >= numPage + pageNav){
         break;
@@ -156,7 +160,7 @@ function commentTable(){
                 idComToDelete = $(this).attr('value');
             })
             comSignPagesMax = response.maxComSignPages;
-            
+            console.log('comSignPagesMax :'+comSignPagesMax)
             $('#tbodyComment').html(newCommentTable);
             $('#signalComLink').attr('data-comSignpageMax', comSignPagesMax);
             $('#signalComLink').attr('data-comSignpage', comSignPage);
@@ -169,7 +173,7 @@ function commentTable(){
 
 function comSignButtonPagination(comSignPagesMax){
     let max = comSignPagesMax
-    console.log('pageMax :'+max)
+    console.log('CompageMax :'+max)
     $('.pageAdminComSign.page-link.next').on('click', function() {
         if(comSignPage<pagesMax){
         comSignPage++
