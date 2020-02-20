@@ -1,8 +1,10 @@
 //TABLE BILLETS**********************************************************
-page = 3;
+page = 1;
+comSignPage = 1;
 
 billetTable();
-billetPagination(page)
+commentTable();
+
 function logout(){
     $.post({
         url: 'login',
@@ -48,96 +50,94 @@ function billetTable(){
                });
                $('#tbodyBillet').html(newBilletTable);
                pagesMax = tabTest.maxPages;
-               affichagePagination(page, pagesMax);
+               $('#tbodyBillet').attr('data-pageMax', pagesMax);
+               $('#tbodyBillet').attr('data-page', page);
+               billetPage = new HtmlPagination('#paginationAdminBillet', 'pageAdminBillet', $('#tbodyBillet').attr('data-page'), $('#tbodyBillet').attr('data-pageMax'), page);
+               billetButtonPagination(pagesMax);
            }
        }
    }); 
-}    
-
-
-function billetPagination(page){
-    
-    paginBillet = new Pagination(document.querySelector('#paginationAdminBillet'), {
-     id: 'pageAdminBillet',
-     urlAjax: 'controllers/ajaxAdminPhp/ajaxAdminBillet.php',
-     page: page,
-     pageNav:1, 
-    });
-    
 }
 
-function buttonPagination(){
-  
+function billetButtonPagination(pagesMax){
+    let max = pagesMax
+    console.log('pageMax :'+max)
     $('.pageAdminBillet.page-link.next').on('click', function() {
-        
+        if(page<pagesMax){
         page++
-        billetTable(); 
+        billetTable();
+        }
     }) 
-
-    
-    $('.page-link.prev').on('click', function() {  
-        
+    $('.pageAdminBillet.page-link.prev').on('click', function() {  
+        if(page>1){
         page--;
         billetTable();
+        }
      })
 }
 
-function affichagePagination(page, pagesMax){
-    numPage = page;
-    pageNav = 1;
-    //let paginationPrev = $('<li class="page-item"><button class="pageAdminBillet page-link prev">Previous</button></li>').appendTo($('.paginationUl'));
+function HtmlPagination(element, paginationId, currentValue, maxValue, pageName){
+
+    this.element = element;
+    this.paginationId = paginationId;
+    this.currentValue = currentValue;
+    this.maxValue = maxValue;
+    this.pageName = pageName;
+    $(element).html('');
+    numPage = parseInt(currentValue);
+    pagesmax = parseInt(maxValue);
+    pageNav = 2;
+    let pagination = $('<nav aria-label="Page navigation '+paginationId+'"></nav>').appendTo($(element));  
+    let paginationUl = $('<ul class="'+paginationId+' paginationUl"></ul>').appendTo($(pagination));
+    let paginationPrev = $('<li class="page-item"><button class="'+paginationId+' page-link prev">Previous</button></li>').appendTo($(paginationUl));
+
     for(let i = numPage - pageNav; i < numPage; i++){
         if(i> 0){
-       
-        let leftPage = $('<li class="page-item"><a class="pageAdminBillet page-link but" value='+i+'>' +i+ '</a></li>');
-        $(leftPage).appendTo($('.paginationUl'));
-        break;
+        let leftPage = $('<li class="page-item"><a class="'+paginationId+' page-link left" value='+i+'>' +i+ '</a></li>');
+        $(leftPage).appendTo($(paginationUl))
         }    
     }
-    let currentPage = $('<li class="page-item"><p class="pageAdminBillet page-link active" value="'+numPage+'">'+numPage+'</p></li>').appendTo($('.paginationUl'));
 
+    let currentPage= $('<li class="page-item current"><p class="'+paginationId+'  page-link active" value="'+numPage+'">'+numPage+'</p></li>').appendTo($(paginationUl));
+  
     for(let j = numPage +1; j <= pagesMax; j++){
-        let rightPage = $('<li class="page-item"><a class="pageAdminBillet page-link but" value='+j+'>'+j+'</a></li>');
-        $(rightPage).appendTo($('.paginationUl'));
+        let rightPage = $('<li class="page-item"><a class="'+paginationId+' page-link right" value='+j+'>'+j+'</a></li>');
+        $(rightPage).appendTo($(paginationUl));
         if(j >= numPage + pageNav){
         break;
         }
     }
-    //let paginationNext = $('<li class="page-item"><button class="pageAdminBillet page-link next">Next</button></li>').appendTo($('.paginationUl'));
-    $('.pageAdminBillet.page-link.active').attr('value', numPage);
-    $('.pageAdminBillet.page-link.active').text(numPage);
-    
-    if(numPage <= 1 || numPage == null){
-     $('.pageAdminBillet.page-link.prev').hide();
-    } else {
 
-     $('.pageAdminBillet.page-link.prev').show();
+    let paginationNext = $('<li class="page-item"><button class="'+paginationId+' page-link next">Next</button></li>').appendTo(paginationUl);
+
+    $(paginationPrev).hide();
+    if(pageName > 1){
+     $(paginationPrev).show();
+    } else {
+     $(paginationPrev).hide();
     }
     
-    if(numPage >= pagesMax){
-    $('.pageAdminBillet.page-link.next').hide();
+    if(pageName >= pagesmax){
+    $(paginationNext).hide();
     } else {
-    $('.pageAdminBillet.page-link.next').show();
-    }
+    $(paginationNext).show();
+    }  
 }
 
-
-//$('.pageAdminBillet.page-link.active').text(numPage);
-
 //TABLE COMMENTAIRES SIGNALÉS********************************************
-let url_string = window.location.href;
-let url = new URL(url_string);
-pageGet= url.searchParams.get("pageComSign");
 function commentTable(){
     $.post({
         url: 'admin',
-        data:{'action': 'showCommentSignaled', 'pageComSign': pageGet},
+        data:{'action': 'showCommentSignaled', 'pageComSign': comSignPage},
         success: function(data){
-            if(!$.trim(data)){
+           
+            response = JSON.parse(data)
+            if(!$.trim(response)){
                 $('#commentTableTitre h2').text('0 commentaire signalé');
                 $('#tableComments').hide();
             } else{     
-            let newCommentTable = $(data);
+            responseTable = response.commentOutput
+            let newCommentTable = $(responseTable);
             newButtonUnsignal = newCommentTable.find('.unsignalComBtn');
             newButtonUnsignal.on('click', function() {
                 modalUnsignalCom;
@@ -155,13 +155,35 @@ function commentTable(){
                 modalDeleteCom;
                 idComToDelete = $(this).attr('value');
             })
-
-            $('#tbodyComment').html(newCommentTable);
+            comSignPagesMax = response.maxComSignPages;
             
+            $('#tbodyComment').html(newCommentTable);
+            $('#signalComLink').attr('data-comSignpageMax', comSignPagesMax);
+            $('#signalComLink').attr('data-comSignpage', comSignPage);
+            comSignPagination = new HtmlPagination('#paginationComSign', 'pageAdminComSign', $('#signalComLink').attr('data-comSignpage'), $('#signalComLink').attr('data-comSignpageMax'), comSignPage);
+            comSignButtonPagination(comSignPagesMax);
             } 
         }
     });
 }
+
+function comSignButtonPagination(comSignPagesMax){
+    let max = comSignPagesMax
+    console.log('pageMax :'+max)
+    $('.pageAdminComSign.page-link.next').on('click', function() {
+        if(comSignPage<pagesMax){
+        comSignPage++
+        commentTable();
+        }
+    }) 
+    $('.pageAdminComSign.page-link.prev').on('click', function() {  
+        if(comSignPage>1){
+        comSignPage--;
+        commentTable();
+        }
+     })
+}
+/*
 function paginationCommentSign(){
     $.post({
         url: 'controllers/ajaxAdminPhp/ajaxAdminComSign.php',
@@ -175,7 +197,7 @@ function paginationCommentSign(){
     })
    
 }
-
+*/
 
 function moderedCommentTable(){
     $.post({
@@ -318,8 +340,10 @@ modalDeleteModCom = new Modal(document.querySelector('body'), {
 
 //BOUTONS CONFIRMATION MODAL*************************************************
 $( window ).bind("load", function(){
-
-    buttonPagination();
+    billetPage;
+    comSignPagination;
+    billetButtonPagination(pagesMax);
+    comSignButtonPagination(comSignPagesMax);
 
     $('#signalCom-wrapper').hide();
     $('#modCom-wrapper').hide();
@@ -409,7 +433,7 @@ $( window ).bind("load", function(){
 isLoggedin();
 
 
-paginationCommentSign();
+//paginationCommentSign();
 
 $('#signalCom-wrapper').hide();
 $('#modCom-wrapper').hide();
