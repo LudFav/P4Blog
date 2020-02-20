@@ -185,7 +185,11 @@ function comSignButtonPagination(comSignPagesMax){
         comSignPage--;
         commentTable();
         }
-     })
+    })
+    $('.pageAdminComSign.page-link.but').on('click', function(){
+        comSignPage = $(this).attr('value');
+        commentTable();
+    })
 }
 /*
 function paginationCommentSign(){
