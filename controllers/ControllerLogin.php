@@ -39,13 +39,6 @@ class ControllerLogin {
 public function isLoggedIn(){
   if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
     if(isset($_POST['action']) && $_POST['action'] == 'isLogged'){
-    //$adminButtonOutput='';
-    //$adminButtonOutput .= '<li><a href="admin">Administration</a></li>';
-    //$data1['adminButtonOutput'] = $adminButtonOutput;
-    //$statutOutput='';
-    //$statutOutput .= '<p class=success> Connecté </p>';
-    //$data2['statutOutput'] = $statutOutput;
-    //$data = array('adminButtonOutput' =>$data1, 'statutOutput'=>$data2);
     $logged = true;
     echo $logged;
     }
