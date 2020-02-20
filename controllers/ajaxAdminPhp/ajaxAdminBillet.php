@@ -9,10 +9,17 @@ $_billetManager = new BilletManager;
 
 $entiteParPage=4;
 $nbreEntitesParPage = $entiteParPage;
+
 $page = isset($_POST['page'])? $_POST['page'] :1;
-$pageDebillets = $_billetManager->getBillets( $page, $entiteParPage);
+
+$pageDebillets = $_billetManager->getBillets($page, $entiteParPage);
 $pages = $_billetManager->getPageMax($nbreEntitesParPage);
 
+//PAGINATION
+/*if(isset($_POST['action']) && $_POST['action']=='pagination'){
+    $data2 = ['page2'=>$page, 'maxPages'=>$pages];
+    echo json_encode($data2);
+}*/
 //TABLEAU BILLET ET PAGE
 if(isset($_POST['action']) && $_POST['action']=='showbillet'){
     $billetsOutput = '';
@@ -41,10 +48,5 @@ if(isset($_POST['action']) && $_POST['action']=='deleteBillet'){
     $deleteBillet = $_billetManager->deleteBillet($_POST['deleteBillet']); 
 }
 
-//PAGINATION
 
-if(isset($_POST['action']) && $_POST['action']=='pagination'){
-    $data2 = ['page2'=>$page, 'maxPages'=>$pages];
-    echo json_encode($data2);
-}
 ?>
