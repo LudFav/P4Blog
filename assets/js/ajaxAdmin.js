@@ -52,7 +52,7 @@ function billetTable(){
                pagesMax = tabTest.maxPages;
                $('#tbodyBillet').attr('data-pageMax', pagesMax);
                $('#tbodyBillet').attr('data-page', page);
-               billetPage = new HtmlPagination('#paginationAdminBillet', 'pageAdminBillet', $('#tbodyBillet').attr('data-page'), $('#tbodyBillet').attr('data-pageMax'), page);
+               billetPage = new HtmlPagination('#paginationAdminBillet', 'pageAdminBillet'/*, $('#tbodyBillet').attr('data-page')*/, pagesMax, page);
                billetButtonPagination(pagesMax);
            }
        }
@@ -80,25 +80,28 @@ function billetButtonPagination(pagesMax){
     })
 }
 
-function HtmlPagination(element, paginationId, currentValue, maxValue, pageName){
+function HtmlPagination(element, paginationId, /*currentValue, maxValue*/pagesMax, pageName){
 
     this.element = element;
     this.paginationId = paginationId;
-    this.currentValue = currentValue;
-    this.maxValue = maxValue;
+    /*this.currentValue = currentValue;
+    this.maxValue = maxValue;*/
+    this.pagesMax = pagesMax
     this.pageName = pageName;
     $(element).html('');
-    numPage = parseInt(currentValue);
-    pagesmax = parseInt(maxValue);
+    numPage = pageName//parseInt(currentValue);
+    pagesmax = pagesMax//parseInt(maxValue);
     pageNav = 2;
     let pagination = $('<nav aria-label="Page navigation '+paginationId+'"></nav>').appendTo($(element));  
     let paginationUl = $('<ul class="'+paginationId+' paginationUl"></ul>').appendTo($(pagination));
+
     let paginationPrev = $('<li class="page-item"><button class="'+paginationId+' page-link prev">Previous</button></li>').appendTo($(paginationUl));
 
     for(let i = numPage - pageNav; i < numPage; i++){
         if(i> 0){
         let leftPage = $('<li class="page-item"><a class="'+paginationId+' page-link but left" value='+i+'>' +i+ '</a></li>');
         $(leftPage).appendTo($(paginationUl))
+        console.log('left loop :'+numPage);
         }    
     }
 
@@ -107,6 +110,8 @@ function HtmlPagination(element, paginationId, currentValue, maxValue, pageName)
     for(let j = numPage +1; j <= pagesMax; j++){
         let rightPage = $('<li class="page-item"><a class="'+paginationId+' page-link but right" value='+j+'>'+j+'</a></li>');
         $(rightPage).appendTo($(paginationUl));
+        console.log('right loop :'+numPage);
+        console.log('left loop max:'+pagesMax);
         if(j >= numPage + pageNav){
         break;
         }
@@ -164,7 +169,8 @@ function commentTable(){
             $('#tbodyComment').html(newCommentTable);
             $('#signalComLink').attr('data-comSignpageMax', comSignPagesMax);
             $('#signalComLink').attr('data-comSignpage', comSignPage);
-            comSignPagination = new HtmlPagination('#paginationComSign', 'pageAdminComSign', $('#signalComLink').attr('data-comSignpage'), $('#signalComLink').attr('data-comSignpageMax'), comSignPage);
+            console.log('init maxpage :'+comSignPagesMax)
+            comSignPagination = new HtmlPagination('#paginationComSign', 'pageAdminComSign'/*, $('#signalComLink').attr('data-comSignpage')*/, comSignPagesMax, comSignPage);
             comSignButtonPagination(comSignPagesMax);
             } 
         }
@@ -349,7 +355,7 @@ modalDeleteModCom = new Modal(document.querySelector('body'), {
 //BOUTONS CONFIRMATION MODAL*************************************************
 $( window ).bind("load", function(){
     billetPage;
-    comSignPagination;
+    
     billetButtonPagination(pagesMax);
     comSignButtonPagination(comSignPagesMax);
 
@@ -440,7 +446,6 @@ $( window ).bind("load", function(){
 
 isLoggedin();
 
-
 //paginationCommentSign();
 
 $('#signalCom-wrapper').hide();
@@ -453,6 +458,7 @@ $('#billetLink').on('click', function(){
 })
 $('#signalComLink').on('click', function(){
     commentTable();
+    comSignPagination;
     $('#billet-wrapper').hide();
     $('#modCom-wrapper').hide();
     $('#signalCom-wrapper').fadeIn(1000);
