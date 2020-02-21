@@ -6,10 +6,16 @@ spl_autoload_register(function($class){
 $_commentManager;
 $_commentManager = new CommentManager;
 
+$modComParPage= 5;
+$nbreEntitesParPage=$entiteParPage;
+$pageComMod= isset($_POST['pageComMod'])? $_POST['pageComMod'] : 1; 
+$commentaireModeres = $_commentManager->getModeredComments('commentaires', 'Comment', $modere=null, $pageComMod, $entiteParPage);
+$comModPages = $_commentManager->getComModPagesMax($nbreEntitesParPage);
+
 if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
     isset($_POST['pageComMod']) && is_numeric($_POST['pageComMod'])? $pageComMod = $_POST['pageComMod'] : $pageComMod = 1; 
     $moderedCommentOutput=''; 
-    $modComParPage= 5;
+    
     $commentaireModeres = $_commentManager->getModeredComments('commentaires', 'Comment', $modere=null, $pageComMod, $modComParPage);
     foreach ($commentaireModeres as $commentaireModere){
         $moderedCommentOutput.='<tr class="moderedCommentRow' .$commentaireModere->id(). '">';
@@ -23,9 +29,13 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
         $moderedCommentOutput.='</td>';
         $moderedCommentOutput.='</tr>';
     }
-    $data['$moderedCommentOutput'] = $moderedCommentOutput;
-    exit($data['$moderedCommentOutput']);
+    $data['moderedCommentOutput'] = $moderedCommentOutput;
+    $data['pageComMod'] = $pageComMod;
+    $data['maxPagesComMod'] = $comModPages;
+    $responseComMod = json_encode($data);
+    exit($responseComMod);
 }
+
 if(isset($_POST['action']) && $_POST['action']=='unmodere'){
     $unModereComment = $_commentManager->unmodereComment($_POST['unmodere']); 
 }
@@ -33,14 +43,10 @@ if(isset($_POST['action']) && $_POST['action']=='deleteModCom'){
     $deleteComment = $_commentManager->deleteComment($_POST['deleteCom']);
 }
 
-
-//PAGINATION BILLET
-
-
-
-
 //CHANGEMENT DE MOT DE PASSE
 if(isset($_POST['action']) && $_POST['action'] == 'changePassword'){
     $formOutput ='';
     $formOutput .= '<form class="changepass">';
 }
+
+?>
