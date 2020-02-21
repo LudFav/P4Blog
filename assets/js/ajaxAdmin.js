@@ -50,9 +50,9 @@ function billetTable(){
                });
                $('#tbodyBillet').html(newBilletTable);
                pagesMax = tabTest.maxPages;
-               $('#tbodyBillet').attr('data-pageMax', pagesMax);
-               $('#tbodyBillet').attr('data-page', page);
-               billetPage = new HtmlPagination('#paginationAdminBillet', 'pageAdminBillet'/*, $('#tbodyBillet').attr('data-page')*/, pagesMax, page);
+               //$('#tbodyBillet').attr('data-pageMax', pagesMax);
+               //$('#tbodyBillet').attr('data-page', page);
+               billetPage = new HtmlPagination('#paginationAdminBillet', 'pageAdminBillet', pagesMax, page);
                billetButtonPagination(pagesMax);
            }
        }
@@ -60,39 +60,43 @@ function billetTable(){
 }
 
 function billetButtonPagination(pagesMax){
-    let max = pagesMax
-    console.log('pageMax :'+max)
-    $('.pageAdminBillet.page-link.next').on('click', function() {
+  
+    $('.pageAdminBillet.page-link.next').one('click', function(e) {
+        e.preventDefault();
         if(page<pagesMax){
-        page++
+        page = page + 1
+        console.log('ma page avant :'+page)
         billetTable();
+        console.log('ma page apres :'+page)
         }
     }) 
     $('.pageAdminBillet.page-link.prev').on('click', function() {  
         if(page>1){
         page--;
+        console.log('ma page :'+page)
         billetTable();
+        console.log('ma page :'+page)
         }
      })
     $('.pageAdminBillet.page-link.but').on('click', function(){
-        page= $(this).attr('value');
+        pagebutton = $(this).attr('value');
+        page = parseInt(pagebutton);
         billetTable();
     })
 }
 
-function HtmlPagination(element, paginationId, /*currentValue, maxValue*/pagesMax, pageName){
+function HtmlPagination(element, paginationId, pagesMax, pageName){
 
     this.element = element;
     this.paginationId = paginationId;
-    /*this.currentValue = currentValue;
-    this.maxValue = maxValue;*/
     this.pagesMax = pagesMax
     this.pageName = pageName;
     $(element).html('');
-    numPage = pageName//parseInt(currentValue);
-    pagesmax = pagesMax//parseInt(maxValue);
+    numPage = pageName;
+    pagesmax = pagesMax;
     pageNav = 2;
-    let pagination = $('<nav aria-label="Page navigation '+paginationId+'"></nav>').appendTo($(element));  
+
+    let pagination = $('<nav aria-label="Page navigation '+paginationId+'" id="'+paginationId+'"></nav>').appendTo($(element));  
     let paginationUl = $('<ul class="'+paginationId+' paginationUl"></ul>').appendTo($(pagination));
 
     let paginationPrev = $('<li class="page-item"><button class="'+paginationId+' page-link prev">Previous</button></li>').appendTo($(paginationUl));
@@ -101,7 +105,6 @@ function HtmlPagination(element, paginationId, /*currentValue, maxValue*/pagesMa
         if(i> 0){
         let leftPage = $('<li class="page-item"><a class="'+paginationId+' page-link but left" value='+i+'>' +i+ '</a></li>');
         $(leftPage).appendTo($(paginationUl))
-        console.log('left loop :'+numPage);
         }    
     }
 
@@ -110,8 +113,6 @@ function HtmlPagination(element, paginationId, /*currentValue, maxValue*/pagesMa
     for(let j = numPage +1; j <= pagesMax; j++){
         let rightPage = $('<li class="page-item"><a class="'+paginationId+' page-link but right" value='+j+'>'+j+'</a></li>');
         $(rightPage).appendTo($(paginationUl));
-        console.log('right loop :'+numPage);
-        console.log('left loop max:'+pagesMax);
         if(j >= numPage + pageNav){
         break;
         }
@@ -165,12 +166,10 @@ function commentTable(){
                 idComToDelete = $(this).attr('value');
             })
             comSignPagesMax = response.maxComSignPages;
-            console.log('comSignPagesMax :'+comSignPagesMax)
             $('#tbodyComment').html(newCommentTable);
             $('#signalComLink').attr('data-comSignpageMax', comSignPagesMax);
             $('#signalComLink').attr('data-comSignpage', comSignPage);
-            console.log('init maxpage :'+comSignPagesMax)
-            comSignPagination = new HtmlPagination('#paginationComSign', 'pageAdminComSign'/*, $('#signalComLink').attr('data-comSignpage')*/, comSignPagesMax, comSignPage);
+            comSignPagination = new HtmlPagination('#paginationComSign', 'pageAdminComSign', comSignPagesMax, comSignPage);
             comSignButtonPagination(comSignPagesMax);
             } 
         }
@@ -178,10 +177,8 @@ function commentTable(){
 }
 
 function comSignButtonPagination(comSignPagesMax){
-    let max = comSignPagesMax
-    console.log('CompageMax :'+max)
     $('.pageAdminComSign.page-link.next').on('click', function() {
-        if(comSignPage<pagesMax){
+        if(comSignPage<comSignPagesMax){
         comSignPage++
         commentTable();
         }
@@ -193,25 +190,11 @@ function comSignButtonPagination(comSignPagesMax){
         }
     })
     $('.pageAdminComSign.page-link.but').on('click', function(){
-        comSignPage = $(this).attr('value');
+        comSignPageButton = $(this).attr('value');
+        comSignPage= parseInt(comSignPageButton);
         commentTable();
     })
 }
-/*
-function paginationCommentSign(){
-    $.post({
-        url: 'controllers/ajaxAdminPhp/ajaxAdminComSign.php',
-        data:{'action': 'paginationComSign', 'pageComSign': pageGet},
-        success: function(data){
-            
-           let pagination = $(data);
-           $('#paginationComSign').html(pagination);
-           
-        }
-    })
-   
-}
-*/
 
 function moderedCommentTable(){
     $.post({
@@ -356,8 +339,8 @@ modalDeleteModCom = new Modal(document.querySelector('body'), {
 $( window ).bind("load", function(){
     billetPage;
     
-    billetButtonPagination(pagesMax);
-    comSignButtonPagination(comSignPagesMax);
+   // billetButtonPagination(pagesMax);
+    //comSignButtonPagination(comSignPagesMax);
 
     $('#signalCom-wrapper').hide();
     $('#modCom-wrapper').hide();
