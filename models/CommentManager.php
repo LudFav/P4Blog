@@ -28,9 +28,19 @@ class CommentManager extends Model implements crud {
       $req->closeCursor(); 
     }
 
-    function ComSignPageMax($table, $nbreEntitesParPage){
+    function comSignPageMax($table, $nbreEntitesParPage){
       $this->getBdd();
       $req = self::$_bdd->prepare("SELECT COUNT(*) from $table WHERE signale = 1 ");
+      $req->execute();
+      $nbrEntites = $req->fetchColumn();  
+      $max = ceil($nbrEntites/$nbreEntitesParPage);
+      return $max;
+      $req->closeCursor(); 
+    }
+
+    function comModPageMax($table, $nbreEntitesParPage){
+      $this->getBdd();
+      $req = self::$_bdd->prepare("SELECT COUNT(*) from $table WHERE modere = 1 ");
       $req->execute();
       $nbrEntites = $req->fetchColumn();  
       $max = ceil($nbrEntites/$nbreEntitesParPage);
@@ -55,27 +65,6 @@ class CommentManager extends Model implements crud {
       $req->closeCursor();
       return $commentaires;
     }
-    
-    /*
-
-    public function getSignaledComments($table, $obj, $signale= null, $pageComSign, $signComParPage){
-      $commentairesignal = [];
-      $bdd = $this->getBdd();
-      $limit = (htmlspecialchars($pageComSign) - 1) * $signComParPage. ', ' .$signComParPage;
-      $req = self::$_bdd->prepare("SELECT * FROM commentaires WHERE signale = 1 LIMIT $limit");
-      $req->execute(array($signale));
-      while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-        $commentaire = new Comment($data);
-        $commentairesignal[] = $commentaire;
-      }
-      $req->closeCursor();
-      return $commentairesignal;
-    } */
-
-
-
-
-
 
     public function readOne($table, $obj, $id){
       $this->getBdd();
@@ -114,9 +103,9 @@ class CommentManager extends Model implements crud {
       $req->closeCursor();
     }
 
-    public function moderation($table, $modere, $where){
+    public function moderation($table, $where){
       $this->getBdd();
-      $req = self::$_bdd->prepare("UPDATE $table SET signale = 0, $modere  WHERE $where");
+      $req = self::$_bdd->prepare("UPDATE $table SET signale = 0, modere = 1  WHERE $where");
       $req->execute();
       $req->closeCursor();
     }
@@ -185,8 +174,11 @@ class CommentManager extends Model implements crud {
       return $this->pagemax('commentaires', $nbreEntitesParPage);
     }
     public function getComSignPageMax($nbreEntitesParPage){
-      return $this->ComSignPageMax('commentaires', $nbreEntitesParPage);
+      return $this->comSignPageMax('commentaires', $nbreEntitesParPage);
     }
+    public function getComModPagesMax($nbreEntitesParPage){
+      return $this->comModPageMax('commentaires', $nbreEntitesParPage);
+    }    
 
     public function signaleComment($id){
       return $this->signale('commentaires', "`id` = '{$_POST['idSignal']}'");
