@@ -6,8 +6,8 @@ spl_autoload_register(function($class){
 $_commentManager;
 $_commentManager = new CommentManager;
 
-$modComParPage= 5;
-$nbreEntitesParPage=$entiteParPage;
+$entiteParPage= 5;
+$nbreEntitesParPage = $entiteParPage;
 $pageComMod= isset($_POST['pageComMod'])? $_POST['pageComMod'] : 1; 
 $commentaireModeres = $_commentManager->getModeredComments('commentaires', 'Comment', $modere=null, $pageComMod, $entiteParPage);
 $comModPages = $_commentManager->getComModPagesMax($nbreEntitesParPage);
@@ -16,7 +16,7 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
     isset($_POST['pageComMod']) && is_numeric($_POST['pageComMod'])? $pageComMod = $_POST['pageComMod'] : $pageComMod = 1; 
     $moderedCommentOutput=''; 
     
-    $commentaireModeres = $_commentManager->getModeredComments('commentaires', 'Comment', $modere=null, $pageComMod, $modComParPage);
+    $commentaireModeres = $_commentManager->getModeredComments('commentaires', 'Comment', $modere=null, $pageComMod, $entiteParPage);
     foreach ($commentaireModeres as $commentaireModere){
         $moderedCommentOutput.='<tr class="moderedCommentRow' .$commentaireModere->id(). '">';
         $moderedCommentOutput.='<td>' .$commentaireModere->id(). '</td>';
