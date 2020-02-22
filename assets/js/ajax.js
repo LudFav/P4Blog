@@ -75,10 +75,9 @@ function signalement(id){
             showComment();
         }
     });
-}  
-    //BOUTON SIGNALER
-    
+}
 
+//BOUTON SIGNALER
 $(window).bind('load', function(){   
 
     $('.signalbtn').on('click', function(){
