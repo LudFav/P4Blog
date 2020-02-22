@@ -101,6 +101,8 @@
                 <tbody id='tbodyCommentModere'>        
                 </tbody>   
             </table> 
+            <div id='paginationComMod'>
+        </div> 
         </div>  
 
 
