@@ -5,7 +5,7 @@ spl_autoload_register(function($class){
 $_commentManager;
 $_commentManager = new CommentManager;
 
-$entiteParPage=1;
+$entiteParPage = 4;
 $nbreEntitesParPage=$entiteParPage;
 $pageComSign= isset($_POST['pageComSign'])? $_POST['pageComSign'] : 1; 
 $commentaires = $_commentManager->getSignaledComments('commentaires', 'Comment', $signale=null, $pageComSign, $entiteParPage);
