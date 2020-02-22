@@ -37,28 +37,34 @@ function isLoggedin() {
 function billetTable() {
   $.post({
     url: "admin",
-    data: { action: "showbillet", page: page },
+    data: { action: "showbillet", 'page': page },
     success: function(data) {
-      tabTest = JSON.parse(data);
-      if (!$.trim(tabTest)) {
+      responseBillet = JSON.parse(data);
+      responseBilletTable = responseBillet.billetsOutput;
+      pagesMax = responseBillet.maxPages;
+      billetPage = new HtmlPagination(
+        "#paginationAdminBillet",
+        "pageAdminBillet",
+        pagesMax,
+        page
+      );
+      if (!$.trim(responseBillet)) {
         $("#billetTableTitre h2").text("0 billet posté");
         $("#tableBillet").hide();
+        $("#pageAdminBillet").hide();
       } else {
-        let tab2Text = tabTest.billetsOutput;
-        let newBilletTable = $(tab2Text);
+        $("#billetTableTitre h2").text("Billets");
+        $("#tableBillet").show();
+        if(pagesMax<=1){ 
+          $("#pageAdminBillet").hide();
+        }
+        newBilletTable = $(responseBilletTable);
         newButtonDeleteBillet = newBilletTable.find(".deleteBilBtn");
         newButtonDeleteBillet.on("click", function() {
           modalDeleteBillet;
           idBilletToDelete = $(this).attr("value");
         });
         $("#tbodyBillet").html(newBilletTable);
-        pagesMax = tabTest.maxPages;
-        billetPage = new HtmlPagination(
-          "#paginationAdminBillet",
-          "pageAdminBillet",
-          pagesMax,
-          page
-        );
         billetButtonPagination(pagesMax);
       }
     }
@@ -242,7 +248,7 @@ function comSignButtonPagination(comSignPagesMax) {
     commentTable();
   });
 }
-
+//TABLE COMMENTAIRES MODERES****************************************************
 function moderedCommentTable() {
   $.post({
     url: "admin",
@@ -250,7 +256,6 @@ function moderedCommentTable() {
     success: function(data) {
     responsemod = JSON.parse(data);
     responsemodTable = responsemod.moderedCommentOutput
-    console.log('response :'+responsemod );
     comModPagesMax = responsemod.maxPagesComMod;
     comModPagination = new HtmlPagination(
         "#paginationComMod",
@@ -263,9 +268,12 @@ function moderedCommentTable() {
         $("#moderedCommentsTable").hide();
         $("#pageAdminComMod").hide();
       } else {
-        
-        /*$("#moderedCommentTableTitre h2").text("Commentaires Modérés");
-        $("#moderedCommentsTable").show();*/
+        $('#moderedCommentTableTitre h2').text('Commentaires Modérés');  
+        $('#moderedCommentsTable').show();
+        console.log('comModPagesMax :'+comModPagesMax)
+        if(comModPagesMax<=1){ 
+        $("#pageAdminComMod").hide();
+        }
         let newModeredCommentTable = $(responsemodTable);
         newButtonUnmodere = newModeredCommentTable.find(".unmodereComBtn");
         newButtonUnmodere.on("click", function() {
@@ -328,7 +336,7 @@ function unsignalCom(idComToUnsignal) {
 function modereComBtn(idComToModere) {
   $.post({
     url: "admin",
-    data: { action: "moderer", modere: idComToModere },
+    data: { action: "moderer", 'modere': idComToModere },
     success: function(data) {
       commentTable();
     }
@@ -338,7 +346,7 @@ function modereComBtn(idComToModere) {
 function deleteComBtn(idComToDelete) {
   $.post({
     url: "admin",
-    data: { action: "deleteComment", deleteCom: idComToDelete },
+    data: { action: "deleteComment", 'deleteCom': idComToDelete },
     success: function(data) {
       commentTable();
     }
@@ -348,7 +356,7 @@ function deleteComBtn(idComToDelete) {
 function unmodereComBtn(idModComToUnmodere) {
   $.post({
     url: "admin",
-    data: { action: "unmodere", unmodere: idModComToUnmodere },
+    data: { action: "unmodere", 'unmodere': idModComToUnmodere },
     success: function(data) {
       moderedCommentTable();
     }
@@ -358,7 +366,7 @@ function unmodereComBtn(idModComToUnmodere) {
 function deleteModComBtn(idModComToDelete) {
   $.post({
     url: "admin",
-    data: { action: "deleteModCom", deleteCom: idModComToDelete },
+    data: { action: "deleteModCom", 'deleteCom': idModComToDelete },
     success: function(data) {
       moderedCommentTable();
     }
