@@ -12,7 +12,7 @@ class Router {
 
       //chargement automatique des classes du dossier models
       spl_autoload_register(function($class){
-        require_once('models/'.$class.'.php');
+        require_once('../PROJET4-MVC-OOP-PHP/models/'.$class.'.php');
       });
 
       //on crée une variable $url contenant une chaine de caractere vide
