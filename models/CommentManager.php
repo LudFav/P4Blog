@@ -17,53 +17,29 @@ class CommentManager extends Model implements crud {
       $req->execute();
       $req->closeCursor();
     }
-  
-    function pagemax($table, $nbreEntitesParPage){
-      $this->getBdd();
-      $req = self::$_bdd->prepare("SELECT COUNT(*) from $table");
-      $req->execute();
-      $nbrEntites = $req->fetchColumn();  
-      $max = ceil($nbrEntites/$nbreEntitesParPage);
-      return $max;
-      $req->closeCursor(); 
-    }
 
-    function comSignPageMax($table, $nbreEntitesParPage){
-      $this->getBdd();
-      $req = self::$_bdd->prepare("SELECT COUNT(*) from $table WHERE signale = 1 ");
-      $req->execute();
-      $nbrEntites = $req->fetchColumn();  
-      $max = ceil($nbrEntites/$nbreEntitesParPage);
-      return $max;
-      $req->closeCursor(); 
-    }
-
-    function comModPageMax($table, $nbreEntitesParPage){
-      $this->getBdd();
-      $req = self::$_bdd->prepare("SELECT COUNT(*) from $table WHERE modere = 1 ");
-      $req->execute();
-      $nbrEntites = $req->fetchColumn();  
-      $max = ceil($nbrEntites/$nbreEntitesParPage);
-      return $max;
-      $req->closeCursor(); 
-    }
-
-    public function readAll($table, $obj, $billetId=null, $pageCom=null, $comParPage=null){
-      $this->getBdd();
+    public function readAll($table, $obj, $page, $entiteParPage, $billetId=null){
       $commentaires = [];
-      
-      $limit = (htmlspecialchars($pageCom) - 1) * $comParPage. ', ' .$comParPage;
-      
-      
-      $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC WHERE billetId = ? LIMIT $limit");
+      $this->getBdd();
+      $limit = (htmlspecialchars($page) - 1) * $entiteParPage. ', ' .$entiteParPage;
+      $req = self::$_bdd->prepare("SELECT * FROM $table WHERE billetId=? LIMIT $limit");
       $req->execute(array($billetId));
-      
       while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
         $commentaire = new Comment($data);
         $commentaires[] = $commentaire;
       }
       $req->closeCursor();
       return $commentaires;
+    }
+
+    function pagemax($table, $nbreEntitesParPage, $billetId){
+      $this->getBdd();
+      $req = self::$_bdd->prepare("SELECT COUNT(*) from $table WHERE billetId=?");
+      $req->execute(array($billetId));
+      $nbrEntites = $req->fetchColumn();  
+      $max = ceil($nbrEntites/$nbreEntitesParPage);
+      return $max;
+      $req->closeCursor(); 
     }
 
     public function readOne($table, $obj, $id){
@@ -77,6 +53,54 @@ class CommentManager extends Model implements crud {
     
       return $commentaire;
       $req->closeCursor();
+    }
+
+    public function readSignaledComments($table, $obj, $pageComSign, $signComParPage){
+      $commentairesignal = [];
+      $bdd = $this->getBdd();
+      $limit = (htmlspecialchars($pageComSign) - 1) * $signComParPage. ', ' .$signComParPage;
+      $req = self::$_bdd->prepare("SELECT * FROM $table WHERE signale = 1 ORDER BY id DESC LIMIT $limit");
+      $req->execute(array());
+      while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+        $commentaire = new Comment($data);
+        $commentairesignal[] = $commentaire;
+      }
+      $req->closeCursor();
+      return $commentairesignal;
+    }
+
+    function comSignPageMax($table, $nbreEntitesParPage){
+      $this->getBdd();
+      $req = self::$_bdd->prepare("SELECT COUNT(*) from $table WHERE signale = 1 ");
+      $req->execute();
+      $nbrEntites = $req->fetchColumn();  
+      $max = ceil($nbrEntites/$nbreEntitesParPage);
+      return $max;
+      $req->closeCursor(); 
+    }
+
+    public function readModeredComments($table, $obj, $pageComMod, $modComParPage){
+      $commentairemodere = [];
+      $bdd = $this->getBdd();
+      $limit = (htmlspecialchars($pageComMod) - 1) * $modComParPage. ', ' .$modComParPage;
+      $req = self::$_bdd->prepare("SELECT * FROM $table WHERE modere = 1 ORDER BY id DESC LIMIT $limit");
+      $req->execute(array());  
+      while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+        $commentaire = new Comment($data);
+        $commentairemodere[] = $commentaire;
+      }
+      $req->closeCursor();
+      return $commentairemodere;
+    }
+
+    function comModPageMax($table, $nbreEntitesParPage){
+      $this->getBdd();
+      $req = self::$_bdd->prepare("SELECT COUNT(*) from $table WHERE modere = 1 ");
+      $req->execute();
+      $nbrEntites = $req->fetchColumn();  
+      $max = ceil($nbrEntites/$nbreEntitesParPage);
+      return $max;
+      $req->closeCursor(); 
     }
      
     public function update($table, $data, $where){
@@ -133,45 +157,26 @@ class CommentManager extends Model implements crud {
       ));
     }
 
-    public function getComments($billetId, $pageCom, $comParPage){
-      return $this->readAll('commentaires', 'Comment', $billetId, $pageCom, $comParPage);
+    public function getComments($billetId, $pageComAccueil, $entiteParPage){
+      $page = $pageComAccueil;
+      return $this->readAll('commentaires', 'Comment', $page, $entiteParPage, $billetId);
     }
     
     public function getComment($billetId){
       return $this->readOne('commentaires', 'Comment', $billetId);
     }
+
+    public function getSignaledComments($pageComSign, $signComParPage){
+      return $this->readSignaledComments('commentaires', 'Comment', $pageComSign, $signComParPage);
+    }
+
+    public function getModeredComments($pageComMod, $modComParPage){
+      return $this->readModeredComments('commentaires', 'Comment', $pageComMod, $modComParPage);
+    }
     
-    public function getSignaledComments($table, $obj, $signale= null, $pageComSign, $signComParPage){
-      $commentairesignal = [];
-      $bdd = $this->getBdd();
-      $limit = (htmlspecialchars($pageComSign) - 1) * $signComParPage. ', ' .$signComParPage;
-      $req = self::$_bdd->prepare("SELECT * FROM $table WHERE signale = 1 LIMIT $limit");
-      $req->execute(array($signale));
-      while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-        $commentaire = new Comment($data);
-        $commentairesignal[] = $commentaire;
-      }
-      $req->closeCursor();
-      return $commentairesignal;
-    }
-
-    public function getModeredComments($table, $obj, $modere= null, $pageComMod, $modComParPage){
-      $commentairemodere = [];
-      $bdd = $this->getBdd();
-      $limit = (htmlspecialchars($pageComMod) - 1) * $modComParPage. ', ' .$modComParPage;
-      $req = self::$_bdd->prepare("SELECT * FROM $table WHERE modere = 1 LIMIT $limit");
-      $req->execute(array($modere));  
-      while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-        $commentaire = new Comment($data);
-        $commentairemodere[] = $commentaire;
-      }
-      $req->closeCursor();
-      return $commentairemodere;
-    }
-
-
-    public function getPageMax($nbreEntitesParPage){
-      return $this->pagemax('commentaires', $nbreEntitesParPage);
+    public function getPageMax($entiteParPage, $billetId){
+      $nbreEntitesParPage = $entiteParPage;
+      return $this->pagemax('commentaires', $nbreEntitesParPage, $billetId);
     }
     public function getComSignPageMax($nbreEntitesParPage){
       return $this->comSignPageMax('commentaires', $nbreEntitesParPage);
