@@ -5,12 +5,12 @@ spl_autoload_register(function($class){
 });
 
 $_billetManager;
-$this->_billetManager = new BilletManager();
+$_billetManager = new BilletManager();
 
 $page = isset($_POST['page']) && is_numeric($_POST['page'])? $_POST['page'] : 1;
 $entiteParPage = 9; 
-$billets = $this->_billetManager->getBillets($page, $entiteParPage);
-$pages = $this->_billetManager->getPageMax($entiteParPage);
+$billets = $_billetManager->getBillets($page, $entiteParPage);
+$pages = $_billetManager->getPageMax($entiteParPage);
 if(isset($_POST['action']) && $_POST['action']=='showAccueilBillet'){
     $billetsAccueilOutput = '';
     foreach ($billets as $billet){ 
