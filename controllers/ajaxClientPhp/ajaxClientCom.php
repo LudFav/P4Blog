@@ -1,25 +1,24 @@
 <?php
+spl_autoload_register(function($class){
+    require_once($_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/models/'.$class.'.php');
+});
 
 $_commentManager;
-
 $this->_commentManager = new CommentManager;
 
+$entiteParPage = 5;
+$pageComAccueil = isset($_POST['pageCom']) && is_numeric($_POST['pageCom'])?$_POST['pageCom'] : 1;
+$billetId = isset($_POST['billetId']) && is_numeric($_POST['billetId'])?$_POST['billetId'] : NULL;
+$commentaires = $this->_commentManager->getComments($billetId, $pageComAccueil, $entiteParPage);
+$pages = $this->_commentManager->getPageMax($entiteParPage, $billetId);
+
 if(isset($_POST['action'])&& $_POST['action']=='showComment'){
-    isset($_POST['pageCom']) && is_numeric($_POST['pageCom'])? $pageCom = $_POST['pageCom'] : $pageCom = 1; 
-    $comParPage = 5;
-    $pages = $this->_commentManager->getPageMax($comParPage);
-    $pageNav = 2;
-    $prev = $pageCom - 1;
-    $next = $pageCom + 1;
   $commentairesOutput = '';
- 
-  $commentaires = $this->_commentManager->getComments($_POST['billetId'], $pageCom, $comParPage);
-  
   foreach ($commentaires as $commentaire){ 
 
-      $commentairesOutput.= '<div class="comments-area" style="margin-top:5px; margin-bottom:20px">';
+    $commentairesOutput.= '<div class="comments-area" style="margin-top:5px; margin-bottom:20px">';
 
-      $commentairesOutput.=    '<div class="comment">';
+    $commentairesOutput.=    '<div class="comment">';
           if($commentaire->modere()==1){
           $commentairesOutput.= '<div class="comment-info" value=' .$commentaire->id(). '>';
           $commentairesOutput.= '<div class="middle-area" value=' .$commentaire->modere(). '>';
@@ -46,7 +45,10 @@ if(isset($_POST['action'])&& $_POST['action']=='showComment'){
         }   
     }
     $data['commentairesOutput'] = $commentairesOutput;
-    exit($data['commentairesOutput']);
+    $data['pageComFront'] = $pageComAccueil;
+    $data['maxPagesComFront'] = $pages;
+    $responseComFront = json_encode($data);
+    exit($responseComFront);
 }
 
 
@@ -62,4 +64,4 @@ if(isset($_POST['action']) && $_POST['action']=='insertCom'){
 
 if(isset($_POST['action']) && $_POST['action']=='signalCom'){
     $signaleCom = $this->_commentManager->signaleComment($_POST['idSignal']);   
-  }
+}
