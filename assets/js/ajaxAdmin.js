@@ -42,7 +42,7 @@ function billetTable() {
       responseBillet = JSON.parse(data);
       responseBilletTable = responseBillet.billetsOutput;
       pagesMax = responseBillet.maxPages;
-      billetPage = new HtmlPagination(
+      billetPage = new AdminPagination(
         "#paginationAdminBillet",
         "pageAdminBillet",
         pagesMax,
@@ -61,8 +61,8 @@ function billetTable() {
         newBilletTable = $(responseBilletTable);
         newButtonDeleteBillet = newBilletTable.find(".deleteBilBtn");
         newButtonDeleteBillet.on("click", function() {
-          modalDeleteBillet;
-          idBilletToDelete = $(this).attr("value");
+        modalDeleteBillet;
+        idBilletToDelete = $(this).attr("value");
         });
         $("#tbodyBillet").html(newBilletTable);
         billetButtonPagination(pagesMax);
@@ -76,17 +76,13 @@ function billetButtonPagination(pagesMax) {
     e.preventDefault();
     if (page < pagesMax) {
       page = page + 1;
-      console.log("ma page avant :" + page);
       billetTable();
-      console.log("ma page apres :" + page);
     }
   });
   $(".pageAdminBillet.page-link.prev").on("click", function() {
     if (page > 1) {
       page--;
-      console.log("ma page :" + page);
       billetTable();
-      console.log("ma page :" + page);
     }
   });
   $(".pageAdminBillet.page-link.but").on("click", function() {
@@ -97,7 +93,7 @@ function billetButtonPagination(pagesMax) {
 }
 
 //OBJET PAGINATION***********************************************************
-function HtmlPagination(element, paginationId, pagesMax, pageName) {
+function AdminPagination(element, paginationId, pagesMax, pageName) {
   this.element = element;
   this.paginationId = paginationId;
   this.pagesMax = pagesMax;
@@ -217,7 +213,7 @@ function commentTable() {
         });
         comSignPagesMax = response.maxComSignPages;
         $("#tbodyComment").html(newCommentTable);
-        comSignPagination = new HtmlPagination(
+        comSignPagination = new AdminPagination(
           "#paginationComSign",
           "pageAdminComSign",
           comSignPagesMax,
@@ -257,7 +253,7 @@ function moderedCommentTable() {
     responsemod = JSON.parse(data);
     responsemodTable = responsemod.moderedCommentOutput
     comModPagesMax = responsemod.maxPagesComMod;
-    comModPagination = new HtmlPagination(
+    comModPagination = new AdminPagination(
         "#paginationComMod",
         'pageAdminComMod',
         comModPagesMax,
