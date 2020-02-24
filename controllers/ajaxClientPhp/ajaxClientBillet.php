@@ -6,6 +6,7 @@ spl_autoload_register(function($class){
 
 $_billetManager;
 $this->_billetManager = new BilletManager();
+
 $page = isset($_POST['page']) && is_numeric($_POST['page'])? $_POST['page'] : 1;
 $entiteParPage = 9; 
 $billets = $this->_billetManager->getBillets($page, $entiteParPage);
