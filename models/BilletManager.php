@@ -1,5 +1,4 @@
 <?php
-// contient les methodes d'operation de nos billets
 
 class BilletManager extends Model implements crud
 {
@@ -28,10 +27,10 @@ class BilletManager extends Model implements crud
     $req->closeCursor(); 
   }
 
-  public function readAll($table, $obj, $pageB=null, $entiteParPage=null){
+  public function readAll($table, $obj, $page, $entiteParPage){
     $this->getBdd();
     $var = [];
-    $limit = (htmlspecialchars($pageB) - 1) * $entiteParPage. ', ' .$entiteParPage;
+    $limit = (htmlspecialchars($page) - 1) * $entiteParPage. ', ' .$entiteParPage;
     $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC LIMIT $limit");
     $req->execute();
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
@@ -79,7 +78,8 @@ class BilletManager extends Model implements crud
   }
   
   public function getBillets($pageB, $entiteParPage){
-    return $this->readAll('billets', 'Billet', $pageB, $entiteParPage);
+    $page = $pageB;
+    return $this->readAll('billets', 'Billet', $page, $entiteParPage);
   }
 
   public function getBillet($id){
