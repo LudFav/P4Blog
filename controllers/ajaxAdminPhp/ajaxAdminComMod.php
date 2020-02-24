@@ -7,16 +7,14 @@ $_commentManager;
 $_commentManager = new CommentManager;
 
 $entiteParPage= 5;
-$nbreEntitesParPage = $entiteParPage;
 $pageComMod= isset($_POST['pageComMod'])? $_POST['pageComMod'] : 1; 
-$commentaireModeres = $_commentManager->getModeredComments('commentaires', 'Comment', $modere=null, $pageComMod, $entiteParPage);
-$comModPages = $_commentManager->getComModPagesMax($nbreEntitesParPage);
+$commentaireModeres = $_commentManager->getModeredComments($pageComMod, $entiteParPage);
+$comModPages = $_commentManager->getComModPagesMax($entiteParPage);
 
 if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
-    isset($_POST['pageComMod']) && is_numeric($_POST['pageComMod'])? $pageComMod = $_POST['pageComMod'] : $pageComMod = 1; 
     $moderedCommentOutput=''; 
     
-    $commentaireModeres = $_commentManager->getModeredComments('commentaires', 'Comment', $modere=null, $pageComMod, $entiteParPage);
+   
     foreach ($commentaireModeres as $commentaireModere){
         $moderedCommentOutput.='<tr class="moderedCommentRow' .$commentaireModere->id(). '">';
         $moderedCommentOutput.='<td>' .$commentaireModere->id(). '</td>';
@@ -42,11 +40,4 @@ if(isset($_POST['action']) && $_POST['action']=='unmodere'){
 if(isset($_POST['action']) && $_POST['action']=='deleteModCom'){
     $deleteComment = $_commentManager->deleteComment($_POST['deleteCom']);
 }
-
-//CHANGEMENT DE MOT DE PASSE
-if(isset($_POST['action']) && $_POST['action'] == 'changePassword'){
-    $formOutput ='';
-    $formOutput .= '<form class="changepass">';
-}
-
 ?>
