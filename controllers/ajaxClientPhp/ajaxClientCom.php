@@ -4,13 +4,13 @@ spl_autoload_register(function($class){
 });
 
 $_commentManager;
-$this->_commentManager = new CommentManager;
+$_commentManager = new CommentManager;
 
 $entiteParPage = 5;
 $pageComAccueil = isset($_POST['pageCom']) && is_numeric($_POST['pageCom'])?$_POST['pageCom'] : 1;
 $billetId = isset($_POST['billetId']) && is_numeric($_POST['billetId'])?$_POST['billetId'] : NULL;
-$commentaires = $this->_commentManager->getComments($billetId, $pageComAccueil, $entiteParPage);
-$pages = $this->_commentManager->getPageMax($entiteParPage, $billetId);
+$commentaires = $_commentManager->getComments($billetId, $pageComAccueil, $entiteParPage);
+$pages = $->_commentManager->getPageMax($entiteParPage, $billetId);
 
 if(isset($_POST['action'])&& $_POST['action']=='showComment'){
   $commentairesOutput = '';
