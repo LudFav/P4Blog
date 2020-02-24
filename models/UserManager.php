@@ -19,10 +19,11 @@ class UserManager extends Model implements crud
   }
 
 
-  public function readAll($table, $obj){
+  public function readAll($table, $obj, $page, $entiteParPage){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare('SELECT * FROM '.$table.' ORDER BY id DESC');
+    $limit = (htmlspecialchars($page) - 1) * $entiteParPage. ', ' .$entiteParPage;
+    $req = self::$_bdd->prepare("SELECT * FROM $table ORDER BY id DESC LIMIT $limit");
     $req->execute();
     while ($data = $req->fetch(PDO::FETCH_ASSOC)) { 
       $var[] = new $obj($data);
@@ -82,7 +83,7 @@ class UserManager extends Model implements crud
   }
   
   public function getUsers(){
-    return $this->readAll('users', 'User');
+    return $this->readAll('users', 'User', $page, $entiteParPage);
   }
 
   public function getUser(){
