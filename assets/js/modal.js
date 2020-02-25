@@ -26,7 +26,7 @@ class Modal {
            // this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
 
             if(this.options.type == 'connexion'){
-            this.modal = $('<form method="post" action="ControllerLogin.php" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'+this.options.titre+'" aria-hidden="true"></form>').appendTo(this.element);
+            this.modal = $('<form method="post" action="ControllerLogin.php" class="modal" tabindex="-1" role="dialog" aria-labelledby="'+this.options.titre+'" aria-hidden="true"></form>').appendTo(this.element);
             let modalId = this.options.id;
             this.modal.attr('id', modalId);
             this.modalDial = $('<div class="modal-dialog" role="document"></div>').appendTo(this.modal);
