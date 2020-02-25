@@ -5,7 +5,7 @@ showComment();
 //  AJAX FRONT
 function billetAccueil() {
     $.post({
-        url: 'accueil',
+        url: 'sommaire',
         data: { 'action': 'showAccueilBillet', 'page': page },
         success: function (data) {
             responseBilletAccueil = JSON.parse(data);
