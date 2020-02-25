@@ -14,7 +14,7 @@ $page = isset($_POST['page'])? $_POST['page'] :1;
 
 $pageDebillets = $_billetManager->getBillets($page, $entiteParPage);
 $pages = $_billetManager->getPageMax($nbreEntitesParPage);
-echo $pagedeBillets;
+
 //TABLEAU BILLET ET PAGE
 if(isset($_POST['action']) && $_POST['action']=='showbillet'){
     $billetsOutput = '';
