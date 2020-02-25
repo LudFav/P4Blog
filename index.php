@@ -2,6 +2,7 @@
 
 require_once('controllers/Router.php');
 
+/*
 require_once('controllers/ControllerAccueil.php');
 echo 'ControllerAccueil.php' .is_file('controllers/ControllerAccueil.php');
 
@@ -33,7 +34,8 @@ require_once('controllers/ajaxAdminPhp/ajaxAdminBillet.php');
 echo 'ajaxAdminBillet' .is_file('controllers/ajaxAdminPhp/ajaxAdminBillet.php');
 
 require_once('controllers/ajaxAdminPhp/ajaxAdminComSign.php');
-echo 'ajaxAdminComSign' .is_file('controllers/ajaxAdminPhp/ajaxAdminComSign.php');
+echo 'ajaxAdminComSign' .is_file('controllers/ajaxAdminPhp/ajaxAdminComSign.php');*/
+
 $router = new Router();
 
 $router->routeReq();
