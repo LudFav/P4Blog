@@ -1,11 +1,32 @@
 <?php
 
-require_once('controllers/Router.php');
-
+require_once($_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/controllers/Router.php');
 /*
-require_once('controllers/ControllerAccueil.php');
-echo 'ControllerAccueil.php' .is_file('controllers/ControllerAccueil.php');
+require_once('views/View.php');
+$bol  = is_file('views/View.php');
+if ( $bol == 1){
+    echo 'fichier existe</br>';
+} else {
+    echo 'fichier non existant';
+}
 
+require_once('controllers/ControllerAccueil.php');
+$bol2 = is_file('controllers/ControllerAccueil.php');
+if ( $bol2 == 1){
+    echo 'fichier 2 existe</br>';
+} else {
+    echo 'fichier  2 non existant</br>';
+}
+
+
+require_once('controllers/ajaxClientPhp/ajaxClientBillet.php');
+$bol3 = is_file('controllers/ajaxClientPhp/ajaxClientBillet.php');
+if ( $bol3 == 1){
+    echo 'fichier 3 existe</br>';
+} else {
+    echo 'fichier  3 non existant</br>';
+}
+/*
 require_once('controllers/ControllerAddBillet.php');
 echo 'ControllerAddBillet.php' .is_file('controllers/ControllerAddBillet.php');
 
