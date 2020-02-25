@@ -9,7 +9,7 @@
 	
 
 	<!-- Font -->
-
+	<link rel="stylesheet" href="assets/css/main.css" />
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 	<link href="assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
