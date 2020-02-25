@@ -5,7 +5,7 @@ showComment();
 //  AJAX FRONT
 function billetAccueil() {
     $.post({
-        url: 'controllers/ControllerAccueil.php',
+        url: 'accueil',
         data: { 'action': 'showAccueilBillet', 'page': page },
         success: function (data) {
             responseBilletAccueil = JSON.parse(data);
@@ -21,6 +21,7 @@ function billetAccueil() {
                 $('#pageAccueilBillet').hide();
             }
             $('#billetAccueil').html(billetAccueilTable);
+            billetAccueilPagination;
             billetAccueilButtonPagination(accueilMaxPages)
         }
     })
@@ -56,7 +57,7 @@ function showComment() {
     idBillet = $('.post-info').attr('value');
     console.log('billet id :'+idBillet);
     $.post({
-        url: 'controllers/ControllerPost.php',
+        url: 'post',
         data: { 'action': 'showComment', 'pageCom' : pageCom, 'billetId': idBillet},
         success: function (data) {
             responseFrontCom = JSON.parse(data);
@@ -84,6 +85,7 @@ function showComment() {
                     $('#frontComPage').hide();
                 }
                 $('#showComments').html(newCommentDisplay);
+                frontComPagination;
                 frontComButtonPagination(frontComPagesMax);
             }
         }
@@ -235,8 +237,8 @@ function FrontPagination(element, paginationId, pagesMax, pageName) {
 
 //BOUTON SIGNALER
 $(window).bind('load', function () {
-    billetAccueilPagination;
-    frontComPagination;
+    //billetAccueilPagination;
+    //frontComPagination;
     $('.signalbtn').on('click', function () {
         signalement($(this).attr('value'));
     });
