@@ -1,12 +1,29 @@
-<section class="blog-area section">
-	<div class="slider"><h1>Billet simple pour l'Alaska</h1></div>
-		<div class="container">
+<div id="wrapper">
+	<nav>
+		<ul>
+			<li><a href="sommaire" class="fas fa-book" id="sommaire"></a><span class="label"></span></a></li>
+			<li><a href="" class="fas fa-sign-in-alt" id="login" data-toggle="modal" data-target="#connexion"><span class="label"></span></a></li>
+		</ul>
+	</nav>
+			
+	<div id="bg"></div>
 
-			<div class="row" id="billetAccueil">
+			<div id="overlay"></div>
+			<div id="main">
+				<header id="header">
+					<h1>Billet simple pour l'Alaska</h1>
+					<p>de Jean Forteroche</p>
+					<nav>
+						<ul>
+							<li><a href="sommaire" class="fas fa-book" id="sommaire"></a><span class="label"></span></a></li>
+							<li><a href="" class="fas fa-sign-in-alt" id="login" data-toggle="modal" data-target="#connexion"><span class="label"></span></a></li>
+						</ul>
+					</nav>
+				</header>
+				
+				<footer id="footer">
+					<span class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>.</span>
+				</footer>
 
-			</div><!-- row -->
-
-			<div id='paginationAccueil'></div>
-		
-		</div><!-- container -->
-</section><!-- section -->
+	</div>
+</div><!--wrapper-->
