@@ -5,7 +5,7 @@ showComment();
 //  AJAX FRONT
 function billetAccueil() {
     $.post({
-        url: 'accueil',
+        url: 'controllers/ControllerAccueil.php',
         data: { 'action': 'showAccueilBillet', 'page': page },
         success: function (data) {
             responseBilletAccueil = JSON.parse(data);
@@ -56,7 +56,7 @@ function showComment() {
     idBillet = $('.post-info').attr('value');
     console.log('billet id :'+idBillet);
     $.post({
-        url: 'post',
+        url: 'controllers/ControllerPost.php',
         data: { 'action': 'showComment', 'pageCom' : pageCom, 'billetId': idBillet},
         success: function (data) {
             responseFrontCom = JSON.parse(data);
