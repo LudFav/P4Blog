@@ -1,5 +1,8 @@
-<div class="alert alert-primary" role="alert" style="height:100%; background: url(assets/images/errorImg.jpg) no-repeat center center">
-<h1 class="errorMessage titre">ERREUR 404</h1>
-<p class="errorMessage text">L'url renseignée n'existe pas, veuillez cliquer sur le lien ci-dessous pour revenir à la page d'accueil</p>
-<button class ="btn btn-success errorMessage"><a href="accueil">Accueil</a></button>
+<div class="errorMessage cont">
+    <img src="assets/images/errorImg.jpg" class="img-responsive errorMessage image">
+    <div class="errorMessage textCont">
+        <h1 class="errorMessage titre">Vous êtes hors piste</h1>
+        <p class="errorMessage text">ERREUR404, cliquez sur le bouton pour revenir sur le sentier</p>
+        <button class ="btn btn-success errorMessage button"><a href="accueil">Accueil</a></button>
+    </div>
 </div>
