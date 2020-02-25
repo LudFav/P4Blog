@@ -65,6 +65,7 @@ function billetTable() {
         idBilletToDelete = $(this).attr("value");
         });
         $("#tbodyBillet").html(newBilletTable);
+        billetPage;
         billetButtonPagination(pagesMax);
       }
     }
@@ -414,7 +415,7 @@ modalDeleteModCom = new Modal(document.querySelector("body"), {
 
 //BOUTONS CONFIRMATION MODAL*************************************************
 $(window).bind("load", function() {
-  billetPage;
+
 
   $("#signalCom-wrapper").hide();
   $("#modCom-wrapper").hide();
