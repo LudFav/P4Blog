@@ -1,8 +1,7 @@
 <?php
-
-require_once 'views/View.php';
-require_once 'controllers/ajaxClientPhp/ajaxClientBillet.php';
-require_once 'controllers/ajaxClientPhp/ajaxClientCom.php';
+require_once $_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/views/View.php';
+require_once $_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/controllers/ajaxClientPhp/ajaxClientBillet.php';
+require_once $_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/controllers/ajaxClientPhp/ajaxClientCom.php';
 
 class ControllerAccueil{
   private $_view;
