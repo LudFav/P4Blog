@@ -39,14 +39,6 @@
 				<li class="li-accueil"><a href="accueil">Accueil</a></li>
 				<li class="li-logout"><a href="#"  class="logout">Deconnexion</a></li>
 			</ul><!-- main-menu -->
-
-			<div class="src-area">
-				<form>
-					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-					<input class="src-input" type="text" placeholder="Type of search">
-				</form>
-			</div>
-
 		</div><!-- container -->
 	</header>
 
