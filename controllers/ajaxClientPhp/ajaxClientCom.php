@@ -10,7 +10,7 @@ $entiteParPage = 5;
 $pageComAccueil = isset($_POST['pageCom']) && is_numeric($_POST['pageCom'])?$_POST['pageCom'] : 1;
 $billetId = isset($_POST['billetId']) && is_numeric($_POST['billetId'])?$_POST['billetId'] : NULL;
 $commentaires = $_commentManager->getComments($billetId, $pageComAccueil, $entiteParPage);
-$pages = $->_commentManager->getPageMax($entiteParPage, $billetId);
+$pages = $_commentManager->getPageMax($entiteParPage, $billetId);
 
 if(isset($_POST['action'])&& $_POST['action']=='showComment'){
   $commentairesOutput = '';
@@ -58,10 +58,10 @@ if(isset($_POST['action']) && $_POST['action']=='insertCom'){
         'auteur' => htmlspecialchars($_POST['auteur']),
         'contenu' => htmlspecialchars($_POST['contenu'])
     );           
-    $createCommentaires = $this->_commentManager->createComment($data, $_POST['billetId']);
+    $createCommentaires = $_commentManager->createComment($data, $_POST['billetId']);
     exit;
 }
 
 if(isset($_POST['action']) && $_POST['action']=='signalCom'){
-    $signaleCom = $this->_commentManager->signaleComment($_POST['idSignal']);   
+    $signaleCom = $_commentManager->signaleComment($_POST['idSignal']);   
 }
