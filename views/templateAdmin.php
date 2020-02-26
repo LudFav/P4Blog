@@ -31,6 +31,7 @@
     	    	</nav>
         	</header>
 		<?= $content ?>	
+		</div>><!--#wrapper dans template -->
 	<script>
 	window.onload = function() { document.body.classList.remove('is-preload'); }
 		window.ontouchmove = function() { return false; }
