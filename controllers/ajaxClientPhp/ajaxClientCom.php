@@ -6,7 +6,7 @@ spl_autoload_register(function($class){
 $_commentManager;
 $_commentManager = new CommentManager;
 
-$entiteParPage = 5;
+$entiteParPage = 3;
 $pageComAccueil = isset($_POST['pageCom']) && is_numeric($_POST['pageCom'])?$_POST['pageCom'] : 1;
 $billetId = isset($_POST['billetId']) && is_numeric($_POST['billetId'])?$_POST['billetId'] : NULL;
 $commentaires = $_commentManager->getComments($billetId, $pageComAccueil, $entiteParPage);
@@ -16,7 +16,7 @@ if(isset($_POST['action'])&& $_POST['action']=='showComment'){
   $commentairesOutput = '';
   foreach ($commentaires as $commentaire){ 
 
-    $commentairesOutput.= '<div class="comments-area" style="margin-top:5px; margin-bottom:20px">';
+    $commentairesOutput.= '<div class="comments-area">';
 
     $commentairesOutput.=    '<div class="comment">';
           if($commentaire->modere()==1){
