@@ -23,11 +23,11 @@ function isLoggedin() {
     data: { action: "isLogged" },
     success: function(data) {
       if (data == "1") {
-        let adminButton = '<li><a href="admin">Administration</a></li>';
-        $(adminButton).insertBefore($(".li-logout"));
-        let statut =
-          '<p class="text-success" style="float:right"> Connecté </p>';
-        $(statut).appendTo($("#statut"));
+        console.log(data);
+        let logout = '<a class="logout fas fa-sign-out-alt"></a>';
+        $('#login').replaceWith($(logout));
+        let adminButton = '<li><a href="admin" class="fas fa-feather-alt"></a></li>';
+        $(adminButton).insertBefore($('li.logout'));
       }
     }
   });
