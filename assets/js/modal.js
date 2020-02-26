@@ -54,7 +54,7 @@ class Modal {
                     
                     //CREATION DIV et Button de modal, si local et session storage sont supporté on sauvegarde nom et prenom en local
                     this.modalFooter = $('<div class="modal-footer"></div>').appendTo(this.modalContent);
-                    let validBtn = $('<button type="submit" value="Connexion" class="btn btn-primary" id="'+modalId + '-validBtn'+'" data-dismiss="modal">Valider</button>').appendTo($(this.modalFooter));
+                    let validBtn = $('<button type="button" value="Connexion" class="btn btn-primary" id="'+modalId + '-validBtn'+'" >Valider</button>').appendTo($(this.modalFooter));
                     $(validBtn).on('click', function () {
                         localStorage.setItem("name", inputPseudo.val()); //savgrd le pseudo
                     })
