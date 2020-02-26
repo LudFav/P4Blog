@@ -1,71 +1,36 @@
-<div class="slider">
-  <div class="display-table  center-text">
-    <h1 class="title display-table-cell"><b>DESIGN</b></h1>
-  </div>
-</div><!-- slider -->
-
 <section class="post-area section">
-  <div class="container">
+    <div class="container">
+      <article>
+        <h1><?=$billet[0]->titre()?></h1>
+			  <div class="row">
+          <div class="col-lg-8 col-md-12 no-right-padding">
 
-    <div class="row">
+            <div class="main-post">
 
-      <div class="col-lg-8 col-md-12 no-right-padding">
+              <div class="blog-post-inner">
 
-        <div class="main-post">
+                <div class="post-info" value="<?=$billet[0]->id()?>">
+                <div class="middle-area">
+                    <h6 class="name" href="#"><b><?=$billet[0]->auteur()?></b></h6>
+                    <h6 class="date"><?=$billet[0]->date()?></h6>
+                </div>
 
-          <div class="blog-post-inner">
-
-            <div class="post-info" value="<?=$billet[0]->id()?>">
-
-              <div class="left-area">
-    
-              </div>
-
-              <div class="middle-area">
-                <a class="name" href="#"><b><?=$billet[0]->auteur()?></b></a>
-                <h6 class="date"><?=$billet[0]->date()?></h6>
-              </div>
-
-            </div><!-- post-info -->
-
-            <h3 class="title"><a href="#"><b><?=$billet[0]->titre()?></b></a></h3>
-
-            <p class="para"><?=$billet[0]->contenu()?></p>
-          </div><!-- blog-post-inner -->
-
-          <div class="post-footer post-info">
-
-            <div class="left-area">
-            
-            </div>
-
-           
-
-          </div><!-- post-info -->
+                </div><!-- post-info -->
 
 
-        </div><!-- main-post -->
-      </div><!-- col-lg-8 col-md-12 -->
-
-        
-          </div><!-- subscribe-area -->
-
-        </div><!-- info-area -->
-
-      </div><!-- col-lg-4 col-md-12 -->
-
-    </div><!-- row -->
-
-  </div><!-- container -->
-</section><!-- post-area -->
+                <p class="para"><?=$billet[0]->contenu()?></p>
+              </div><!-- blog-post-inner -->
+            </div><!-- main-post -->
 
 
+            </div><!-- col-lg-8 col-md-12 -->
+        </div><!-- .row -->
+      </article>
+      </div><!-- .container -->
+</section><!--post area section-->
 
 <section class="comment-section">
   <div class="container">
-  <?php
-  
-  ?>
     <h4><b>Commentaires</b></h4>
     <div class="row">
 
@@ -91,5 +56,10 @@
         </div>
         <div id="showComments"></div>
         <div id='paginationFrontCom'></div>
-        
-</section>
+    </div><!-- .container -->
+    </div>><!--#wrapper dans template -->
+</section><!-- .section commentaire-->
+
+
+
+
