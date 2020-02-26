@@ -113,6 +113,28 @@ function frontComButtonPagination(frontComPagesMax) {
     });
 }
 
+
+function errorMessageEmpty(){
+    let emptyLogins = '<div class="emptylogins alert alert-warning" role="alert">Veuillez remplir tout les champs</div>';
+    $(emptyLogins).insertAfter($('.md-form.mb-4'));
+    $('.emptylogins').fadeIn(1000);
+    setTimeout(function(){
+        $('.emptylogins').fadeOut( "slow", function(){
+            $('.emptylogins').remove();
+        } );
+    }, 2000);
+}
+
+function errorMessageLogin(){
+    let errorLogin = '<div class="errorlogins alert alert-warning" role="alert">Erreur de login, veuillez reessayer</div>';
+    $(errorLogin).insertAfter($('.md-form.mb-4'));
+    $('.errorlogins').fadeIn(1000);
+    setTimeout(function(){
+        $('.errorlogins').fadeOut( "slow", function(){
+            $('.errorlogins').remove();
+        });
+    }, 2000);
+}
 //FORMULAIRE D'ENVOI DE COMMENTAIRE
 $('.submit-btn').on('click', function (e) {
     e.preventDefault();
@@ -237,8 +259,6 @@ function FrontPagination(element, paginationId, pagesMax, pageName) {
 
 //BOUTON SIGNALER
 $(window).bind('load', function () {
-    //billetAccueilPagination;
-    //frontComPagination;
     $('.signalbtn').on('click', function () {
         signalement($(this).attr('value'));
     });
@@ -259,15 +279,23 @@ $(window).bind('load', function () {
     $('#connexion-validBtn').on('click', function () {
         var username = $('#username').val();
         var password = $('#password').val();
-        $.post({
-            url: 'login',
-            data: { 'action': 'login', 'username': username, 'password': password },
-            success: function (data) {
-                window.location.href = data;
-            }
-        });
-    })
-
+            $.post({
+                url: 'login',
+                data: { 'action': 'login', 'username': username, 'password': password },
+                success: function (data) {
+                    console.log(data);
+                        if(data == 'inputVide'){
+                            errorMessageEmpty();
+                        } else if (data == 'wrong login'){
+                            errorMessageLogin();
+                        } else {
+                        $('#connexion-validBtn').attr('data-dismiss','modal');
+                        window.location.href = data;
+                        }
+                }
+            });
+    }) 
+    
 })
 
 
