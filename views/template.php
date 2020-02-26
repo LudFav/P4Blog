@@ -19,6 +19,16 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body>
+		<div id="wrapper">
+    	<div id="bg"></div>
+    	    <header id="header">
+    	    	<nav>
+				    <ul>
+				    	<li><a href="accueil" class="fas fa-angle-left" id="accueil"></a><span class="label"></span></a></li>
+				    	<li><a href="" class="fas fa-sign-in-alt" id="login" data-toggle="modal" data-target="#connexion"><span class="label"></span></a></li>
+				    </ul>
+    	    	</nav>
+        	</header>
 		<?= $content ?>	
 			<script>
 			window.onload = function() { document.body.classList.remove('is-preload'); }
@@ -30,7 +40,7 @@
 			<script src="public/common-js/bootstrap.js"></script>
 			<script src="public/common-js/scripts.js"></script>
 			<script src="assets/js/Modal.js"></script>
-			<script src="assets/js/Pagination.js"></script>
 			<script src="assets/js/ajax.js"></script>
+			<script src="assets/js/main.js"></script>
 	</body>
 </html>
