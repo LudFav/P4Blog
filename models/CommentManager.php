@@ -22,7 +22,7 @@ class CommentManager extends Model implements crud {
       $commentaires = [];
       $this->getBdd();
       $limit = (htmlspecialchars($page) - 1) * $entiteParPage. ', ' .$entiteParPage;
-      $req = self::$_bdd->prepare("SELECT * FROM $table WHERE billetId=? LIMIT $limit");
+      $req = self::$_bdd->prepare("SELECT * FROM $table WHERE billetId=? ORDER BY id DESC LIMIT $limit");
       $req->execute(array($billetId));
       while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
         $commentaire = new Comment($data);
