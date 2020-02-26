@@ -40,10 +40,10 @@
             <table class="table table-striped table-hover" id='tableBillet'>
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Auteur</th>
-						<th>Titre</th>
-                        <th>Date</th>
+                        <th class="tdId">#</th>
+                        <th class="tdAuteur">Auteur</th>
+						<th class="tdTitre">Titre</th>
+                        <th class="tdDate">Date</th>
                         <th style="text-align:center;">Actions</th>
                     </tr>
                 </thead>
