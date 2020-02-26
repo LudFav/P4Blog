@@ -1,76 +1,24 @@
 $(document).ready(function() {
+	/*const queryString = document.URL;
+	console.log(queryString);
 
-	
-	/* Navigation burger onclick side navigation show */
-	$('.burger-container').on('click', function() {
-		$('.main-navigation').toggle('slow');
+	const urlParams = new URLSearchParams(queryString);
 
-		if($('#myBtn').hasClass('change')) {
-			$('body').addClass('stop-scroll');
-		} else {
-			$('body').removeClass('stop-scroll');
-		}
-	});
-
-
-	/* About me slider */
-	$('.about-me-slider').slick({
-		slidesToShow: 1,
-		prevArrow: '<span class="span-arrow slick-prev"><</span>',
-		nextArrow: '<span class="span-arrow slick-next">></span>'
-	});
-
-	/* Blog slider */
-	$('.blog-slider').slick({
-		slidesToShow: 2,
-		prevArrow: '<span class="span-arrow slick-prev"><</span>',
-		nextArrow: '<span class="span-arrow slick-next">></span>',
-		responsive: [
-		{
-			breakpoint: 768,
-			settings: {
-				slidesToShow: 1
-			}
-		}
-		]
-	});
-	
-});
-
-
-
-var counta = 0;
-
-$(window).scroll(function(e){
-
-
-	/* Onscroll number counter */
-	var statisticNumbers = $('.single-count');
-	if(statisticNumbers.length) {
-		var oTop = statisticNumbers.offset().top - window.innerHeight;
-		if (counta == 0 && $(window).scrollTop() > oTop) {
-			$('.count').each(function() {
-				var $this = $(this),
-				countTo = $this.attr('data-count');
-				$({
-					countNum: $this.text()
-				}).animate({
-					countNum: countTo
-				},
-
-				{
-					duration: 2000,
-					easing: 'swing',
-					step: function() {
-						$this.text(Math.floor(this.countNum));
-					},
-					complete: function() {
-						$this.text(this.countNum);
-					}
-				});
-			});
-			counta = 1;
-		}
+	const blabla = urlParams.has('post&id');
+	console.log(blabla);*/
+	var url_param       = $(location).attr('href').split("/");
+	console.log(url_param)
+	var param           = (url_param[4]).split("&")
+	var whatIwant = (param[0]);
+	console.log(whatIwant)
+	if(whatIwant === 'post'){
+		let retourSommaire = '<a href="sommaire" class="fas fa-book" id="retourSommaire"></a>';
+		$('#accueil').replaceWith($(retourSommaire));
+	} else if(whatIwant === 'accueil'){
+		let sommaire = '<a href="sommaire" class="fas fa-book" id="retourSommaire"></a>';
+		$('#accueil').replaceWith($(sommaire));
 	}
-
 });
+
+
+
