@@ -2,7 +2,7 @@
 <form action="addbillet" method="post" id="FormAddBillet">
   <div class="form-group">
     <label for="auteur" class="labelBillet"><b>Auteur</b></label>
-    <input type="text" name="auteur" class="form-control" id="auteurB" placeholder="Stephane Rois" size="35" required>
+    <input type="text" name="auteur" class="form-control" id="auteurB" value="Jean Forteroche" size="35" required>
   </div>
 
   <div class="form-group">
@@ -15,5 +15,6 @@
     <textarea class="form-control" name="contenu" id="textareaB" rows="3"></textarea>
   </div>
 
-  <input name="add" type="submit" value="valider" class="addBillet"/>
+  <input name="add" type="submit" value="valider" class="btn-success addBillet"/>
 </form>
+</div>><!--#wrapper dans template -->
