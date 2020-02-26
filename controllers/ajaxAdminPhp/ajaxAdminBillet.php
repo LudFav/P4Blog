@@ -20,10 +20,10 @@ if(isset($_POST['action']) && $_POST['action']=='showbillet'){
     $billetsOutput = '';
     foreach ($pageDebillets as $billet){ 
          $billetsOutput.= '<tr class="billetRow' .$billet->id(). '">';
-         $billetsOutput.= '<a href="post&id' .$billet->id(). '"><td>' .$billet->id(). '</td></a>';
-         $billetsOutput.= '<td>' .$billet->auteur(). '</td>';
-         $billetsOutput.= '<td>' .$billet->titre(). '</td>';
-         $billetsOutput.= '<td>' .$billet->date(). '</td>';
+         $billetsOutput.= '<a href="post&id' .$billet->id(). '"><td class="tdId">' .$billet->id(). '</td></a>';
+         $billetsOutput.= '<td class="tdAuteur">' .$billet->auteur(). '</td>';
+         $billetsOutput.= '<td class="tdTitre">' .$billet->titre(). '</td>';
+         $billetsOutput.= '<td class="tdDate">' .$billet->date(). '</td>';
          $billetsOutput.= '<td class="actionTd" value="' .$pages. '">';
          $billetsOutput.= '<button class="visualBilBtn"><a href="post&id=' .$billet->id(). '" ><i class="fa fa-eye"></i></a></button>';
          $billetsOutput.= '<button class="editBilBtn" ><a href="update&id=' .$billet->id(). '"><i class="fa fa-pencil" aria-hidden="true"></i></a></button>';
