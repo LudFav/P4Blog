@@ -17,4 +17,4 @@
 
   <input name="add" type="submit" value="valider" class="btn-success addBillet"/>
 </form>
-</div>><!--#wrapper dans template -->
+
