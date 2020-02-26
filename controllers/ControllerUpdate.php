@@ -22,12 +22,18 @@ class ControllerUpdate {
       $billetToUpdate = $this->_billetManager->getBillet($_GET['id']);
       
       if(isset($_POST['updateBillet'])){
-        $data = array(
-        'titre' => htmlspecialchars($_POST['titre']),
-        'contenu' =>  $_POST['contenu']
-        );
-        $updateBillet = $this->_billetManager->updateBillet($data, $_GET['id']);
-        header('Location:admin');
+        if(!empty($_POST['contenu'])){
+          $updatedContent = $_POST['contenu'];
+          $data = array(
+            'titre' => htmlspecialchars($_POST['titre']),
+            'contenu' =>  $updatedContent
+            );
+            $updateBillet = $this->_billetManager->updateBillet($data, $_GET['id']);
+            header('Location:admin');
+        } else{
+          echo '<h3>Champs texte vide</h3>';
+        }
+        
       }
       $this->_view = new View('Update');
       $this->_view->generateAdmin(array('billet' => $billetToUpdate));  
