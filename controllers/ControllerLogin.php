@@ -19,21 +19,20 @@ class ControllerLogin {
       //$passToHash = password_hash('admin', PASSWORD_DEFAULT, ['cost' => 12]);
       //var_dump($passToHash);
       //$2y$12$d6saXiDFegaG6kPyYQYWROryvOPaMK45wyVPHqR0cj2y7iDsIgj/2
-      if(isset($_POST['username']) && isset($_POST['password'])){
-        $username = htmlspecialchars($_POST['username']);
-      
-        $passwordSubmitted = htmlspecialchars($_POST['password']);
-        $passwordHashed = $userInfo[0]->password();
-        $password= password_verify($passwordSubmitted, $passwordHashed);
-      
-        if($_POST['username'] == $userInfo[0]->username() && $password == true){
-          $_SESSION['admin'] = $username;
-          $link = "admin";
-          echo $link;
-        } else {
-          echo "Erreur : Erreur de login </br>";
-        }
-      }
+      $username = htmlspecialchars($_POST['username']);
+      $passwordSubmitted = htmlspecialchars($_POST['password']);
+      $passwordHashed = $userInfo[0]->password();
+      $goodUsername = $userInfo[0]->username();
+      $password= password_verify($passwordSubmitted, $passwordHashed);
+      if($_POST['username'] == $userInfo[0]->username() && $password == true){
+      $_SESSION['admin'] = $username;
+      $link = "admin";
+      echo $link; 
+      } else if(empty($_POST['username']) || empty($_POST['password'])){
+        echo 'inputVide';
+      } else if(($_POST['username'] != $goodUsername && $password == false) || ($_POST['username'] == $goodUsername && $password == false) || ($_POST['username'] != $goodUsername && $password == true)){
+       echo 'wrong login';
+      } 
     }
   }
 public function isLoggedIn(){
