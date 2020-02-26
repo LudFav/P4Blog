@@ -9,5 +9,4 @@
 			<div id='paginationAccueil'></div>
 		
     </div><!-- .container -->
-    </div>><!--#wrapper dans template -->
 </section><!-- .section -->
