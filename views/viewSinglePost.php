@@ -57,7 +57,6 @@
         <div id="showComments"></div>
         <div id='paginationFrontCom'></div>
     </div><!-- .container -->
-    </div>><!--#wrapper dans template -->
 </section><!-- .section commentaire-->
 
 
