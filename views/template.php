@@ -24,7 +24,7 @@
     	    <header id="header">
     	    	<nav>
 				    <ul>
-				    	<li><a href="accueil" class="fas fa-angle-left" id="accueil"></a><span class="label"></span></a></li>
+				    	<li><a href="sommaire" class="fas fa-book" id="retourSommaire"></a></li>
 				    	<li><a href="" class="fas fa-sign-in-alt" id="login" data-toggle="modal" data-target="#connexion"><span class="label"></span></a></li>
 				    </ul>
     	    	</nav>
