@@ -11,12 +11,9 @@ $(document).ready(function() {
 	var param           = (url_param[4]).split("&")
 	var whatIwant = (param[0]);
 	console.log(whatIwant)
-	if(whatIwant === 'post'){
-		let retourSommaire = '<a href="sommaire" class="fas fa-book" id="retourSommaire"></a>';
-		$('#accueil').replaceWith($(retourSommaire));
-	} else if(whatIwant === 'accueil'){
-		let sommaire = '<a href="sommaire" class="fas fa-book" id="retourSommaire"></a>';
-		$('#accueil').replaceWith($(sommaire));
+	if(whatIwant === 'sommaire'){
+		let accueil = '<a href="accueil" class="fas fa-angle-left" id="accueil"></a><span class="label"></span></a>';  
+		$('#retoutSommaire').replaceWith($(accueil));
 	}
 });
 
