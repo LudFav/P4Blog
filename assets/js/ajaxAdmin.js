@@ -497,8 +497,6 @@ $(window).bind("load", function() {
 
 isLoggedin();
 
-//paginationCommentSign();
-
 $("#signalCom-wrapper").hide();
 $("#modCom-wrapper").hide();
 
