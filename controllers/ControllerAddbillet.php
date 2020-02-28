@@ -14,18 +14,26 @@ class ControllerAddbillet
 
   private function addBillet(){
     
-    
     if(isset($_POST['add'])){
-      $data = array(
-      'auteur' => htmlspecialchars($_POST['auteur']),
-      'titre' => htmlspecialchars($_POST['titre']),
-      'contenu' =>  $_POST['contenu']
-      );
-      $this->_billetManager = new BilletManager();
-      $billets = $this->_billetManager->createBillet($data);
-      header('Location:admin');
+      if(!empty($_POST['auteur']) && !empty($_POST['titre']) && !empty($_POST['contenu']) ){
+        $data = array(
+        'auteur' => htmlspecialchars($_POST['auteur']),
+        'titre' => htmlspecialchars($_POST['titre']),
+        'contenu' =>  $_POST['contenu']
+        );
+        $this->_billetManager = new BilletManager();
+        $billets = $this->_billetManager->createBillet($data);
+        header('Location:admin');
+      } else {
+        return false;
+      }
+    } 
+
+    if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
+      $this->_view = new View('Addbillet');
+      $this->_view->generateAdmin(array());
+    }else {
+      header('Location:accueil');
     }
-    $this->_view = new View('Addbillet');
-    $this->_view->generateAdmin(array());
   }
 }
