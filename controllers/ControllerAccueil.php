@@ -1,7 +1,7 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/views/View.php';
-require_once $_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/controllers/ajaxClientPhp/ajaxClientBillet.php';
-require_once $_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/controllers/ajaxClientPhp/ajaxClientCom.php';
+require_once $_SERVER["DOCUMENT_ROOT"]. '/P4Blog/views/View.php';
+require_once $_SERVER["DOCUMENT_ROOT"]. '/P4Blog/controllers/ajaxClientPhp/ajaxClientBillet.php';
+require_once $_SERVER["DOCUMENT_ROOT"]. '/P4Blog/controllers/ajaxClientPhp/ajaxClientCom.php';
 
 class ControllerAccueil{
   private $_view;
@@ -18,4 +18,3 @@ class ControllerAccueil{
     } 
   }
 }
-
