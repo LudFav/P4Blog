@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function($class){
-    require_once($_SERVER["DOCUMENT_ROOT"].'/PROJET4-MVC-OOP-PHP/models/'.$class.'.php');
+    require_once($_SERVER["DOCUMENT_ROOT"].'/P4Blog/models/'.$class.'.php');
 });
 
 $_billetManager;
@@ -42,6 +42,4 @@ if(isset($_POST['action']) && $_POST['action']=='showbillet'){
 if(isset($_POST['action']) && $_POST['action']=='deleteBillet'){
     $deleteBillet = $_billetManager->deleteBillet($_POST['deleteBillet']); 
 }
-
-
 ?>
