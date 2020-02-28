@@ -1,6 +1,6 @@
 <?php
 spl_autoload_register(function($class){
-  require_once($_SERVER["DOCUMENT_ROOT"]. '/PROJET4-MVC-OOP-PHP/models/'.$class.'.php');
+  require_once($_SERVER["DOCUMENT_ROOT"]. '/P4Blog/models/'.$class.'.php');
 }); 
 
 
@@ -17,7 +17,6 @@ if(isset($_POST['action']) && $_POST['action']=='showAccueilBillet'){
          $billetsAccueilOutput.= '<div class="col-lg-4 col-md-6">';
          $billetsAccueilOutput.= '<div class="card h-100">';
          $billetsAccueilOutput.= '<div class="single-post post-style-1">';
-        // $billetsAccueilOutput.= '<div class="blog-image"><img src="public/images/marion-michele-330691.jpg" alt="Blog Image"></div>';
          $billetsAccueilOutput.= '<div class="blog-info">';
          $billetsAccueilOutput.= '<h4 class="title"><a href="post&id=' .$billet->id(). '"><b>' .$billet->titre(). '</b></a></h4>';
          $billetsAccueilOutput.= '</div><!-- blog-info -->';
@@ -31,5 +30,3 @@ if(isset($_POST['action']) && $_POST['action']=='showAccueilBillet'){
     $response = json_encode($data);
     exit($response);
 }  
-
-
