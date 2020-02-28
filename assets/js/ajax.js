@@ -268,7 +268,7 @@ $(window).bind('load', function () {
         type: 'connexion',
         pseudonyme: '',
         motDePasse: '',
-        confirmation: 'Veuillez rentrer vos identifiants'
+        message: 'Veuillez rentrer vos identifiants'
     });
     $('#login').on('click', function () {
         login;
@@ -297,5 +297,3 @@ $(window).bind('load', function () {
     }) 
     
 })
-
-
