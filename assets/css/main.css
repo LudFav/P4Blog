@@ -887,6 +887,10 @@ input, select, textarea {
 			}
 		}
 
+		.tdId, .tdAuteur, .tdDate{
+			display:block;
+		}
+
 		#bg {
 			background-size: 750px auto;
 			width: 2250px;
@@ -977,6 +981,8 @@ input, select, textarea {
 			background-size: 300px auto;
 			width: 900px;
 		}
+
+		
 
 	/* Header */
 
