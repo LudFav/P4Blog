@@ -11,7 +11,7 @@ class ControllerAccueil{
     } else {
       $this->_view = new View('Accueil');
       if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
-      $this->_view->generateAdmin(array());
+      $this->_view->generate(array());
       } else {
         $this->_view->generate(array());
       }
