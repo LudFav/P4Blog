@@ -31,7 +31,7 @@ class ControllerAddbillet
 
     if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
       $this->_view = new View('Addbillet');
-      $this->_view->generateAdmin(array());
+      $this->_view->generate(array());
     }else {
       header('Location:accueil');
     }
