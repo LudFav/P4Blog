@@ -12,17 +12,17 @@ class View
     $this->_file = 'views/view'.$action.'.php';
   }
 
-  //crée une fonction qui va générer et afficher la vue
+  //crée une fonction qui va générer et afficher la vue selon si une session est ouverte ou pas 
   public function generate($data){
     //définir le contenu à envoyer
     $content = $this->generateFile($this->_file, $data);
-    $view = $this->generateFile('views/template.php', array('t' => $this->_t, 'content' => $content));
+    if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
+      $template = 'views/templateAdmin.php';
+    } else {
+      $template = 'views/template.php';
+    }
+    $view = $this->generateFile($template, array('t' => $this->_t, 'content' => $content));
     echo $view;
-  }
-  public function generateAdmin($data){
-    $content = $this->generateFile($this->_file, $data);
-    $view = $this->generateFile('views/templateAdmin.php', array('t' => $this->_t, 'content' => $content ));
-    echo $view; 
   }
 
   private function generateFile($file, $data){
