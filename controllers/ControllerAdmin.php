@@ -11,7 +11,7 @@ class ControllerAdmin{
     public function __construct(){
       if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
         $this->_view = new View('Admin'); 
-        $this->_view->generateAdmin(array());  
+        $this->_view->generate(array());  
     } else {
       header('Location:accueil');
     }
