@@ -17,10 +17,10 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
    
     foreach ($commentaireModeres as $commentaireModere){
         $moderedCommentOutput.='<tr class="moderedCommentRow' .$commentaireModere->id(). '">';
-        $moderedCommentOutput.='<td class="tdId">' .$commentaireModere->id(). '</td>';
-        $moderedCommentOutput.='<td class="tdAuteur">' .$commentaireModere->auteur(). '</td>';
-        $moderedCommentOutput.='<td class="tdContent">' .$commentaireModere->contenu(). '</td>';
-        $moderedCommentOutput.='<td class="tdDate">' .$commentaireModere->date(). '</td>';
+        $moderedCommentOutput.='<td>' .$commentaireModere->id(). '</td>';
+        $moderedCommentOutput.='<td>' .$commentaireModere->auteur(). '</td>';
+        $moderedCommentOutput.='<td>' .$commentaireModere->contenu(). '</td>';
+        $moderedCommentOutput.='<td>' .$commentaireModere->date(). '</td>';
         $moderedCommentOutput.='<td class="commentActionTd">';       
         $moderedCommentOutput.='<button class="unmodereComBtn" value="' .$commentaireModere->id(). '" data-toggle="modal" data-target ="#unmodereComModal" ><i class="fa fa-commenting unmod" aria-hidden="true"></i></button>';
         $moderedCommentOutput.='<button class="deleteModComBtn" value="' .$commentaireModere->id(). '" data-toggle="modal" data-target ="#deleteModComModal" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
