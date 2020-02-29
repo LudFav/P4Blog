@@ -28,11 +28,7 @@ class ControllerPost {
      * Generation de la vue 
      */
     $this->_view = new View('SinglePost');
-    if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
-    $this->_view->generateAdmin(array('billet' => $billet));
-    } else {
-      $this->_view->generate(array('billet' => $billet));
-    }
+    $this->_view->generate(array('billet' => $billet));
   
     }
   }
