@@ -1,27 +1,31 @@
+
+<!--BILLET-->
 <div class="container-fluid" style="padding-top:20px;">
-<div class="row"> 
-        <ul class="nav nav-tabs nav-fill" role="tablist">
-          <li class="nav-item" id="billetLink" data-toggle="tab"  role="tab" aria-controls="billet" >
-            <a class="nav-link" href="#billetTab">
-            Billet 
+<div class="row">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item" id="billetLink">
+            <a class="nav-link" href="#">
+              <span class="glyphicon glyphicon-book"></span> Billet 
             </a>
           </li>
-          <li class="nav-item" id="signalComLink" data-toggle="tab"  role="tab" aria-controls="commentairesSignalés" >
-            <a class="nav-link" href="#commentSignTab">
+          <li class="nav-item" id="signalComLink">
+            <a class="nav-link" href="#">
              Commentaires Signalés
             </a>
           </li>
-          <li class="nav-item" id="modComLink" data-toggle="tab"  role="tab" aria-controls="commentairesModérés" >
-            <a class="nav-link" href="#commentModTab">
+          <li class="nav-item" id="modComLink">
+            <a class="nav-link" href="#">
               Commentaires Modérés
             </a>
-          </li>  
+          </li>
+          
         </ul>
-<div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="billetTab" role="tabpanel" aria-labelledby="billet-tab">
-                <div class="billetAdmin col-md-9 ml-sm-auto col-lg-10 px-4">
-
-<!--BILLETS-->
+      </div>
+</nav>
+<div class="billetAdmin col-md-9 ml-sm-auto col-lg-10 px-4">
+       
         <div class="table-wrapper" id="billet-wrapper">
             <div class="table-title">
                 <div class="row">
@@ -33,72 +37,79 @@
 					          </div>
                 </div>
             </div>
-            <table class="table table-striped table-hover" id='tableBillet'>
-                <thead class="thead-dark">
-                    <tr>
-                        <th>#</th>
-                        <th>Auteur</th>
-						<th>Titre</th>
-                        <th>Date</th>
-                        <th style="text-align:center;">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyBillet">
-                </tbody>    
-            </table>
-            <div id='paginationAdminBillet'></div>  
+            <div class="table-responsive">
+                <table class="table" id='tableBillet'>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Auteur</th>
+			    			<th>Titre</th>
+                            <th>Date</th>
+                            <th style="text-align:center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyBillet">
+                    </tbody>    
+                </table>
+            </div> <!--table-responsive-->
+            <div id='paginationAdminBillet'>
+            </div>  
         </div>    
              
 <!--COMMENTAIRE SIGNALÉ-->
-<div class="tab-pane fade show active" id="commentSignTab" role="tabpanel" aria-labelledby="commentairesSignalés-tab">
-    <div class="table-wrapper" id="signalCom-wrapper">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-6" id="commentTableTitre">
-					<h2>Commentaires Signalés</h2>
+        <div class="table-wrapper" id="signalCom-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6" id="commentTableTitre">
+						          <h2>Commentaires Signalés</h2>
+                    </div>
                 </div>
             </div>
+            <div class="table-responsive">
+                <table class="table" id='tableComments'>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Auteur</th>
+			    			<th>Titre</th>
+                            <th>Date</th>
+                            <th style="text-align:center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id='tbodyComment'>        
+                    </tbody>   
+                </table>
+            </div><!--table-responsive-->
+            <div id='paginationComSign'>
+        </div>   
         </div>
-        <table class="table table-striped table-hover" id='tableComments'>
-            <thead class="thead-dark">
-                <tr>
-                    <th>#</th>
-                    <th>Auteur</th>
-					<th>Titre</th>
-                    <th>Date</th>
-                    <th style="text-align:center;">Actions</th>
-                </tr>
-            </thead>
-            <tbody id='tbodyComment'>        
-            </tbody>   
-        </table>
-        <div id='paginationComSign'></div>   
-</div>
 <!--COMMENTAIRE MODERÉ-->
-<div class="tab-pane fade show active" id="commentModTab" role="tabpanel" aria-labelledby="commentairesModérés-tab">
-    <div class="table-wrapper" id="modCom-wrapper">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-6" id="moderedCommentTableTitre">
-					<h2>Commentaires Modérés</h2>
+        <div class="table-wrapper" id="modCom-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6" id="moderedCommentTableTitre">
+						          <h2>Commentaires Modérés</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-        <table class="table table-striped table-hover" id='moderedCommentsTable'>
-            <thead class="thead-dark">
-                <tr>
-                    <th>#</th>
-                    <th>Auteur</th>
-					<th>Titre</th>
-                    <th>Date</th>
-                    <th style="text-align:center;">Actions</th>
-                </tr>
-            </thead>
-            <tbody id='tbodyCommentModere'>        
-            </tbody>   
-        </table> 
-        <div id='paginationComMod'></div> 
-</div>  
+            <div class="table-responsive">
+                <table class="table" id='moderedCommentsTable'>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Auteur</th>
+			    			<th>Titre</th>
+                            <th>Date</th>
+                            <th style="text-align:center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id='tbodyCommentModere'>        
+                    </tbody>   
+                </table>
+            <div><!--table-responsive--> 
+            <div id='paginationComMod'>
+        </div> 
+        </div>  
 
 
         </div> 

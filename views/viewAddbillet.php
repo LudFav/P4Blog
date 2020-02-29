@@ -1,5 +1,5 @@
 
-<form action="addbillet" method="post" id="FormAddBillet">
+<form action="addbillet" method="post" id="formAddBillet">
   <div class="form-group">
     <label for="auteur" class="labelBillet"><b>Auteur</b></label>
     <input type="text" name="auteur" class="form-control" id="auteurB" value="Jean Forteroche" size="35" required>

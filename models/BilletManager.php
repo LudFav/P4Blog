@@ -2,24 +2,20 @@
 
 class BilletManager extends Model implements crud
 {
-  public function create($table, $obj){
+  public function create($table, $data){
     $this->getBdd();
-    $var = [];
-    $req = self::$_bdd->prepare("INSERT INTO $table SET auteur = :auteur, titre = :titre, contenu = :contenu, date = NOW()"); 
-    $req->bindValue(':auteur', $obj->auteur());
-    $req->bindValue(':titre', $obj->titre());
-    $req->bindValue(':contenu', $obj->contenu());
+    ksort($data);
+    $keyFields = implode('`, `', array_keys($data));
+    $valueFields = ':' . implode(', :', array_keys($data));
+    $req = self::$_bdd->prepare("INSERT INTO $table (`$keyFields`) VALUES ($valueFields )"); 
+
+    foreach ($data as $key => $value){
+      $req->bindValue(":$key", $value);
+    }
+
     $req->execute();
     $req->closeCursor();
   }
-
-    /*ksort($data);
-    $keyFields = implode('`, `', array_keys($data));
-    $valueFields = ':' . implode(', :', array_keys($data));
-    $req = self::$_bdd->prepare("INSERT INTO $table (`$keyFields`) VALUES ($valueFields )");  
-    foreach ($data as $key => $value){
-      $req->bindValue(":$key", $value);
-    }*/
 
   function pagemax($table, $nbreEntitesParPage){
     $this->getBdd();
@@ -95,7 +91,12 @@ class BilletManager extends Model implements crud
   }
 
   public function createBillet($data){
-    return $this->create('billets', 'Billet');
+    return $this->create('billets',array(
+    'auteur' => $data['auteur'],
+    'titre'  => $data['titre'],
+    'contenu'=> $data['contenu'],
+    'date'   => date('d-m-Y H:i')
+  ));
   }
 
   public function updateBillet($data, $id){
