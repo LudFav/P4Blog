@@ -23,6 +23,7 @@ class ControllerPost {
      */
       $this->_billetManager = new BilletManager;
       $billet = $this->_billetManager->getBillet($_GET['id']);
+    
     //VUE
         /**
      * Generation de la vue 
@@ -31,10 +32,10 @@ class ControllerPost {
     if($billet == false){
       $errorMsg = 'Billet introuvable';
       $this->_view = new View('Error');
-      $this->_view->generate(array('errorMsg' => $errorMsg));
+      $this->_view->generate('Erreur', array('errorMsg' => $errorMsg));
     } else{
       $this->_view = new View('SinglePost');
-      $this->_view->generate(array('billet' => $billet));
+      $this->_view->generate('Billet', array('billet' => $billet));
     }
     
   
