@@ -5,12 +5,15 @@ class View
   //fichier a envoyer a la vue
   private $_file;
 
+  //titre de la page
+  private $title;
+
   function __construct($action){
     $this->_file = 'views/view'.$action.'.php';
   }
 
   //crée une fonction qui va générer et afficher la vue selon si une session est ouverte ou pas 
-  public function generate($data){
+  public function generate($title, $data){
     //définir le contenu à envoyer
     $content = $this->generateFile($this->_file, $data);
     if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
@@ -18,7 +21,7 @@ class View
     } else {
       $template = 'views/template.php';
     }
-    $view = $this->generateFile($template, array('content' => $content));
+    $view = $this->generateFile($template, array('title'=>$title, 'content' => $content));
     echo $view;
   }
 
