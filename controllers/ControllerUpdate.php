@@ -35,7 +35,7 @@ class ControllerUpdate {
 
       if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
         $this->_view = new View('Update'); 
-        $this->_view->generate(array('billet' => $billetToUpdate));  
+        $this->_view->generate('Édition', array('billet' => $billetToUpdate));  
       } else {
       header('Location:accueil');
       }  
