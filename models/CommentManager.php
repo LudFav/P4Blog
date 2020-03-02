@@ -153,7 +153,7 @@ class CommentManager extends Model implements crud {
         'billetId'=> $_POST['billetId'],
         'auteur' => htmlspecialchars($_POST['auteur']),
         'contenu'=> htmlspecialchars($_POST['contenu']),    
-        'date'   => date('d-m-Y H:i:s')
+        'date'   => (new \DateTime())->format('Y-m-d H:i:s')
       ));
     }
 
