@@ -10,7 +10,7 @@ class ControllerSommaire{
       throw new \Exception("Page introuvable", 1);
     } else {
       $this->_view = new View('Sommaire');
-      $this->_view->generate(array());
+      $this->_view->generate('Sommaire', array());
     } 
   } 
 }
