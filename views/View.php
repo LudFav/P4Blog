@@ -5,9 +5,6 @@ class View
   //fichier a envoyer a la vue
   private $_file;
 
-  //titre de la page
-  private $_t;
-
   function __construct($action){
     $this->_file = 'views/view'.$action.'.php';
   }
@@ -21,7 +18,7 @@ class View
     } else {
       $template = 'views/template.php';
     }
-    $view = $this->generateFile($template, array('t' => $this->_t, 'content' => $content));
+    $view = $this->generateFile($template, array('content' => $content));
     echo $view;
   }
 
