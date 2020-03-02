@@ -11,7 +11,7 @@ class ControllerAccueil{
     } else {
       $this->_view = new View('Accueil');
       if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
-      $this->_view->generate(array());
+      $this->_view->generate("Billet simple pour l'Alaska", array());
       } else {
         $this->_view->generate("Billet simple pour l'Alaska", array());
       }
