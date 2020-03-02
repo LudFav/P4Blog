@@ -1,7 +1,7 @@
 <?php
 
-class BilletManager extends Model implements crud
-{
+class BilletManager extends Model implements crud{
+
   public function create($table, $data){
     $this->getBdd();
     ksort($data);
@@ -105,7 +105,7 @@ class BilletManager extends Model implements crud
     'auteur' => $data['auteur'],
     'titre'  => $data['titre'],
     'contenu'=> $data['contenu'],
-    'date'   => date('d-m-Y H:i')
+    'date'   => (new \DateTime())->format('Y-m-d H:i')
   ));
   }
 
