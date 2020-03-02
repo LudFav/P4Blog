@@ -13,7 +13,7 @@ class ControllerAccueil{
       if(isset($_SESSION['admin']) && !empty($_SESSION['admin'])){
       $this->_view->generate(array());
       } else {
-        $this->_view->generate(array());
+        $this->_view->generate("Billet simple pour l'Alaska", array());
       }
     } 
   }
