@@ -8,7 +8,7 @@
         <ul class="nav flex-column">
           <li class="nav-item active" id="billetLink">
             <a class="nav-link" href="#">
-              <span class="glyphicon glyphicon-book"></span> Billet 
+              <span class="glyphicon glyphicon-book"></span> Billets 
             </a>
           </li>
           <li class="nav-item" id="signalComLink">
