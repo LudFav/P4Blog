@@ -23,7 +23,6 @@ function isLoggedin() {
     data: { action: "isLogged" },
     success: function(data) {
       if (data == "1") {
-        console.log(data);
         let logout = '<a class="logout fas fa-sign-out-alt"></a>';
         $('#login').replaceWith($(logout));
         let adminButton = '<li><a href="admin" class="fas fa-feather-alt"></a></li>';
@@ -49,7 +48,7 @@ function billetTable() {
         pagesMax,
         page
       );
-      if (!$.trim(responseBillet)) {
+      if (!$.trim(responseBilletTable)) {
         $("#billetTableTitre h2").text("0 billet posté");
         $("#tableBillet").hide();
         $("#pageAdminBillet").hide();

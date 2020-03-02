@@ -17,6 +17,7 @@ class ControllerLogin {
         $userInfo = $this->_userManager->getUser();
         $username = htmlspecialchars($_POST['username']);
         $passwordSubmitted = htmlspecialchars($_POST['password']);
+        //$passToHash = password_hash('mot de passe', PASSWORD_DEFAULT, ['cost' => 12]);
         $passwordHashed = $userInfo[0]->password();
         $goodUsername = $userInfo[0]->username();
         $password= password_verify($passwordSubmitted, $passwordHashed);

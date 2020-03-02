@@ -1,7 +1,7 @@
-<section class="post-area section">
-    <div class="container">
+
+    <div class="post-area container">
       <article>
-        <h1><?=$billet[0]->titre()?></h1>
+        <h2><?=$billet[0]->titre()?></h2>
 			  <div class="row">
           <div class="col-lg-8 col-md-12 no-right-padding">
 
@@ -9,16 +9,15 @@
 
               <div class="blog-post-inner">
 
-                <div class="post-info" value="<?=$billet[0]->id()?>">
+                <div class="post-info" data-trf="<?=$billet[0]->id()?>">
                 <div class="middle-area">
-                    <h6 class="name" href="#"><b><?=$billet[0]->auteur()?></b></h6>
-                    <h6 class="date"><?=$billet[0]->date()?></h6>
+                    <h6 class="date">Posté le <?=$billet[0]->date()?></h6>
                 </div>
 
                 </div><!-- post-info -->
 
 
-                <p class="para"><?=$billet[0]->contenu()?></p>
+                <div class="para"><?=$billet[0]->contenu()?></div>
               </div><!-- blog-post-inner -->
             </div><!-- main-post -->
 
@@ -27,7 +26,7 @@
         </div><!-- .row -->
       </article>
       </div><!-- .container -->
-</section><!--post area section-->
+
 
 <section class="comment-section">
   <div class="container">
@@ -36,7 +35,7 @@
 
       <div class="col-lg-8 col-md-12">
         <div class="comment-form">
-          <form action="" method="post" id="formCommentaire">
+          <form action="#" method="post" id="formCommentaire">
             <div class="row">
 
               <div class="col-sm-6">
@@ -53,12 +52,14 @@
 
             </div>
           </form>
-        </div>
+        </div><!--comment-form-->
         <div id="showComments"></div>
         <div id='paginationFrontCom'></div>
-    </div><!-- .container -->
+      </div><!--col-lg-8 col-md-12-->
+    </div><!--row-->    
+  </div><!-- .container -->
 </section><!-- .section commentaire-->
-
+</div><!--wrapper-->
 
 
 

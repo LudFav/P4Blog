@@ -2,10 +2,11 @@
 <!--BILLET-->
 <div class="container-fluid" style="padding-top:20px;">
 <div class="row">
+
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-          <li class="nav-item" id="billetLink">
+          <li class="nav-item active" id="billetLink">
             <a class="nav-link" href="#">
               <span class="glyphicon glyphicon-book"></span> Billet 
             </a>
@@ -24,6 +25,7 @@
         </ul>
       </div>
 </nav>
+
 <div class="billetAdmin col-md-9 ml-sm-auto col-lg-10 px-4">
        
         <div class="table-wrapper" id="billet-wrapper">
@@ -38,20 +40,20 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table" id='tableBillet'>
-                    <thead class="thead-dark">
+                <table class="table table-striped table-hover" id='tableBillet'>
+                    <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Auteur</th>
-			    			<th>Titre</th>
-                            <th>Date</th>
+                            <th class="tdId">#</th>
+                            <th class="tdAuteur">Auteur</th>
+			    			<th class="tdTitre">Titre</th>
+                            <th class="tdDate">Date</th>
                             <th style="text-align:center;">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyBillet">
                     </tbody>    
                 </table>
-            </div> <!--table-responsive-->
+            </div>
             <div id='paginationAdminBillet'>
             </div>  
         </div>    
@@ -66,12 +68,12 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table" id='tableComments'>
-                    <thead class="thead-dark">
+                <table class="table table-striped table-hover" id='tableComments'>
+                    <thead>
                         <tr>
                             <th>#</th>
                             <th>Auteur</th>
-			    			<th>Titre</th>
+			    			<th>Contenu</th>
                             <th>Date</th>
                             <th style="text-align:center;">Actions</th>
                         </tr>
@@ -79,7 +81,7 @@
                     <tbody id='tbodyComment'>        
                     </tbody>   
                 </table>
-            </div><!--table-responsive-->
+            </div>
             <div id='paginationComSign'>
         </div>   
         </div>
@@ -93,12 +95,12 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table" id='moderedCommentsTable'>
-                    <thead class="thead-dark">
+                <table class="table table-striped table-hover" id='moderedCommentsTable'>
+                    <thead>
                         <tr>
                             <th>#</th>
                             <th>Auteur</th>
-			    			<th>Titre</th>
+			    			<th>Contenu</th>
                             <th>Date</th>
                             <th style="text-align:center;">Actions</th>
                         </tr>
@@ -106,7 +108,7 @@
                     <tbody id='tbodyCommentModere'>        
                     </tbody>   
                 </table>
-            <div><!--table-responsive--> 
+            </div> 
             <div id='paginationComMod'>
         </div> 
         </div>  

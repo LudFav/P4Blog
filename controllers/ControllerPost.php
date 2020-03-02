@@ -27,8 +27,16 @@ class ControllerPost {
         /**
      * Generation de la vue 
      */
-    $this->_view = new View('SinglePost');
-    $this->_view->generate(array('billet' => $billet));
+   
+    if($billet == false){
+      $errorMsg = 'Billet introuvable';
+      $this->_view = new View('Error');
+      $this->_view->generate(array('errorMsg' => $errorMsg));
+    } else{
+      $this->_view = new View('SinglePost');
+      $this->_view->generate(array('billet' => $billet));
+    }
+    
   
     }
   }

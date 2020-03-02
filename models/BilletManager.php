@@ -5,8 +5,8 @@ class BilletManager extends Model implements crud
   public function create($table, $data){
     $this->getBdd();
     ksort($data);
-    $keyFields = implode('`, `', array_keys($data));
-    $valueFields = ':' . implode(', :', array_keys($data));
+    $keyFields = implode('`, `', array_keys($data));// key1, key2
+    $valueFields = ':' . implode(', :', array_keys($data));//  :key1, :key2
     $req = self::$_bdd->prepare("INSERT INTO $table (`$keyFields`) VALUES ($valueFields )"); 
 
     foreach ($data as $key => $value){
@@ -44,11 +44,17 @@ class BilletManager extends Model implements crud
     $this->getBdd();
     $var = [];
     $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, date FROM $table WHERE id = ?");
+
     $req->execute(array($id));
-    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-      $var[] = new $obj($data);
+    if($req->rowCount()>0){
+      while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+        $var[] = new $obj($data);
+        return $var;
+      }
+    } else {
+      return false;
     }
-    return $var;
+    
     $req->closeCursor();
   }
 
@@ -83,7 +89,11 @@ class BilletManager extends Model implements crud
   }
 
   public function getBillet($id){
+    if($this->readone('billets', 'Billet', $id) == false){
+      return false;
+    } else {
     return $this->readOne('billets', 'Billet', $id);
+    }
   }
 
   public function getPageMax($nbreEntitesParPage){

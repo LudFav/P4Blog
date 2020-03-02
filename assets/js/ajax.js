@@ -30,32 +30,26 @@ function billetAccueil() {
 function billetAccueilButtonPagination(accueilMaxPages) {
     $(".pageAccueilBillet.page-link.next").one("click", function (e) {
         e.preventDefault();
-        console.log('next accueil')
         if (page < accueilMaxPages) {
             page = page + 1;
             billetAccueil();
         }
     });
     $(".pageAccueilBillet.page-link.prev").on("click", function () {
-        console.log('prev Accueil');
         if (page > 1) {
             page--;
             billetAccueil();
         }
     });
     $(".pageAccueilBillet.page-link.but").on("click", function () {
-        console.log('button accueil');
         pagebutton = $(this).attr("value");
         page = parseInt(pagebutton);
         billetAccueil();
     });
 }
 
-
-
 function showComment() {
-    idBillet = $('.post-info').attr('value');
-    console.log('billet id :'+idBillet);
+    idBillet = $('.post-info').attr('data-trf');
     $.post({
         url: 'post',
         data: { 'action': 'showComment', 'pageCom' : pageCom, 'billetId': idBillet},
@@ -63,7 +57,6 @@ function showComment() {
             responseFrontCom = JSON.parse(data);
             responseFrontComTable = responseFrontCom.commentairesOutput;
             frontComPagesMax = responseFrontCom.maxPagesComFront;
-            console.log('max pages com :'+frontComPagesMax);
             frontComPagination = new FrontPagination(
                 "#paginationFrontCom",
                 "frontComPage",
@@ -71,10 +64,12 @@ function showComment() {
                 pageCom
             )
             if (!$.trim(responseFrontComTable)) {
-                $('#showComments').text('Soyez la première personne à écrire un commentaire sur ce billet.');
+                let noComment = '<p class ="noComment">Soyez la première personne à écrire un commentaire sur ce billet.</p>';
+                $(noComment).appendTo($('#showComments'));
                 $('#showComments').attr('style', 'font-style:italic; margin-bottom:15px;');
                 $('#frontComPage').hide();
             } else {
+               
                 let newCommentDisplay = $(responseFrontComTable);
                 newButtonSignal = newCommentDisplay.find('.signalbtn');
                 newButtonSignal.on('click', function () {
@@ -84,7 +79,8 @@ function showComment() {
                 if (frontComPagesMax <= 1) {
                     $('#frontComPage').hide();
                 }
-                $('#showComments').html(newCommentDisplay);
+                let comDisplay = $('#showComments').html(newCommentDisplay);
+                $(comDisplay).fadeIn('slow');
                 frontComPagination;
                 frontComButtonPagination(frontComPagesMax);
             }
@@ -113,7 +109,6 @@ function frontComButtonPagination(frontComPagesMax) {
     });
 }
 
-
 function errorMessageEmpty(){
     let emptyLogins = '<div class="emptylogins alert alert-warning" role="alert">Veuillez remplir tout les champs</div>';
     $(emptyLogins).insertAfter($('.md-form.mb-4'));
@@ -135,11 +130,12 @@ function errorMessageLogin(){
         });
     }, 2000);
 }
+
 //FORMULAIRE D'ENVOI DE COMMENTAIRE
 $('.submit-btn').on('click', function (e) {
     e.preventDefault();
     if ($('#formCommentaire')[0].checkValidity()) {
-        var idBillet = $('.post-info').attr('value');
+        var idBillet = $('.post-info').attr('data-trf');
         var auteur = $('#auteur').val();
         var contenu = $('#contenu').val();
         $.post({
@@ -259,6 +255,8 @@ function FrontPagination(element, paginationId, pagesMax, pageName) {
 
 //BOUTON SIGNALER
 $(window).bind('load', function () {
+
+    $('#formCommentaire').attr('action', '');    
     $('.signalbtn').on('click', function () {
         signalement($(this).attr('value'));
     });
@@ -283,7 +281,6 @@ $(window).bind('load', function () {
                 url: 'login',
                 data: { 'action': 'login', 'username': username, 'password': password },
                 success: function (data) {
-                    console.log(data);
                         if(data == 'inputVide'){
                             errorMessageEmpty();
                         } else if (data == 'wrong login'){
