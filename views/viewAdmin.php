@@ -72,7 +72,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>ID du Billet Commenté</th>
+                            <th>Titre du Billet Commenté</th>
                             <th>Auteur</th>
 			    			<th>Contenu</th>
                             <th>Date</th>
@@ -100,7 +100,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>ID du Billet Commenté</th>
+                            <th>Titre du Billet Commenté</th>
                             <th>Auteur</th>
 			    			<th>Contenu</th>
                             <th>Date</th>
