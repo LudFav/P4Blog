@@ -20,6 +20,7 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
         $contenuExtrais = substr($contenuComplet, 0,50)."&hellip;";
         $moderedCommentOutput.='<tr class="moderedCommentRow' .$commentaireModere->id(). '">';
         $moderedCommentOutput.='<td>' .$commentaireModere->id(). '</td>';
+        $moderedCommentOutput.='<td><a href=post&id=' .$commentaireModere->billetId(). '>' .$commentaireModere->billetId(). '<a></td>';
         $moderedCommentOutput.='<td>' .$commentaireModere->auteur(). '</td>';
         $moderedCommentOutput.='<td>' .$contenuExtrais. '</td>';
         $moderedCommentOutput.='<td>' .$commentaireModere->date(). '</td>';
