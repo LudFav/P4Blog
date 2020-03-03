@@ -4,7 +4,9 @@ spl_autoload_register(function($class){
 });
 
 $_commentManager;
+$_billetManager;
 $_commentManager = new CommentManager;
+$_billetManager = new BilletManager;
 
 $entiteParPage= 5;
 $pageComMod= isset($_POST['pageComMod'])? $_POST['pageComMod'] : 1; 
@@ -18,9 +20,13 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
     foreach ($commentaireModeres as $commentaireModere){
         $contenuComplet = $commentaireModere->contenu();
         $contenuExtrais = substr($contenuComplet, 0,50)."&hellip;";
+        $id = $commentaireModere->billetId();
+        $billets = $_billetManager->getBillet($id);
         $moderedCommentOutput.='<tr class="moderedCommentRow' .$commentaireModere->id(). '">';
         $moderedCommentOutput.='<td>' .$commentaireModere->id(). '</td>';
-        $moderedCommentOutput.='<td><a href=post&id=' .$commentaireModere->billetId(). '>' .$commentaireModere->billetId(). '<a></td>';
+        foreach($billets as $billet){
+        $moderedCommentOutput.='<td><a href=post&id=' .$billet->id(). '>' .$billet->titre(). '<a></td>';
+        }
         $moderedCommentOutput.='<td>' .$commentaireModere->auteur(). '</td>';
         $moderedCommentOutput.='<td>' .$contenuExtrais. '</td>';
         $moderedCommentOutput.='<td>' .$commentaireModere->date(). '</td>';
