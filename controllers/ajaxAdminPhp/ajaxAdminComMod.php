@@ -16,10 +16,12 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
     
    
     foreach ($commentaireModeres as $commentaireModere){
+        $contenuComplet = $commentaireModere->contenu();
+        $contenuExtrais = substr($contenuComplet, 0,30)."&hellip;";
         $moderedCommentOutput.='<tr class="moderedCommentRow' .$commentaireModere->id(). '">';
         $moderedCommentOutput.='<td>' .$commentaireModere->id(). '</td>';
         $moderedCommentOutput.='<td>' .$commentaireModere->auteur(). '</td>';
-        $moderedCommentOutput.='<td>' .$commentaireModere->contenu(). '</td>';
+        $moderedCommentOutput.='<td>' .$contenuExtrais. '</td>';
         $moderedCommentOutput.='<td>' .$commentaireModere->date(). '</td>';
         $moderedCommentOutput.='<td class="commentActionTd">';       
         $moderedCommentOutput.='<button class="unmodereComBtn" value="' .$commentaireModere->id(). '" data-toggle="modal" data-target ="#unmodereComModal" ><i class="fa fa-commenting unmod" aria-hidden="true"></i></button>';
