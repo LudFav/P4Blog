@@ -15,7 +15,7 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){
     $commentOutput='';
     foreach ($commentaires as $commentaire){
         $contenuComplet = $commentaire->contenu();
-        $contenuExtrais = substr($contenuComplet, 0,30)."&hellip;";
+        $contenuExtrais = substr($contenuComplet, 0,50)."&hellip;";
         $commentOutput.='<tr class="signaledCommentRow' .$commentaire->id(). '">';
         $commentOutput.='<td>' .$commentaire->id(). '</td>';
         $commentOutput.='<td>' .$commentaire->auteur(). '</td>';
