@@ -14,10 +14,12 @@ $comSignpages = $_commentManager->getComSignPageMax($nbreEntitesParPage);
 if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){       
     $commentOutput='';
     foreach ($commentaires as $commentaire){
+        $contenuComplet = $commentaire->contenu();
+        $contenuExtrais = substr($contenuComplet, 0,30)."&hellip;";
         $commentOutput.='<tr class="signaledCommentRow' .$commentaire->id(). '">';
         $commentOutput.='<td>' .$commentaire->id(). '</td>';
         $commentOutput.='<td>' .$commentaire->auteur(). '</td>';
-        $commentOutput.='<td>' .$commentaire->contenu(). '</td>';
+        $commentOutput.='<td>' .$contenuExtrais. '</td>';
         $commentOutput.='<td>' .$commentaire->date(). '</td>';
         $commentOutput.='<td class="commentActionTd">';       
         $commentOutput.='<button class="unsignalComBtn" value="' .$commentaire->id(). '" data-toggle="modal" data-target ="#unsignalComModal"><i class="fa fa-comment-o" aria-hidden="true"></i></button>';
