@@ -17,11 +17,15 @@ $comSignpages = $_commentManager->getComSignPageMax($nbreEntitesParPage);
 if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){       
     $commentOutput='';
     foreach ($commentaires as $commentaire){
+        $id = $commentaire->billetId();
+        $billets = $_billetManager->getBillet($id);
         $contenuComplet = $commentaire->contenu();
         $contenuExtrais = substr($contenuComplet, 0,50)."&hellip;";
         $commentOutput.='<tr class="signaledCommentRow' .$commentaire->id(). '">';
         $commentOutput.='<td>' .$commentaire->id(). '</td>';
-        $commentOutput.='<td><a href=post&id=' .$commentaire->billetId(). '>' .$commentaire->billetId(). '<a></td>';
+        foreach($billets as $billet){
+        $commentOutput.='<td><a href=post&id=' .$billet->id(). '>' .$billet->titre(). '<a></td>';
+        }
         $commentOutput.='<td>' .$commentaire->auteur(). '</td>';
         $commentOutput.='<td>' .$contenuExtrais. '</td>';
         $commentOutput.='<td>' .$commentaire->date(). '</td>';
