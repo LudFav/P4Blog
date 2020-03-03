@@ -17,7 +17,7 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentModered'){
    
     foreach ($commentaireModeres as $commentaireModere){
         $contenuComplet = $commentaireModere->contenu();
-        $contenuExtrais = substr($contenuComplet, 0,30)."&hellip;";
+        $contenuExtrais = substr($contenuComplet, 0,50)."&hellip;";
         $moderedCommentOutput.='<tr class="moderedCommentRow' .$commentaireModere->id(). '">';
         $moderedCommentOutput.='<td>' .$commentaireModere->id(). '</td>';
         $moderedCommentOutput.='<td>' .$commentaireModere->auteur(). '</td>';
