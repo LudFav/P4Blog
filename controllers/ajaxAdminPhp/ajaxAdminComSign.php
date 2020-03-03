@@ -3,12 +3,15 @@ spl_autoload_register(function($class){
     require_once($_SERVER["DOCUMENT_ROOT"]. '/P4Blog/models/'.$class.'.php');
 });
 $_commentManager;
+$_billetManager;
 $_commentManager = new CommentManager;
+$_billetManager = new BilletManager;
 
 $entiteParPage = 4;
 $nbreEntitesParPage=$entiteParPage;
 $pageComSign= isset($_POST['pageComSign'])? $_POST['pageComSign'] : 1; 
 $commentaires = $_commentManager->getSignaledComments($pageComSign, $entiteParPage);
+
 $comSignpages = $_commentManager->getComSignPageMax($nbreEntitesParPage);
 
 if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){       
@@ -18,6 +21,7 @@ if(isset($_POST['action']) && $_POST['action']=='showCommentSignaled'){
         $contenuExtrais = substr($contenuComplet, 0,50)."&hellip;";
         $commentOutput.='<tr class="signaledCommentRow' .$commentaire->id(). '">';
         $commentOutput.='<td>' .$commentaire->id(). '</td>';
+        $commentOutput.='<td><a href=post&id=' .$commentaire->billetId(). '>' .$commentaire->billetId(). '<a></td>';
         $commentOutput.='<td>' .$commentaire->auteur(). '</td>';
         $commentOutput.='<td>' .$contenuExtrais. '</td>';
         $commentOutput.='<td>' .$commentaire->date(). '</td>';
