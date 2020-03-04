@@ -29,10 +29,10 @@ class Router {
         //on recupere le premier parametre de url, on le met tout en minuscule, on met sa premiere lettre en majuscule
         $controller = ucfirst(strtolower($url[0])); // $controller = Accueil
 
-        $controllerClass = "Controller".$controller; // ControllerClass = ControllerAccueil
+        $controllerClass = "Controller".$controller; // $controllerClass = ControllerAccueil
 
         //on retrouve le chemin du controleur voulu
-        $controllerFile = "controllers/".$controllerClass.".php"; // controllerFile = "controllers/ControllerAccueil.php"
+        $controllerFile = "controllers/".$controllerClass.".php"; // $controllerFile = "controllers/ControllerAccueil.php"
 
         //on verifit si le fichier du controleur existe
         if (file_exists($controllerFile)) {
