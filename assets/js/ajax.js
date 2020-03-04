@@ -16,13 +16,18 @@ function billetAccueil() {
                 "pageAccueilBillet",
                 accueilMaxPages,
                 page
-            )
-            if (accueilMaxPages <= 1) {
+            );
+            if (!$.trim(billetAccueilTable)) {
+                $("#billetAccueil").text("0 billet posté pour le moment, revenez plus tard");
                 $('#pageAccueilBillet').hide();
-            }
-            $('#billetAccueil').html(billetAccueilTable);
-            billetAccueilPagination;
-            billetAccueilButtonPagination(accueilMaxPages)
+              } else {
+                if (accueilMaxPages <= 1) {
+                    $('#pageAccueilBillet').hide();
+                }
+                $('#billetAccueil').html(billetAccueilTable);
+                billetAccueilPagination;
+                billetAccueilButtonPagination(accueilMaxPages)
+                }
         }
     })
 }
