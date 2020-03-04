@@ -3,7 +3,6 @@ spl_autoload_register(function($class){
   require_once($_SERVER["DOCUMENT_ROOT"]. '/P4Blog/models/'.$class.'.php');
 }); 
 
-
 $_billetManager;
 $_billetManager = new BilletManager();
 
@@ -12,7 +11,6 @@ $entiteParPage = 9;
 $billets = $_billetManager->getBillets($page, $entiteParPage);
 $pages = $_billetManager->getPageMax($entiteParPage);
 if(isset($_POST['action']) && $_POST['action']=='showAccueilBillet'){
-  
   $billetsAccueilOutput = '';
   foreach ($billets as $billet){ 
        $billetsAccueilOutput.= '<div class="col-lg-4 col-md-6">';
