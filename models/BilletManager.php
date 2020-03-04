@@ -43,7 +43,7 @@ class BilletManager extends Model implements crud{
   public function readOne($table, $obj, $id){
     $this->getBdd();
     $var = [];
-    $req = self::$_bdd->prepare("SELECT id, auteur, titre, contenu, date FROM $table WHERE id = ?");
+    $req = self::$_bdd->prepare("SELECT * FROM $table WHERE id = ?");
 
     $req->execute(array($id));
     if($req->rowCount()>0){
