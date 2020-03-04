@@ -151,6 +151,8 @@ $('.submit-btn').on('click', function (e) {
                 showComment();
             }
         })
+    } else {
+        $('#alertComModal').modal('show');
     }
 })
 
@@ -253,10 +255,19 @@ function FrontPagination(element, paginationId, pagesMax, pageName) {
     }
 }
 
-//BOUTON SIGNALER
+//MODAL ALERTE NON CONFORMITÉ FORM COMMENTAIRE
+modalAlertUpdate =  new Modal(document.querySelector("body"), {
+    id: "alertComModal",
+    titre: "Probleme",
+    type: "alert",
+    message: "Vous n'avez pas remplie tout les champs"
+  });
+
+// AU CHARGEMENT DE LA PAGE
 $(window).bind('load', function () {
 
-    $('#formCommentaire').attr('action', '');    
+    $('#formCommentaire').attr('action', '');
+
     $('.signalbtn').on('click', function () {
         signalement($(this).attr('value'));
     });
@@ -294,5 +305,3 @@ $(window).bind('load', function () {
     }) 
     
 })
-
-
