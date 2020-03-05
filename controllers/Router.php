@@ -44,12 +44,11 @@ class Router {
           throw new \Exception("Page introuvable", 1);
         }
       }
-       // si le routeur ne reconnait pas le parametre de la variable $url, il redirigera la page vers la page d'accueil
       else {
         require_once('controllers/ControllerAccueil.php');
         $this->ctrl = new ControllerAccueil($url);
       }
-
+      // si le routeur ne reconnait pas le parametre de la variable $url, il redirigera la page vers la page d'accueil
     } catch (\Exception $e) {
       $errorMsg = $e->getMessage();
       $this->_view = new View('Error');
